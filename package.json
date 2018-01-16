@@ -5,5 +5,8 @@
   "repository": "https://github.com/pselden/stellarguard.git",
   "author": "Paul Selden <pselden4@gmail.com>",
   "license": "none",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
