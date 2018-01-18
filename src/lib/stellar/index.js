@@ -4,5 +4,6 @@ StellarSdk.Network.useTestNetwork();
 
 module.exports = {
   multisig: require('./multisig'),
-  signer: require('./signer')
+  signer: require('./signer'),
+  transactions: require('./transactions')
 };

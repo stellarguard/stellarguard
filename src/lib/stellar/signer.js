@@ -1,12 +1,11 @@
 const StellarSdk = require('stellar-sdk');
 
-function signTransactionWithSecretKey(transactionEnvelope, signerSecretKey) {
+function signTransactionWithSecretKey(transaction, signerSecretKey) {
   const signerKeypair = StellarSdk.Keypair.fromSecret(signerSecretKey);
-  return signTransactionWithKeyPair(transactionEnvelope, signerKeypair);
+  return signTransactionWithKeyPair(transaction, signerKeypair);
 }
 
-function signTransactionWithKeyPair(transactionEnvelope, signerKeypair) {
-  const transaction = new StellarSdk.Transaction(transactionEnvelope);
+function signTransactionWithKeyPair(transaction, signerKeypair) {
   transaction.sign(signerKeypair);
   return transaction;
 }
