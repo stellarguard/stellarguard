@@ -23,7 +23,17 @@ async function getUserById(id) {
   return new User(userDto);
 }
 
+async function getUserByUsername(username) {
+  const userDto = await userRepository.getUserByUsername(username);
+  if (!userDto) {
+    return;
+  }
+
+  return new User(userDto);
+}
+
 module.exports = {
   createUser,
-  getUserById
+  getUserById,
+  getUserByUsername
 };

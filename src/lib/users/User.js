@@ -9,7 +9,7 @@ class User {
     this.passwordHash = passwordHash;
   }
 
-  async isPassword(password) {
+  async verifyPassword(password) {
     return await passwords.compare(password, this.passwordHash);
   }
 

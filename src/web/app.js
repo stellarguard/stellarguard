@@ -3,6 +3,7 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+const session = require('./session');
 
 const apiRoutes = require('./api');
 
@@ -15,10 +16,29 @@ app.set('view engine', 'ejs');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(cookieParser('keyboard cat'));
+
+session.configure(app);
+
+const passport = require('passport');
+app.get('/', function(req, res) {
+  res.render('home', { user: req.user });
+});
+
+app.get('/login', function(req, res) {
+  res.render('login');
+});
+
+app.post(
+  '/login',
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  }
+);
 
 app.use('/api', apiRoutes);
 
