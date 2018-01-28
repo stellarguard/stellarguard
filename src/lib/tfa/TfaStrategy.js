@@ -1,6 +1,8 @@
 class TfaStrategy {
-  constructor({ type }) {
+  constructor({ id, type, userId }) {
     this.type = type;
+    this.userId = userId;
+    this.id = id;
   }
 }
 

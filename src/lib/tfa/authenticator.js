@@ -1,35 +1,37 @@
 const speakeasy = require('speakeasy');
 const qrcode = require('qrcode');
 
+const ISSUER = 'Stellar Guard';
+
 async function generateSecret(username) {
-  const issuer = 'Stellar Guard';
   const speakeasySecret = speakeasy.generateSecret({
     name: username,
-    issuer
+    issuer: ISSUER,
+    length: 16
   });
 
   const secret = speakeasySecret.base32;
-  const otpAuthUrl = getOtpAuthUrl(username, issuer, secret);
-  const qrCode = await generateQrCode(otpAuthUrl);
+  const qrCode = await generateQrCode(username, secret);
   return {
     secret,
     qrCode
   };
 }
 
-function getOtpAuthUrl(label, issuer, secret) {
+async function generateQrCode(username, secret) {
+  const otpAuthUrl = getOtpAuthUrl(username, secret);
+  return await qrcode.toDataURL(otpAuthUrl);
+}
+
+function getOtpAuthUrl(label, secret) {
   const otpAuthUrlOptions = {
-    label: `${encodeURIComponent(issuer)}:${encodeURIComponent(label)}`,
+    label: `${encodeURIComponent(ISSUER)}:${encodeURIComponent(label)}`,
     secret: secret,
     encoding: 'base32',
-    issuer
+    ISSUER
   };
 
   return speakeasy.otpauthURL(otpAuthUrlOptions);
-}
-
-async function generateQrCode(otpAuthUrl) {
-  return await qrcode.toDataURL(otpAuthUrl);
 }
 
 function verifyToken(token, secret) {

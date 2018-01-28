@@ -1,21 +1,60 @@
-const strategiesDb = {
-  GCPG4BXCMCD4JSH5EC3SD2HMIGTLNXUZKOUSLP7MEY63HICHNNHI6KO7: {
-    type: 'authenticator',
-    secret: 'FAZUO4SDOJIVIOTZJJDUGXRIJMSFKS2MHYUDCKBZLN2SQWTRFFNQ'
+const TfaStrategy = require('./TfaStrategy');
+const AuthenticatorStrategy = require('./AuthenticatorStrategy');
+const EmailStrategy = require('./EmailStrategy');
+
+class TfaStrategyRepository {
+  constructor() {
+    const dbs = require('./strategyDbs');
+    this.strategyDb = dbs.strategyDb;
+    this.authenticatorStrategyDb = dbs.authenticatorStrategyDb;
+    this.emailStrategyDb = dbs.emailStrategyDb;
   }
-};
 
-async function getStrategyForPublicKey(publicKey) {
-  return strategiesDb[publicKey];
+  async getStrategiesForUserId(userId) {
+    const baseStrategies = this.strategyDb.get(userId, 'userId');
+    return await baseStrategies.map(buildStrategy);
+  }
+
+  async createStrategy({ userId, type, ...extras }) {
+    const id = this.strategyDb.create({ userId, type });
+    await this.createStrategySubType(id, type, extras);
+    return this.newStrategy({ userId, id, type, ...extras });
+  }
+
+  async createStrategySubType(id, type, extras = {}) {
+    switch (type) {
+      case TfaStrategy.Type.Authenticator:
+        return this.authenticatorStrategyDb.create({ id, ...extras });
+      case TfaStrategy.Type.Email:
+        return this.emailStrategyDb.create({ id, ...extras });
+    }
+  }
+
+  newStrategy({ userId, id, type, ...extras }) {
+    switch (type) {
+      case TfaStrategy.Type.Authenticator:
+        return new AuthenticatorStrategy({ userId, id, ...extras });
+      case TfaStrategy.Type.Email:
+        return new EmailStrategy({ userId, id, ...extras });
+    }
+  }
+
+  async buildStrategy(baseStrategy) {
+    switch (baseStrategy.type) {
+      case TfaStrategy.Type.Authenticator:
+        const authenticatorStrategyData = this.authenticatorStrategyDb.get(
+          baseStrategy.id
+        );
+
+        return new AuthenticatorStrategy(
+          Object.assign(authenticatorStrategyData, baseStrategy)
+        );
+      case TfaStrategy.Type.Email:
+        return new EmailStrategy(baseStrategy);
+      default:
+        throw new Error(`Strategy of type ${baseStrategy.type} does not exist`);
+    }
+  }
 }
 
-async function saveStrategy({ publicKey, type, secret }) {
-  const strategy = { publicKey, type, secret };
-  strategiesDb[publicKey] = strategy;
-  return strategy;
-}
-
-module.exports = {
-  getStrategyForPublicKey,
-  saveStrategy
-};
+module.exports = new TfaStrategyRepository();

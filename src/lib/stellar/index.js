@@ -1,9 +1,7 @@
-const StellarSdk = require('stellar-sdk');
-
-StellarSdk.Network.useTestNetwork();
-
 module.exports = {
+  server: require('./server'),
   multisig: require('./multisig'),
   signer: require('./signer'),
-  transactions: require('./transactions')
+  transactions: require('./transactions'),
+  accounts: require('./accounts')
 };

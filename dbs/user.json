@@ -1,0 +1,18 @@
+{
+  "data": {
+    "id": {
+      "1": {
+        "id": 1,
+        "username": "paul",
+        "email": "pselden4@gmail.com",
+        "passwordHash":
+          "$2a$10$enOjIMe3bj/ggb0EZlyAv.jSX.Lm1dJcqGpsAhZTmooaX.CSH1fVq",
+        "verified": false
+      }
+    },
+    "username": {
+      "paul": 1
+    }
+  },
+  "counter": 1
+}

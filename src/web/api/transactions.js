@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const { stellar, tfa, transactions } = require('../../lib');
+const { stellar, accounts, tfa, transactions, users } = require('../../lib');
 
-router.put('/', async function(req, res, next) {
+// TODO -- think about this -- should i allow you to submit transactions when not logged in?
+router.post('/', async function(req, res, next) {
   try {
     const { xdr } = req.body;
     if (!xdr) {
@@ -11,20 +12,40 @@ router.put('/', async function(req, res, next) {
     }
 
     const transaction = new transactions.Transaction({ xdr });
-    const sourceAccount = transaction.sourceAccount;
-    // TODO -- do we allow transactions that haven't been signed yet?
-    const tfaStrategy = await tfa.strategies.getForPublicKey(sourceAccount);
+    const source = transaction.source;
+    const user = users.userService.getByAccountPublicKey(source, {
+      withTfaStrategies: true
+    });
 
-    if (!tfaStrategy) {
+    if (!user) {
       return res.status(404).json({
         error:
-          'There are no verification methods associated with the source account public key'
+          'There is no user associated with the transaction source account.'
       });
     }
 
-    // TODO RENAME SOURCEACCOUNT
-    const newTransaction = await transactions.createTransaction(transaction);
-    const result = await tfaStrategy.execute(req.body);
+    if (!await transaction.hasValidSignatures()) {
+      return res.status(403).json({
+        error:
+          'The submitted transaction does not have valid signatures for the source account.'
+      });
+    }
+
+    const allTfaStrategies = user.tfaStrategies;
+    if (!user.tfaStrategies || !allTfaStrategies.length) {
+      return res.status(404).json({
+        error:
+          'There are no authorization methods associated with the source account.'
+      });
+    }
+
+    const newTransaction = await transactions.transactionService.createTransaction(
+      {
+        userId: user.id,
+        xdr
+      }
+    );
+    allTfaStrategies.forEach(strategy => strategy.execute(newTransaction));
     return res.json({ id: newTransaction.id });
   } catch (e) {
     // TODO -- centralize this
@@ -33,31 +54,67 @@ router.put('/', async function(req, res, next) {
   }
 });
 
-router.post('/:id/verify', async function(req, res, next) {
+// scenarios to test
+// public key matches to no accounts
+// current user does not have any accounts with source public key
+
+// TODO - require log in?
+router.post('/:id/authorize', async function(req, res, next) {
   try {
-    const { id } = req.params;
-    const transaction = await transactions.getTransaction(id);
+    const { id, tfaType } = req.params;
+    const transaction = await transactions.transactionService.getTransaction(
+      id
+    );
+
+    // TODO - expiration
     if (!transaction) {
       return res
         .status(404)
-        .json({ error: 'Transaction could not be found or is expired.' });
+        .json({ error: 'Transaction not found or is expired.' });
     }
 
-    const sourceAccount = transaction.sourceAccount;
-    const tfaStrategy = await tfa.strategies.getForPublicKey(sourceAccount);
+    const transactionUser = users.userService.getUserById(transaction.userId, {
+      withTfaStrategies: true
+    });
+
+    if (!transactionUser) {
+      return res
+        .status(403)
+        .json({ error: 'Transaction does not have any associated users.' });
+    }
+
+    // TODO - decide here whether we need this.. i think we probably do?
+    if (transactionUser.userId != req.user.userId) {
+      return res.status(403).json({
+        error:
+          'You are trying to authorize a transaction that is not tied to your account'
+      });
+    }
+
+    const tfaStrategy = transactionuser.tfaStrategies.find(
+      tfaStrategy => tfaStrategy.type === tfaType
+    );
+
+    if (!tfaStrategy) {
+      return res.status(500).json({ error: 'Unknown' });
+    }
+
     const isVerified = await tfaStrategy.verify(req.body);
     if (!isVerified) {
-      // increment tries
+      // TODO - increment tries
       return res
         .status(401)
-        .json({ error: 'Verification failed. Please try again.' });
+        .json({ error: 'Your verification code is incorrect.' });
     }
 
+    // TODO - env object -- and encapsulate this better
     transaction.sign(process.env.SECRET_KEY);
-    const result = await transactions.submitTransaction(transaction);
+
+    const result = await transactions.transactionsService.submitTransaction(
+      transaction
+    );
     res.json(result);
   } catch (e) {
-    console.error(e.stack);
     console.error(e);
     return res.status(500).json({ error: 'Unknown' });
   }

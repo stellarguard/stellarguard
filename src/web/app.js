@@ -28,18 +28,6 @@ app.get('/', function(req, res) {
   res.render('home', { user: req.user });
 });
 
-app.get('/login', function(req, res) {
-  res.render('login');
-});
-
-app.post(
-  '/login',
-  passport.authenticate('local', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  }
-);
-
 app.use('/api', apiRoutes);
 
 // catch 404 and forward to error handler

@@ -9,10 +9,12 @@
   "dependencies": {
     "bcrypt": "^1.0.3",
     "cookie-parser": "~1.4.3",
+    "cryptr": "^2.0.0",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
+    "lodash": "^4.17.4",
     "morgan": "~1.9.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
@@ -22,9 +24,11 @@
     "stellar-sdk": "^0.8.0"
   },
   "scripts": {
-    "start": "supervisor -w src/ ./src/web/bin/www"
+    "start": "supervisor -w src/ ./src/web/bin/www",
+    "run-job": "node ./src/jobs/run"
   },
   "devDependencies": {
+    "battery-level": "^3.0.0",
     "supervisor": "^0.12.0"
   }
 }

@@ -1,46 +1,61 @@
-const usernames = {};
-const db = {};
+const User = require('./User');
 
-let sequence = 0;
+const accountsRepository = require('../accounts/stellarAccountsRepository');
 
-async function createUser({ username, email, passwordHash }) {
-  if (usernames[username]) {
-    throw {
-      error: 'unique',
-      field: 'username'
+class UserRepository {
+  constructor() {
+    this.userDb = require('./userDb');
+  }
+
+  async createUser({ username, email, passwordHash }) {
+    if (this.userDb.get(username, 'username')) {
+      throw {
+        error: 'unique',
+        field: 'username'
+      };
+    }
+
+    const user = {
+      username,
+      email,
+      passwordHash,
+      verified: false
     };
+
+    user.id = this.userDb.create(user);
+    return new User(user);
   }
 
-  const id = ++sequence;
-
-  usernames[username] = id;
-  const newUser = {
-    id,
-    username,
-    email,
-    passwordHash,
-    verified: false
-  };
-
-  db[id] = newUser;
-  return newUser;
-}
-
-async function getUserById(id) {
-  return db[id];
-}
-
-async function getUserByUsername(username) {
-  const id = usernames[username];
-  if (!id) {
-    return;
+  async getUserById(id, { withTfaStrategies = false } = {}) {
+    const data = this.userDb.get(id);
+    if (data) {
+      return new User(data);
+    }
   }
 
-  return db[id];
+  async getUserByUsername(username) {
+    const data = this.userDb.get(username, 'username');
+    if (data) {
+      return new User(data);
+    }
+  }
+
+  async getByAccountPublicKey(publicKey, options) {
+    const stellarAccounts = await accountsRepository.findAccountsByPublicKey(
+      publicKey
+    );
+
+    const activeAccounts = stellarAccounts.filter(
+      account => account.isActive === true
+    );
+
+    if (!activeAccounts.length) {
+      return;
+    }
+
+    const account = activeAccounts[0];
+    return await this.getUserById(account.userId, options);
+  }
 }
 
-module.exports = {
-  getUserById,
-  getUserByUsername,
-  createUser
-};
+module.exports = new UserRepository();
