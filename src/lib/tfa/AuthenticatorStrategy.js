@@ -2,9 +2,10 @@ const authenticator = require('./authenticator');
 const TfaStrategy = require('./TfaStrategy');
 
 class AuthenticatorStrategy extends TfaStrategy {
-  constructor({ secret }) {
-    super(TfaStrategy.Type.Authenticator);
+  constructor({ id, userId, secret }) {
+    super({ id, userId, type: TfaStrategy.Type.Authenticator });
 
+    console.log(id, secret);
     this.secret = secret;
   }
 
@@ -21,6 +22,10 @@ class AuthenticatorStrategy extends TfaStrategy {
     }
 
     return authenticator.verifyToken(token, this.secret);
+  }
+
+  static async getExtras({ username }) {
+    return await authenticator.generateSecret(username);
   }
 }
 

@@ -1,5 +1,5 @@
-const strategies = require('./tfaStrategyFactory');
+const tfaStrategyService = require('./tfaStrategyService');
 
 module.exports = {
-  strategies
+  tfaStrategyService
 };

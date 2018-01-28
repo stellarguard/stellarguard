@@ -1,0 +1,39 @@
+{
+  "data": {
+    "id": {
+      "1": {
+        "id": 1,
+        "userId": 1,
+        "publicKey": "GALXOOUZ2KSL3IAHOJ5OW5SYCLNCBRWFCS4IZ4ZSUNCFENJJEEMRONOD",
+        "isActive": false
+      },
+      "2": {
+        "id": 2,
+        "userId": 1,
+        "publicKey": "GCPG4BXCMCD4JSH5EC3SD2HMIGTLNXUZKOUSLP7MEY63HICHNNHI6KO7",
+        "isActive": true
+      },
+      "3": {
+        "id": 3,
+        "userId": 1,
+        "publicKey": "GBLW4UVVOIKNPMI5ALYPXMVI5ROZRCTQICP7HMGDEM733YWVCSF7CQLB",
+        "isActive": true
+      }
+    },
+    "publicKey": {
+      "GALXOOUZ2KSL3IAHOJ5OW5SYCLNCBRWFCS4IZ4ZSUNCFENJJEEMRONOD": [
+        1
+      ],
+      "GCPG4BXCMCD4JSH5EC3SD2HMIGTLNXUZKOUSLP7MEY63HICHNNHI6KO7": [
+        1
+      ],
+      "GBLW4UVVOIKNPMI5ALYPXMVI5ROZRCTQICP7HMGDEM733YWVCSF7CQLB": [
+        1
+      ]
+    },
+    "userId": {
+      "1": 1
+    }
+  },
+  "counter": 1
+}

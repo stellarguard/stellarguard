@@ -7,7 +7,7 @@ const { users } = require('../lib');
 function configure(app) {
   app.use(
     session({
-      secret: 'keyboard cat',
+      secret: 'keyboard cat', // TODO -- change this secret
       resave: false,
       saveUninitialized: false,
       cookie: {
@@ -22,7 +22,8 @@ function configure(app) {
 
   passport.use(
     new LocalStrategy(async function(username, password, done) {
-      const user = await users.getUserByUsername(username);
+      console.log('herfdsfse');
+      const user = await users.userService.getUserByUsername(username);
       if (!user) {
         return done(null, false);
       }
@@ -39,11 +40,47 @@ function configure(app) {
   });
 
   passport.deserializeUser(async function(id, cb) {
-    const user = await users.getUserById(id);
+    const user = await users.userService.getUserById(id);
     cb(null, user);
   });
 }
 
+function ensureLoggedIn(options) {
+  return (req, res, next) => {
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({
+        error: 'You must be logged in to perform this operation.'
+      });
+    }
+
+    next();
+  };
+}
+
+function ensureLoggedOut(options) {
+  return (req, res, next) => {
+    if (!req.isAuthenticated()) {
+      return res.status(403).json({
+        error:
+          'You cannot already be logged in while performing this operation.'
+      });
+    }
+
+    next();
+  };
+}
+
+function authenticateLocal(options) {
+  return passport.authenticate('local', options);
+}
+
+async function logout() {
+  req.logout();
+}
+
 module.exports = {
-  configure
+  configure,
+  logout,
+  authenticateLocal,
+  ensureLoggedIn
 };

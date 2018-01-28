@@ -1,18 +1,28 @@
-const transactions = {};
-let ids = 0;
+const Transaction = require('./Transaction');
 
-async function getTransaction(id) {
-  return transactions[id];
+class TransactionRepository {
+  constructor() {
+    this.transactionDb = require('./transactionDb');
+  }
+
+  async getTransaction(id) {
+    const data = this.transactionDb.get(id);
+    if (!data) {
+      return;
+    }
+
+    return new Transaction(data);
+  }
+
+  async createTransaction({ userId, xdr }) {
+    const id = await this.transactionDb.create({ userId, xdr });
+    return new Transaction({ xdr, userId, id });
+  }
+
+  async getTransactionsForUserId(userId) {
+    const transactions = await this.transactionDb.get(userId, 'userId');
+    return transactions.map(transaction => new Transaction(transaction));
+  }
 }
 
-async function createTransaction({ sourceAccount, xdr }) {
-  const id = ++ids;
-  const transaction = { xdr, sourceAccount, id };
-  transactions[id] = transaction;
-  return transaction;
-}
-
-module.exports = {
-  getTransaction,
-  createTransaction
-};
+module.exports = new TransactionRepository();
