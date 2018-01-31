@@ -5,6 +5,10 @@ class StellarAccount {
     this.publicKey = publicKey;
     this.isActive = isActive;
   }
+
+  get memoText() {
+    return String(this.userId);
+  }
 }
 
 module.exports = StellarAccount;

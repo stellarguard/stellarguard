@@ -6,7 +6,7 @@ class GetEffectsJob extends Job {
     const effects = await stellar.accounts.getEffects(publicKey);
     const signerCreatedRecords = getSignerCreatedRecords(
       effects,
-      this.config.keys.signerPublicKey
+      this.config.signerPublicKey
     );
 
     const operations = await Promise.all(

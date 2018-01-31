@@ -34,10 +34,8 @@ class AccountsController {
 
     const multiSigSetup = await stellar.accounts.getMultiSigSetup(
       account.publicKey,
-      config.keys.signerPublicKey
+      config.signerPublicKey
     );
-
-    console.log(multiSigSetup);
 
     if (!multiSigSetup) {
       return res.status(400).json({
@@ -63,6 +61,31 @@ class AccountsController {
     const activatedAccount = accounts.accountsService.activateAccount(account);
     res.json(activatedAccount);
   }
+
+  async getMultiSigActivationTransaction(req, res) {
+    const { id } = req.params;
+    const { backup } = req.query;
+    const account = await accounts.accountsService.getAccount(id);
+    if (!account) {
+      return res.status(404).json({
+        error: 'The requested account does not exist.'
+      });
+    }
+
+    if (account.userId !== req.user.id) {
+      return res.status(403).json({
+        error:
+          'The requested account does not belong to the currently logged in user'
+      });
+    }
+
+    const transaction = await accounts.accountsService.getMultiSigActivationTransaction(
+      account,
+      { backupSigner: backup }
+    );
+
+    res.json({ xdr: transaction.xdr });
+  }
 }
 
 const accountsController = new AccountsController();
@@ -70,5 +93,9 @@ const accountsController = new AccountsController();
 router.use(session.ensureLoggedIn());
 router.post('/', accountsController.createAccount);
 router.post('/:id/activate', accountsController.activateAccount);
+router.get(
+  '/:id/multisig',
+  accountsController.getMultiSigActivationTransaction
+);
 
 module.exports = router;

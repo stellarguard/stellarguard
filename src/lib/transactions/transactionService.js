@@ -1,3 +1,6 @@
+const transactionsRepository = require('./transactionsRepository');
+const stellar = require('../stellar');
+
 class TransactionService {
   async getTransaction(id) {
     return await transactionsRepository.getTransaction(id);

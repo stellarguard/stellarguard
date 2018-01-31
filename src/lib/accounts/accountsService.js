@@ -1,5 +1,6 @@
 const StellarAccount = require('./StellarAccount');
 const stellarAccountsRepository = require('./stellarAccountsRepository');
+const stellar = require('../stellar');
 
 class AccountsService {
   async getAccounts({ cursor, limit = 20 } = {}) {
@@ -28,6 +29,22 @@ class AccountsService {
 
   async deactivateAccount(account) {
     return await stellarAccountsRepository.deactivateAccount(account);
+  }
+
+  async getMultiSigActivationTransaction(account, { backupSigner }) {
+    const transaction = await stellar.multisig.buildMultiSigTransaction(
+      account.publicKey,
+      {
+        memoText: account.memoText,
+        backupSigner
+      }
+    );
+
+    const xdr = stellar.transactions.toXdr(transaction);
+    return {
+      transaction,
+      xdr
+    };
   }
 }
 

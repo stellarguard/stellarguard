@@ -5,8 +5,9 @@ class Transaction {
     return new Transaction({ xdr });
   }
 
-  constructor({ id, xdr }) {
+  constructor({ id, userId, xdr }) {
     this.id = id;
+    this.userId = userId;
     this.stellarTransaction = stellar.transactions.fromXdr(xdr);
   }
 

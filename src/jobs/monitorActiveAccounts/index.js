@@ -27,7 +27,7 @@ class MonitorActiveAccounts extends Job {
           const stellarAccount = stellarAccounts[i];
           const hasSigner = doesAccountHaveSigner(
             stellarAccount,
-            config.keys.signerPublicKey
+            config.signerPublicKey
           );
 
           if (hasSigner) {
