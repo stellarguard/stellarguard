@@ -1,23 +1,45 @@
 const StellarSdk = require('stellar-sdk');
+const config = require('../../config');
+const server = require('./server').server();
+const accounts = require('./accounts');
 
-function buildMultiSigTransaction(
-  account,
-  { additionalSignerPublicKey, weight = 1 }
+async function buildMultiSigTransaction(
+  accountPublicKey,
+  { memoText, backupSigner }
 ) {
+  const memo = StellarSdk.Memo.text(memoText);
+  const account = await server.loadAccount(accountPublicKey);
   const builder = new StellarSdk.TransactionBuilder(account);
-  builder
-    // this operation funds the new account with XLM
-    .addOperation(
+  builder.addMemo(memo).addOperation(
+    StellarSdk.Operation.setOptions({
+      signer: {
+        ed25519PublicKey: config.signerPublicKey,
+        weight: 1
+      }
+    })
+  );
+
+  console.log(config.signerPublicKey);
+
+  if (backupSigner) {
+    builder.addOperation(
       StellarSdk.Operation.setOptions({
-        masterWeight: 1,
-        medThreshold: 2,
-        highThreshold: 2,
         signer: {
-          ed25519PublicKey: additionalSignerPublicKey,
-          weight
+          ed25519PublicKey: backupSigner,
+          weight: 1
         }
       })
     );
+  }
+
+  builder.addOperation(
+    StellarSdk.Operation.setOptions({
+      masterWeight: 1,
+      lowThreshold: 1,
+      medThreshold: 2,
+      highThreshold: 2
+    })
+  );
 
   return builder.build();
 }

@@ -45,6 +45,8 @@ class UserRepository {
       publicKey
     );
 
+    console.log(stellarAccounts);
+
     const activeAccounts = stellarAccounts.filter(
       account => account.isActive === true
     );

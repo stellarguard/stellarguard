@@ -1,13 +1,14 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
+const config = require('../config');
 
 const { users } = require('../lib');
 
 function configure(app) {
   app.use(
     session({
-      secret: 'keyboard cat', // TODO -- change this secret
+      secret: config.sessionSecret,
       resave: false,
       saveUninitialized: false,
       cookie: {
@@ -22,7 +23,6 @@ function configure(app) {
 
   passport.use(
     new LocalStrategy(async function(username, password, done) {
-      console.log('herfdsfse');
       const user = await users.userService.getUserByUsername(username);
       if (!user) {
         return done(null, false);

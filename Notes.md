@@ -14,7 +14,7 @@ Should I separate payments from verification?
 
 = IDEAS =
 
-* federation for verifications paul\*stellarguard.io
+* federation for verifications paul\*stellarguard.io -- naw... we're building this ourselves anyway
 
 = Code improvements =
 
@@ -22,6 +22,9 @@ Should I separate payments from verification?
 [] Drastically improve TFA strategy code... it sucks
 [] Standardize how create works -- do i need to pass a full class, or just props?
 [] change StellarAccount to Account
+[] middleware for fetching objects
+[] get case sensitivity on everything
+[] 
 
 NEXT:
 
@@ -31,3 +34,12 @@ NEXT:
   * make verification payment
   * submit transaction
   * verify transaction
+
+Next Steps
+= implement email verification
+= Test End to End Scenario
+= UI
+= Postgres
+= Google Domains
+= Google App Engine
+= Sendgrid

@@ -1,0 +1,17 @@
+{
+  "data": {
+    "id": {
+      "1": {
+        "userId": 1,
+        "xdr": "AAAAANqRfZbI5vw88JPU9umGyNmB4wgFKYXnEHy5R7j819zaAAAAZABqoSYAAAACAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAV25StXIU17EdAvD7sqjsXZiKcECf87DDIz+94tUUi/EAAAAAAAAAAHc1lAAAAAAAAAAAAfzX3NoAAABA4jJFhnqTnN2RkMRAU88KnyZD4D2nZuTtBHBOkN2ARk7Pypb8JofiuUAdUOF8J3Gaoi3CoqWdTHhbJDlkbX0TAA==",
+        "id": 1
+      }
+    },
+    "userId": {
+      "1": [
+        1
+      ]
+    }
+  },
+  "counter": 1
+}

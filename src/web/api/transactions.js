@@ -1,5 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const _ = require('lodash');
+
+const session = require('../session');
+const config = require('../../config');
 
 const { stellar, accounts, tfa, transactions, users } = require('../../lib');
 
@@ -13,7 +17,7 @@ router.post('/', async function(req, res, next) {
 
     const transaction = new transactions.Transaction({ xdr });
     const source = transaction.source;
-    const user = users.userService.getByAccountPublicKey(source, {
+    const user = await users.userService.getByAccountPublicKey(source, {
       withTfaStrategies: true
     });
 
@@ -31,8 +35,7 @@ router.post('/', async function(req, res, next) {
       });
     }
 
-    const allTfaStrategies = user.tfaStrategies;
-    if (!user.tfaStrategies || !allTfaStrategies.length) {
+    if (_.isEmpty(user.tfaStrategies)) {
       return res.status(404).json({
         error:
           'There are no authorization methods associated with the source account.'
@@ -45,7 +48,10 @@ router.post('/', async function(req, res, next) {
         xdr
       }
     );
-    allTfaStrategies.forEach(strategy => strategy.execute(newTransaction));
+
+    user.tfaStrategies.forEach(strategy =>
+      strategy.execute({ user, transaction: newTransaction })
+    );
     return res.json({ id: newTransaction.id });
   } catch (e) {
     // TODO -- centralize this
@@ -58,10 +64,14 @@ router.post('/', async function(req, res, next) {
 // public key matches to no accounts
 // current user does not have any accounts with source public key
 
-// TODO - require log in?
-router.post('/:id/authorize', async function(req, res, next) {
+router.post('/:id/authorize', session.ensureLoggedIn(), async function(
+  req,
+  res,
+  next
+) {
   try {
-    const { id, tfaType } = req.params;
+    const { id } = req.params;
+    const { tfaType } = req.query;
     const transaction = await transactions.transactionService.getTransaction(
       id
     );
@@ -73,9 +83,12 @@ router.post('/:id/authorize', async function(req, res, next) {
         .json({ error: 'Transaction not found or is expired.' });
     }
 
-    const transactionUser = users.userService.getUserById(transaction.userId, {
-      withTfaStrategies: true
-    });
+    const transactionUser = await users.userService.getUserById(
+      transaction.userId,
+      {
+        withTfaStrategies: true
+      }
+    );
 
     if (!transactionUser) {
       return res
@@ -91,26 +104,28 @@ router.post('/:id/authorize', async function(req, res, next) {
       });
     }
 
-    const tfaStrategy = transactionuser.tfaStrategies.find(
+    const tfaStrategy = transactionUser.tfaStrategies.find(
       tfaStrategy => tfaStrategy.type === tfaType
     );
 
     if (!tfaStrategy) {
-      return res.status(500).json({ error: 'Unknown' });
+      return res.status(500).json({
+        error: `There is no ${tfaType} authorization strategy for this user.`
+      });
     }
 
     const isVerified = await tfaStrategy.verify(req.body);
     if (!isVerified) {
       // TODO - increment tries
       return res
-        .status(401)
+        .status(403)
         .json({ error: 'Your verification code is incorrect.' });
     }
 
     // TODO - env object -- and encapsulate this better
-    transaction.sign(process.env.SECRET_KEY);
+    transaction.sign(config.signerSecretKey);
 
-    const result = await transactions.transactionsService.submitTransaction(
+    const result = await transactions.transactionService.submitTransaction(
       transaction
     );
     res.json(result);
