@@ -45,8 +45,6 @@ class UserRepository {
       publicKey
     );
 
-    console.log(stellarAccounts);
-
     const activeAccounts = stellarAccounts.filter(
       account => account.isActive === true
     );
@@ -57,6 +55,12 @@ class UserRepository {
 
     const account = activeAccounts[0];
     return await this.getUserById(account.userId, options);
+  }
+
+  async verifyEmail(user) {
+    user.hasVerifiedEmail = true;
+    this.userDb.update(user);
+    return user;
   }
 }
 

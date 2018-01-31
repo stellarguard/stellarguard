@@ -1,5 +1,5 @@
 const env = {
-  signerSecretKey: process.env.SIGNER_SECRET_KEY,
+  signerSecretKey: process.env.STELLAR_SIGNER_SECRET_KEY,
   sessionSecret: process.env.SESSION_SECRET,
   useStellarPublicNetwork: process.env.USE_STELLAR_PUBLIC_NETWORK,
   devMode: !!process.env.DEV_MODE,

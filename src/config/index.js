@@ -6,6 +6,10 @@ class Config {
     return env.sessionSecret || 'koopa troopa doopa';
   }
 
+  get hmacSecret() {
+    return this.sessionSecret;
+  }
+
   get signerPublicKey() {
     return keys.signerPublicKey;
   }

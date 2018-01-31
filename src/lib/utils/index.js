@@ -1,3 +1,5 @@
 module.exports = {
-  Cursor: require('./Cursor')
+  Cursor: require('./Cursor'),
+  urls: require('./urls'),
+  crypto: require('./crypto')
 };
