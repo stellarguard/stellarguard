@@ -1,4 +1,5 @@
 const passwords = require('./passwords');
+const { crypto } = require('../utils');
 
 // interface IUser {
 //   id: number,
@@ -13,16 +14,24 @@ const passwords = require('./passwords');
 // }
 
 class User {
-  constructor({ id, username, email, verified = false, passwordHash }) {
+  constructor({ id, username, email, hasVerifiedEmail = false, passwordHash }) {
     this.id = id;
     this.username = username;
     this.email = email;
-    this.verified = verified;
+    this.hasVerifiedEmail = hasVerifiedEmail;
     this.passwordHash = passwordHash;
   }
 
   async verifyPassword(password) {
     return await passwords.compare(password, this.passwordHash);
+  }
+
+  get emailVerificationCode() {
+    return crypto.getHmac(this.email);
+  }
+
+  verifyEmailCode(code) {
+    return code === this.emailVerificationCode;
   }
 
   toJSON() {
@@ -31,7 +40,7 @@ class User {
       id: this.id,
       username: this.username,
       email: this.email,
-      verified: this.verified
+      hasVerifiedEmail: this.hasVerifiedEmail
     };
   }
 }

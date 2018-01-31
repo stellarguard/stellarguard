@@ -72,6 +72,7 @@ router.post('/:id/authorize', session.ensureLoggedIn(), async function(
   try {
     const { id } = req.params;
     const { tfaType } = req.query;
+    const { code } = req.body;
     const transaction = await transactions.transactionService.getTransaction(
       id
     );
@@ -114,7 +115,7 @@ router.post('/:id/authorize', session.ensureLoggedIn(), async function(
       });
     }
 
-    const isVerified = await tfaStrategy.verify(req.body);
+    const isVerified = await tfaStrategy.verify({ transaction, code });
     if (!isVerified) {
       // TODO - increment tries
       return res

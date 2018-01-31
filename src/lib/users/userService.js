@@ -11,20 +11,13 @@ class UserService {
     // TODO: password validations
     // password blacklist
     const passwordHash = await passwords.hash(password);
-
     const user = await userRepository.createUser({
       username,
       email,
       passwordHash
     });
 
-    await tfa.tfaStrategyService.createStrategy({
-      userId: user.id,
-      username: user.username,
-      type: tfa.TfaStrategy.Email
-    });
-
-    emailService.sendWelcomeEmail({ to: email, username });
+    emailService.sendWelcomeEmail({ user });
 
     return user;
   }
@@ -57,6 +50,23 @@ class UserService {
 
   async getUserByUsername(username) {
     return await userRepository.getUserByUsername(username);
+  }
+
+  async verifyEmail(user, code) {
+    if (!user.verifyEmailCode(code)) {
+      return false;
+    }
+
+    await Promise.all([
+      userRepository.verifyEmail(user),
+      tfa.tfaStrategyService.createStrategy({
+        userId: user.id,
+        username: user.username,
+        type: tfa.TfaStrategy.Email
+      })
+    ]);
+
+    return true;
   }
 
   /**

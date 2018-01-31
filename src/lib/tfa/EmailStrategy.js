@@ -11,8 +11,8 @@ class EmailStrategy extends TfaStrategy {
     // generate passcode, save to db (or some magic with totp?)
     // send or queue email with link to it
     await emailService.sendTransactionAuthorizationEmail({
-      to: user.email,
-      transactionId: transaction.id
+      user,
+      transaction
     });
 
     return {
@@ -21,9 +21,8 @@ class EmailStrategy extends TfaStrategy {
     };
   }
 
-  async verify({ token }) {
-    // TODO -- implement
-    return true;
+  async verify({ transaction, code }) {
+    return transaction.verifyAuthorizationCode(code);
   }
 
   static async getExtras({}) {

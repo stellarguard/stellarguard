@@ -25,7 +25,7 @@
     "stellar-sdk": "^0.8.0"
   },
   "scripts": {
-    "start": "node -w ./src/web/bin/www",
+    "start": "node ./src/web/bin/www",
     "dev": "DEV_MODE=1 supervisor -w src/ ./src/web/bin/www",
     "run-job": "node ./src/jobs/run"
   },

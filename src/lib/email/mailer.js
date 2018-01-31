@@ -1,7 +1,8 @@
 const nodemailer = require('nodemailer');
 
 class Mailer {
-  async sendEmail({ to, from, subject, text, html }) {
+  async sendEmail(email) {
+    const { to, from, subject, text, html } = email;
     const promise = new Promise((resolve, reject) => {
       nodemailer.createTestAccount((err, account) => {
         if (err) {

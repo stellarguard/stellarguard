@@ -1,5 +1,5 @@
 const stellar = require('../stellar');
-
+const { crypto } = require('../utils');
 class Transaction {
   static fromXdr(xdr) {
     return new Transaction({ xdr });
@@ -23,6 +23,14 @@ class Transaction {
     return await stellar.transactions.hasValidSignatures(
       this.stellarTransaction
     );
+  }
+
+  get authorizationCode() {
+    return crypto.getHmac(this.id);
+  }
+
+  verifyAuthorizationCode(code) {
+    return this.authorizationCode === code;
   }
 
   sign(secretKey) {

@@ -7,10 +7,11 @@ Should I separate payments from verification?
 
 = TODO =
 
-[] add email strategy as default when creating account
+[x] add email strategy as default when creating account
+[] - wait until they verify their email?
 [] sanitize body of POST /tfa based on type
 [] idea -- federation for verification
-[] email service
+[] - log IP addresses
 
 = IDEAS =
 
@@ -24,16 +25,9 @@ Should I separate payments from verification?
 [] change StellarAccount to Account
 [] middleware for fetching objects
 [] get case sensitivity on everything
-[] 
+[]
 
 NEXT:
-
-* start fresh with the new address
-  * set up 2/3 multisig with test account
-  * sign up new user, paul
-  * make verification payment
-  * submit transaction
-  * verify transaction
 
 Next Steps
 = implement email verification
