@@ -21,6 +21,10 @@ class Config {
   get useStellarPublicNetwork() {
     return env.useStellarPublicNetwork || false;
   }
+
+  get isDevMode() {
+    return env.devMode || false;
+  }
 }
 
 const config = new Config();
