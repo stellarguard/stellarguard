@@ -20,17 +20,23 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "qrcode": "^1.2.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "serve-favicon": "~2.4.5",
     "speakeasy": "^2.0.0",
     "stellar-sdk": "^0.8.0"
   },
   "scripts": {
     "start": "node ./src/web/bin/www",
-    "dev": "DEV_MODE=1 supervisor -w src/ ./src/web/bin/www",
+    "dev": "DEV_MODE=1 supervisor -w src/ -i src/web/ui ./src/web/bin/www",
     "run-job": "node ./src/jobs/run"
   },
   "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
     "battery-level": "^3.0.0",
+    "parcel-bundler": "^1.5.1",
+    "postcss-modules": "^1.1.0",
     "supervisor": "^0.12.0"
   }
 }

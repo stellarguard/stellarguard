@@ -9,6 +9,15 @@ const apiRoutes = require('./api');
 
 var app = express();
 
+const config = require('../config');
+if (config.isDevMode) {
+  console.log('oh yeahhhhh');
+  const Bundler = require('parcel-bundler');
+  const bundler = new Bundler(path.resolve(__dirname, 'ui/index.html'));
+  bundler.bundle();
+  app.use(bundler.middleware());
+}
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
