@@ -51,7 +51,7 @@ class AccountsController {
     }
 
     // TODO -- don't rely on it being a number
-    if (Number(multiSigSetup.memo) !== req.user.id) {
+    if (req.user.matchesMultiSigMemo(multiSigSetup.memo)) {
       return res.status(400).json({
         error:
           'Multi-sig transaction contained a memo, but it cannot be associated with the current logged in account'
@@ -81,6 +81,7 @@ class AccountsController {
 
     const transaction = await accounts.accountsService.getMultiSigActivationTransaction(
       account,
+      user,
       { backupSigner: backup }
     );
 

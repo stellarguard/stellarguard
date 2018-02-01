@@ -27,7 +27,15 @@ class User {
   }
 
   get emailVerificationCode() {
-    return crypto.getHmac(this.email);
+    return crypto.getHmac(this.email, 20);
+  }
+
+  get memoText() {
+    return crypto.getHmac(this.id, 20);
+  }
+
+  verifyMemoText(memoText) {
+    return memoText === this.memoText;
   }
 
   verifyEmailCode(code) {

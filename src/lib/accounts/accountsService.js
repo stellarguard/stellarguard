@@ -31,11 +31,11 @@ class AccountsService {
     return await stellarAccountsRepository.deactivateAccount(account);
   }
 
-  async getMultiSigActivationTransaction(account, { backupSigner }) {
+  async getMultiSigActivationTransaction(account, user, { backupSigner }) {
     const transaction = await stellar.multisig.buildMultiSigTransaction(
       account.publicKey,
       {
-        memoText: account.memoText,
+        memoText: user.memoText,
         backupSigner
       }
     );
