@@ -10,13 +10,6 @@ const apiRoutes = require('./api');
 var app = express();
 
 const config = require('../config');
-if (config.isDevMode) {
-  console.log('oh yeahhhhh');
-  const Bundler = require('parcel-bundler');
-  const bundler = new Bundler(path.resolve(__dirname, 'ui/index.html'));
-  bundler.bundle();
-  app.use(bundler.middleware());
-}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,13 +24,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser('keyboard cat'));
 
 session.configure(app);
-
-const passport = require('passport');
-app.get('/', function(req, res) {
-  res.render('home', { user: req.user });
-});
-
 app.use('/api', apiRoutes);
+
+if (config.isDevMode) {
+  const Bundler = require('parcel-bundler');
+  const bundler = new Bundler(path.resolve(__dirname, 'ui/index.html'));
+  bundler.bundle();
+  app.use(bundler.middleware());
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

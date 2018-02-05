@@ -5,18 +5,26 @@ const { users } = require('../../lib');
 const session = require('../session');
 
 router.post('/', async function(req, res, next) {
-  const { username, email, password } = req.body;
-  const user = await users.userService.createUser({
-    username,
-    email,
-    password
-  });
-  req.login(user, function(err) {
-    if (err) {
-      return next(err);
-    }
-    res.json(user);
-  });
+  try {
+    const { username, email, password } = req.body;
+    const user = await users.userService.createUser({
+      username,
+      email,
+      password
+    });
+    req.login(user, function(err) {
+      if (err) {
+        return next(err);
+      }
+      res.json(user);
+    });
+  } catch (e) {
+    return res.status(400).json(e);
+  }
+});
+
+router.get('/me', session.ensureLoggedIn(), async (req, res) => {
+  res.json(req.user);
 });
 
 router.post('/me/verifyemail', session.ensureLoggedIn(), async function(

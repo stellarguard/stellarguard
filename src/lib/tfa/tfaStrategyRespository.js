@@ -44,7 +44,6 @@ class TfaStrategyRepository {
   }
 
   async buildStrategy(baseStrategy) {
-    console.log(baseStrategy);
     switch (baseStrategy.type) {
       case TfaStrategy.Type.Authenticator:
         const authenticatorStrategyData = this.authenticatorStrategyDb.get(

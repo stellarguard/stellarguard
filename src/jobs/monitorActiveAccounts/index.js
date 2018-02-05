@@ -2,7 +2,7 @@
 // and check whether they have it as a signer
 // if not, deactivate it
 const Job = require('../Job');
-const _ = require('lodash');
+const map = require('lodash.map');
 const { accounts, utils, stellar } = require('../../lib');
 const config = require('../../config');
 
@@ -19,7 +19,7 @@ class MonitorActiveAccounts extends Job {
       const allAccounts = result.accounts;
 
       const stellarAccounts = await stellar.accounts.getAccounts(
-        _.map(allAccounts, 'publicKey')
+        map(allAccounts, 'publicKey')
       );
 
       await Promise.all(
