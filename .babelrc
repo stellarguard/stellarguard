@@ -2,7 +2,6 @@
   "plugins": [
     "transform-decorators-legacy",
     "transform-export-extensions",
-    "transform-function-bind",
     "transform-class-properties"
   ],
   "presets": [
