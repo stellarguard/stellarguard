@@ -5,11 +5,11 @@ const passwords = require('./passwords');
 const accounts = require('../accounts');
 const tfa = require('../tfa');
 const { emailService } = require('../email');
+const userValidator = require('../../validators/users.server');
 
 class UserService {
   async createUser({ username, email, password }) {
-    // TODO: password validations
-    // password blacklist
+    await userValidator.validate({ username, email, password });
     const passwordHash = await passwords.hash(password);
     const user = await userRepository.createUser({
       username,
@@ -27,7 +27,6 @@ class UserService {
     { withTfaStrategies = false, withStellarAccounts = false } = {}
   ) {
     const user = await userRepository.getUserById(id);
-    console.log('getUserById', id, user);
     if (!user) {
       return;
     }

@@ -37,3 +37,7 @@ Next Steps
 = Google Domains
 = Google App Engine
 = Sendgrid
+
+Nice to Have
+[] Known accounts list -- warn if it's unknown or someone you haven't sent to before
+[]

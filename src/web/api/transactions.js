@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const _ = require('lodash');
+const isEmpty = require('lodash.isempty');
 
 const session = require('../session');
 const config = require('../../config');
@@ -35,7 +35,7 @@ router.post('/', async function(req, res, next) {
       });
     }
 
-    if (_.isEmpty(user.tfaStrategies)) {
+    if (isEmpty(user.tfaStrategies)) {
       return res.status(404).json({
         error:
           'There are no authorization methods associated with the source account.'

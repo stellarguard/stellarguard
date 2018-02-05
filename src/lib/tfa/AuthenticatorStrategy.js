@@ -5,7 +5,6 @@ class AuthenticatorStrategy extends TfaStrategy {
   constructor({ id, userId, secret }) {
     super({ id, userId, type: TfaStrategy.Type.Authenticator });
 
-    console.log(id, secret);
     this.secret = secret;
   }
 

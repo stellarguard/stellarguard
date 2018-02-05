@@ -3,8 +3,22 @@ const router = express.Router();
 
 const session = require('../session');
 
-router.post('/', session.authenticateLocal(), function(req, res) {
-  res.json(req.user);
+router.post('/', function(req, res, next) {
+  session.authenticateLocal(function(err, user, info) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.status(401).json({ error: 'Incorrect username or password.' });
+    }
+
+    req.logIn(user, function(err) {
+      if (err) {
+        return next(err);
+      }
+      return res.json(user);
+    });
+  })(req, res, next);
 });
 
 router.delete('/', session.ensureLoggedIn(), function(req, res) {

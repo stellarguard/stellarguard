@@ -10,8 +10,7 @@ class UserRepository {
   async createUser({ username, email, passwordHash }) {
     if (this.userDb.get(username, 'username')) {
       throw {
-        error: 'unique',
-        field: 'username'
+        username: 'This username is already taken.'
       };
     }
 
