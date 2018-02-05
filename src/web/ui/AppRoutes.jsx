@@ -1,9 +1,9 @@
 import React from 'react';
-
 import { Route, Switch, Redirect } from 'react-router';
-import HomePage from './home/HomePage';
-import FourOhFourPage from './errors/FourOhFourPage';
-import SignInPage from './signIn/SignInPage';
+
+import HomePage from './pages/home/HomePage';
+import FourOhFourPage from './pages/errors/FourOhFourPage';
+import SignInPage from './pages/signIn/SignInPage';
 
 class AppRoutes extends React.Component {
   render() {

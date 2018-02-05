@@ -4,7 +4,7 @@ const yup = require('yup');
 const MIN_PASSWORD_LENGTH = 8;
 
 const schema = yup.object().shape({
-  username: yup.string().required(),
+  username: yup.string().required('Username is required.'),
   password: yup
     .string()
     .min(

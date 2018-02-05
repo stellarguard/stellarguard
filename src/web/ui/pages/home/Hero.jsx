@@ -4,7 +4,7 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import { Redirect } from 'react-router';
 
-import logo from '../images/logo.png';
+import logo from '../../images/logo.png';
 import SignInDialog from '../signIn/SignInDialog';
 import RegisterDialog from '../register/RegisterDialog';
 
@@ -116,7 +116,7 @@ class Hero extends Component {
           <img src={logo} alt="StellarGuard Logo" className={classes.logo} />
           <div className={classes.text}>
             <Typography
-              type="display2"
+              variant="display2"
               component="h1"
               color="inherit"
               gutterBottom
@@ -125,7 +125,7 @@ class Hero extends Component {
               <span className={classes.guard}>Guard</span>
             </Typography>
             <Typography
-              type="headline"
+              variant="headline"
               component="h2"
               color="inherit"
               className={classes.headline}
@@ -137,14 +137,14 @@ class Hero extends Component {
                 <Button
                   className={classes.getStarted}
                   color="secondary"
-                  raised
+                  variant="raised"
                   onClick={this.handleRegisterOpen}
                 >
                   Get Started
                 </Button>
                 <Button className={classes.learnMore}>Learn More</Button>
               </div>
-              <Typography color="inherit" type="subheading">
+              <Typography color="inherit" variant="subheading">
                 Already have an account?{' '}
                 <Button color="secondary" onClick={this.handleSignInOpen}>
                   Sign in.

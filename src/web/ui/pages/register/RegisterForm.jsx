@@ -5,27 +5,43 @@ import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
 import yup from 'yup';
 
-import { FormError, FormActions } from '../components';
-import { sessionApi } from '../api';
+import { validate } from '../../../../validators/users';
+
+import { FormGroup } from 'material-ui/form';
+
+import { FormError, FormActions } from '../../components';
+import { usersApi } from '../../api';
 
 const styles = theme => ({});
 
-class SignInForm extends React.Component {
+class RegisterForm extends React.Component {
   state = {};
 
-  onSubmit = async ({ username, password }, { setSubmitting, setErrors }) => {
+  onSubmit = async (
+    { username, password, email },
+    { setSubmitting, setErrors }
+  ) => {
     try {
-      const user = await sessionApi.signIn({ username, password });
+      const user = await usersApi.register({ username, password, email });
       setSubmitting(false);
-      this.signInSuccess(user);
+      this.registerSuccess(user);
     } catch (e) {
+      console.error(e);
       setSubmitting(false);
-      setErrors({ form: e.response.data.error });
+      setErrors(e);
     }
   };
 
-  signInSuccess = user => {
-    this.props.onSignIn && this.props.onSignIn(user);
+  registerSuccess = user => {
+    this.props.onRegister && this.props.onRegister(user);
+  };
+
+  validate = async user => {
+    try {
+      await validate(user);
+    } catch (e) {
+      throw e;
+    }
   };
 
   render() {
@@ -35,13 +51,11 @@ class SignInForm extends React.Component {
       <Formik
         initialValues={{
           username: '',
-          password: ''
+          password: '',
+          email: ''
         }}
         onSubmit={this.onSubmit}
-        validationSchema={yup.object().shape({
-          username: yup.string().required(),
-          password: yup.string().required()
-        })}
+        validate={this.validate}
         render={({
           values,
           errors,
@@ -51,41 +65,57 @@ class SignInForm extends React.Component {
           handleSubmit,
           isSubmitting
         }) => (
-          <Form id="sign-in-form">
-            <FormError>{errors.form}</FormError>
+          <Form id="register-form" noValidate>
             <TextField
-              fullWidth
               autoFocus
+              fullWidth
               margin="normal"
-              type="text"
+              variant="text"
               id="username"
               name="username"
               label="Username"
+              required
               onChange={handleChange}
               inputProps={{ onBlur: handleBlur }}
               value={values.username}
               error={!!(touched.username && errors.username)}
+              helperText={touched.username && errors.username}
             />
             <TextField
               fullWidth
               margin="normal"
-              type="password"
+              variant="password"
               name="password"
               label="Password"
+              required
               onChange={handleChange}
               inputProps={{ onBlur: handleBlur }}
               value={values.password}
               error={!!(touched.password && errors.password)}
+              helperText={touched.password && errors.password}
+            />
+            <TextField
+              fullWidth
+              margin="normal"
+              variant="email"
+              name="email"
+              label="Email address"
+              required
+              onChange={handleChange}
+              inputProps={{ onBlur: handleBlur }}
+              value={values.email}
+              error={!!(touched.email && errors.email)}
+              helperText={touched.email && errors.email}
             />
             {includeActions && (
               <FormActions>
                 <Button
-                  type="submit"
+                  variant="submit"
                   disabled={isSubmitting}
-                  raised
+                  variant="raised"
                   color="primary"
                 >
-                  Sign in
+                  Register
                 </Button>
               </FormActions>
             )}
@@ -96,4 +126,4 @@ class SignInForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(SignInForm);
+export default withStyles(styles)(RegisterForm);

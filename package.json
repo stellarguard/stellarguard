@@ -21,6 +21,8 @@
     "lodash.isempty": "^4.4.0",
     "lodash.map": "^4.6.0",
     "material-ui": "^1.0.0-beta.31",
+    "mobx": "^3.4.1",
+    "mobx-react": "^4.3.5",
     "morgan": "~1.9.0",
     "nodemailer": "^4.4.2",
     "passport": "^0.4.0",
@@ -39,12 +41,13 @@
   "scripts": {
     "start": "node ./src/web/bin/www",
     "build": "parcel build src/web/ui/index.html",
-    "dev": "open http://localhost:3000/; DEV_MODE=1 supervisor -w src/ -i src/web/ui ./src/web/bin/www",
+    "dev": "DEV_MODE=1 supervisor -w src/ -i src/web/ui ./src/web/bin/www",
     "run-job": "node ./src/jobs/run"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators": "^6.24.1",
     "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
     "babel-plugin-transform-es3-property-literals": "^6.22.0",
     "babel-plugin-transform-export-extensions": "^6.22.0",
