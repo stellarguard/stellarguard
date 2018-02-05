@@ -1,8 +1,9 @@
 {
   "plugins": [
+    "transform-decorators-legacy",
     "transform-export-extensions",
-    "transform-class-properties",
-    "transform-decorators"
+    "transform-function-bind",
+    "transform-class-properties"
   ],
   "presets": [
     [
