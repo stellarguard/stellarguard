@@ -1,5 +1,9 @@
 {
-  "plugins": ["transform-export-extensions", "transform-class-properties"],
+  "plugins": [
+    "transform-export-extensions",
+    "transform-class-properties",
+    "transform-decorators"
+  ],
   "presets": [
     [
       "env",

@@ -13,7 +13,7 @@ import Dialog, {
 import SignInForm from './SignInForm';
 
 const styles = theme => ({
-  dialog: {
+  content: {
     width: '400px',
     [theme.breakpoints.down('sm')]: {
       width: 'auto'
@@ -28,19 +28,18 @@ class SignInDialog extends Component {
       <Dialog
         fullScreen={fullScreen}
         open={open}
-        className={classes.dialog}
         onClose={onClose}
         aria-labelledby="sign-in-dialog"
       >
         <DialogTitle id="sign-in-dialog">Sign in to StellarGuard</DialogTitle>
-        <DialogContent>
+        <DialogContent className={classes.content}>
           <SignInForm onSignIn={onSignIn} includeActions={false} />
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose} color="primary">
             Cancel
           </Button>
-          <Button type="submit" color="primary" form="sign-in-form">
+          <Button variant="submit" color="primary" form="sign-in-form">
             Sign in
           </Button>
         </DialogActions>
