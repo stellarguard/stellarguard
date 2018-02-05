@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
-
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -39,7 +38,7 @@ class SignInDialog extends Component {
           <Button onClick={onClose} color="primary">
             Cancel
           </Button>
-          <Button variant="submit" color="primary" form="sign-in-form">
+          <Button type="submit" color="primary" form="sign-in-form">
             Sign in
           </Button>
         </DialogActions>

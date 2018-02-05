@@ -8,6 +8,8 @@ import logo from '../../images/logo.png';
 import SignInDialog from '../signIn/SignInDialog';
 import RegisterDialog from '../register/RegisterDialog';
 
+import { inject, observer } from 'mobx-react';
+
 const styles = theme => ({
   hero: {
     minHeight: '40vh',
@@ -39,9 +41,6 @@ const styles = theme => ({
   getStarted: {
     marginRight: theme.spacing.unit
   },
-  learnMore: {
-    color: theme.palette.primary.contrastText
-  },
   text: {
     paddingLeft: theme.spacing.unit * 4,
     paddingRight: theme.spacing.unit * 4,
@@ -61,38 +60,21 @@ const styles = theme => ({
   }
 });
 
+@inject('rootStore')
+@observer
 class Hero extends Component {
-  state = {
-    isSignInDialogOpen: false,
-    isRegisterDialogOpen: false
-  };
+  state = {};
 
   handleSignInOpen = () => {
-    this.setState({ isSignInDialogOpen: true });
-  };
-
-  handleSignInClose = () => {
-    this.setState({ isSignInDialogOpen: false });
-  };
-
-  handleSignInSuccess = user => {
-    this.setState({ signedIn: true });
+    this.props.rootStore.uiState.openSignInDialog();
   };
 
   handleRegisterOpen = () => {
-    this.setState({ isRegisterDialogOpen: true });
-  };
-
-  handleRegisterClose = () => {
-    this.setState({ isRegisterDialogOpen: false });
-  };
-
-  handleRegisterSuccess = user => {
-    this.setState({ signedIn: true });
+    this.props.rootStore.uiState.openRegisterDialog();
   };
 
   render() {
-    const { classes } = this.props;
+    const { rootStore, classes } = this.props;
 
     if (this.state.signedIn) {
       return <Redirect to="/dashboard" />;
@@ -100,18 +82,6 @@ class Hero extends Component {
 
     return (
       <div className={classes.hero}>
-        <SignInDialog
-          open={this.state.isSignInDialogOpen}
-          onClose={this.handleSignInClose}
-          onSignIn={this.handleSignInSuccess}
-        />
-
-        <RegisterDialog
-          open={this.state.isRegisterDialogOpen}
-          onClose={this.handleRegisterClose}
-          onRegister={this.handleRegisterSuccess}
-        />
-
         <div className={classes.content}>
           <img src={logo} alt="StellarGuard Logo" className={classes.logo} />
           <div className={classes.text}>
@@ -142,7 +112,9 @@ class Hero extends Component {
                 >
                   Get Started
                 </Button>
-                <Button className={classes.learnMore}>Learn More</Button>
+                <Button color="inherit" className={classes.learnMore}>
+                  Learn More
+                </Button>
               </div>
               <Typography color="inherit" variant="subheading">
                 Already have an account?{' '}

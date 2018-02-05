@@ -110,7 +110,7 @@ class RegisterForm extends React.Component {
             {includeActions && (
               <FormActions>
                 <Button
-                  variant="submit"
+                  type="submit"
                   disabled={isSubmitting}
                   variant="raised"
                   color="primary"
