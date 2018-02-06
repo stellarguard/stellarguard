@@ -21,7 +21,7 @@ app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser('keyboard cat'));
+app.use(cookieParser(config.sessionSecret));
 
 session.configure(app);
 app.use('/api', apiRoutes);
