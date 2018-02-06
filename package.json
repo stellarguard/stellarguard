@@ -42,7 +42,7 @@
   "scripts": {
     "start": "node ./src/web/bin/www",
     "build": "parcel build src/web/ui/index.html",
-    "dev": "DEV_MODE=1 supervisor -w src/ -i src/web/ui ./src/web/bin/www",
+    "dev": "DEV_MODE=1 supervisor -w src/ -i src/ui ./src/server/bin/www",
     "run-job": "node ./src/jobs/run"
   },
   "devDependencies": {
