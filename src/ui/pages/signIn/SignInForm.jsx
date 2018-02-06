@@ -4,23 +4,26 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
 import yup from 'yup';
+import { inject, observer } from 'mobx-react';
 
 import { FormError, FormActions } from '../../components';
-import { sessionApi } from '../../api';
 
 const styles = theme => ({});
 
+@inject('rootStore')
+@observer
 class SignInForm extends React.Component {
-  state = {};
-
   onSubmit = async ({ username, password }, { setSubmitting, setErrors }) => {
     try {
-      const user = await sessionApi.signIn({ username, password });
+      const user = await this.props.rootStore.sessionStore.signIn({
+        username,
+        password
+      });
       setSubmitting(false);
       this.signInSuccess(user);
     } catch (e) {
       setSubmitting(false);
-      setErrors({ form: e.response.data.error });
+      setErrors(e);
     }
   };
 
@@ -52,12 +55,12 @@ class SignInForm extends React.Component {
           isSubmitting
         }) => (
           <Form id="sign-in-form">
-            <FormError>{errors.form}</FormError>
+            <FormError errors={errors} />
             <TextField
               fullWidth
               autoFocus
               margin="normal"
-              variant="text"
+              type="text"
               id="username"
               name="username"
               label="Username"
@@ -69,7 +72,7 @@ class SignInForm extends React.Component {
             <TextField
               fullWidth
               margin="normal"
-              variant="password"
+              type="password"
               name="password"
               label="Password"
               onChange={handleChange}

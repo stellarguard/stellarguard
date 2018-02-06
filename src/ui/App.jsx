@@ -13,13 +13,15 @@ import AppRoutes from './AppRoutes';
 import RootStore from './stores/rootStore';
 import AppDialogs from './AppDialogs';
 
+const rootStore = new RootStore();
+
 class App extends React.Component {
   componentDidMount() {}
 
   render() {
     return (
       <BrowserRouter>
-        <Provider rootStore={new RootStore()}>
+        <Provider rootStore={rootStore}>
           <AppTheme>
             <Reboot />
             <AppDialogs />

@@ -24,6 +24,41 @@ const styles = theme => ({
 
 @inject('rootStore')
 @observer
+class ToolbarActions extends Component {
+  render() {
+    const { rootStore } = this.props;
+    if (rootStore.sessionStore.isSignedIn) {
+      return (
+        <Button
+          color="inherit"
+          onClick={() => rootStore.sessionStore.signOut()}
+        >
+          Sign out
+        </Button>
+      );
+    }
+
+    return (
+      <div>
+        <Button
+          color="inherit"
+          onClick={() => rootStore.uiState.openRegisterDialog()}
+        >
+          Register
+        </Button>
+        <Button
+          color="inherit"
+          onClick={() => rootStore.uiState.openSignInDialog()}
+        >
+          Sign in
+        </Button>
+      </div>
+    );
+  }
+}
+
+@inject('rootStore')
+@observer
 class AppHeader extends Component {
   render() {
     const { classes } = this.props;
@@ -45,18 +80,7 @@ class AppHeader extends Component {
             >
               StellarGuard
             </Typography>
-            <Button
-              color="inherit"
-              onClick={() => this.props.rootStore.uiState.openRegisterDialog()}
-            >
-              Register
-            </Button>
-            <Button
-              color="inherit"
-              onClick={() => this.props.rootStore.uiState.openSignInDialog()}
-            >
-              Sign in
-            </Button>
+            <ToolbarActions />
           </Toolbar>
         </AppBar>
       </div>

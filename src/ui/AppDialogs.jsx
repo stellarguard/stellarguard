@@ -21,7 +21,7 @@ class AppDialogs extends Component {
   };
 
   handleSignInSuccess = user => {
-    this.setState({ signedIn: true });
+    this.uiState.closeSignInDialog();
   };
 
   handleRegisterClose = () => {
@@ -29,7 +29,7 @@ class AppDialogs extends Component {
   };
 
   handleRegisterSuccess = user => {
-    this.setState({ signedIn: true });
+    this.uiState.closeRegisterDialog();
   };
 
   render() {
