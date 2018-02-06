@@ -5,7 +5,7 @@ import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
 import yup from 'yup';
 
-import { validate } from '../../../../validators/users';
+import { validate } from '../../../validators/users';
 
 import { FormGroup } from 'material-ui/form';
 
