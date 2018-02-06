@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-import { Redirect } from 'react-router';
 
 import logo from '../../images/logo.png';
 import SignInDialog from '../signIn/SignInDialog';
@@ -63,8 +62,6 @@ const styles = theme => ({
 @inject('rootStore')
 @observer
 class Hero extends Component {
-  state = {};
-
   handleSignInOpen = () => {
     this.props.rootStore.uiState.openSignInDialog();
   };
@@ -75,10 +72,6 @@ class Hero extends Component {
 
   render() {
     const { rootStore, classes } = this.props;
-
-    if (this.state.signedIn) {
-      return <Redirect to="/dashboard" />;
-    }
 
     return (
       <div className={classes.hero}>

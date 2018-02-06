@@ -3,30 +3,31 @@ import { Formik, Form } from 'formik';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
-import yup from 'yup';
-
-import { validate } from '../../../validators/users';
-
 import { FormGroup } from 'material-ui/form';
 
+import { inject, observer } from 'mobx-react';
+
+import { validate } from '../../../validators/users';
 import { FormError, FormActions } from '../../components';
-import { usersApi } from '../../api';
 
 const styles = theme => ({});
 
+@inject('rootStore')
+@observer
 class RegisterForm extends React.Component {
-  state = {};
-
   onSubmit = async (
     { username, password, email },
     { setSubmitting, setErrors }
   ) => {
     try {
-      const user = await usersApi.register({ username, password, email });
+      const user = await this.props.rootStore.userStore.register({
+        username,
+        password,
+        email
+      });
       setSubmitting(false);
       this.registerSuccess(user);
     } catch (e) {
-      console.error(e);
       setSubmitting(false);
       setErrors(e);
     }
@@ -70,7 +71,7 @@ class RegisterForm extends React.Component {
               autoFocus
               fullWidth
               margin="normal"
-              variant="text"
+              type="text"
               id="username"
               name="username"
               label="Username"
@@ -84,7 +85,7 @@ class RegisterForm extends React.Component {
             <TextField
               fullWidth
               margin="normal"
-              variant="password"
+              type="password"
               name="password"
               label="Password"
               required
@@ -97,7 +98,7 @@ class RegisterForm extends React.Component {
             <TextField
               fullWidth
               margin="normal"
-              variant="email"
+              type="email"
               name="email"
               label="Email address"
               required

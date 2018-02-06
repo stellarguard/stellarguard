@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
+import Typography from 'material-ui/Typography';
 
 const styles = theme => ({
   root: {
@@ -10,8 +11,22 @@ const styles = theme => ({
 
 class FormError extends Component {
   render() {
-    const { classes, children } = this.props;
-    return <div className={classes.root}>{children}</div>;
+    const { classes, errors } = this.props;
+    return (
+      <div className={classes.root}>
+        <Typography color="error" variant="subheading">
+          {this.renderErrors(errors)}
+        </Typography>
+      </div>
+    );
+  }
+
+  renderErrors(errors) {
+    if (!errors || !errors.error) {
+      return '';
+    }
+
+    return errors.error;
   }
 }
 

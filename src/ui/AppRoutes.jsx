@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router';
+import { Route, Switch } from 'react-router';
 
 import HomePage from './pages/home/HomePage';
 import FourOhFourPage from './pages/errors/FourOhFourPage';
@@ -10,7 +10,7 @@ class AppRoutes extends React.Component {
     return (
       <Switch>
         <Route path="/" exact component={HomePage} />
-        <Route path="/signin" extend component={SignInPage} />
+        <Route path="/signin" exact component={SignInPage} />
         <Route component={FourOhFourPage} />
       </Switch>
     );
