@@ -28,7 +28,7 @@ app.use('/api', apiRoutes);
 
 if (config.isDevMode) {
   const Bundler = require('parcel-bundler');
-  const bundler = new Bundler(path.resolve(__dirname, 'ui/index.html'));
+  const bundler = new Bundler(path.resolve(__dirname, '../ui/index.html'));
   bundler.bundle();
   app.use(bundler.middleware());
 }
