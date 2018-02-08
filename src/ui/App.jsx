@@ -13,7 +13,7 @@ import { inject, observer } from 'mobx-react';
 @observer
 class App extends React.Component {
   componentDidMount() {
-    this.props.rootStore.sessionStore.getSession();
+    this.props.rootStore.sessionStore.loadSession();
   }
 
   render() {

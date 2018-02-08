@@ -4,7 +4,7 @@ const router = express.Router();
 const session = require('../session');
 
 router.post('/', function(req, res, next) {
-  session.authenticateLocal(function(err, user, info) {
+  session.authenticateLocal(function(err, user) {
     if (err) {
       return next(err);
     }
