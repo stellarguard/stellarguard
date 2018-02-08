@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
 
 import RegisterDialog from './pages/register/RegisterDialog';
 import SignInDialog from './pages/signIn/SignInDialog';
 
 import { inject, observer } from 'mobx-react';
 
-const styles = theme => ({});
+const styles = () => ({});
 
 @inject('rootStore')
 @observer
@@ -20,7 +19,7 @@ class AppDialogs extends Component {
     this.uiState.closeSignInDialog();
   };
 
-  handleSignInSuccess = user => {
+  handleSignInSuccess = () => {
     this.uiState.closeSignInDialog();
   };
 
@@ -28,12 +27,12 @@ class AppDialogs extends Component {
     this.uiState.closeRegisterDialog();
   };
 
-  handleRegisterSuccess = user => {
+  handleRegisterSuccess = () => {
     this.uiState.closeRegisterDialog();
   };
 
   render() {
-    const { classes, rootStore } = this.props;
+    const { rootStore } = this.props;
 
     return [
       <SignInDialog

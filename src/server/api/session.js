@@ -21,6 +21,14 @@ router.post('/', function(req, res, next) {
   })(req, res, next);
 });
 
+router.get('/', function(req, res) {
+  if (req.user) {
+    return res.json(req.user);
+  } else {
+    return res.send();
+  }
+});
+
 router.delete('/', session.ensureLoggedIn(), function(req, res) {
   req.logout();
   res.json({});

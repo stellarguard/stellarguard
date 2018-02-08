@@ -14,6 +14,14 @@ export default class SessionStore {
   }
 
   @action
+  async getSession() {
+    const user = await sessionApi.getSession();
+    if (user) {
+      this.setCurrentUser(user);
+    }
+  }
+
+  @action
   async signIn({ username, password }) {
     const user = await sessionApi.signIn({ username, password });
     this.setCurrentUser(user);

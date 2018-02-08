@@ -8,7 +8,7 @@ import { inject, observer } from 'mobx-react';
 
 import { FormError, FormActions } from '../../components';
 
-const styles = theme => ({});
+const styles = () => ({});
 
 @inject('rootStore')
 @observer
@@ -32,7 +32,7 @@ class SignInForm extends React.Component {
   };
 
   render() {
-    const { classes, includeActions = true } = this.props;
+    const { includeActions = true, id = 'sign-in-form' } = this.props;
 
     return (
       <Formik
@@ -51,10 +51,9 @@ class SignInForm extends React.Component {
           touched,
           handleChange,
           handleBlur,
-          handleSubmit,
           isSubmitting
         }) => (
-          <Form id="sign-in-form">
+          <Form id={id}>
             <FormError errors={errors} />
             <TextField
               fullWidth

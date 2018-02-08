@@ -3,14 +3,12 @@ import { Formik, Form } from 'formik';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
-import { FormGroup } from 'material-ui/form';
-
 import { inject, observer } from 'mobx-react';
 
 import { validate } from '../../../validators/users';
-import { FormError, FormActions } from '../../components';
+import { FormActions } from '../../components';
 
-const styles = theme => ({});
+const styles = () => ({});
 
 @inject('rootStore')
 @observer
@@ -46,7 +44,7 @@ class RegisterForm extends React.Component {
   };
 
   render() {
-    const { classes, includeActions = true } = this.props;
+    const { includeActions = true } = this.props;
 
     return (
       <Formik
@@ -63,7 +61,6 @@ class RegisterForm extends React.Component {
           touched,
           handleChange,
           handleBlur,
-          handleSubmit,
           isSubmitting
         }) => (
           <Form id="register-form" noValidate>

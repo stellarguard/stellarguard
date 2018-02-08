@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
+import Typography from 'material-ui/Typography';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
-import IconButton from 'material-ui/IconButton';
-import Typography from 'material-ui/Typography';
 import MenuIcon from 'material-ui-icons/Menu';
-import Button from 'material-ui/Button';
-
+import IconButton from 'material-ui/IconButton';
 import { inject, observer } from 'mobx-react';
+
+import ToolbarActions from './ToolbarActions';
 
 const styles = theme => ({
   root: {
@@ -24,42 +24,11 @@ const styles = theme => ({
 
 @inject('rootStore')
 @observer
-class ToolbarActions extends Component {
-  render() {
-    const { rootStore } = this.props;
-    if (rootStore.sessionStore.isSignedIn) {
-      return (
-        <Button
-          color="inherit"
-          onClick={() => rootStore.sessionStore.signOut()}
-        >
-          Sign out
-        </Button>
-      );
-    }
-
-    return (
-      <div>
-        <Button
-          color="inherit"
-          onClick={() => rootStore.uiState.openRegisterDialog()}
-        >
-          Register
-        </Button>
-        <Button
-          color="inherit"
-          onClick={() => rootStore.uiState.openSignInDialog()}
-        >
-          Sign in
-        </Button>
-      </div>
-    );
-  }
-}
-
-@inject('rootStore')
-@observer
 class AppHeader extends Component {
+  handleToggleMenuClick = () => {
+    this.props.rootStore.uiState.toggleAppDrawer();
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -70,6 +39,7 @@ class AppHeader extends Component {
               className={classes.menuButton}
               color="inherit"
               aria-label="Menu"
+              onClick={this.handleToggleMenuClick}
             >
               <MenuIcon />
             </IconButton>

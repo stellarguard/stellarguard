@@ -4,7 +4,6 @@ import Button from 'material-ui/Button';
 import Dialog, {
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   withMobileDialog
 } from 'material-ui/Dialog';
@@ -32,13 +31,17 @@ class SignInDialog extends Component {
       >
         <DialogTitle id="sign-in-dialog">Sign in to StellarGuard</DialogTitle>
         <DialogContent className={classes.content}>
-          <SignInForm onSignIn={onSignIn} includeActions={false} />
+          <SignInForm
+            id="sign-in-form-for-dialog"
+            onSignIn={onSignIn}
+            includeActions={false}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose} color="primary">
             Cancel
           </Button>
-          <Button type="submit" color="primary" form="sign-in-form">
+          <Button type="submit" color="primary" form="sign-in-form-for-dialog">
             Sign in
           </Button>
         </DialogActions>

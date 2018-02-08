@@ -1,17 +1,12 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
-import Paper from 'material-ui/Paper';
-import Card, {
-  CardHeader,
-  CardMedia,
-  CardContent,
-  CardActions
-} from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
+import Card, { CardHeader, CardContent } from 'material-ui/Card';
+import { Redirect } from 'react-router';
+import { inject, observer } from 'mobx-react';
 
 import SignInForm from './SignInForm';
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -26,9 +21,14 @@ const styles = theme => ({
   }
 });
 
+@inject('rootStore')
+@observer
 class SignInPage extends React.Component {
   render() {
-    const { classes } = this.props;
+    const { classes, rootStore } = this.props;
+    if (rootStore.sessionStore.isSignedIn) {
+      return <Redirect to="/dashboard" />;
+    }
 
     return (
       <div className={classes.root}>
@@ -44,11 +44,6 @@ class SignInPage extends React.Component {
         </Card>
         <div className={classes.spacer} />
       </div>
-    );
-    return (
-      <Paper className={classes.root}>
-        <SignInForm />
-      </Paper>
     );
   }
 }
