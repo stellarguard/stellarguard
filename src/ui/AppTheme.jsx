@@ -2,6 +2,9 @@ import React from 'react';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
 const theme = createMuiTheme({
+  drawer: {
+    width: 240
+  },
   palette: {
     primary: {
       light: '#67daff',

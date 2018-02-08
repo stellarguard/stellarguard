@@ -1,4 +1,4 @@
-import { observable, computed, action } from 'mobx';
+import { action } from 'mobx';
 import { usersApi } from '../api';
 
 export default class UserStore {

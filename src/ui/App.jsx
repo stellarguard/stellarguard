@@ -1,36 +1,30 @@
 import React from 'react';
 import Reboot from 'material-ui/Reboot';
-import Button from 'material-ui/Button';
-
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'mobx-react';
 
 import AppHeader from './components/AppHeader';
 import AppFooter from './components/AppFooter';
 import AppTheme from './AppTheme';
-import AppRoutes from './AppRoutes';
-
-import RootStore from './stores/rootStore';
+import AppContent from './AppContent';
 import AppDialogs from './AppDialogs';
 
-const rootStore = new RootStore();
+import { inject, observer } from 'mobx-react';
 
+@inject('rootStore')
+@observer
 class App extends React.Component {
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.rootStore.sessionStore.getSession();
+  }
 
   render() {
     return (
-      <BrowserRouter>
-        <Provider rootStore={rootStore}>
-          <AppTheme>
-            <Reboot />
-            <AppDialogs />
-            <AppHeader />
-            <AppRoutes />
-            <AppFooter />
-          </AppTheme>
-        </Provider>
-      </BrowserRouter>
+      <AppTheme>
+        <Reboot />
+        <AppDialogs />
+        <AppHeader />
+        <AppContent />
+        <AppFooter />
+      </AppTheme>
     );
   }
 }
