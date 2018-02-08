@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
-import AppRoutes from './AppRoutes';
-
 import cx from 'classnames';
-
 import { inject, observer } from 'mobx-react';
+
+import AppRoutes from './AppRoutes';
+import AppDrawer from './AppDrawer';
+import AppLoader from './AppLoader';
 
 const styles = theme => ({
   root: {
@@ -31,23 +32,31 @@ const styles = theme => ({
   }
 });
 
-const drawerWidth = 240;
-
 @inject('rootStore')
 @observer
 class AppContent extends Component {
+  renderContent() {
+    const sessionStore = this.props.rootStore.sessionStore;
+    if (sessionStore.isSessionLoading) {
+      return <AppLoader />;
+    }
+
+    return <AppRoutes />;
+  }
+
   render() {
     const { classes, rootStore } = this.props;
     const open = rootStore.uiState.isAppDrawerOpen;
 
     return (
       <div className={classes.root}>
+        <AppDrawer />
         <main
           className={cx(classes.content, {
             [classes.contentShift]: open
           })}
         >
-          <AppRoutes />
+          {this.renderContent()}
         </main>
       </div>
     );
