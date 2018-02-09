@@ -46,7 +46,7 @@ router.post('/me/verifyemail', session.ensureLoggedIn(), async function(
   req,
   res
 ) {
-  const { code } = req.params;
+  const { code } = req.body;
   const isVerified = await users.userService.verifyEmail(req.user, code);
   if (!isVerified) {
     return res

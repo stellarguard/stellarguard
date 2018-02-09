@@ -17,7 +17,9 @@ class VerifyEmailPage extends Component {
   async componentDidMount() {
     const search = new URLSearchParams(this.props.location.search);
     const code = search.get('code');
-    await this.props.rootStore.sessionStore.verifyEmailAddress({ code });
+    if (code) {
+      await this.props.rootStore.sessionStore.verifyEmailAddress({ code });
+    }
   }
 
   render() {
@@ -32,4 +34,4 @@ class VerifyEmailPage extends Component {
   }
 }
 
-export default withAuth(withStyles(styles)(VerifyEmailPage));
+export default withStyles(styles)(VerifyEmailPage);
