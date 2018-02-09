@@ -1,6 +1,6 @@
-import { observable, computed, action } from 'mobx';
-import { sessionApi } from '../api';
-
+import { observable, computed, action, runInAction } from 'mobx';
+import { sessionApi, usersApi } from '../api';
+import history from '../history';
 class CurrentUserCache {
   static UserKey = 'sgUser';
 
@@ -70,6 +70,7 @@ export default class SessionStore {
   @action
   async signOut() {
     this.setCurrentUser(null);
+    history.push('/');
     await sessionApi.signOut();
   }
 
@@ -82,5 +83,24 @@ export default class SessionStore {
   setCurrentUser(user) {
     this.currentUser = user;
     this.currentUserCache.set(user);
+  }
+
+  @action
+  async resendVerifyEmailAddressEmail() {
+    this.rootStore.uiState.setResendVerifyEmailStatus('loading');
+    try {
+      await usersApi.resendVerifyEmailAddressEmail();
+      this.rootStore.uiState.setResendVerifyEmailStatus('sent');
+    } catch (e) {
+      this.rootStore.uiState.setResendVerifyEmailStatus('error');
+    }
+  }
+
+  @action
+  async verifyEmailAddress({ code }) {
+    await usersApi.verifyEmailAddress({ code });
+    runInAction(() => {
+      this.currentUser.hasVerifiedEmail = true;
+    });
   }
 }

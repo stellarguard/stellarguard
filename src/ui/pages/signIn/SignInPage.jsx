@@ -10,7 +10,7 @@ const styles = () => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '100vh'
+    minHeight: 'calc(100vh - 64px)'
   },
   card: {
     margin: '0 auto',

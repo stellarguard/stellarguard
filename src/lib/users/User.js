@@ -5,7 +5,7 @@ const { crypto } = require('../utils');
 //   id: number,
 //   username: string,
 //   email: string,
-//   emailVerified: boolean,
+//   hasVerifiedEmail: boolean,
 //   passwordHash: string,
 
 //   // relations
@@ -27,11 +27,11 @@ class User {
   }
 
   get emailVerificationCode() {
-    return crypto.getHmac(this.email, 20);
+    return crypto.getHmac(this.email, 10);
   }
 
   get memoText() {
-    return crypto.getHmac(this.id, 20);
+    return crypto.getHmac(this.id, 10);
   }
 
   verifyMemoText(memoText) {

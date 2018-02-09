@@ -81,7 +81,7 @@ class AccountsController {
 
     const transaction = await accounts.accountsService.getMultiSigActivationTransaction(
       account,
-      user,
+      req.user,
       { backupSigner: backup }
     );
 

@@ -5,5 +5,5 @@ module.exports = {
     'react/prop-types': false,
     'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }]
   },
-  env: { browser: true, node: true }
+  env: { browser: true, node: true, es6: true }
 };

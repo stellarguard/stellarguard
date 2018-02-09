@@ -19,6 +19,7 @@
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "formik": "^0.11.3",
+    "history": "^4.7.2",
     "lodash.isempty": "^4.4.0",
     "lodash.map": "^4.6.0",
     "material-ui": "^1.0.0-beta.31",

@@ -8,7 +8,9 @@ import AppContent from './AppContent';
 import AppDialogs from './AppDialogs';
 
 import { inject, observer } from 'mobx-react';
+import { withRouter } from 'react-router';
 
+@withRouter
 @inject('rootStore')
 @observer
 class App extends React.Component {

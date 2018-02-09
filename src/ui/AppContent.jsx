@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { withStyles } from 'material-ui/styles';
 import cx from 'classnames';
 import { inject, observer } from 'mobx-react';
-
 import AppRoutes from './AppRoutes';
 import AppDrawer from './AppDrawer';
 import AppLoader from './AppLoader';
+import { withRouter } from 'react-router';
 
 const styles = theme => ({
   root: {
@@ -32,15 +32,11 @@ const styles = theme => ({
   }
 });
 
+@withRouter
 @inject('rootStore')
 @observer
 class AppContent extends Component {
   renderContent() {
-    const sessionStore = this.props.rootStore.sessionStore;
-    if (sessionStore.isSessionLoading) {
-      return <AppLoader />;
-    }
-
     return <AppRoutes />;
   }
 
