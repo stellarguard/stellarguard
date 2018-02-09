@@ -2,18 +2,20 @@ import './polyfills';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import App from './App';
 import RootStore from './stores/rootStore';
+import history from './history';
+
 const rootStore = new RootStore();
 
 const app = (
-  <BrowserRouter>
+  <Router history={history}>
     <Provider rootStore={rootStore}>
       <App />
     </Provider>
-  </BrowserRouter>
+  </Router>
 );
 
 ReactDOM.render(app, document.getElementById('root'));

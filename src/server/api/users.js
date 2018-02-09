@@ -27,10 +27,24 @@ router.get('/me', session.ensureLoggedIn(), async (req, res) => {
   res.json(req.user);
 });
 
+router.post(
+  '/me/resendverifyemail',
+  session.ensureLoggedIn(),
+  async (req, res) => {
+    try {
+      await users.userService.sendVerifyEmailAddressEmail(req.user);
+      res.json({});
+    } catch (e) {
+      res
+        .status(500)
+        .json({ error: 'Something went wrong. Please try again.' });
+    }
+  }
+);
+
 router.post('/me/verifyemail', session.ensureLoggedIn(), async function(
   req,
-  res,
-  next
+  res
 ) {
   const { code } = req.params;
   const isVerified = await users.userService.verifyEmail(req.user, code);

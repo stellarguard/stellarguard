@@ -45,4 +45,11 @@ export default class UiStateStore {
   toggleAppDrawer() {
     this.isAppDrawerOpen = !this.isAppDrawerOpen;
   }
+
+  @observable resendVerifyEmailStatus;
+
+  @action
+  setResendVerifyEmailStatus(status) {
+    this.resendVerifyEmailStatus = status;
+  }
 }

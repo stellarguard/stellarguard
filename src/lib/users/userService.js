@@ -47,6 +47,10 @@ class UserService {
     return user;
   }
 
+  async sendVerifyEmailAddressEmail(user) {
+    await emailService.sendWelcomeEmail({ user });
+  }
+
   async getUserByUsername(username) {
     return await userRepository.getUserByUsername(username);
   }

@@ -8,13 +8,15 @@ import IconButton from 'material-ui/IconButton';
 import { inject, observer } from 'mobx-react';
 
 import ToolbarActions from './ToolbarActions';
+import { Link } from 'react-router-dom';
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     width: '100%'
   },
-  flex: {
-    flex: 1
+  name: {
+    flex: 1,
+    textDecoration: 'none'
   },
   menuButton: {
     marginLeft: -12,
@@ -33,7 +35,7 @@ class AppHeader extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" elevation={0}>
           <Toolbar>
             <IconButton
               className={classes.menuButton}
@@ -46,7 +48,9 @@ class AppHeader extends Component {
             <Typography
               variant="title"
               color="inherit"
-              className={classes.flex}
+              className={classes.name}
+              component={Link}
+              to="/"
             >
               StellarGuard
             </Typography>
