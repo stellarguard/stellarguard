@@ -27,7 +27,12 @@ class SignInPage extends React.Component {
   render() {
     const { classes, rootStore } = this.props;
     if (rootStore.sessionStore.isSignedIn) {
-      return <Redirect to="/dashboard" />;
+      let to = '/';
+      if (rootStore.sessionStore.returnUrl) {
+        to = rootStore.sessionStore.returnUrl;
+        rootStore.sessionStore.setReturnUrl(null);
+      }
+      return <Redirect to={to} />;
     }
 
     return (

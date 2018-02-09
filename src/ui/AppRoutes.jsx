@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route, Switch, withRouter } from 'react-router';
+import { Route, Switch, withRouter, Redirect } from 'react-router';
+import { inject, observer } from 'mobx-react';
 
 import HomePage from './pages/home/HomePage';
 import FourOhFourPage from './pages/errors/FourOhFourPage';
@@ -7,15 +8,45 @@ import SignInPage from './pages/signIn/SignInPage';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import VerifyEmailPage from './pages/email/VerifyEmailPage';
 
+import AppLoader from './AppLoader';
+
 @withRouter
+@inject('rootStore')
+@observer
 class AppRoutes extends React.Component {
   render() {
+    const isSignedIn = this.props.rootStore.sessionStore.isSignedIn;
+
     return (
       <Switch>
-        <Route path="/" exact component={HomePage} />
+        {!isSignedIn && <Route path="/" exact component={HomePage} />}
         <Route path="/signin" exact component={SignInPage} />
-        <Route path="/dashboard" component={DashboardPage} />
-        <Route path="/verifyemail" component={VerifyEmailPage} />
+        <Route path="/" component={ProtectedRoutes} />
+        <Route component={FourOhFourPage} />
+      </Switch>
+    );
+  }
+}
+
+@withRouter
+@inject('rootStore')
+@observer
+class ProtectedRoutes extends React.Component {
+  render() {
+    const { rootStore } = this.props;
+    if (rootStore.sessionStore.isSessionLoading) {
+      return <AppLoader />;
+    }
+
+    if (!rootStore.sessionStore.isSignedIn) {
+      rootStore.sessionStore.setReturnUrl(this.props.location);
+      return <Redirect to="/signin" />;
+    }
+
+    return (
+      <Switch>
+        <Route exact path="/" component={DashboardPage} />
+        <Route exact path="/verifyemail" component={VerifyEmailPage} />
         <Route component={FourOhFourPage} />
       </Switch>
     );

@@ -67,6 +67,13 @@ export default class SessionStore {
     return user;
   }
 
+  @observable returnUrl;
+
+  @action
+  async setReturnUrl(returnUrl) {
+    this.returnUrl = returnUrl;
+  }
+
   @action
   async signOut() {
     this.setCurrentUser(null);

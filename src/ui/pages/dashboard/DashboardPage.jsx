@@ -47,4 +47,4 @@ class DashboardPage extends Component {
   }
 }
 
-export default withAuth(withStyles(styles)(DashboardPage));
+export default withStyles(styles)(DashboardPage);

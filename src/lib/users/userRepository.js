@@ -57,9 +57,10 @@ class UserRepository {
   }
 
   async verifyEmail(user) {
-    user.hasVerifiedEmail = true;
-    this.userDb.update(user);
-    return user;
+    const updatedUser = this.userDb.get(user.id);
+    updatedUser.hasVerifiedEmail = true;
+    this.userDb.update(updatedUser);
+    return updatedUser;
   }
 }
 
