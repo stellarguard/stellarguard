@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
-import Page from '../../components/Page';
-
-import Grid from 'material-ui/Grid';
+import { withStyles, Grid } from 'material-ui';
 import { withRouter } from 'react-router';
 import { inject, observer } from 'mobx-react';
-import withAuth from '../../withAuth';
+
+import Page from '../../components/Page';
 
 const styles = theme => ({});
 

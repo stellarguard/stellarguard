@@ -1,10 +1,8 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import { withStyles } from 'material-ui/styles';
-import yup from 'yup';
+import { withStyles, TextField, Button } from 'material-ui';
 import { inject, observer } from 'mobx-react';
+import yup from 'yup';
 
 import { FormError, FormActions } from '../../components';
 

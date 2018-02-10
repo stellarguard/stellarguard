@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui';
 
 const styles = theme => ({
   actions: {

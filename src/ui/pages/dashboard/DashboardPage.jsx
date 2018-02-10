@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
-import Grid from 'material-ui/Grid';
+import { withStyles, Grid } from 'material-ui';
 import Page from '../../components/Page';
-import withAuth from '../../withAuth';
 
 import VerifyEmailCard from './VerifyEmailCard';
 import AddFirstStellarAccountCard from './AddFirstStellarAccountCard';

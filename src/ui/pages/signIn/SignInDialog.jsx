@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
-import Button from 'material-ui/Button';
-import Dialog, {
+import {
+  withStyles,
+  Button,
+  Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   withMobileDialog
-} from 'material-ui/Dialog';
+} from 'material-ui';
 
 import SignInForm from './SignInForm';
 

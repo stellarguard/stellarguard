@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
-import { LinearProgress } from 'material-ui/Progress';
+import { withStyles, LinearProgress } from 'material-ui';
 
 const styles = () => ({});
 

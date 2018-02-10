@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
-import Drawer from 'material-ui/Drawer';
+import { withStyles, Drawer } from 'material-ui';
 import { inject, observer } from 'mobx-react';
 
 const styles = theme => ({

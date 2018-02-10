@@ -1,12 +1,18 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import Card, { CardHeader, CardContent, CardActions } from 'material-ui/Card';
-import Avatar from 'material-ui/Avatar';
-import Typography from 'material-ui/Typography';
-import CheckIcon from 'material-ui-icons/Check';
-import ErrorIcon from 'material-ui-icons/Error';
+import {
+  withStyles,
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  Avatar,
+  Typography
+} from 'material-ui';
+
+import { Check as CheckIcon, Error as ErrorIcon } from 'material-ui-icons';
 import LoadingButton from '../../components/LoadingButton';
 import { inject, observer } from 'mobx-react';
+
 import green from 'material-ui/colors/green';
 
 const styles = theme => ({
