@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui';
 
 import RegisterDialog from './pages/register/RegisterDialog';
 import SignInDialog from './pages/signIn/SignInDialog';

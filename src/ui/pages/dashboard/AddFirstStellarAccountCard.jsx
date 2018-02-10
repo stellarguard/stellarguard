@@ -1,10 +1,15 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import Card, { CardHeader, CardContent, CardActions } from 'material-ui/Card';
-import Avatar from 'material-ui/Avatar';
-import Typography from 'material-ui/Typography';
+import {
+  withStyles,
+  Card,
+  CardHeader,
+  CardContent,
+  Avatar,
+  Stepper,
+  Step,
+  StepLabel
+} from 'material-ui';
 import LockIcon from 'material-ui-icons/Lock';
-import Stepper, { Step, StepLabel } from 'material-ui/Stepper';
 import { inject, observer } from 'mobx-react';
 
 const styles = theme => ({

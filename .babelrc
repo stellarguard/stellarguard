@@ -1,5 +1,9 @@
 {
   "plugins": [
+    [
+      "direct-import",
+      ["material-ui", "react-router", "react-router-dom", "material-ui-icons"]
+    ],
     "transform-decorators-legacy",
     "transform-export-extensions",
     "transform-class-properties",

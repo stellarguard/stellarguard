@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
-import Menu, { MenuItem } from 'material-ui/Menu';
+import { withStyles, Menu, MenuItem, Button } from 'material-ui';
 import AccountCircle from 'material-ui-icons/AccountCircle';
-import Button from 'material-ui/Button';
 import { inject, observer } from 'mobx-react';
 
 const styles = theme => ({

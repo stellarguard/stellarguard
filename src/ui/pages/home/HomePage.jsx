@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui';
 import { Helmet } from 'react-helmet';
 import Hero from './Hero';
 

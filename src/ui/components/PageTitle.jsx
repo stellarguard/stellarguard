@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
+import { withStyles, Typography } from 'material-ui';
 import Helmet from 'react-helmet';
 
 const styles = theme => ({

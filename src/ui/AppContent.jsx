@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui';
 import cx from 'classnames';
 import { inject, observer } from 'mobx-react';
 import AppRoutes from './AppRoutes';

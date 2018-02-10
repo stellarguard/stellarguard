@@ -1,5 +1,5 @@
 import React from 'react';
-import Reboot from 'material-ui/Reboot';
+import { Reboot } from 'material-ui';
 
 import AppHeader from './components/AppHeader';
 import AppFooter from './components/AppFooter';

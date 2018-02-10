@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import MenuIcon from 'material-ui-icons/Menu';
-import IconButton from 'material-ui/IconButton';
+import {
+  withStyles,
+  Typography,
+  AppBar,
+  Toolbar,
+  IconButton
+} from 'material-ui';
+import { Menu as MenuIcon } from 'material-ui-icons';
 import { inject, observer } from 'mobx-react';
-
-import ToolbarActions from './ToolbarActions';
 import { Link } from 'react-router-dom';
+import ToolbarActions from './ToolbarActions';
 
 const styles = () => ({
   root: {
