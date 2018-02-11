@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
   withStyles,
   Card,
@@ -7,10 +7,15 @@ import {
   Avatar,
   Stepper,
   Step,
-  StepLabel
+  StepLabel,
+  Button
 } from 'material-ui';
 import LockIcon from 'material-ui-icons/Lock';
 import { inject, observer } from 'mobx-react';
+
+import BuildMultiSigForm from './TestWrappedForm';
+//import BuildMultiSigForm from './BuildMultiSigForm';
+import SubmitMultiSigToStellar from './SubmitToStellar';
 
 const styles = theme => ({
   actions: {
@@ -18,6 +23,10 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: theme.palette.primary.main
+  },
+  stepContainer: {
+    padding: theme.spacing.unit * 2,
+    border: '1px dashed #CCC'
   }
 });
 
@@ -27,7 +36,8 @@ class AddFirstStellarAccountCard extends React.Component {
   resendEmail = () => {};
 
   render() {
-    const { classes } = this.props;
+    const { classes, rootStore } = this.props;
+    const uiState = rootStore.uiState.addStellarUiState;
 
     return (
       <Card>
@@ -38,10 +48,10 @@ class AddFirstStellarAccountCard extends React.Component {
             </Avatar>
           }
           title="Link Stellar Account"
-          subheader="Protect your Account with StellarGuard by adding StellarGuard multi-sig"
+          subheader="Add Multi-Sig to your account to activate StellarGuard"
         />
         <CardContent>
-          <Stepper activeStep={0} alternativeLabel>
+          <Stepper activeStep={uiState.step} alternativeLabel>
             <Step>
               <StepLabel>Build Multi-Sig Transaction</StepLabel>
             </Step>
@@ -52,6 +62,27 @@ class AddFirstStellarAccountCard extends React.Component {
               <StepLabel>Activate your Account</StepLabel>
             </Step>
           </Stepper>
+          <div className={classes.stepContainer}>
+            {uiState.step === 0 && (
+              <Fragment>
+                <BuildMultiSigForm />
+                <Button onClick={() => uiState.gotoStep(1)}>Next</Button>
+              </Fragment>
+            )}
+            {uiState.step === 1 && (
+              <Fragment>
+                <SubmitMultiSigToStellar />
+                <Button onClick={() => uiState.gotoStep(2)}>Back</Button>
+                <Button onClick={() => uiState.gotoStep(2)}>Next</Button>
+              </Fragment>
+            )}
+            {uiState.step === 2 && (
+              <Fragment>
+                <BuildMultiSigForm />
+                <Button onClick={() => uiState.gotoStep(1)}>Next</Button>
+              </Fragment>
+            )}
+          </div>
         </CardContent>
       </Card>
     );

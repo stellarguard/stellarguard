@@ -1,5 +1,7 @@
 import { observable, action } from 'mobx';
 
+import AddStellarUiState from './addStellarUiState';
+
 export default class UiStateStore {
   @observable isSignInDialogOpen = false;
 
@@ -9,6 +11,7 @@ export default class UiStateStore {
 
   constructor(rootStore) {
     this.rootStore = rootStore;
+    this.addStellarUiState = new AddStellarUiState(rootStore);
   }
 
   @action

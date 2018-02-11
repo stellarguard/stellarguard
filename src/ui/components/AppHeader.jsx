@@ -11,7 +11,7 @@ import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import ToolbarActions from './ToolbarActions';
 
-const styles = () => ({
+const styles = theme => ({
   root: {
     width: '100%'
   },
@@ -53,7 +53,7 @@ class AppHeader extends Component {
               component={Link}
               to="/"
             >
-              StellarGuard
+              StellarGuard.me
             </Typography>
             <ToolbarActions />
           </Toolbar>

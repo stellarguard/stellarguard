@@ -5,7 +5,10 @@ const styles = theme => ({
   root: {
     padding: theme.spacing.unit * 4,
     height: '100%',
-    minHeight: 'calc(100vh - 64px)'
+    minHeight: 'calc(100vh - 64px)',
+    [theme.breakpoints.down('sm')]: {
+      padding: 0
+    }
   },
   body: {
     height: '100%'

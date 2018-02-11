@@ -1,22 +1,14 @@
 import React from 'react';
-import { withStyles, Card, CardHeader, CardContent } from 'material-ui';
+import { withStyles, Grid, Card, CardHeader, CardContent } from 'material-ui';
 import { Redirect } from 'react-router';
 import { inject, observer } from 'mobx-react';
 
 import SignInForm from './SignInForm';
+import Page from '../../components/Page';
 
 const styles = () => ({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: 'calc(100vh - 64px)'
-  },
-  card: {
-    margin: '0 auto',
-    padding: '20px'
-  },
-  spacer: {
-    flexGrow: 1
+    height: '100%'
   }
 });
 
@@ -35,19 +27,27 @@ class SignInPage extends React.Component {
     }
 
     return (
-      <div className={classes.root}>
-        <div className={classes.spacer} />
-        <Card className={classes.card}>
-          <CardHeader
-            title="Sign in"
-            subheader="with your StellarGuard account"
-          />
-          <CardContent>
-            <SignInForm />
-          </CardContent>
-        </Card>
-        <div className={classes.spacer} />
-      </div>
+      <Page>
+        <Grid
+          className={classes.root}
+          container
+          spacing={24}
+          alignItems="center"
+          justify="center"
+        >
+          <Grid item md={6} sm={8} xs={12}>
+            <Card>
+              <CardHeader
+                title="Sign in"
+                subheader="with your StellarGuard account"
+              />
+              <CardContent>
+                <SignInForm />
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </Page>
     );
   }
 }

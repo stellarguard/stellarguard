@@ -43,12 +43,12 @@ class User {
   }
 
   toJSON() {
-    // TODO -- is this actually a good idea?
     return {
       id: this.id,
       username: this.username,
       email: this.email,
-      hasVerifiedEmail: this.hasVerifiedEmail
+      hasVerifiedEmail: this.hasVerifiedEmail,
+      memoText: this.memoText
     };
   }
 }
