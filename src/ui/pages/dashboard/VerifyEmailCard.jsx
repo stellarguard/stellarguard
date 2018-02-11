@@ -38,14 +38,22 @@ const styles = theme => ({
 @inject('rootStore')
 @observer
 class VerifyEmailCard extends React.Component {
-  resendEmail = () => {
-    this.props.rootStore.sessionStore.resendVerifyEmailAddressEmail();
+  state = {};
+
+  resendEmail = async () => {
+    try {
+      this.setState({ status: 'loading' });
+      await this.props.rootStore.sessionStore.resendVerifyEmailAddressEmail();
+      this.setState({ status: 'sent' });
+    } catch (e) {
+      this.setState({ status: 'error' });
+    }
   };
 
   render() {
-    const { classes, rootStore } = this.props;
+    const { classes } = this.props;
+    const { status } = this.state;
 
-    const status = rootStore.uiState.resendVerifyEmailStatus;
     const success = status === 'sent';
     const loading = status === 'loading';
     const error = status === 'error';
@@ -68,7 +76,7 @@ class VerifyEmailCard extends React.Component {
           </Typography>
           <Typography className={classes.line2} component="p">
             You will not be able to receive transaction authorization emails if
-            your email is not verified.
+            you have not verified your email address.
           </Typography>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>

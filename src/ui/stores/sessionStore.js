@@ -1,12 +1,16 @@
 import { observable, computed, action, runInAction } from 'mobx';
 import { sessionApi, usersApi } from '../api';
 import history from '../history';
+
+import User from '../models/User';
 class CurrentUserCache {
   static UserKey = 'sgUser';
 
   get() {
     try {
-      return JSON.parse(localStorage.getItem(CurrentUserCache.UserKey));
+      return User.fromJson(
+        JSON.parse(localStorage.getItem(CurrentUserCache.UserKey))
+      );
     } catch (e) {
       this.remove();
       return null;
@@ -94,13 +98,7 @@ export default class SessionStore {
 
   @action
   async resendVerifyEmailAddressEmail() {
-    this.rootStore.uiState.setResendVerifyEmailStatus('loading');
-    try {
-      await usersApi.resendVerifyEmailAddressEmail();
-      this.rootStore.uiState.setResendVerifyEmailStatus('sent');
-    } catch (e) {
-      this.rootStore.uiState.setResendVerifyEmailStatus('error');
-    }
+    await usersApi.resendVerifyEmailAddressEmail();
   }
 
   @action

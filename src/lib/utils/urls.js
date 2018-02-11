@@ -3,11 +3,11 @@ const url = require('url');
 
 class Urls {
   withHost(url) {
-    return `https://stellarguard.io${url}`;
+    return `https://stellarguard.me${url}`;
   }
 
   verifyEmail({ user }) {
-    const pathname = `/users/${user.id}/verifyemail`;
+    const pathname = `/verifyemail`;
     const query = {
       code: user.emailVerificationCode
     };

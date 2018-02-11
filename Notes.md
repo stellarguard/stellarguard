@@ -9,13 +9,14 @@ Should I separate payments from verification?
 
 [x] add email strategy as default when creating account
 [] - wait until they verify their email?
-[] sanitize body of POST /tfa based on type
-[] idea -- federation for verification
+[] - sanitize body of POST /tfa based on type
 [] - log IP addresses
+[] - add change email address to verify email card and user profile
+[] - make sure they verify that they've set up google auth by entering the code when adding authenticator
 
 = IDEAS =
 
-* federation for verifications paul\*stellarguard.io -- naw... we're building this ourselves anyway
+* federation for verifications paul\*stellarguard.me -- be careful not to leak ids
 
 = Code improvements =
 
@@ -30,8 +31,6 @@ Should I separate payments from verification?
 NEXT:
 
 Next Steps
-= implement email verification
-= Test End to End Scenario
 = UI
 = Postgres
 = Google Domains

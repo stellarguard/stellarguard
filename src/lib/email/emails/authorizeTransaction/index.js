@@ -4,7 +4,7 @@ const { urls } = require('../../../utils');
 class AuthorizeTransactionEmail extends Email {
   constructor({ user, transaction }) {
     const to = user.email;
-    const from = 'StellarGuard <authorize@stellarguard.io>';
+    const from = 'StellarGuard <authorize@stellarguard.me>';
     const authorizeUrl = urls.withHost(
       urls.authorizeTransaction({
         transaction,
