@@ -74,7 +74,7 @@ function authenticateLocal(options) {
   return passport.authenticate('local', options);
 }
 
-async function logout() {
+async function logout(req) {
   req.logout();
 }
 
