@@ -7,6 +7,8 @@ import FourOhFourPage from './pages/errors/FourOhFourPage';
 import SignInPage from './pages/signIn/SignInPage';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import VerifyEmailPage from './pages/email/VerifyEmailPage';
+import SubmitTransactionPage from './pages/transactions/SubmitTransactionPage';
+import AuthorizeTransactionPage from './pages/transactions/AuthorizeTransactionPage';
 
 import AppLoader from './AppLoader';
 
@@ -21,6 +23,11 @@ class AppRoutes extends React.Component {
       <Switch>
         {!isSignedIn && <Route path="/" exact component={HomePage} />}
         <Route path="/signin" exact component={SignInPage} />
+        <Route
+          path="/transactions/submit"
+          exact
+          component={SubmitTransactionPage}
+        />
         <Route path="/" component={ProtectedRoutes} />
         <Route component={FourOhFourPage} />
       </Switch>
@@ -46,6 +53,11 @@ class ProtectedRoutes extends React.Component {
     return (
       <Switch>
         <Route exact path="/" component={DashboardPage} />
+        <Route
+          exact
+          path="/transactions/:id"
+          component={AuthorizeTransactionPage}
+        />
         <Route exact path="/verifyemail" component={VerifyEmailPage} />
         <Route component={FourOhFourPage} />
       </Switch>

@@ -2,3 +2,5 @@ node_modules
 dbs
 .cache
 dist
+
+.env.local

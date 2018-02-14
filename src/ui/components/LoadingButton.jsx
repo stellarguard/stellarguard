@@ -18,7 +18,14 @@ const styles = theme => ({
 
 class LoadingButton extends Component {
   render() {
-    const { classes, loading, success, children, ...rest } = this.props;
+    const {
+      classes,
+      loading,
+      success,
+      disabled,
+      children,
+      ...rest
+    } = this.props;
     const buttonClassname = cx({
       [classes.buttonSuccess]: success
     });
@@ -27,7 +34,7 @@ class LoadingButton extends Component {
       <div className={classes.root}>
         <Button
           className={buttonClassname}
-          disabled={loading || success}
+          disabled={disabled || loading || success}
           {...rest}
         >
           {children}

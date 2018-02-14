@@ -1,3 +1,5 @@
+const config = require('../config');
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -8,8 +10,6 @@ const session = require('./session');
 const apiRoutes = require('./api');
 
 var app = express();
-
-const config = require('../config');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

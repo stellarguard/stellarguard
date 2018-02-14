@@ -19,8 +19,6 @@ async function buildMultiSigTransaction(
     })
   );
 
-  console.log(config.signerPublicKey);
-
   if (backupSigner) {
     builder.addOperation(
       StellarSdk.Operation.setOptions({

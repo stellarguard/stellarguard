@@ -3,7 +3,7 @@ const env = require('./env');
 
 class Config {
   get sessionSecret() {
-    return env.sessionSecret || 'koopa troopa doopa';
+    return env.sessionSecret;
   }
 
   get hmacSecret() {
