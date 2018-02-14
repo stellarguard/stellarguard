@@ -10,7 +10,7 @@ import {
 } from 'material-ui';
 import { inject, observer } from 'mobx-react';
 
-import multiSigValidator from '../../../validators/multiSig';
+import multiSigValidator from '../../../shared/validators/multiSig';
 
 const styles = theme => ({
   divider: {

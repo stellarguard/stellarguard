@@ -3,7 +3,7 @@ import { Formik, Form } from 'formik';
 import { withStyles, TextField, Button } from 'material-ui';
 import { inject, observer } from 'mobx-react';
 
-import { validate } from '../../../validators/transactions';
+import { validate } from '../../../shared/validators/transactions';
 import { FormActions, LoadingButton } from '../../components';
 
 const styles = () => ({});
