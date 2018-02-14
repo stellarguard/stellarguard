@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { users } = require('../../lib');
+const { users } = require('../lib');
 const session = require('../session');
 
 router.post('/', async function(req, res, next) {

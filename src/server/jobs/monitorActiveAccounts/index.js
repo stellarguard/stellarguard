@@ -3,8 +3,8 @@
 // if not, deactivate it
 const Job = require('../Job');
 const map = require('lodash.map');
-const { accounts, utils, stellar } = require('../../lib');
-const config = require('../../config');
+const { accounts, utils, stellar } = require('../lib');
+const config = require('../config');
 
 class MonitorActiveAccounts extends Job {
   async run() {

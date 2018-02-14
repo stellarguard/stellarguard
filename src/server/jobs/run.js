@@ -1,4 +1,4 @@
-const config = require('../config');
+const config = require('./config');
 const jobName = process.argv[2];
 
 (async () => {

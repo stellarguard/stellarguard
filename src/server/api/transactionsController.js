@@ -3,9 +3,9 @@ const router = express.Router();
 const isEmpty = require('lodash.isempty');
 
 const session = require('../session');
-const config = require('../../config');
+const config = require('../config');
 
-const { stellar, accounts, tfa, transactions, users } = require('../../lib');
+const { stellar, accounts, tfa, transactions, users } = require('../lib');
 
 class TransactionsController {
   async createTransaction(req, res, next) {

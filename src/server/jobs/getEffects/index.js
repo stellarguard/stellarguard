@@ -1,5 +1,5 @@
 const Job = require('../Job');
-const { stellar } = require('../../lib');
+const { stellar } = require('../lib');
 
 class GetEffectsJob extends Job {
   async run(publicKey) {
