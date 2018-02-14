@@ -1,4 +1,4 @@
-import FormError from './FormError.jsx';
-import FormActions from './FormActions';
-
-export { FormError, FormActions };
+export { default as FormError } from './FormError.jsx';
+export { default as FormActions } from './FormActions';
+export { default as LoadingButton } from './LoadingButton';
+export { default as Page } from './Page';

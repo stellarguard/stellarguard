@@ -9,6 +9,7 @@ import { inject, observer } from 'mobx-react';
 
 const styles = theme => ({});
 
+@withStyles(styles)
 @inject('rootStore')
 @observer
 class DashboardPage extends Component {
@@ -45,4 +46,4 @@ class DashboardPage extends Component {
   }
 }
 
-export default withStyles(styles)(DashboardPage);
+export default DashboardPage;

@@ -7,8 +7,33 @@ const session = require('../session');
 const { accounts, stellar } = require('../../lib');
 
 class AccountsController {
-  async createAccount(req, res, next) {
+  async createAccount(req, res) {
     const { publicKey } = req.body;
+    const multiSigSetup = await stellar.accounts.getMultiSigSetup(
+      publicKey,
+      config.signerPublicKey
+    );
+
+    if (!multiSigSetup) {
+      return res.status(400).json({
+        error: 'Multi-sig has not been set up for the requested account.'
+      });
+    }
+
+    if (!multiSigSetup.memo) {
+      return res.status(400).json({
+        error:
+          'Multi-sig transaction did not contain a memo. Please resubmit with the provided memo text.'
+      });
+    }
+
+    if (!req.user.verifyMemoText(multiSigSetup.memo)) {
+      return res.status(400).json({
+        error:
+          'Multi-sig transaction contained a memo, but it is not associated with the current logged in account'
+      });
+    }
+
     const account = await accounts.accountsService.createAccount({
       publicKey,
       userId: req.user.id

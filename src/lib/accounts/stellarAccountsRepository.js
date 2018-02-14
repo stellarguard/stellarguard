@@ -24,8 +24,12 @@ class StellarAccountsRepository {
 
   async createAccount(account) {
     const { userId, publicKey } = account;
-    const id = this.stellarAccountsDb.create({ userId, publicKey });
-    return new StellarAccount({ userId, publicKey, id });
+    const id = this.stellarAccountsDb.create({
+      userId,
+      publicKey,
+      isActive: true
+    });
+    return new StellarAccount({ userId, publicKey, id, isActive: true });
   }
 
   async getAccountById(id) {
@@ -46,10 +50,10 @@ class StellarAccountsRepository {
     return account;
   }
 
-  async findAccountsByPublicKey(publicKey) {
+  async findAccountByPublicKey(publicKey) {
     const accountsData =
       this.stellarAccountsDb.get(publicKey, 'publicKey') || [];
-    return accountsData.map(accountData => new StellarAccount(accountData));
+    return accountsData.map(accountData => new StellarAccount(accountData))[0];
   }
 
   async getPayments(userId) {

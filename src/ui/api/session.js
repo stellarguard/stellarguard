@@ -2,19 +2,19 @@ import axios from './axios';
 import User from '../models/User';
 
 export async function getSession() {
-  const result = await axios.get('/session');
-  if (result.data) {
-    return User.fromJson(result.data);
+  const user = await axios.get('/session');
+  if (user) {
+    return User.fromJson(user);
   }
 }
 
 export async function signIn({ username, password }) {
-  const result = await axios.post('/session', {
+  const user = await axios.post('/session', {
     username,
     password
   });
 
-  return User.fromJson(result.data);
+  return User.fromJson(user);
 }
 
 export async function signOut() {

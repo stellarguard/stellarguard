@@ -19,7 +19,8 @@ function wrap(method) {
 
 async function call(method, args) {
   try {
-    return await apiClient[method].apply(apiClient, args);
+    const result = await apiClient[method].apply(apiClient, args);
+    return result.data;
   } catch (err) {
     throw err.response.data;
   }

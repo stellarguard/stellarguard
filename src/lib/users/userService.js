@@ -65,7 +65,7 @@ class UserService {
       tfa.tfaStrategyService.createStrategy({
         userId: user.id,
         username: user.username,
-        type: tfa.TfaStrategy.Email
+        type: tfa.TfaStrategy.Type.Email
       })
     ]);
 

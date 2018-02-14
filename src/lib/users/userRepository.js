@@ -40,19 +40,12 @@ class UserRepository {
   }
 
   async getByAccountPublicKey(publicKey, options) {
-    const stellarAccounts = await accountsRepository.findAccountsByPublicKey(
-      publicKey
-    );
+    const account = await accountsRepository.findAccountByPublicKey(publicKey);
 
-    const activeAccounts = stellarAccounts.filter(
-      account => account.isActive === true
-    );
-
-    if (!activeAccounts.length) {
+    if (!account.isActive) {
       return;
     }
 
-    const account = activeAccounts[0];
     return await this.getUserById(account.userId, options);
   }
 

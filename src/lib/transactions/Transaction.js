@@ -29,6 +29,15 @@ class Transaction {
     return crypto.getHmac(this.id);
   }
 
+  /**
+   * Returns true if the transaction has source accounts inside operations that differ from the transaction source
+   */
+  get hasVariedSourceAccounts() {
+    return this.stellarTransaction.operations.some(
+      operation => !!operation.source && operation.source !== this.source
+    );
+  }
+
   verifyAuthorizationCode(code) {
     return this.authorizationCode === code;
   }
@@ -38,6 +47,14 @@ class Transaction {
       this.stellarTransaction,
       secretKey
     );
+  }
+
+  toJSON() {
+    return {
+      id: this.id,
+      userId: this.userId,
+      xdr: this.xdr
+    };
   }
 }
 

@@ -14,6 +14,7 @@
     "cookie-parser": "~1.4.3",
     "cryptr": "^2.0.0",
     "debug": "~2.6.9",
+    "dotenv": "^5.0.0",
     "dumb-passwords": "^0.2.1",
     "ejs": "~2.5.7",
     "express": "^4.16.2",
@@ -45,7 +46,7 @@
   "scripts": {
     "start": "node ./src/web/bin/www",
     "build": "parcel build src/ui/index.html",
-    "dev": "DEV_MODE=1 supervisor -w src/ -i src/ui ./src/server/bin/www",
+    "dev": "supervisor -w src/ -i src/ui ./src/server/bin/www",
     "run-job": "node ./src/jobs/run",
     "clean": "rm -rf dist"
   },

@@ -1,10 +1,8 @@
 const StellarSdk = require('stellar-sdk');
 const env = require('./env');
 
-const devModeSignerSecretKey =
-  'SAHAT7Y7MFAR6CQHXJIPQBG6OK6AATCIYPK6THMVIFIK5LVDZVJN3I6O';
 class Keys {
-  constructor({ signerSecretKey = devModeSignerSecretKey }) {
+  constructor({ signerSecretKey }) {
     this.signerKeyPair = StellarSdk.Keypair.fromSecret(signerSecretKey);
   }
 

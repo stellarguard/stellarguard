@@ -9,6 +9,7 @@ import {
 } from 'material-ui';
 
 import { inject, observer } from 'mobx-react';
+import config from '../../config';
 
 const styles = theme => ({
   numbers: {
@@ -16,7 +17,8 @@ const styles = theme => ({
   },
   link: {
     color: theme.palette.primary.main,
-    textDecoration: 'none'
+    textDecoration: 'none',
+    cursor: 'pointer'
   }
 });
 
@@ -25,14 +27,18 @@ const styles = theme => ({
 class SubmitMultiSigToStellar extends Component {
   get stellarTransactionSignerHref() {
     const xdr = this.props.rootStore.uiState.addStellarUiState.xdr;
-    const network = 'test';
+    const network = config.isTestNetwork ? 'test' : 'public';
     return `https://www.stellar.org/laboratory/#txsigner?xdr=${encodeURIComponent(
       xdr
     )}&network=${network}`;
   }
 
+  activateStellarGuard = () => {
+    this.props.rootStore.uiState.addStellarUiState.goNext();
+  };
+
   render() {
-    const { classes, children } = this.props;
+    const { classes } = this.props;
     return (
       <div>
         <Typography variant="title">
@@ -56,7 +62,19 @@ class SubmitMultiSigToStellar extends Component {
           </ListItem>
           <ListItem>
             <Avatar className={classes.numbers}>2</Avatar>
-            <ListItemText primary="After you submit it, click Activate to link it to StellarGuard." />
+            <ListItemText
+              primary={
+                <span>
+                  After submitting,{' '}
+                  <span
+                    className={classes.link}
+                    onClick={this.activateStellarGuard}
+                  >
+                    Activate StellarGuard
+                  </span>
+                </span>
+              }
+            />
           </ListItem>
         </List>
       </div>
