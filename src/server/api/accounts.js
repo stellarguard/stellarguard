@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const config = require('../../config');
+const config = require('../config');
 
 const session = require('../session');
-const { accounts, stellar } = require('../../lib');
+const { accounts, stellar } = require('../lib');
 
 class AccountsController {
   async createAccount(req, res) {

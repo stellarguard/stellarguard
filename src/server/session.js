@@ -1,9 +1,9 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
-const config = require('../config');
+const config = require('./config');
 
-const { users } = require('../lib');
+const { users } = require('./lib');
 
 function configure(app) {
   app.use(

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const session = require('../session');
-const { tfa } = require('../../lib');
+const { tfa } = require('../lib');
 
 class TfaController {
   async createTfaStrategy(req, res) {

@@ -5,7 +5,7 @@ const passwords = require('./passwords');
 const accounts = require('../accounts');
 const tfa = require('../tfa');
 const { emailService } = require('../email');
-const userValidator = require('../../validators/users.server');
+const userValidator = require('../../../validators/users.server');
 
 class UserService {
   async createUser({ username, email, password }) {
