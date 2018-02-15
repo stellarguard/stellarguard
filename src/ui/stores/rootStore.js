@@ -2,6 +2,7 @@ import UiStateStore from './uiStateStore';
 import SessionStore from './sessionStore';
 import UserStore from './userStore';
 import TransactionsStore from './transactionsStore';
+import TfaStore from './tfaStore.js';
 
 import { useStrict, computed } from 'mobx';
 
@@ -12,6 +13,7 @@ export default class RootStore {
   sessionStore = new SessionStore(this);
   userStore = new UserStore(this);
   transactionsStore = new TransactionsStore();
+  tfaStore = new TfaStore();
 
   @computed
   get currentUser() {

@@ -4,6 +4,7 @@ import Page from '../../components/Page';
 
 import VerifyEmailCard from './VerifyEmailCard';
 import AddFirstStellarAccountCard from './AddFirstStellarAccountCard';
+import AddTwoFactorAuthCard from './tfa/AddTwoFactorAuthCard';
 
 import { inject, observer } from 'mobx-react';
 
@@ -33,6 +34,14 @@ class DashboardPage extends Component {
     );
   }
 
+  addTwoFactorAuthCard() {
+    return (
+      <Grid item sm={12} md={9}>
+        <AddTwoFactorAuthCard />
+      </Grid>
+    );
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -40,6 +49,7 @@ class DashboardPage extends Component {
         <Grid container spacing={24} justify="space-around">
           {this.verifyEmailCard()}
           {this.addFirstStellarAccountCard()}
+          {this.addTwoFactorAuthCard()}
         </Grid>
       </Page>
     );

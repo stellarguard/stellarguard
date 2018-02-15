@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+import AppError from '../../shared/errors/AppError';
+import UnknownError from '../../shared/errors/UnknownError';
+
 const apiClient = axios.create({
   baseURL: '/api/'
 });
@@ -22,6 +25,11 @@ async function call(method, args) {
     const result = await apiClient[method].apply(apiClient, args);
     return result.data;
   } catch (err) {
-    throw err.response.data;
+    if (err.response.data && err.response.data.code) {
+      console.log(err.response.data);
+      throw new AppError(err.response.data);
+    } else {
+      throw new UnknownError();
+    }
   }
 }

@@ -11,7 +11,7 @@ import {
   Button,
   Paper
 } from 'material-ui';
-import LockIcon from 'material-ui-icons/Lock';
+import { Security as SecurityIcon } from 'material-ui-icons';
 import { inject, observer } from 'mobx-react';
 
 import BuildMultiSigForm from './BuildMultiSigForm';
@@ -77,7 +77,7 @@ class AddFirstStellarAccountCard extends React.Component {
         <CardHeader
           avatar={
             <Avatar className={classes.avatar}>
-              <LockIcon />
+              <SecurityIcon />
             </Avatar>
           }
           title="Link Stellar Account"
