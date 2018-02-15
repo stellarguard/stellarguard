@@ -1,52 +1,16 @@
-const speakeasy = require('speakeasy');
-const qrcode = require('qrcode');
+class Authenticator {
+  constructor({ id, userId, secret }) {
+    this.id = id;
+    this.userId = userId;
+    this.secret = secret;
+  }
 
-const ISSUER = 'Stellar Guard';
-
-async function generateSecret(username) {
-  const speakeasySecret = speakeasy.generateSecret({
-    name: username,
-    issuer: ISSUER,
-    length: 16
-  });
-
-  const secret = speakeasySecret.base32;
-  const qrCode = await generateQrCode(username, secret);
-  return {
-    secret,
-    qrCode
-  };
+  toJSON() {
+    return {
+      id: this.id,
+      userId: this.userId
+    };
+  }
 }
 
-async function generateQrCode(username, secret) {
-  const otpAuthUrl = getOtpAuthUrl(username, secret);
-  return await qrcode.toDataURL(otpAuthUrl);
-}
-
-function getOtpAuthUrl(label, secret) {
-  const otpAuthUrlOptions = {
-    label: `${encodeURIComponent(ISSUER)}:${encodeURIComponent(label)}`,
-    secret: secret,
-    encoding: 'base32',
-    ISSUER
-  };
-
-  return speakeasy.otpauthURL(otpAuthUrlOptions);
-}
-
-function verifyToken(token, secret) {
-  return speakeasy.totp.verify({
-    secret,
-    token,
-    encoding: 'base32'
-  });
-}
-
-module.exports = {
-  generateSecret,
-  verifyToken
-};
-
-// FAZUO4SDOJIVIOTZJJDUGXRIJMSFKS2MHYUDCKBZLN2SQWTRFFNQ
-
-// data:image/png;base64,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
+module.exports = Authenticator;

@@ -7,7 +7,13 @@
     "transform-decorators-legacy",
     "transform-export-extensions",
     "transform-class-properties",
-    "transform-object-rest-spread"
+    "transform-object-rest-spread",
+    [
+      "babel-plugin-transform-builtin-extend",
+      {
+        "globals": ["Error"]
+      }
+    ]
   ],
   "presets": [
     [
