@@ -2,12 +2,27 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const config = require('./config');
+const PgSession = require('connect-pg-simple')(session);
 
 const { users } = require('./lib');
+
+const pg = require('pg');
+
+var pgPool = new pg.Pool({
+  host: 'localhost',
+  user: 'paul.selden',
+  database: 'stellarguard',
+  max: 20,
+  idleTimeoutMillis: 10000,
+  connectionTimeoutMillis: 2000
+});
 
 function configure(app) {
   app.use(
     session({
+      store: new PgSession({
+        pool: pgPool
+      }),
       secret: config.sessionSecret,
       resave: false,
       saveUninitialized: false,
@@ -82,5 +97,6 @@ module.exports = {
   configure,
   logout,
   authenticateLocal,
+  ensureLoggedOut,
   ensureLoggedIn
 };
