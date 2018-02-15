@@ -28,6 +28,7 @@ Should I separate payments from verification?
 [] middleware for fetching objects
 [] get case sensitivity on everything -- usernames, email
 [] Error codes and standardized errors
+[] Look into mobx-utils for state handling
 
 NEXT:
 

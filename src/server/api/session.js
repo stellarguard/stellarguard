@@ -30,7 +30,7 @@ router.get('/', function(req, res) {
 });
 
 router.delete('/', session.ensureLoggedIn(), function(req, res) {
-  req.logout();
+  session.logout(req);
   res.json({});
 });
 

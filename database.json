@@ -1,0 +1,14 @@
+{
+  "dev": {
+    "driver": "pg",
+    "user": "paul.selden",
+    "host": "localhost",
+    "database": "stellarguard",
+    "schema": "public"
+  },
+  "prod": {
+    "driver": "pg",
+    "user": { "ENV": "PG_PROD_USERNAME" },
+    "password": { "ENV": "PG_PROD_PASSWORD" }
+  }
+}
