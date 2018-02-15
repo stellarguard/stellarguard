@@ -90,8 +90,7 @@ class TransactionsController {
   async authorizeTransaction(req, res, next) {
     try {
       const { id } = req.params;
-      const { tfaType } = req.query;
-      const { code } = req.body;
+      const { code, type } = req.body;
       const transaction = await transactions.transactionService.getTransaction(
         id
       );
@@ -125,12 +124,12 @@ class TransactionsController {
       }
 
       const tfaStrategy = transactionUser.tfaStrategies.find(
-        tfaStrategy => tfaStrategy.type === tfaType
+        tfaStrategy => tfaStrategy.type === type
       );
 
       if (!tfaStrategy) {
         return res.status(500).json({
-          error: `There is no ${tfaType} authorization strategy for this user.`
+          error: `There is no ${type} authorization strategy for this user.`
         });
       }
 
@@ -139,7 +138,7 @@ class TransactionsController {
         // TODO - increment tries
         return res
           .status(403)
-          .json({ error: 'Your verification code is incorrect.' });
+          .json({ code: 'Your authorization code is incorrect.' });
       }
 
       transaction.sign(config.signerSecretKey);

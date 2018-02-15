@@ -16,7 +16,7 @@ function getHmac(data, length = 0) {
     .update(String(data))
     .digest('hex');
 
-  return hmac.slice(0, length);
+  return hmac.slice(-length);
 }
 
 module.exports = {

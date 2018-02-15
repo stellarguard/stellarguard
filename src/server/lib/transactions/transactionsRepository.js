@@ -23,6 +23,12 @@ class TransactionRepository {
     const transactions = await this.transactionDb.get(userId, 'userId');
     return transactions.map(transaction => new Transaction(transaction));
   }
+
+  async submitted(transaction) {
+    transaction.status = 'submitted';
+    await this.transactionDb.update(transaction);
+    return transaction;
+  }
 }
 
 module.exports = new TransactionRepository();

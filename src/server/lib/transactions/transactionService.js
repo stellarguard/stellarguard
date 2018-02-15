@@ -16,9 +16,11 @@ class TransactionService {
 
   async submitTransaction(transaction) {
     // TODO -- record result after it was sent
-    return await stellar.transactions.submitTransaction(
+    const submitResult = await stellar.transactions.submitTransaction(
       transaction.stellarTransaction
     );
+
+    return await transactionsRepository.submitted(transaction);
   }
 }
 

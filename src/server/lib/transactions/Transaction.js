@@ -5,10 +5,11 @@ class Transaction {
     return new Transaction({ xdr });
   }
 
-  constructor({ id, userId, xdr }) {
+  constructor({ id, userId, xdr, status = 'pending' }) {
     this.id = id;
     this.userId = userId;
     this.stellarTransaction = stellar.transactions.fromXdr(xdr);
+    this.status = status;
   }
 
   get source() {
@@ -25,21 +26,21 @@ class Transaction {
     );
   }
 
-  get authorizationCode() {
-    return crypto.getHmac(this.id);
+  getAuthorizationCode() {
+    return crypto.getHmac(this.id, 20);
   }
 
   /**
    * Returns true if the transaction has source accounts inside operations that differ from the transaction source
    */
-  get hasVariedSourceAccounts() {
+  hasVariedSourceAccounts() {
     return this.stellarTransaction.operations.some(
       operation => !!operation.source && operation.source !== this.source
     );
   }
 
   verifyAuthorizationCode(code) {
-    return this.authorizationCode === code;
+    return this.getAuthorizationCode() === code;
   }
 
   sign(secretKey) {

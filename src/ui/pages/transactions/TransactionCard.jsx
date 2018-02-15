@@ -9,7 +9,7 @@ import {
   Typography,
   Button
 } from 'material-ui';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
 import { Operations } from './operations';
 import AuthorizeTransactionDialog from './AuthorizeTransactionDialog';
@@ -21,6 +21,7 @@ const styles = theme => ({
   }
 });
 
+@inject('rootStore')
 @observer
 @withStyles(styles)
 class TransactionCard extends Component {
@@ -28,14 +29,14 @@ class TransactionCard extends Component {
 
   render() {
     const { classes, transaction } = this.props;
-    const { authorizeDialogOpen, denyDialogOpen } = this.state;
+    const { authorizeDialogOpen } = this.state;
     return (
       <React.Fragment>
         <AuthorizeTransactionDialog
           transaction={transaction}
           open={authorizeDialogOpen}
-          onOk={this.handleAuthorizeDialogOk}
-          onCancel={this.handleAuthorizeDialogCancel}
+          type="email"
+          onClose={this.handleAuthorizationDialogClose}
         />
         <Card>
           <CardContent>
@@ -59,25 +60,17 @@ class TransactionCard extends Component {
   }
 
   onDenyTransactionClick = async () => {
-    this.rootStore.transactionsStore.denyTransaction(this.props.transaction);
+    this.prop.rootStore.transactionsStore.denyTransaction(
+      this.props.transaction
+    );
   };
 
   onAuthorizeTransactionClick = () => {
     this.setState({ authorizeDialogOpen: true });
   };
 
-  handleAuthorizeDialogCancel = () => {
+  handleAuthorizationDialogClose = () => {
     this.setState({ authorizeDialogOpen: false });
-  };
-
-  handleAuthorizeDialogOk = async ({ code } = {}) => {
-    this.setState({ authorizeDialogOpen: false });
-    this.rootStore.transactionsStore.authorizeTransaction(
-      this.props.transaction,
-      {
-        code
-      }
-    );
   };
 }
 

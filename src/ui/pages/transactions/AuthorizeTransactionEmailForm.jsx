@@ -11,7 +11,7 @@ const styles = () => ({});
 @inject('rootStore')
 @observer
 @withStyles
-class SignInForm extends React.Component {
+class AuthorizeTransactionEmailForm extends React.Component {
   onSubmit = async ({ username, password }, { setSubmitting, setErrors }) => {
     try {
       const user = await this.props.rootStore.sessionStore.signIn({
@@ -97,4 +97,4 @@ class SignInForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(SignInForm);
+export default withStyles(styles)(AuthorizeTransactionEmailForm);
