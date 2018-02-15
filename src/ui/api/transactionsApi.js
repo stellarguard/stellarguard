@@ -11,6 +11,6 @@ export async function getTransaction(id) {
   return Transaction.fromJson(transaction);
 }
 
-export async function authorizeTransaction(id, { code }) {
-  await axios.post(`/transactions/${id}/authorize`, { code });
+export async function authorizeTransaction(id, { type, code }) {
+  await axios.post(`/transactions/${id}/authorize`, { type, code });
 }

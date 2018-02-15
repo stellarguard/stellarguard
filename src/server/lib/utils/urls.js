@@ -19,7 +19,7 @@ class Urls {
   }
 
   authorizeTransaction({ transaction, code, type }) {
-    const pathname = `/transactions/${transaction.id}/authorize`;
+    const pathname = `/transactions/${transaction.id}`;
     const query = {};
     if (code) {
       query.code = code;

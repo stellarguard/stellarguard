@@ -1,52 +1,35 @@
 import React, { Component } from 'react';
-import {
-  withStyles,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Button
-} from 'material-ui';
+import { withStyles } from 'material-ui';
 import { observer } from 'mobx-react';
+
+import EmailAuthorizeDialog from './EmailAuthorizeDialog';
+
+const dialogTypes = new Map();
+dialogTypes.set('email', EmailAuthorizeDialog);
 
 const styles = theme => ({});
 
 @observer
 @withStyles(styles)
 class AuthorizeTransactionDialog extends Component {
-  handleOk = () => {
-    this.props.onOk();
+  onSuccess = () => {
+    this.props.onClose({});
   };
 
-  handleCancel = () => {
-    this.props.onCancel();
+  onCancel = () => {
+    this.props.onClose();
   };
 
   render() {
-    const { classes, open, transaction } = this.props;
+    const { classes, open, transaction, type } = this.props;
+    const AuthorizeDialog = dialogTypes.get(type);
     return (
-      <Dialog
-        disableBackdropClick
-        disableEscapeKeyDown
-        maxWidth="xs"
+      <AuthorizeDialog
         open={open}
-      >
-        <DialogTitle id="confirmation-dialog-title">
-          Authorize Transaction
-        </DialogTitle>
-        <DialogContent>
-          Authorizing this transaction will sign and submit it to the Stellar
-          Network.
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={this.handleCancel} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={this.handleOk} color="primary">
-            Ok
-          </Button>
-        </DialogActions>
-      </Dialog>
+        transaction={transaction}
+        onSuccess={this.onSuccess}
+        onCancel={this.onCancel}
+      />
     );
   }
 }

@@ -28,8 +28,8 @@ export default class TransactionsStore {
   }
 
   @action
-  async authorize(transaction, { code } = {}) {
-    await transactionsApi.authorizeTransaction(transaction.id, { code });
+  async authorize(transaction, { type, code } = {}) {
+    await transactionsApi.authorizeTransaction(transaction.id, { type, code });
     transaction.status = 'submitted';
   }
 
