@@ -14,7 +14,7 @@ export async function verifyEmailAddress({ code }) {
   return await axios.post('/users/me/verifyemail', { code });
 }
 
-export async function register({ username, password, email }) {
-  const user = await axios.post('/users', { username, password, email });
+export async function register({ password, email }) {
+  const user = await axios.post('/users', { password, email });
   return User.fromJson(user);
 }

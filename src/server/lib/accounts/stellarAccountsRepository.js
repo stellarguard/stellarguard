@@ -22,32 +22,21 @@ class StellarAccountsRepository {
     };
   }
 
-  async createAccount(account) {
-    const { userId, publicKey } = account;
-    const id = this.stellarAccountsDb.create({
+  async createAccount({ userId, publicKey }) {
+    const newAccount = await this.stellarAccountsDb.create({
       userId,
-      publicKey,
-      isActive: true
+      publicKey
     });
-    return new StellarAccount({ userId, publicKey, id, isActive: true });
+    return new StellarAccount(newAccount);
   }
 
   async getAccountById(id) {
-    return new StellarAccount(this.stellarAccountsDb.get(id));
+    return new StellarAccount(await this.stellarAccountsDb.getById(id));
   }
 
-  async getAccountByUserId(userId, { withPayments = false }) {
-    const data = this.stellarAccountsDb.get(userId, 'userId');
-    if (!data) {
-      return;
-    }
-
-    const account = new StellarAccount(data);
-    if (withPayments) {
-      account.payments = await this.getPayments(userId);
-    }
-
-    return account;
+  async getAccountsByUserId(userId) {
+    const accounts = await this.stellarAccountsDb.getByUserId(userId);
+    return accounts.map(account => new StellarAccount(account));
   }
 
   async findAccountByPublicKey(publicKey) {

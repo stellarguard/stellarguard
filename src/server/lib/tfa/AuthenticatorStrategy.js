@@ -23,8 +23,8 @@ class AuthenticatorStrategy extends TfaStrategy {
     return otp.verifyToken(token, this.secret);
   }
 
-  static async getExtras({ username }) {
-    return await otp.generateSecret(username);
+  static async getExtras({ email }) {
+    return await otp.generateSecret(email);
   }
 }
 

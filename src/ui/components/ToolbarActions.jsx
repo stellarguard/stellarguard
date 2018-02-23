@@ -34,7 +34,7 @@ class ToolbarActions extends Component {
         <div>
           <Button color="inherit" onClick={this.handleUserMenuOpen}>
             <AccountCircle className={classes.leftIcon}>me</AccountCircle>
-            {rootStore.sessionStore.currentUser.username}
+            {rootStore.sessionStore.currentUser.email}
           </Button>
           <Menu
             anchorEl={menuAnchor}

@@ -21,7 +21,7 @@ Should I separate payments from verification?
 
 = Code improvements =
 
-[] Have first-class response objects in controllers
+[] Have first-class response objects in controllers -- fromJSON might be ok
 [] Drastically improve TFA strategy code... it sucks
 [] Standardize how create works -- do i need to pass a full class, or just props?
 [] change StellarAccount to Account
@@ -49,3 +49,8 @@ Nice to Have
 PROTECTED ACCOUNT:
 
 // GAGFWJVTYUEPG7EQCUET5CI2AAATOLLYLXUWIHF6JRD2SQXN3EJGVNGL SDZ3UUJHTHWCMTW63PF4P42TEHHD7BC4OTTIBBLKXXB4EIZFN7XKFGFC
+
+TODO:
+
+* set up db for stellar accounts
+* test errors for activating account

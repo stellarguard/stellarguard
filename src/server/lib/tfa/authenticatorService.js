@@ -4,7 +4,7 @@ const authenticatorRepository = require('./authenticatorRepository');
 
 class AuthenticatorService {
   async generateSecret(user) {
-    return await otp.generateSecret(user.username);
+    return await otp.generateSecret(user.email);
   }
 
   async enableAuthenticator(user, { secret, verificationCode }) {

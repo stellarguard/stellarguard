@@ -1,5 +1,5 @@
 const dumbPasswords = require('dumb-passwords');
-const users = require('../../../shared/validators/users');
+const users = require('validators/users');
 
 exports.validate = async function(user) {
   await users.validate(user);

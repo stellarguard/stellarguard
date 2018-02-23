@@ -2,36 +2,38 @@ const express = require('express');
 const router = express.Router();
 
 const session = require('../session');
+const Controller = require('./Controller');
 
-router.post('/', function(req, res, next) {
-  session.authenticateLocal(function(err, user) {
-    if (err) {
-      return next(err);
-    }
-    if (!user) {
-      return res.status(401).json({ error: 'Incorrect username or password.' });
-    }
-
+class SessionController extends Controller {
+  async signIn(req, res, next) {
+    const user = await session.authenticateLocal(req, res, next);
     req.logIn(user, function(err) {
       if (err) {
         return next(err);
       }
+
       return res.json(user);
     });
-  })(req, res, next);
-});
-
-router.get('/', function(req, res) {
-  if (req.user) {
-    return res.json(req.user);
-  } else {
-    return res.send();
   }
-});
 
-router.delete('/', session.ensureLoggedIn(), function(req, res) {
-  session.logout(req);
-  res.json({});
-});
+  async getSession(req, res) {
+    if (req.user) {
+      return res.json(req.user);
+    } else {
+      return res.send();
+    }
+  }
+
+  async signOut(req, res) {
+    session.logout(req);
+    res.json({});
+  }
+}
+
+const controller = new SessionController();
+
+router.post('/', controller.signIn);
+router.get('/', controller.getSession);
+router.delete('/', session.ensureLoggedIn(), controller.signOut);
 
 module.exports = router;

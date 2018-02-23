@@ -3,5 +3,6 @@ module.exports = {
   multisig: require('./multisig'),
   signer: require('./signer'),
   transactions: require('./transactions'),
-  accounts: require('./accounts')
+  accounts: require('./accounts'),
+  keys: require('./keys')
 };

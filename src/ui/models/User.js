@@ -1,17 +1,15 @@
 import { observable } from 'mobx';
 
 export default class User {
-  @observable username;
   @observable email;
-  @observable hasVerifiedEmail;
-  @observable memoText;
+  @observable isEmailVerified;
+  @observable signerPublicKey;
 
-  constructor({ id, username, email, memoText, hasVerifiedEmail = false }) {
+  constructor({ id, email, isEmailVerified = false, signerPublicKey }) {
     this.id = id;
-    this.username = username;
     this.email = email;
-    this.hasVerifiedEmail = hasVerifiedEmail;
-    this.memoText = memoText;
+    this.isEmailVerified = isEmailVerified;
+    this.signerPublicKey = signerPublicKey;
   }
 
   static fromJson(user) {

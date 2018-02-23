@@ -2,26 +2,26 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import { withStyles, TextField, Button } from 'material-ui';
 import { inject, observer } from 'mobx-react';
-import yup from 'yup';
 
-import { FormError, FormActions } from '../../components';
+import { FormError, FormActions, FormFieldHelperText } from '../../components';
+import signInValidator from '../../../shared/validators/signIn';
 
 const styles = () => ({});
 
 @inject('rootStore')
 @observer
 class SignInForm extends React.Component {
-  onSubmit = async ({ username, password }, { setSubmitting, setErrors }) => {
+  onSubmit = async ({ email, password }, { setSubmitting, setErrors }) => {
     try {
       const user = await this.props.rootStore.sessionStore.signIn({
-        username,
+        email,
         password
       });
       setSubmitting(false);
       this.signInSuccess(user);
-    } catch (e) {
+    } catch (error) {
       setSubmitting(false);
-      setErrors(e);
+      setErrors(error.toFormError());
     }
   };
 
@@ -35,14 +35,11 @@ class SignInForm extends React.Component {
     return (
       <Formik
         initialValues={{
-          username: '',
+          email: '',
           password: ''
         }}
         onSubmit={this.onSubmit}
-        validationSchema={yup.object().shape({
-          username: yup.string().required(),
-          password: yup.string().required()
-        })}
+        validationSchema={signInValidator.schema}
         render={({
           values,
           errors,
@@ -58,13 +55,21 @@ class SignInForm extends React.Component {
               autoFocus
               margin="normal"
               type="text"
-              id="username"
-              name="username"
-              label="Username"
+              id="email"
+              name="email"
+              label="Email address"
               onChange={handleChange}
               inputProps={{ onBlur: handleBlur }}
-              value={values.username}
-              error={!!(touched.username && errors.username)}
+              value={values.email}
+              error={!!(touched.email && errors.email)}
+              helperText={
+                <FormFieldHelperText
+                  error={errors.email}
+                  touched={touched.email}
+                >
+                  {' '}
+                </FormFieldHelperText>
+              }
             />
             <TextField
               fullWidth

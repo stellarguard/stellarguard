@@ -31,10 +31,9 @@ const styles = theme => ({
   mapPropsToValues(props) {
     return {
       sourceAccount: '',
-      primarySigner: 'GCVHEKSRASJBD6O2Z532LWH4N2ZLCBVDLLTLKSYCSMBLOYTNMEEGUARD', // TODO - don't hardcode
+      primarySigner: props.rootStore.currentUser.signerPublicKey,
       addBackupSigner: false,
-      backupSigner: '',
-      memoText: props.rootStore.currentUser.memoText
+      backupSigner: ''
     };
   },
   handleSubmit() {},
@@ -80,7 +79,6 @@ class BuildMultiSigForm extends Component {
           value={values.sourceAccount}
           error={!!(touched.sourceAccount && errors.sourceAccount)}
         />
-        <input type="hidden" name="memoText" value={values.memoText} />
         <div className={classes.signersHeader}>
           <Typography variant="title">Signers </Typography>
           <FormControlLabel
@@ -102,7 +100,7 @@ class BuildMultiSigForm extends Component {
           type="text"
           id="primarySigner"
           name="primarySigner"
-          label="StellarGuard's Public Key"
+          label="StellarGuard Public Key"
           onChange={handleChange}
           value={values.primarySigner}
           disabled

@@ -9,7 +9,7 @@ import {
   Typography
 } from 'material-ui';
 
-import { Check as CheckIcon, Error as ErrorIcon } from 'material-ui-icons';
+import { Check as CheckIcon, Email as EmailIcon } from 'material-ui-icons';
 import LoadingButton from '../../components/LoadingButton';
 import { inject, observer } from 'mobx-react';
 
@@ -63,7 +63,7 @@ class VerifyEmailCard extends React.Component {
         <CardHeader
           avatar={
             <Avatar className={classes.avatar}>
-              <ErrorIcon />
+              <EmailIcon />
             </Avatar>
           }
           title="Verify your email address"

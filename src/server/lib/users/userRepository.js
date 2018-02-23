@@ -7,36 +7,48 @@ class UserRepository {
     this.userDb = require('./userDb');
   }
 
-  async createUser({ username, email, passwordHash }) {
-    if (this.userDb.get(username, 'username')) {
-      throw {
-        username: 'This username is already taken.'
-      };
-    }
-
+  async createUser({ email, passwordHash, signerPublicKey, signerSecretKey }) {
     const user = {
-      username,
       email,
       passwordHash,
-      verified: false
+      isEmailVerified: false,
+      signerPublicKey,
+      signerSecretKey
     };
 
-    user.id = this.userDb.create(user);
-    return new User(user);
+    const newUser = await this.userDb.create(user);
+    return new User(newUser);
   }
 
-  async getUserById(id, { withTfaStrategies = false } = {}) {
-    const data = this.userDb.get(id);
+  async getUserById(id) {
+    const data = await this.userDb.getById(id);
     if (data) {
       return new User(data);
     }
   }
 
-  async getUserByUsername(username) {
-    const data = this.userDb.get(username, 'username');
+  async getUserByEmail(email) {
+    const data = await this.userDb.getByEmail(email);
     if (data) {
       return new User(data);
     }
+  }
+
+  async getUserBySignerPublicKey(signerPublicKey) {
+    const data = await this.userDb.getBySignerPublicKey(signerPublicKey);
+    if (data) {
+      return new User(data);
+    }
+  }
+
+  async verifyEmail(user) {
+    const isEmailVerified = true;
+    await this.userDb.updateIsEmailVerified({
+      id: user.id,
+      isEmailVerified
+    });
+    user.isEmailVerified = isEmailVerified;
+    return user;
   }
 
   async getByAccountPublicKey(publicKey, options) {
@@ -47,13 +59,6 @@ class UserRepository {
     }
 
     return await this.getUserById(account.userId, options);
-  }
-
-  async verifyEmail(user) {
-    const updatedUser = this.userDb.get(user.id);
-    updatedUser.hasVerifiedEmail = true;
-    this.userDb.update(updatedUser);
-    return updatedUser;
   }
 }
 
