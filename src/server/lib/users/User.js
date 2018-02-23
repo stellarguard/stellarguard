@@ -10,7 +10,7 @@ const { crypto } = require('../utils');
 
 //   // relations
 //   stellarAccounts: StellarAccount[];
-//   tfaStrategies: TfaStrategies[];
+//   authenticator: Authenticator
 // }
 
 class User {
@@ -47,7 +47,8 @@ class User {
       id: this.id,
       email: this.email,
       isEmailVerified: this.isEmailVerified,
-      signerPublicKey: this.signerPublicKey
+      signerPublicKey: this.signerPublicKey,
+      authenticator: this.authenticator
     };
   }
 }

@@ -35,6 +35,10 @@ class DashboardPage extends Component {
   }
 
   addTwoFactorAuthCard() {
+    if (this.props.rootStore.sessionStore.currentUser.hasAuthenticator) {
+      return null;
+    }
+
     return (
       <Grid item sm={12} md={9}>
         <AddTwoFactorAuthCard />
