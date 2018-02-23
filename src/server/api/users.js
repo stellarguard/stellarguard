@@ -13,8 +13,6 @@ class UserController extends Controller {
       password
     });
 
-    console.log('controller', user);
-
     req.login(user, function(err) {
       if (err) {
         return next(err);

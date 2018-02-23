@@ -1,5 +1,5 @@
 const otp = require('./otp');
-const { AuthenticatorVerificationError } = require('errors');
+const { AuthenticatorVerificationError } = require('errors/authenticator');
 const authenticatorRepository = require('./authenticatorRepository');
 
 class AuthenticatorService {
@@ -12,7 +12,11 @@ class AuthenticatorService {
       throw new AuthenticatorVerificationError();
     }
 
-    return authenticatorRepository.enableAuthenticator(user, { secret });
+    return await authenticatorRepository.enableAuthenticator(user, { secret });
+  }
+
+  async getForUser(userId) {
+    return await authenticatorRepository.getForUser(userId);
   }
 }
 

@@ -3,11 +3,13 @@ const router = express.Router();
 
 const session = require('../session');
 const Controller = require('./Controller');
+const { tfa } = require('../lib');
 
 class SessionController extends Controller {
   async signIn(req, res, next) {
     const user = await session.authenticateLocal(req, res, next);
-    req.logIn(user, function(err) {
+    user.authenticator = await tfa.authenticatorService.getForUser(user);
+    req.logIn(user, async function(err) {
       if (err) {
         return next(err);
       }
@@ -17,8 +19,10 @@ class SessionController extends Controller {
   }
 
   async getSession(req, res) {
-    if (req.user) {
-      return res.json(req.user);
+    const user = req.user;
+    if (user) {
+      user.authenticator = await tfa.authenticatorService.getForUser(user);
+      return res.json(user);
     } else {
       return res.send();
     }

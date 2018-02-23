@@ -6,9 +6,16 @@ class AuthenticatorRepository {
   }
 
   async enableAuthenticator(user, { secret }) {
-    const userId = user.id;
-    const id = this.authenticatorDb.create({ userId: user.id, secret });
-    return new Authenticator({ id, userId, secret });
+    const authenticator = await this.authenticatorDb.create({
+      userId: user.id,
+      secret
+    });
+    return new Authenticator(authenticator);
+  }
+
+  async getForUser(user) {
+    const authenticator = await this.authenticatorDb.getByUserId(user.id);
+    return new Authenticator(authenticator);
   }
 }
 
