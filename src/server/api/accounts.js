@@ -5,8 +5,10 @@ const config = require('../config');
 
 const session = require('../session');
 const { accounts, stellar } = require('../lib');
+const { MultiSigNotActiveError } = require('errors/account');
+const Controller = require('./Controller');
 
-class AccountsController {
+class AccountsController extends Controller {
   async createAccount(req, res) {
     const { publicKey } = req.body;
     const user = req.user;
@@ -16,9 +18,7 @@ class AccountsController {
     );
 
     if (!multiSigSetup) {
-      return res.status(400).json({
-        error: 'Multi-sig has not been set up for the requested account.'
-      });
+      throw new MultiSigNotActiveError(user.signerPublicKey);
     }
 
     const account = await accounts.accountsService.createAccount({
