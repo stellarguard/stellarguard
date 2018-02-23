@@ -26,9 +26,9 @@ async function call(method, args) {
     return result.data;
   } catch (err) {
     if (err.response.data && err.response.data.code) {
-      console.log(err.response.data);
       throw new AppError(err.response.data);
     } else {
+      console.error(err);
       throw new UnknownError();
     }
   }

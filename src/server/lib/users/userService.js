@@ -1,20 +1,23 @@
 const userRepository = require('./userRepository');
-const User = require('./User');
+const { InvalidEmailVerificationCodeError } = require('errors/user');
 const passwords = require('./passwords');
 
 const accounts = require('../accounts');
 const tfa = require('../tfa');
+const stellar = require('../stellar');
 const { emailService } = require('../email');
 const userValidator = require('./userValidator');
 
 class UserService {
-  async createUser({ username, email, password }) {
-    await userValidator.validate({ username, email, password });
+  async createUser({ email, password }) {
+    await userValidator.validate({ email, password });
     const passwordHash = await passwords.hash(password);
+    const keyPair = stellar.keys.random();
     const user = await userRepository.createUser({
-      username,
       email,
-      passwordHash
+      passwordHash,
+      signerPublicKey: keyPair.publicKey(),
+      signerSecretKey: keyPair.secret()
     });
 
     emailService.sendWelcomeEmail({ user });
@@ -51,24 +54,16 @@ class UserService {
     await emailService.sendWelcomeEmail({ user });
   }
 
-  async getUserByUsername(username) {
-    return await userRepository.getUserByUsername(username);
+  async getUserByEmail(email) {
+    return await userRepository.getUserByEmail(email);
   }
 
   async verifyEmail(user, code) {
     if (!user.verifyEmailCode(code)) {
-      return false;
+      throw new InvalidEmailVerificationCodeError();
     }
 
-    await Promise.all([
-      userRepository.verifyEmail(user),
-      tfa.tfaStrategyService.createStrategy({
-        userId: user.id,
-        username: user.username,
-        type: tfa.TfaStrategy.Type.Email
-      })
-    ]);
-
+    await userRepository.verifyEmail(user);
     return true;
   }
 

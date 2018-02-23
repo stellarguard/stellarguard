@@ -8,9 +8,9 @@ export async function getSession() {
   }
 }
 
-export async function signIn({ username, password }) {
+export async function signIn({ email, password }) {
   const user = await axios.post('/session', {
-    username,
+    email,
     password
   });
 

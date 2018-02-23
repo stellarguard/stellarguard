@@ -21,11 +21,7 @@ class FormError extends Component {
   }
 
   renderErrors(errors) {
-    if (!errors || !errors.error) {
-      return '';
-    }
-
-    return errors.error;
+    return (errors && errors.all) || null;
   }
 }
 

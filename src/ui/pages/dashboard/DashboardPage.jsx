@@ -15,7 +15,7 @@ const styles = theme => ({});
 @observer
 class DashboardPage extends Component {
   verifyEmailCard() {
-    if (this.props.rootStore.sessionStore.currentUser.hasVerifiedEmail) {
+    if (this.props.rootStore.sessionStore.currentUser.isEmailVerified) {
       return null;
     }
 

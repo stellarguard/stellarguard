@@ -7,13 +7,21 @@ if (fs.existsSync(localEnvFile)) {
 }
 
 const env = {
+  devMode: !!process.env.DEV_MODE,
+
+  port: process.env.port || 3000,
+
   signerSecretKey: process.env.STELLAR_SIGNER_SECRET_KEY,
   sessionSecret: process.env.SESSION_SECRET,
   useStellarPublicNetwork: !!process.env.USE_STELLAR_PUBLIC_NETWORK,
-  devMode: !!process.env.DEV_MODE,
+
   domainName: process.env.DOMAIN_NAME,
-  port: process.env.port || 3000,
-  sendGridApiKey: process.env.SEND_GRID_API_KEY
+  sendGridApiKey: process.env.SEND_GRID_API_KEY,
+
+  // postgres
+  pgHost: process.env.PG_HOST,
+  pgUser: process.env.PG_USER,
+  pgPassword: process.env.PG_PASSWORD
 };
 
 function validateEnv(env) {

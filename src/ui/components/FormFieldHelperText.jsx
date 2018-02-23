@@ -36,7 +36,7 @@ class FormFieldHelperText extends Component {
     return error && touched ? (
       <span className={classes.hasError}>{error}</span>
     ) : (
-      children
+      children || ' '
     );
   }
 }

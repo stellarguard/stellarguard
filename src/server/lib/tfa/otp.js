@@ -3,23 +3,23 @@ const qrcode = require('qrcode');
 
 const ISSUER = 'StellarGuard.me';
 
-async function generateSecret(username) {
+async function generateSecret(email) {
   const speakeasySecret = speakeasy.generateSecret({
-    name: username,
+    name: email,
     issuer: ISSUER,
     length: 16
   });
 
   const secret = speakeasySecret.base32;
-  const qrCode = await generateQrCode(username, secret);
+  const qrCode = await generateQrCode(email, secret);
   return {
     secret,
     qrCode
   };
 }
 
-async function generateQrCode(username, secret) {
-  const otpAuthUrl = getOtpAuthUrl(username, secret);
+async function generateQrCode(email, secret) {
+  const otpAuthUrl = getOtpAuthUrl(email, secret);
   return await qrcode.toDataURL(otpAuthUrl);
 }
 

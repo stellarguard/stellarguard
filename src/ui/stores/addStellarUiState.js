@@ -23,15 +23,14 @@ class AddStellarUiState {
   @action
   async buildMultiSigTransaction({
     sourceAccount,
-    memoText,
     primarySigner,
     backupSigner
   }) {
     const StellarSdk = await import('stellar-sdk');
-    const memo = StellarSdk.Memo.text(memoText);
+
     const account = await server(StellarSdk).loadAccount(sourceAccount);
     const builder = new StellarSdk.TransactionBuilder(account);
-    builder.addMemo(memo).addOperation(
+    builder.addOperation(
       StellarSdk.Operation.setOptions({
         signer: {
           ed25519PublicKey: primarySigner,

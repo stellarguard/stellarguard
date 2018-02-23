@@ -4,24 +4,14 @@ const session = require('express-session');
 const config = require('./config');
 const PgSession = require('connect-pg-simple')(session);
 
-const { users } = require('./lib');
-
-const pg = require('pg');
-
-var pgPool = new pg.Pool({
-  host: 'localhost',
-  user: 'paul.selden',
-  database: 'stellarguard',
-  max: 20,
-  idleTimeoutMillis: 10000,
-  connectionTimeoutMillis: 2000
-});
+const { users, db } = require('./lib');
+const { InvalidCredentialsError } = require('errors/session');
 
 function configure(app) {
   app.use(
     session({
       store: new PgSession({
-        pool: pgPool
+        pool: db.pg.pool
       }),
       secret: config.sessionSecret,
       resave: false,
@@ -37,8 +27,12 @@ function configure(app) {
   app.use(passport.session());
 
   passport.use(
-    new LocalStrategy(async function(username, password, done) {
-      const user = await users.userService.getUserByUsername(username);
+    new LocalStrategy({ usernameField: 'email' }, async function(
+      email,
+      password,
+      done
+    ) {
+      const user = await users.userService.getUserByEmail(email);
       if (!user) {
         return done(null, false);
       }
@@ -85,8 +79,16 @@ function ensureLoggedOut(options) {
   };
 }
 
-function authenticateLocal(options) {
-  return passport.authenticate('local', options);
+function authenticateLocal(req, res, next) {
+  return new Promise((resolve, reject) => {
+    passport.authenticate('local', function(err, user) {
+      if (err || !user) {
+        return reject(new InvalidCredentialsError());
+      }
+
+      resolve(user);
+    })(req, res, next);
+  });
 }
 
 async function logout(req) {

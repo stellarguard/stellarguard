@@ -38,14 +38,14 @@ class AppHeader extends Component {
       <div className={classes.root}>
         <AppBar position="static" elevation={0}>
           <Toolbar>
-            <IconButton
+            {/* <IconButton
               className={classes.menuButton}
               color="inherit"
               aria-label="Menu"
               onClick={this.handleToggleMenuClick}
             >
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
             <Typography
               variant="title"
               color="inherit"

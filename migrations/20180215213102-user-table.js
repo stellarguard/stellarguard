@@ -14,13 +14,19 @@ exports.setup = function(options, seedLink) {
   seed = seedLink;
 };
 
-exports.up = function(db) {
-  return db.createTable('user', {
+exports.up = async function(db) {
+  await db.createTable('user', {
     id: { type: 'int', primaryKey: true, autoIncrement: true },
-    username: { type: 'string', length: 30, unique: true },
-    email: { type: 'string', length: 254, unique: true },
-    is_email_verified: { type: 'boolean', default: true }
+    email: { type: 'string', length: 254, unique: true, notNull: true },
+    password_hash: { type: 'string', notNull: true },
+    is_email_verified: { type: 'boolean', default: true },
+    signer_public_key: { type: 'string', notNull: true },
+    signer_secret_key: { type: 'string', notNull: true }
   });
+
+  return await db.addIndex('user', 'index_user_signer_public_key', [
+    'signer_public_key'
+  ]);
 };
 
 exports.down = function(db) {

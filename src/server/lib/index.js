@@ -5,5 +5,6 @@ module.exports = {
   users: require('./users'),
   payments: require('./payments'),
   accounts: require('./accounts'),
-  utils: require('./utils')
+  utils: require('./utils'),
+  db: require('./db')
 };

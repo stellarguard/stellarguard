@@ -7,8 +7,8 @@ export default class UserStore {
   }
 
   @action
-  async register({ username, password, email }) {
-    const user = await usersApi.register({ username, password, email });
+  async register({ password, email }) {
+    const user = await usersApi.register({ password, email });
     this.rootStore.sessionStore.setCurrentUser(user);
     return user;
   }

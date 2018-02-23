@@ -1,4 +1,5 @@
 const keys = require('./keys');
+const pg = require('./pg');
 const env = require('./env');
 
 class Config {
@@ -8,6 +9,10 @@ class Config {
 
   get hmacSecret() {
     return this.sessionSecret;
+  }
+
+  get pg() {
+    return pg;
   }
 
   get signerPublicKey() {

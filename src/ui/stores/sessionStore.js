@@ -65,8 +65,8 @@ export default class SessionStore {
   }
 
   @action
-  async signIn({ username, password }) {
-    const user = await sessionApi.signIn({ username, password });
+  async signIn({ email, password }) {
+    const user = await sessionApi.signIn({ email, password });
     this.setCurrentUser(user);
     return user;
   }
@@ -105,7 +105,7 @@ export default class SessionStore {
   async verifyEmailAddress({ code }) {
     await usersApi.verifyEmailAddress({ code });
     runInAction(() => {
-      this.currentUser.hasVerifiedEmail = true;
+      this.currentUser.isEmailVerified = true;
     });
   }
 }

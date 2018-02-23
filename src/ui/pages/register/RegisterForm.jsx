@@ -4,28 +4,24 @@ import { withStyles, TextField, Button } from 'material-ui';
 import { inject, observer } from 'mobx-react';
 
 import { validate } from '../../../shared/validators/users';
-import { FormActions } from '../../components';
+import { FormActions, FormFieldHelperText } from '../../components';
 
 const styles = () => ({});
 
 @inject('rootStore')
 @observer
 class RegisterForm extends React.Component {
-  onSubmit = async (
-    { username, password, email },
-    { setSubmitting, setErrors }
-  ) => {
+  onSubmit = async ({ password, email }, { setSubmitting, setErrors }) => {
     try {
       const user = await this.props.rootStore.userStore.register({
-        username,
         password,
         email
       });
       setSubmitting(false);
       this.registerSuccess(user);
-    } catch (e) {
+    } catch (error) {
       setSubmitting(false);
-      setErrors(e);
+      setErrors((error.toFormError && error.toFormError()) || error);
     }
   };
 
@@ -47,7 +43,6 @@ class RegisterForm extends React.Component {
     return (
       <Formik
         initialValues={{
-          username: '',
           password: '',
           email: ''
         }}
@@ -66,16 +61,24 @@ class RegisterForm extends React.Component {
               autoFocus
               fullWidth
               margin="normal"
-              type="text"
-              id="username"
-              name="username"
-              label="Username"
+              type="email"
+              id="email"
+              name="email"
+              label="Email address"
               required
               onChange={handleChange}
               inputProps={{ onBlur: handleBlur }}
-              value={values.username}
-              error={!!(touched.username && errors.username)}
-              helperText={touched.username && errors.username}
+              value={values.email}
+              error={!!(touched.email && errors.email)}
+              helperText={
+                <FormFieldHelperText
+                  touched={touched.email}
+                  error={errors.email}
+                >
+                  Your email address will be used to sign in and for verifying
+                  transactions
+                </FormFieldHelperText>
+              }
             />
             <TextField
               fullWidth
@@ -88,20 +91,14 @@ class RegisterForm extends React.Component {
               inputProps={{ onBlur: handleBlur }}
               value={values.password}
               error={!!(touched.password && errors.password)}
-              helperText={touched.password && errors.password}
-            />
-            <TextField
-              fullWidth
-              margin="normal"
-              type="email"
-              name="email"
-              label="Email address"
-              required
-              onChange={handleChange}
-              inputProps={{ onBlur: handleBlur }}
-              value={values.email}
-              error={!!(touched.email && errors.email)}
-              helperText={touched.email && errors.email}
+              helperText={
+                <FormFieldHelperText
+                  touched={touched.password}
+                  error={errors.password}
+                >
+                  Must be at least 8 characters long
+                </FormFieldHelperText>
+              }
             />
             {includeActions && (
               <FormActions>

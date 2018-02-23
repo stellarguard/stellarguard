@@ -17,7 +17,7 @@ class TfaController extends Controller {
     res.json(tfaStrategy);
   }
 
-  async generateSecret(req, res) {
+  async generateAuthenticatorSecret(req, res) {
     const secret = await tfa.authenticatorService.generateSecret(req.user);
     return res.json(secret);
   }
@@ -39,7 +39,7 @@ const controller = new TfaController();
 
 router.use(session.ensureLoggedIn());
 router.post('/', controller.createTfaStrategy);
-router.post('/authenticator/secret', controller.generateSecret);
+router.post('/authenticator/secret', controller.generateAuthenticatorSecret);
 router.post('/authenticator', controller.enableAuthenticator);
 
 module.exports = router;

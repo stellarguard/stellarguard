@@ -1,16 +1,8 @@
 const utils = require('./utils');
 const yup = require('yup');
 
-const MIN_PASSWORD_LENGTH = 8;
-
 const schema = yup.object().shape({
-  password: yup
-    .string()
-    .min(
-      MIN_PASSWORD_LENGTH,
-      `Password must be at least ${MIN_PASSWORD_LENGTH} characters.`
-    )
-    .required('Password is required.'),
+  password: yup.string().required('Password is required.'),
   email: yup
     .string()
     .email('Email must be a valid email.')
