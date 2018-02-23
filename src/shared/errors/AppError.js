@@ -1,5 +1,5 @@
 class AppError extends Error {
-  constructor({ code, field, message, statusCode = 400 }) {
+  constructor({ code, field = 'error', message, statusCode = 400 }) {
     super(message);
 
     this.code = code;
@@ -10,7 +10,7 @@ class AppError extends Error {
 
   toFormError() {
     return {
-      [this.field || 'all']: this.message
+      [this.field]: this.message
     };
   }
 

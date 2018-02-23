@@ -45,6 +45,9 @@ const styles = theme => ({
     position: 'absolute',
     top: '-10%',
     left: '-10%'
+  },
+  message: {
+    textAlign: 'center'
   }
 });
 
@@ -52,7 +55,7 @@ const styles = theme => ({
 @inject('rootStore')
 @observer
 class ActivateAccountStep extends Component {
-  async componentDidMount() {
+  componentDidMount() {
     this.props.rootStore.uiState.addStellarUiState.activateAccount();
   }
 
@@ -101,13 +104,13 @@ class ActivateAccountStep extends Component {
             )}
           </div>
           {loading && (
-            <Typography>
-              Verifying that your Stellar Account has Multi-Sig setup up.
+            <Typography className={classes.message}>
+              Verifying that your Stellar Account has Multi-Sig active.
             </Typography>
           )}
           {success && (
             <React.Fragment>
-              <Typography>
+              <Typography className={classes.message}>
                 Your account is now protected by StellarGuard!
               </Typography>
               <Button color="primary" onClick={this.ok}>
@@ -117,7 +120,9 @@ class ActivateAccountStep extends Component {
           )}
           {error && (
             <React.Fragment>
-              <Typography>{data.error}</Typography>
+              <Typography className={classes.message}>
+                {data.message}
+              </Typography>
               <Button color="primary" onClick={this.tryAgain}>
                 Try Again
               </Button>

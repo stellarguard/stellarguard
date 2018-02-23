@@ -9,6 +9,16 @@ class DuplicatePublicKeyError extends AppError {
   }
 }
 
+class MultiSigNotActiveError extends AppError {
+  constructor(signerPublicKey) {
+    super({
+      code: 6002,
+      message: `Multi-sig is not active for the specified account. Verify that you submitted it to the Stellar network with ${signerPublicKey} as an additional signer.`
+    });
+  }
+}
+
 module.exports = {
-  DuplicatePublicKeyError
+  DuplicatePublicKeyError,
+  MultiSigNotActiveError
 };
