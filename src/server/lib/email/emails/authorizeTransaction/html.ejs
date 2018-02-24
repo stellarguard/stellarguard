@@ -1,6 +1,9 @@
 <div>
   <h1>
-    A Stellar transaction has been submitted and requires authorization.
+    Authorize your Stellar Transaction
   </h1>
-  <p>To view, authorize, and submit this transaction, go to: <a href="<%- locals.authorizeUrl %>"><%- locals.authorizeUrl %></a>
+  <p>Go to: <a href="<%- locals.authorizeUrl %>"><%- locals.authorizeUrl %></a> to view, authorize, and submit this transaction.
+  <% if(locals.code) { %>
+  <p>You authorization code is: <b><%= locals.code %></b></p>
+  <% } %>
 </div>

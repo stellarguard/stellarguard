@@ -1,159 +1,56 @@
 const express = require('express');
 const router = express.Router();
-const isEmpty = require('lodash.isempty');
 
 const session = require('../session');
 const config = require('../config');
 
-const { stellar, accounts, tfa, transactions, users } = require('../lib');
+const { transactions, users } = require('../lib');
+const Controller = require('./Controller');
 
-class TransactionsController {
-  async createTransaction(req, res, next) {
-    try {
-      const { xdr } = req.body;
-      if (!xdr) {
-        return res.json(500, { error: 'xdr is required' });
-      }
+class TransactionsController extends Controller {
+  async createTransaction(req, res) {
+    const { xdr } = req.body;
+    const ipAddress = req.ip;
+    const transaction = new transactions.Transaction({ xdr, ipAddress });
+    const newTransaction = await transactions.transactionService.createTransaction(
+      transaction
+    );
 
-      const transaction = new transactions.Transaction({ xdr });
-      const source = transaction.source;
-      const user = await users.userService.getByAccountPublicKey(source, {
-        withTfaStrategies: true
-      });
-
-      if (!user) {
-        return res.status(404).json({
-          error:
-            'There is no user associated with the transaction source account.'
-        });
-      }
-
-      if (transaction.hasVariedSourceAccounts()) {
-        return res.status(403).json({
-          error:
-            'StellarGuard currently does not support operations with a source account that differs from the transaction source account.'
-        });
-      }
-
-      if (!await transaction.hasValidSignatures()) {
-        return res.status(403).json({
-          error:
-            'The submitted transaction does not have valid signatures for the source account.'
-        });
-      }
-
-      if (isEmpty(user.tfaStrategies)) {
-        return res.status(404).json({
-          error:
-            'There are no active authorization methods associated with the source account.'
-        });
-      }
-
-      const newTransaction = await transactions.transactionService.createTransaction(
-        {
-          userId: user.id,
-          xdr
-        }
-      );
-
-      user.tfaStrategies.forEach(strategy =>
-        strategy.execute({ user, transaction: newTransaction })
-      );
-      return res.json({ id: newTransaction.id });
-    } catch (e) {
-      // TODO -- centralize this
-      console.error(e);
-      return res.status(500).json({ error: 'Unknown' });
-    }
+    return res.json(newTransaction);
   }
 
   async getTransaction(req, res, next) {
-    try {
-      const { id } = req.params;
-      const transaction = await transactions.transactionService.getTransaction(
-        id
-      );
+    const { id } = req.params;
+    const transaction = await transactions.transactionService.getTransaction(
+      id
+    );
 
-      if (!transaction || transaction.userId !== req.user.id) {
-        return res.status(404).json({
-          error: 'Transaction not found or you are not authorized to view it.'
-        });
-      }
-
-      return res.json(transaction);
-    } catch (e) {
-      console.error(e);
-      return res.status(500).json({ error: 'Unknown' });
+    if (!transaction || transaction.userId !== req.user.id) {
+      return res.status(404).json({
+        error: 'Transaction not found or you are not authorized to view it.'
+      });
     }
+
+    return res.json(transaction);
   }
 
   async authorizeTransaction(req, res, next) {
-    try {
-      const { id } = req.params;
-      const { code, type } = req.body;
-      const transaction = await transactions.transactionService.getTransaction(
-        id
-      );
+    const { id } = req.params;
+    const { code } = req.body;
+    const transaction = await transactions.transactionService.getTransaction(
+      id
+    );
 
-      // TODO - expiration
-      if (!transaction) {
-        return res
-          .status(404)
-          .json({ error: 'Transaction not found or is expired.' });
-      }
-
-      const transactionUser = await users.userService.getUserById(
-        transaction.userId,
-        {
-          withTfaStrategies: true
-        }
-      );
-
-      if (!transactionUser) {
-        return res
-          .status(403)
-          .json({ error: 'Transaction does not have any associated users.' });
-      }
-
-      // TODO - decide here whether we need this.. i think we probably do?
-      if (transactionUser.userId != req.user.userId) {
-        return res.status(403).json({
-          error:
-            'You are trying to authorize a transaction that is not tied to your account'
-        });
-      }
-
-      const tfaStrategy = transactionUser.tfaStrategies.find(
-        tfaStrategy => tfaStrategy.type === type
-      );
-
-      if (!tfaStrategy) {
-        return res.status(500).json({
-          error: `There is no ${type} authorization strategy for this user.`
-        });
-      }
-
-      const isVerified = await tfaStrategy.verify({ transaction, code });
-      if (!isVerified) {
-        // TODO - increment tries
-        return res
-          .status(403)
-          .json({ code: 'Your authorization code is incorrect.' });
-      }
-
-      transaction.sign(config.signerSecretKey);
-
-      const result = await transactions.transactionService.submitTransaction(
-        transaction
-      );
-      res.json(result);
-    } catch (e) {
-      console.error(e);
-      return res.status(500).json({ error: 'Unknown' });
-    }
+    const result = await transactions.transactionService.authorizeTransaction({
+      transaction,
+      user: req.user,
+      code
+    });
+    res.json(result);
   }
 
   async denyTransaction(req, res, next) {
+    // TODO - deny
     res.json({});
   }
 }

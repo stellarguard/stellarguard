@@ -11,7 +11,7 @@ import {
 import { observer, inject } from 'mobx-react';
 import { Formik, Form } from 'formik';
 
-import { schema } from '../../../shared/validators/emailAuthorize';
+import { schema } from '../../../shared/validators/authenticatorAuthorize';
 import {
   FormError,
   FormFieldHelperText,
@@ -23,19 +23,19 @@ const styles = theme => ({});
 @inject('rootStore')
 @observer
 @withStyles(styles)
-class EmailAuthorizeDialog extends Component {
+class AuthenticatorAuthorizeDialog extends Component {
   state = { isSubmitting: false };
 
   render() {
-    const { classes, open, code = '' } = this.props;
+    const { classes, open } = this.props;
     const { isSubmitting } = this.state;
     return (
       <Dialog disableBackdropClick disableEscapeKeyDown open={open}>
-        <DialogTitle>Enter Authorization Code</DialogTitle>
+        <DialogTitle>Enter Authenticator Code</DialogTitle>
         <DialogContent>
           <Formik
             initialValues={{
-              code
+              code: ''
             }}
             onSubmit={this.onSubmit}
             validationSchema={schema}
@@ -47,9 +47,10 @@ class EmailAuthorizeDialog extends Component {
                   autoFocus
                   margin="normal"
                   type="text"
+                  maxLength={6}
                   id="code"
                   name="code"
-                  label="Email Authorization Code"
+                  label="Authenticator Code"
                   onChange={handleChange}
                   inputProps={{ onBlur: handleBlur }}
                   value={values.code}
@@ -59,8 +60,7 @@ class EmailAuthorizeDialog extends Component {
                       error={errors.code}
                       touched={touched.code}
                     >
-                      Enter the code found in your transaction authorization
-                      email
+                      Enter the 6-digit code from your authenticator app
                     </FormFieldHelperText>
                   }
                 />
@@ -109,4 +109,4 @@ class EmailAuthorizeDialog extends Component {
   };
 }
 
-export default EmailAuthorizeDialog;
+export default AuthenticatorAuthorizeDialog;

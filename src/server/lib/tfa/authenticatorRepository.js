@@ -15,7 +15,9 @@ class AuthenticatorRepository {
 
   async getForUser(user) {
     const authenticator = await this.authenticatorDb.getByUserId(user.id);
-    return new Authenticator(authenticator);
+    if (authenticator) {
+      return new Authenticator(authenticator);
+    }
   }
 }
 

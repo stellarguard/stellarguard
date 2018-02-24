@@ -21,25 +21,22 @@ Should I separate payments from verification?
 
 = Code improvements =
 
-[] Have first-class response objects in controllers -- fromJSON might be ok
-[] Drastically improve TFA strategy code... it sucks
 [] Standardize how create works -- do i need to pass a full class, or just props?
 [] change StellarAccount to Account
 [] middleware for fetching objects
-[] get case sensitivity on everything -- usernames, email
 [] Error codes and standardized errors
 [] Look into mobx-utils for state handling
+[] standardize terminology of authorize vs verification -- ex: transactionVerificationType
 
 NEXT:
 
 Next Steps
 = UI
 
-* Verify email page just says "HELLO THERE"
-  = Postgres
-  = Google Domains
-  = Google App Engine
-  = Sendgrid
+= Postgres
+= Google Domains
+= Google App Engine
+= Sendgrid
 
 Nice to Have
 [] Known accounts list -- warn if it's unknown or someone you haven't sent to before
@@ -56,3 +53,4 @@ TODO:
 
 * test errors for activating account
 * OK button does nothing after activating stellar account
+* add authenticator to sign in

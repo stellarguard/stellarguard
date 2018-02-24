@@ -30,6 +30,10 @@ class Config {
   get isDevMode() {
     return env.devMode || false;
   }
+
+  get sendGridApiKey() {
+    return env.sendGridApiKey;
+  }
 }
 
 const config = new Config();

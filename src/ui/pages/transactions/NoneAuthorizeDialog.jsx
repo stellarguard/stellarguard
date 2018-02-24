@@ -1,69 +1,42 @@
 import React, { Component } from 'react';
 import {
   withStyles,
-  TextField,
   Button,
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogActions
+  DialogActions,
+  DialogContentText
 } from 'material-ui';
 import { observer, inject } from 'mobx-react';
 import { Formik, Form } from 'formik';
 
-import { schema } from '../../../shared/validators/emailAuthorize';
-import {
-  FormError,
-  FormFieldHelperText,
-  LoadingButton
-} from '../../components';
+import { FormError, LoadingButton } from '../../components';
 
 const styles = theme => ({});
 
 @inject('rootStore')
 @observer
 @withStyles(styles)
-class EmailAuthorizeDialog extends Component {
+class NoneAuthorizeDialog extends Component {
   state = { isSubmitting: false };
 
   render() {
-    const { classes, open, code = '' } = this.props;
+    const { classes, open } = this.props;
     const { isSubmitting } = this.state;
     return (
       <Dialog disableBackdropClick disableEscapeKeyDown open={open}>
-        <DialogTitle>Enter Authorization Code</DialogTitle>
+        <DialogTitle>Authorize this Transaction?</DialogTitle>
         <DialogContent>
+          <DialogContentText>
+            Do you want to authorize this transaction?
+          </DialogContentText>
           <Formik
-            initialValues={{
-              code
-            }}
+            initialValues={{}}
             onSubmit={this.onSubmit}
-            validationSchema={schema}
             render={({ values, errors, touched, handleChange, handleBlur }) => (
               <Form id="authorize-transaction-form">
                 <FormError errors={errors} />
-                <TextField
-                  fullWidth
-                  autoFocus
-                  margin="normal"
-                  type="text"
-                  id="code"
-                  name="code"
-                  label="Email Authorization Code"
-                  onChange={handleChange}
-                  inputProps={{ onBlur: handleBlur }}
-                  value={values.code}
-                  error={!!(touched.code && errors.code)}
-                  helperText={
-                    <FormFieldHelperText
-                      error={errors.code}
-                      touched={touched.code}
-                    >
-                      Enter the code found in your transaction authorization
-                      email
-                    </FormFieldHelperText>
-                  }
-                />
               </Form>
             )}
           />
@@ -85,14 +58,12 @@ class EmailAuthorizeDialog extends Component {
     );
   }
 
-  onSubmit = async ({ code }, { setSubmitting, setErrors }) => {
+  onSubmit = async (_, { setSubmitting, setErrors }) => {
+    console.log('submitting');
     this.setState({ isSubmitting: true });
     try {
       await this.props.rootStore.transactionsStore.authorize(
-        this.props.transaction,
-        {
-          code
-        }
+        this.props.transaction
       );
       this.setState({ isSubmitting: false });
       setSubmitting(false);
@@ -109,4 +80,4 @@ class EmailAuthorizeDialog extends Component {
   };
 }
 
-export default EmailAuthorizeDialog;
+export default NoneAuthorizeDialog;

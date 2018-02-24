@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withStyles, Avatar, Typography } from 'material-ui';
-
 import { CheckCircle } from 'material-ui-icons';
-
 import green from 'material-ui/colors/green';
+
+import { Link } from '../../components';
 
 const styles = theme => ({
   root: {
@@ -36,7 +36,11 @@ class SubmitTransactionSuccess extends Component {
         </Avatar>
         <Typography variant="headline" className={classes.root}>
           <div>Your transaction has been submitted to StellarGuard.</div>
-          <div>An authorization email has been sent.</div>
+          <div>
+            <Link to={`/transactions/${transaction.id}`}>
+              Go here to authorize your transaction.
+            </Link>
+          </div>
         </Typography>
       </div>
     );

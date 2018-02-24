@@ -33,15 +33,18 @@ class SubmitTransactionPage extends Component {
     const { transaction } = this.state;
     const loading = !transaction;
 
+    const search = new URLSearchParams(this.props.location.search);
+    const code = search.get('code');
+
     return (
       <Page title="Authorize Transaction" loading={loading}>
         <Helmet>
           <title>StellarGuard | Authorize Transaction</title>
         </Helmet>
         {!loading && (
-          <Grid container spacing={24} justify="space-around">
+          <Grid container justify="space-around">
             <Grid item xs={12} sm={9}>
-              <TransactionCard transaction={transaction} />
+              <TransactionCard code={code} transaction={transaction} />
             </Grid>
           </Grid>
         )}

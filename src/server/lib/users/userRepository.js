@@ -34,6 +34,13 @@ class UserRepository {
     }
   }
 
+  async getUserByAccountPublicKey(publicKey) {
+    const data = await this.userDb.getByAccountPublicKey(publicKey);
+    if (data) {
+      return new User(data);
+    }
+  }
+
   async getUserBySignerPublicKey(signerPublicKey) {
     const data = await this.userDb.getBySignerPublicKey(signerPublicKey);
     if (data) {
@@ -49,16 +56,6 @@ class UserRepository {
     });
     user.isEmailVerified = isEmailVerified;
     return user;
-  }
-
-  async getByAccountPublicKey(publicKey, options) {
-    const account = await accountsRepository.findAccountByPublicKey(publicKey);
-
-    if (!account.isActive) {
-      return;
-    }
-
-    return await this.getUserById(account.userId, options);
   }
 }
 

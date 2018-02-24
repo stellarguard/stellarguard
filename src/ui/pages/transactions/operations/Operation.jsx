@@ -23,7 +23,6 @@ class Operation extends Component {
 
   render() {
     const { classes, operation } = this.props;
-    console.log(operation);
     const OperationComponent = this.getOperationComponent();
     return (
       <Paper className={classes.wrapper}>

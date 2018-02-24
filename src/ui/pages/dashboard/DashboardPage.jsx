@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles, Grid } from 'material-ui';
-import Page from '../../components/Page';
+import { Page, SubmitTransactionFab } from '../../components';
 
 import VerifyEmailCard from './VerifyEmailCard';
 import AddFirstStellarAccountCard from './AddFirstStellarAccountCard';
@@ -55,6 +55,7 @@ class DashboardPage extends Component {
           {this.addFirstStellarAccountCard()}
           {this.addTwoFactorAuthCard()}
         </Grid>
+        <SubmitTransactionFab />
       </Page>
     );
   }

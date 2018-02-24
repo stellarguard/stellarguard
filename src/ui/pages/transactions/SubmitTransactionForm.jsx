@@ -4,7 +4,12 @@ import { withStyles, TextField, Button } from 'material-ui';
 import { inject, observer } from 'mobx-react';
 
 import { validate } from '../../../shared/validators/transactions';
-import { FormActions, LoadingButton } from '../../components';
+import {
+  FormActions,
+  FormError,
+  FormFieldHelperText,
+  LoadingButton
+} from '../../components';
 
 const styles = () => ({});
 
@@ -14,27 +19,23 @@ const styles = () => ({});
 class SubmitTransactionForm extends React.Component {
   onSubmit = async ({ xdr }, { setSubmitting, setErrors }) => {
     try {
-      const user = await this.props.rootStore.transactionsStore.submit({
+      const transaction = await this.props.rootStore.transactionsStore.submit({
         xdr
       });
       setSubmitting(false);
-      this.registerSuccess(user);
+      this.onSuccess(transaction);
     } catch (e) {
       setSubmitting(false);
-      setErrors(e);
+      setErrors(e.toFormError());
     }
-  };
-
-  registerSuccess = user => {
-    this.props.onRegister && this.props.onRegister(user);
   };
 
   validate = async user => {
-    try {
-      await validate(user);
-    } catch (e) {
-      throw e;
-    }
+    await validate(user);
+  };
+
+  onSuccess = transaction => {
+    this.props.onSuccess && this.props.onSuccess(transaction);
   };
 
   render() {
@@ -50,13 +51,13 @@ class SubmitTransactionForm extends React.Component {
         render={({
           values,
           errors,
-          isValid,
           touched,
           handleChange,
           handleBlur,
           isSubmitting
         }) => (
-          <Form id="register-form" noValidate>
+          <Form id="submit-transaction-form" noValidate>
+            <FormError errors={errors} />
             <TextField
               autoFocus
               multiline
@@ -71,7 +72,11 @@ class SubmitTransactionForm extends React.Component {
               inputProps={{ onBlur: handleBlur }}
               value={values.xdr}
               error={!!(touched.xdr && errors.xdr)}
-              helperText={touched.xdr && errors.xdr}
+              helperText={
+                <FormFieldHelperText error={errors.xdr} touched={touched.xdr}>
+                  Paste your signed transaction XDR here
+                </FormFieldHelperText>
+              }
             />
             {includeActions && (
               <FormActions>
@@ -79,7 +84,6 @@ class SubmitTransactionForm extends React.Component {
                   loading={isSubmitting}
                   type="submit"
                   color="primary"
-                  disabled={!isValid}
                 >
                   Submit
                 </LoadingButton>
