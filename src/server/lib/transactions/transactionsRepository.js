@@ -6,7 +6,7 @@ class TransactionRepository {
   }
 
   async getTransaction(id) {
-    const data = this.transactionDb.get(id);
+    const data = await this.transactionDb.getById(id);
     if (!data) {
       return;
     }
@@ -14,19 +14,28 @@ class TransactionRepository {
     return new Transaction(data);
   }
 
-  async createTransaction({ userId, xdr }) {
-    const id = await this.transactionDb.create({ userId, xdr });
-    return new Transaction({ xdr, userId, id });
+  async createTransaction({ userId, xdr, ipAddress }) {
+    const transaction = await this.transactionDb.create({
+      userId,
+      xdr,
+      ipAddress
+    });
+    return new Transaction(transaction);
   }
 
   async getTransactionsForUserId(userId) {
-    const transactions = await this.transactionDb.get(userId, 'userId');
+    const transactions = await this.transactionDb.getByUserId(userId);
     return transactions.map(transaction => new Transaction(transaction));
   }
 
-  async submitted(transaction) {
-    transaction.status = 'submitted';
-    await this.transactionDb.update(transaction);
+  async updateStatus(transaction, { status, result }) {
+    await this.transactionDb.updateStatus({
+      id: transaction.id,
+      status,
+      result
+    });
+    transaction.status = status;
+    transaction.result = result;
     return transaction;
   }
 }

@@ -25,17 +25,19 @@ const styles = theme => ({
 @observer
 @withStyles(styles)
 class TransactionCard extends Component {
-  state = {};
+  state = {
+    authorizeDialogOpen: false
+  };
 
   render() {
-    const { classes, transaction } = this.props;
+    const { classes, transaction, code = '' } = this.props;
     const { authorizeDialogOpen } = this.state;
     return (
       <React.Fragment>
         <AuthorizeTransactionDialog
+          code={code}
           transaction={transaction}
           open={authorizeDialogOpen}
-          type="email"
           onClose={this.handleAuthorizationDialogClose}
         />
         <Card>
@@ -60,7 +62,7 @@ class TransactionCard extends Component {
   }
 
   onDenyTransactionClick = async () => {
-    this.prop.rootStore.transactionsStore.denyTransaction(
+    this.props.rootStore.transactionsStore.denyTransaction(
       this.props.transaction
     );
   };

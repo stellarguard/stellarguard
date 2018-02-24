@@ -6,19 +6,22 @@ export default class User {
   @observable isEmailVerified;
   @observable signerPublicKey;
   @observable authenticator;
+  @observable transactionVerificationType;
 
   constructor({
     id,
     email,
     isEmailVerified = false,
     signerPublicKey,
-    authenticator
+    authenticator,
+    transactionVerificationType
   }) {
     this.id = id;
     this.email = email;
     this.isEmailVerified = isEmailVerified;
     this.signerPublicKey = signerPublicKey;
     this.authenticator = authenticator;
+    this.transactionVerificationType = transactionVerificationType;
   }
 
   @computed

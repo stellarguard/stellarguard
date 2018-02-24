@@ -5,11 +5,22 @@ class Transaction {
     return new Transaction({ xdr });
   }
 
-  constructor({ id, userId, xdr, status = 'pending' }) {
+  constructor({
+    id,
+    userId,
+    xdr,
+    status = Transaction.Status.Pending,
+    dateCreated,
+    ipAddress,
+    result
+  }) {
     this.id = id;
     this.userId = userId;
     this.stellarTransaction = stellar.transactions.fromXdr(xdr);
     this.status = status;
+    this.dateCreated = dateCreated;
+    this.result = result;
+    this.ipAddress = ipAddress;
   }
 
   get source() {
@@ -54,9 +65,19 @@ class Transaction {
     return {
       id: this.id,
       userId: this.userId,
-      xdr: this.xdr
+      xdr: this.xdr,
+      status: this.status,
+      result: this.result,
+      dateCreated: this.dateCreated
     };
   }
 }
+
+Transaction.Status = {
+  Pending: 1,
+  Success: 2,
+  Expired: 3,
+  Error: 4
+};
 
 module.exports = Transaction;

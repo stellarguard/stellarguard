@@ -5,8 +5,8 @@ const schema = yup.object().shape({
   xdr: yup.string().required('Transaction XDR is required.')
 });
 
-async function validate(user) {
-  return await utils.validateYup(schema, user);
+async function validate(transaction) {
+  return await utils.validateYup(schema, transaction);
 }
 
 module.exports = {

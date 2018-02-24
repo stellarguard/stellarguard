@@ -1,3 +1,5 @@
-A Stellar transaction has been submitted and requires authorization.
+Authorize your Stellar Transaction
 
-To view, authorize, and submit this transaction, go to: <%- locals.authorizeUrl %>
+Go to: <%- locals.authorizeUrl %> to view, authorize, and submit this transaction.
+
+<% if(locals.code) { %>You authorization code is: <%= locals.code %><% } %>

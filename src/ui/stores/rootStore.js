@@ -12,8 +12,8 @@ export default class RootStore {
   uiState = new UiStateStore(this);
   sessionStore = new SessionStore(this);
   userStore = new UserStore(this);
-  transactionsStore = new TransactionsStore();
-  tfaStore = new TfaStore();
+  transactionsStore = new TransactionsStore(this);
+  tfaStore = new TfaStore(this);
 
   @computed
   get currentUser() {

@@ -1,4 +1,4 @@
-import { action, computed, observable } from 'mobx';
+import { action, computed, observable, runInAction } from 'mobx';
 
 import { tfaApi } from '../api';
 
@@ -9,7 +9,15 @@ class TfaStore {
 
   @action
   async enableAuthenticator({ secret, verificationCode }) {
-    return await tfaApi.enableAuthenticator({ secret, verificationCode });
+    const authenticator = await tfaApi.enableAuthenticator({
+      secret,
+      verificationCode
+    });
+    runInAction(() => {
+      this.rootStore.currentUser.authenticator = authenticator;
+    });
+
+    return authenticator;
   }
 
   @observable secret;

@@ -18,6 +18,10 @@ class AuthenticatorService {
   async getForUser(userId) {
     return await authenticatorRepository.getForUser(userId);
   }
+
+  verifyForUser(user, code) {
+    return otp.verifyToken(code, user.authenticator.secret);
+  }
 }
 
 module.exports = new AuthenticatorService();

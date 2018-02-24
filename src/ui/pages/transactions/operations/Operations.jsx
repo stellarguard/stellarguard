@@ -11,14 +11,14 @@ const styles = theme => ({
 @withStyles(styles)
 class Operations extends Component {
   render() {
-    const { classes, children, operations } = this.props;
+    const { classes, operations } = this.props;
     return (
       <div>
         <Typography className={classes.title} variant="title">
-          Operations ({operations.length})
+          Operations
         </Typography>
-        {operations.map(operation => (
-          <Operation key={operation.id} operation={operation} />
+        {operations.map((operation, index) => (
+          <Operation key={index} operation={operation} />
         ))}
       </div>
     );

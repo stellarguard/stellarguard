@@ -60,6 +60,18 @@ class UserDb {
     return rows[0];
   }
 
+  async getByAccountPublicKey(publicKey) {
+    const { rows } = await this.db.pg.query(
+      `SELECT u.* from "user" u
+       JOIN stellar_account s
+       ON u.id = s.user_id
+       WHERE s.public_key = $1`,
+      [publicKey]
+    );
+
+    return rows[0];
+  }
+
   async updateIsEmailVerified({ id, isEmailVerified }) {
     const { rows } = await this.db.pg.query(
       `UPDATE "user"

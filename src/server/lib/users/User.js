@@ -20,7 +20,8 @@ class User {
     isEmailVerified = false,
     passwordHash,
     signerPublicKey,
-    signerSecretKey
+    signerSecretKey,
+    authenticator
   }) {
     this.id = id;
     this.email = email;
@@ -28,6 +29,7 @@ class User {
     this.passwordHash = passwordHash;
     this.signerPublicKey = signerPublicKey;
     this.signerSecretKey = signerSecretKey;
+    this.authenticator = authenticator;
   }
 
   async verifyPassword(password) {
@@ -42,13 +44,26 @@ class User {
     return code === this.emailVerificationCode;
   }
 
+  get transactionVerificationType() {
+    if (this.authenticator) {
+      return 'authenticator';
+    }
+
+    if (this.isEmailVerified) {
+      return 'email';
+    }
+
+    return 'none';
+  }
+
   toJSON() {
     return {
       id: this.id,
       email: this.email,
       isEmailVerified: this.isEmailVerified,
       signerPublicKey: this.signerPublicKey,
-      authenticator: this.authenticator
+      authenticator: this.authenticator,
+      transactionVerificationType: this.transactionVerificationType
     };
   }
 }

@@ -19,13 +19,13 @@ class SubmitTransactionPage extends Component {
   };
 
   render() {
-    const { classes, children } = this.props;
+    const { classes } = this.props;
     const { transaction } = this.state;
 
     return (
       <Page title="Submit Transaction">
         <Helmet>
-          <title>StellarGuard</title>
+          <title>StellarGuard | Submit Transaction</title>
         </Helmet>
         <Grid container spacing={24} justify="space-around">
           <Grid item xs={12} sm={9}>

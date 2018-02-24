@@ -14,7 +14,7 @@ class UserService {
     const passwordHash = await passwords.hash(password);
     const keyPair = stellar.keys.random();
     const user = await userRepository.createUser({
-      email,
+      email: email.toLowerCase(),
       passwordHash,
       signerPublicKey: keyPair.publicKey(),
       signerSecretKey: keyPair.secret()
@@ -55,7 +55,7 @@ class UserService {
   }
 
   async getUserByEmail(email) {
-    return await userRepository.getUserByEmail(email);
+    return await userRepository.getUserByEmail(email.toLowerCase());
   }
 
   async verifyEmail(user, code) {
@@ -72,19 +72,8 @@ class UserService {
    *
    * @param {string} publicKey The public key of the account to search by.
    */
-  async getByAccountPublicKey(publicKey, { withTfaStrategies = false } = {}) {
-    const user = await userRepository.getByAccountPublicKey(publicKey);
-    if (!user) {
-      return;
-    }
-
-    if (withTfaStrategies) {
-      user.tfaStrategies = await tfa.tfaStrategyService.getStrategiesForUserId(
-        user.id
-      );
-    }
-
-    return user;
+  async getUserByAccountPublicKey(publicKey) {
+    return await userRepository.getUserByAccountPublicKey(publicKey);
   }
 }
 

@@ -1,4 +1,3 @@
-const qs = require('querystring');
 const url = require('url');
 
 class Urls {
@@ -18,15 +17,11 @@ class Urls {
     });
   }
 
-  authorizeTransaction({ transaction, code, type }) {
+  authorizeTransaction({ transaction, code }) {
     const pathname = `/transactions/${transaction.id}`;
     const query = {};
     if (code) {
       query.code = code;
-    }
-
-    if (type) {
-      query.type = type;
     }
 
     return url.format({

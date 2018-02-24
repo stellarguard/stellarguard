@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { withStyles, Grid } from 'material-ui';
+import { withStyles, Grid, Typography } from 'material-ui';
 import { withRouter } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 
-import Page from '../../components/Page';
+import { Page } from '../../components';
 
 const styles = theme => ({});
 
@@ -20,11 +21,17 @@ class VerifyEmailPage extends Component {
   }
 
   render() {
-    const { classes, children } = this.props;
+    const { classes, rootStore } = this.props;
+    if (rootStore.currentUser.isEmailVerified) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <Page>
         <Grid container spacing={24} justify="center" alignItems="center">
-          <Grid item>HELLO THERE</Grid>
+          <Grid item>
+            <Typography variant="title">Verifying Email...</Typography>
+          </Grid>
         </Grid>
       </Page>
     );

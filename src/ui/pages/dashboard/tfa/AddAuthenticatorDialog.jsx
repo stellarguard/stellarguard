@@ -86,6 +86,10 @@ class AddAuthenticatorDialog extends Component {
               Authenticator does <b>NOT</b> allow you to access or back up your
               secret code from within the app, so do it now.
             </DialogContentText>
+            <DialogContentText>
+              4. Open your authenticator app and enter the 6 digit passcode
+              below. Each code is valid for 30 seconds.
+            </DialogContentText>
           </div>
           <div className={classes.enterCode}>
             <Formik
@@ -167,7 +171,7 @@ class AddAuthenticatorDialog extends Component {
       setSubmitting(false);
       this.props.onClose(authenticator);
     } catch (error) {
-      setErrors((error.toFormError && error.toFormError()) || error);
+      setErrors(error.toFormError());
       setSubmitting(false);
     }
   };

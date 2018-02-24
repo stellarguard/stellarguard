@@ -3,21 +3,27 @@ const { urls } = require('../../../utils');
 
 class AuthorizeTransactionEmail extends Email {
   constructor({ user, transaction }) {
-    console.log(
-      'authorizetransactionemail',
-      transaction.getAuthorizationCode()
-    );
     const to = user.email;
     const from = 'StellarGuard <authorize@stellarguard.me>';
-    const authorizeUrl = urls.withHost(
-      urls.authorizeTransaction({
-        transaction,
-        code: transaction.getAuthorizationCode(),
-        type: 'email'
-      })
-    );
+    let authorizeUrl;
+    let code;
+    if (user.transactionVerificationType === 'email') {
+      code = transaction.getAuthorizationCode();
+      authorizeUrl = urls.withHost(
+        urls.authorizeTransaction({
+          transaction,
+          code
+        })
+      );
+    } else {
+      authorizeUrl = urls.withHost(
+        urls.authorizeTransaction({
+          transaction
+        })
+      );
+    }
 
-    super({ to, from, dir: __dirname, data: { authorizeUrl } });
+    super({ to, from, dir: __dirname, data: { code, authorizeUrl } });
   }
 }
 
