@@ -27,7 +27,7 @@ class EmailAuthorizeDialog extends Component {
   state = { isSubmitting: false };
 
   render() {
-    const { classes, open, code = '' } = this.props;
+    const { classes, open, code } = this.props;
     const { isSubmitting } = this.state;
     return (
       <Dialog disableBackdropClick disableEscapeKeyDown open={open}>
@@ -35,7 +35,7 @@ class EmailAuthorizeDialog extends Component {
         <DialogContent>
           <Formik
             initialValues={{
-              code
+              code: code || ''
             }}
             onSubmit={this.onSubmit}
             validationSchema={schema}

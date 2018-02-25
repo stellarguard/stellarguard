@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { withStyles, Grid, Paper, Card, CardContent } from 'material-ui';
+import { withStyles, Grid } from 'material-ui';
 import { Helmet } from 'react-helmet';
 
 import { inject, observer } from 'mobx-react';
+import { computed } from 'mobx';
 import { withRouter } from 'react-router';
 
 import { Page } from '../../components';
@@ -12,25 +13,25 @@ const styles = theme => {
   return {};
 };
 
+@withStyles(styles)
+@withRouter
 @inject('rootStore')
 @observer
-@withRouter
-@withStyles(styles)
 class SubmitTransactionPage extends Component {
-  state = {};
+  @computed
+  get transaction() {
+    const id = this.props.match.params.id;
+    return this.props.rootStore.transactionsStore.transactions.get(id);
+  }
 
   async componentDidMount() {
     const id = this.props.match.params.id;
-    const transaction = await this.props.rootStore.transactionsStore.getTransaction(
-      id
-    );
-
-    this.setState({ transaction });
+    await this.props.rootStore.transactionsStore.getTransaction(id);
   }
 
   render() {
-    const { classes, children } = this.props;
-    const { transaction } = this.state;
+    const { classes } = this.props;
+    const transaction = this.transaction;
     const loading = !transaction;
 
     const search = new URLSearchParams(this.props.location.search);

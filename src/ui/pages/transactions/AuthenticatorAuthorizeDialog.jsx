@@ -95,10 +95,10 @@ class AuthenticatorAuthorizeDialog extends Component {
         }
       );
       this.setState({ isSubmitting: false });
-      setSubmitting(false);
       this.props.onSuccess();
     } catch (e) {
       setErrors(e.toFormError());
+    } finally {
       this.setState({ isSubmitting: false });
       setSubmitting(false);
     }

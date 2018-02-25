@@ -14,9 +14,6 @@ class Operations extends Component {
     const { classes, operations } = this.props;
     return (
       <div>
-        <Typography className={classes.title} variant="title">
-          Operations
-        </Typography>
         {operations.map((operation, index) => (
           <Operation key={index} operation={operation} />
         ))}

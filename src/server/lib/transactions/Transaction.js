@@ -77,7 +77,8 @@ Transaction.Status = {
   Pending: 1,
   Success: 2,
   Expired: 3,
-  Error: 4
+  Denied: 4,
+  Error: 5
 };
 
 module.exports = Transaction;

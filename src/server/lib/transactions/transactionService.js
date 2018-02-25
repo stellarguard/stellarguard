@@ -9,7 +9,8 @@ const { authenticatorService } = require('../tfa');
 const {
   TransactionNotFoundError,
   TransactionNotOwnedByUserError,
-  InvalidAuthorizationCodeError
+  InvalidAuthorizationCodeError,
+  TransactionAlreadySubmittedError
 } = require('errors/transaction');
 
 class TransactionService {
@@ -45,6 +46,10 @@ class TransactionService {
       throw new TransactionNotOwnedByUserError();
     }
 
+    if (transaction.status !== Transaction.Status.Pending) {
+      throw new TransactionAlreadySubmittedError();
+    }
+
     const isVerified = await this.verify({ transaction, user, code });
     if (!isVerified) {
       throw new InvalidAuthorizationCodeError();
@@ -59,6 +64,24 @@ class TransactionService {
     return await transactionsRepository.updateStatus(transaction, {
       status: Transaction.Status.Success,
       result
+    });
+  }
+
+  async denyTransaction({ transaction, user }) {
+    if (!transaction) {
+      throw new TransactionNotFoundError();
+    }
+
+    if (transaction.userId != user.id) {
+      throw new TransactionNotOwnedByUserError();
+    }
+
+    if (transaction.status !== Transaction.Status.Pending) {
+      throw new TransactionAlreadySubmittedError();
+    }
+
+    return await transactionsRepository.updateStatus(transaction, {
+      status: Transaction.Status.Denied
     });
   }
 

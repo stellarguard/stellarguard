@@ -46,12 +46,22 @@ class TransactionsController extends Controller {
       user: req.user,
       code
     });
+
     res.json(result);
   }
 
-  async denyTransaction(req, res, next) {
-    // TODO - deny
-    res.json({});
+  async denyTransaction(req, res) {
+    const { id } = req.params;
+    const transaction = await transactions.transactionService.getTransaction(
+      id
+    );
+
+    const result = await transactions.transactionService.denyTransaction({
+      user: req.user,
+      transaction
+    });
+
+    res.json(result);
   }
 }
 

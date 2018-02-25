@@ -12,5 +12,14 @@ export async function getTransaction(id) {
 }
 
 export async function authorizeTransaction(id, { type, code }) {
-  await axios.post(`/transactions/${id}/authorize`, { type, code });
+  const transaction = await axios.post(`/transactions/${id}/authorize`, {
+    type,
+    code
+  });
+  return Transaction.fromJson(transaction);
+}
+
+export async function denyTransaction(id) {
+  const transaction = await axios.post(`/transactions/${id}/deny`, {});
+  return Transaction.fromJson(transaction);
 }

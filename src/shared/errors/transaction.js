@@ -59,11 +59,21 @@ class InvalidAuthorizationCodeError extends AppError {
   }
 }
 
+class TransactionAlreadySubmittedError extends AppError {
+  constructor() {
+    super({
+      code: 207,
+      message: `You can only authorize or deny pending transactions.`
+    });
+  }
+}
+
 module.exports = {
   NoUserForSourceError,
   VariedSourceAccountsError,
   InvalidSignaturesError,
   TransactionNotFoundError,
   TransactionNotOwnedByUserError,
-  InvalidAuthorizationCodeError
+  InvalidAuthorizationCodeError,
+  TransactionAlreadySubmittedError
 };
