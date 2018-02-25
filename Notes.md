@@ -54,3 +54,10 @@ TODO:
 * test errors for activating account
 * OK button does nothing after activating stellar account
 * add authenticator to sign in
+
+Proper Order:
+
+@withStyles(styles)
+@withRouter
+@inject('rootStore')
+@observer

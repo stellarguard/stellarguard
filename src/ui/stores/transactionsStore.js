@@ -28,9 +28,19 @@ export default class TransactionsStore {
   }
 
   @action
-  async authorize(transaction, { type, code } = {}) {
-    await transactionsApi.authorizeTransaction(transaction.id, { type, code });
-    transaction.status = 'submitted';
+  async authorize({ id }, { code }) {
+    const transaction = await transactionsApi.authorizeTransaction(id, {
+      code
+    });
+    this.addTransaction(transaction);
+    return transaction;
+  }
+
+  @action
+  async deny({ id }) {
+    const transaction = await transactionsApi.denyTransaction(id);
+    this.addTransaction(transaction);
+    return transaction;
   }
 
   @action

@@ -4,7 +4,15 @@ import { observer } from 'mobx-react';
 
 import OperationWrapper from './OperationWrapper';
 
-const styles = theme => ({});
+const styles = theme => ({
+  label: {
+    fontWeight: 500,
+    marginRight: theme.spacing.unit,
+    minWidth: '60px',
+    textAlign: 'right',
+    display: 'inline-block'
+  }
+});
 
 @observer
 @withStyles(styles)
@@ -13,9 +21,13 @@ class PaymentOperation extends Component {
     const { classes, children, operation } = this.props;
     return (
       <OperationWrapper type="Payment">
-        <Typography>To: {operation.destination}</Typography>
         <Typography>
-          Amount: {operation.amount} {operation.asset.code}
+          <label className={classes.label}>To: </label>
+          {operation.destination}
+        </Typography>
+        <Typography>
+          <label className={classes.label}>Amount: </label> {operation.amount}{' '}
+          {operation.asset.code}
         </Typography>
       </OperationWrapper>
     );
