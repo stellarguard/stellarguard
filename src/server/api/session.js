@@ -8,8 +8,8 @@ const { tfa } = require('../lib');
 class SessionController extends Controller {
   async signIn(req, res, next) {
     const user = await session.authenticateLocal(req, res, next);
-    user.authenticator = await tfa.authenticatorService.getForUser(user);
-    req.logIn(user, async function(err) {
+
+    req.logIn(user, function(err) {
       if (err) {
         return next(err);
       }
@@ -29,7 +29,7 @@ class SessionController extends Controller {
   }
 
   async signOut(req, res) {
-    session.logout(req);
+    await session.logout(req);
     res.json({});
   }
 }

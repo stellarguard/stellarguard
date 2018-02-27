@@ -52,7 +52,8 @@
   "scripts": {
     "start": "NODE_PATH=src/shared node ./src/web/bin/www",
     "build": "parcel build src/ui/index.html",
-    "dev": "NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
+    "dev":
+      "NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
     "run-job": "NODE_PATH=src/shared node ./src/jobs/run",
     "clean": "rm -rf dist"
   },
@@ -81,7 +82,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.6.1",
     "mobx-react-devtools": "^4.2.15",
-    "parcel-bundler": "^1.5.1",
+    "parcel-bundler": "^1.6.2",
     "postcss-modules": "^1.1.0",
     "supervisor": "^0.12.0"
   }
