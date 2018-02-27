@@ -138,6 +138,11 @@ class AddFirstStellarAccountCard extends React.Component {
                 </div>
               </Fragment>
             )}
+            {this.activeStep === 3 && (
+              <Fragment>
+                <DoneActivatingAccountStep />
+              </Fragment>
+            )}
           </Paper>
         </CardContent>
       </Card>

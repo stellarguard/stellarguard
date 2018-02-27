@@ -1,6 +1,7 @@
 import { action, computed, observable } from 'mobx';
 import config from '../config';
 import { accountsApi } from '../api';
+import StellarSdk from 'stellar-sdk';
 
 function server(StellarSdk) {
   if (config.isTestNetwork) {
@@ -26,8 +27,6 @@ class AddStellarUiState {
     primarySigner,
     backupSigner
   }) {
-    const StellarSdk = await import('stellar-sdk');
-
     const account = await server(StellarSdk).loadAccount(sourceAccount);
     const builder = new StellarSdk.TransactionBuilder(account);
     builder.addOperation(
@@ -79,13 +78,6 @@ class AddStellarUiState {
   @action
   gotoStep(step) {
     this.step = step;
-  }
-
-  @observable isDone = false;
-
-  @action
-  done() {
-    this.isDone = true;
   }
 
   @action

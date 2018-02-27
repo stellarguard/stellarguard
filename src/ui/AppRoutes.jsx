@@ -24,7 +24,7 @@ class AppRoutes extends React.Component {
         {!isSignedIn && <Route path="/" exact component={HomePage} />}
         <Route path="/signin" exact component={SignInPage} />
         <Route
-          path="/transactions/submit"
+          path="/transactions/new"
           exact
           component={SubmitTransactionPage}
         />
