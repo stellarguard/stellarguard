@@ -34,9 +34,7 @@ Next Steps
 = UI
 
 = Postgres
-= Google Domains
 = Google App Engine
-= Sendgrid
 
 Nice to Have
 [] Known accounts list -- warn if it's unknown or someone you haven't sent to before
@@ -49,12 +47,11 @@ PROTECTED ACCOUNT:
 
 //GABVLZKTQOAKX4WRE6P6YVSOQ4WADFLF3IGQS5FGOMHKMLQXOVTTFOUT
 SDKXD6MW5SCFM6CQXZSGALA5QMAPGETQW34EDO5LWO7QDLSU3HC3CZTQ
+
+GBM2UYNQQJITSXIYA7SKRXJ4Z5APVS7X7EWZ72EBTJ2SG7W6ONBRDA2V
+SDW6MSTMUYFRT7UB4K63X6QQNM4XT6KE4AH22HOZINIGFZYTJTTJS5IV
+
 TODO:
-
-* test errors for activating account
-* OK button does nothing after activating stellar account
-* add authenticator to sign in
-
 Proper Order:
 
 @withStyles(styles)

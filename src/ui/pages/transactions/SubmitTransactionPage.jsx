@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withStyles, Grid, Paper, Card, CardContent } from 'material-ui';
 import { Helmet } from 'react-helmet';
 
-import { Page } from '../../components';
+import { Page, DashboardFab } from '../../components';
 import SubmitTransactionForm from './SubmitTransactionForm';
 import SubmitTransactionSuccess from './SubmitTransactionSuccess';
 
@@ -23,10 +23,11 @@ class SubmitTransactionPage extends Component {
     const { transaction } = this.state;
 
     return (
-      <Page title="Submit Transaction">
+      <Page title="New Transaction">
         <Helmet>
-          <title>StellarGuard | Submit Transaction</title>
+          <title>StellarGuard | New Transaction</title>
         </Helmet>
+        <DashboardFab />
         <Grid container spacing={24} justify="space-around">
           <Grid item xs={12} sm={9}>
             <Card>

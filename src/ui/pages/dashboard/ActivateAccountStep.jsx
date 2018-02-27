@@ -6,13 +6,13 @@ import {
   Typography,
   Button
 } from 'material-ui';
-import { inject, observer } from 'mobx-react';
-import { CheckCircle, Check, Error } from 'material-ui-icons';
-
 import grey from 'material-ui/colors/grey';
 import green from 'material-ui/colors/green';
-
+import { CheckCircle, Check, Error } from 'material-ui-icons';
+import { inject, observer } from 'mobx-react';
 import cx from 'classnames';
+
+import { ButtonLink } from '../../components';
 
 const styles = theme => ({
   root: {
@@ -113,9 +113,9 @@ class ActivateAccountStep extends Component {
               <Typography className={classes.message}>
                 Your account is now protected by StellarGuard!
               </Typography>
-              <Button color="primary" onClick={this.ok}>
-                Ok
-              </Button>
+              <ButtonLink color="primary" to="/transactions/new">
+                Submit a New Transaction
+              </ButtonLink>
             </React.Fragment>
           )}
           {error && (

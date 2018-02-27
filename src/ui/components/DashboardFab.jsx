@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles, Button, Tooltip } from 'material-ui';
-import { Add as AddIcon } from 'material-ui-icons';
+import { Home as HomeIcon } from 'material-ui-icons';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 
@@ -14,24 +14,24 @@ const styles = theme => ({
 
 @withStyles(styles)
 @observer
-class SubmitTransactionFab extends Component {
+class DashboardFab extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Tooltip id="tooltip-fab" className={classes.fab} title="New Transaction">
+      <Tooltip id="tooltip-fab" className={classes.fab} title="Home">
         <Button
           component={Link}
-          to="/transactions/new"
+          to="/"
           variant="fab"
           color="primary"
-          aria-label="New Transaction"
+          aria-label="Home"
           className={classes.button}
         >
-          <AddIcon />
+          <HomeIcon />
         </Button>
       </Tooltip>
     );
   }
 }
 
-export default SubmitTransactionFab;
+export default DashboardFab;

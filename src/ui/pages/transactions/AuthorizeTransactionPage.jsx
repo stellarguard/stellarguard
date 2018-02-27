@@ -6,7 +6,7 @@ import { inject, observer } from 'mobx-react';
 import { computed } from 'mobx';
 import { withRouter } from 'react-router';
 
-import { Page } from '../../components';
+import { Page, DashboardFab } from '../../components';
 import TransactionCard from './TransactionCard';
 
 const styles = theme => {
@@ -42,6 +42,7 @@ class SubmitTransactionPage extends Component {
         <Helmet>
           <title>StellarGuard | Authorize Transaction</title>
         </Helmet>
+        <DashboardFab />
         {!loading && (
           <Grid container justify="space-around">
             <Grid item xs={12} sm={9}>
