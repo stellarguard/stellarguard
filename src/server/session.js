@@ -4,8 +4,12 @@ const session = require('express-session');
 const config = require('./config');
 const PgSession = require('connect-pg-simple')(session);
 
-const { users, db } = require('./lib');
-const { InvalidCredentialsError } = require('errors/session');
+const { users, db, tfa } = require('./lib');
+const {
+  InvalidCredentialsError,
+  RequiresAuthenticatorError,
+  InvalidAuthenticatorCodeError
+} = require('errors/session');
 
 function configure(app) {
   app.use(
@@ -27,21 +31,33 @@ function configure(app) {
   app.use(passport.session());
 
   passport.use(
-    new LocalStrategy({ usernameField: 'email' }, async function(
-      email,
-      password,
-      done
-    ) {
-      const user = await users.userService.getUserByEmail(email);
-      if (!user) {
-        return done(null, false);
-      }
-      if (!await user.verifyPassword(password)) {
-        return done(null, false);
-      }
+    new LocalStrategy(
+      { usernameField: 'email', passReqToCallback: true },
+      async function(req, email, password, done) {
+        const user = await users.userService.getUserByEmail(email);
+        if (!user) {
+          return done(new InvalidCredentialsError());
+        }
 
-      done(null, user);
-    })
+        if (!await user.verifyPassword(password)) {
+          return done(new InvalidCredentialsError());
+        }
+
+        user.authenticator = await tfa.authenticatorService.getForUser(user);
+        if (user.authenticator) {
+          const code = req.body.code;
+          if (!code) {
+            return done(new RequiresAuthenticatorError());
+          }
+
+          if (!tfa.authenticatorService.verifyForUser(user, code)) {
+            return done(new InvalidAuthenticatorCodeError());
+          }
+        }
+
+        done(null, user);
+      }
+    )
   );
 
   passport.serializeUser(function(user, cb) {
@@ -82,8 +98,8 @@ function ensureLoggedOut(options) {
 function authenticateLocal(req, res, next) {
   return new Promise((resolve, reject) => {
     passport.authenticate('local', function(err, user) {
-      if (err || !user) {
-        return reject(new InvalidCredentialsError());
+      if (err) {
+        return reject(err);
       }
 
       resolve(user);

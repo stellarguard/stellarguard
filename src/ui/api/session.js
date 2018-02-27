@@ -8,10 +8,11 @@ export async function getSession() {
   }
 }
 
-export async function signIn({ email, password }) {
+export async function signIn({ email, password, code }) {
   const user = await axios.post('/session', {
     email,
-    password
+    password,
+    code: code || undefined
   });
 
   return User.fromJson(user);

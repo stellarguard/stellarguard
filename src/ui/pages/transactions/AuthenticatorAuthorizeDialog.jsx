@@ -47,12 +47,11 @@ class AuthenticatorAuthorizeDialog extends Component {
                   autoFocus
                   margin="normal"
                   type="text"
-                  maxLength={6}
                   id="code"
                   name="code"
                   label="Authenticator Code"
                   onChange={handleChange}
-                  inputProps={{ onBlur: handleBlur }}
+                  inputProps={{ onBlur: handleBlur, maxLength: 6 }}
                   value={values.code}
                   error={!!(touched.code && errors.code)}
                   helperText={

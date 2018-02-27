@@ -65,8 +65,8 @@ export default class SessionStore {
   }
 
   @action
-  async signIn({ email, password }) {
-    const user = await sessionApi.signIn({ email, password });
+  async signIn({ email, password, code }) {
+    const user = await sessionApi.signIn({ email, password, code });
     this.setCurrentUser(user);
     return user;
   }

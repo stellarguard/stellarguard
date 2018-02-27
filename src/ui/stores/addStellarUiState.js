@@ -104,7 +104,7 @@ class AddStellarUiState {
   @observable activateAccountStatus = { status: 'loading' };
 
   @action
-  async setActivateAccountStatus(status, data) {
+  setActivateAccountStatus(status, data) {
     this.activateAccountStatus = { status, data };
   }
 }
