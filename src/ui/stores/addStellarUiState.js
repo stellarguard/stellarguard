@@ -86,6 +86,7 @@ class AddStellarUiState {
     this.setActivateAccountStatus('loading');
     try {
       const account = await accountsApi.createAccount({ publicKey });
+      this.rootStore.userStore.addAccount(account);
       this.setActivateAccountStatus('success');
       return account;
     } catch (error) {

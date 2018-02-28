@@ -79,24 +79,7 @@ async function getMultiSigSetup(publicKey, targetSignerPublicKey) {
     return;
   }
 
-  let order = 'desc';
-  let effects = await getEffects(publicKey, { order });
-  while (effects.records.length) {
-    const signerCreatedRecord = getSignerCreatedRecord(
-      effects.records,
-      targetSignerPublicKey
-    );
-
-    if (signerCreatedRecord) {
-      const operation = await signerCreatedRecord.operation();
-      const transaction = await operation.transaction();
-      return {
-        memo: transaction.memo
-      };
-    }
-
-    effects = await effects.next();
-  }
+  return {};
 }
 
 function doesAccountHaveSigner(account, requiredSigner) {

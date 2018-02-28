@@ -21,7 +21,8 @@ class User {
     passwordHash,
     signerPublicKey,
     signerSecretKey,
-    authenticator
+    authenticator,
+    accounts
   }) {
     this.id = id;
     this.email = email;
@@ -30,6 +31,7 @@ class User {
     this.signerPublicKey = signerPublicKey;
     this.signerSecretKey = signerSecretKey;
     this.authenticator = authenticator;
+    this.accounts = accounts;
   }
 
   async verifyPassword(password) {
@@ -63,6 +65,7 @@ class User {
       isEmailVerified: this.isEmailVerified,
       signerPublicKey: this.signerPublicKey,
       authenticator: this.authenticator,
+      accounts: this.accounts,
       transactionVerificationType: this.transactionVerificationType
     };
   }

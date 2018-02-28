@@ -12,4 +12,11 @@ export default class UserStore {
     this.rootStore.sessionStore.setCurrentUser(user);
     return user;
   }
+
+  @action
+  addAccount(account) {
+    const accounts = this.rootStore.currentUser.accounts || [];
+    accounts.push(account);
+    this.rootStore.currentUser.accounts = accounts;
+  }
 }
