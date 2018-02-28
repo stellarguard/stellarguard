@@ -1,4 +1,3 @@
-const keys = require('./keys');
 const pg = require('./pg');
 const env = require('./env');
 
@@ -15,14 +14,6 @@ class Config {
     return pg;
   }
 
-  get signerPublicKey() {
-    return keys.signerPublicKey;
-  }
-
-  get signerSecretKey() {
-    return keys.signerSecretKey;
-  }
-
   get useStellarPublicNetwork() {
     return env.useStellarPublicNetwork || false;
   }
@@ -33,6 +24,10 @@ class Config {
 
   get sendGridApiKey() {
     return env.sendGridApiKey;
+  }
+
+  get domainName() {
+    return env.domainName;
   }
 }
 
