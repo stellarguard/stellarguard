@@ -20,7 +20,7 @@ class DashboardPage extends Component {
     }
 
     return (
-      <Grid item sm={12} md={9}>
+      <Grid item xs={12}>
         <VerifyEmailCard />
       </Grid>
     );
@@ -28,7 +28,7 @@ class DashboardPage extends Component {
 
   addFirstStellarAccountCard() {
     return (
-      <Grid item sm={12} md={9}>
+      <Grid item xs={12}>
         <AddFirstStellarAccountCard />
       </Grid>
     );
@@ -40,7 +40,7 @@ class DashboardPage extends Component {
     }
 
     return (
-      <Grid item sm={12} md={9}>
+      <Grid item xs={12}>
         <AddTwoFactorAuthCard />
       </Grid>
     );
@@ -50,7 +50,7 @@ class DashboardPage extends Component {
     const { classes } = this.props;
     return (
       <Page>
-        <Grid container spacing={24} justify="space-around">
+        <Grid container justify="space-around">
           {this.verifyEmailCard()}
           {this.addFirstStellarAccountCard()}
           {this.addTwoFactorAuthCard()}

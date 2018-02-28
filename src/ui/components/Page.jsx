@@ -8,8 +8,10 @@ const styles = theme => ({
     height: '100%',
     minHeight: 'calc(100vh - 64px)',
     [theme.breakpoints.down('sm')]: {
-      padding: 0
-    }
+      padding: theme.spacing.unit
+    },
+    maxWidth: '1280px',
+    margin: '0 auto'
   },
   body: {
     height: '100%'
