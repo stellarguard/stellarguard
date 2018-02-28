@@ -20,16 +20,20 @@ const UI_DIST = path.join(__dirname, '../../dist');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use('/dist', express.static(UI_DIST));
+if (!config.isDevMode) {
+  app.use('/dist', express.static(UI_DIST));
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(config.sessionSecret));
 
 const sessionMiddleware = session.configure();
 app.use('/api', sessionMiddleware, apiRoutes);
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(UI_DIST, 'index.html'));
-});
+if (!config.isDevMode) {
+  app.get('/*', function(req, res) {
+    res.sendFile(path.join(UI_DIST, 'index.html'));
+  });
+}
 
 if (config.isDevMode) {
   const Bundler = require('parcel-bundler');
