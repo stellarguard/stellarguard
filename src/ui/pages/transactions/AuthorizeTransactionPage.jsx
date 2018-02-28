@@ -45,7 +45,7 @@ class SubmitTransactionPage extends Component {
         <DashboardFab />
         {!loading && (
           <Grid container justify="space-around">
-            <Grid item xs={12} sm={9}>
+            <Grid item xs={12}>
               <TransactionCard code={code} transaction={transaction} />
             </Grid>
           </Grid>

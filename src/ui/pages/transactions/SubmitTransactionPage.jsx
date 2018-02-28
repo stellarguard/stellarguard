@@ -28,8 +28,8 @@ class SubmitTransactionPage extends Component {
           <title>StellarGuard | New Transaction</title>
         </Helmet>
         <DashboardFab />
-        <Grid container spacing={24} justify="space-around">
-          <Grid item xs={12} sm={9}>
+        <Grid container justify="space-around">
+          <Grid item xs={12}>
             <Card>
               <CardContent>
                 {transaction ? (
