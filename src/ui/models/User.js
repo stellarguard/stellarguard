@@ -1,11 +1,13 @@
 import { observable, computed } from 'mobx';
 import Authenticator from './Authenticator';
+import Account from './Account';
 
 export default class User {
   @observable email;
   @observable isEmailVerified;
   @observable signerPublicKey;
   @observable authenticator;
+  @observable accounts;
   @observable transactionVerificationType;
 
   constructor({
@@ -14,6 +16,7 @@ export default class User {
     isEmailVerified = false,
     signerPublicKey,
     authenticator,
+    accounts,
     transactionVerificationType
   }) {
     this.id = id;
@@ -22,6 +25,7 @@ export default class User {
     this.signerPublicKey = signerPublicKey;
     this.authenticator = authenticator;
     this.transactionVerificationType = transactionVerificationType;
+    this.accounts = accounts;
   }
 
   @computed
@@ -30,9 +34,12 @@ export default class User {
   }
 
   static fromJson(json) {
-    if (json) {
-      const authenticator = Authenticator.fromJson(json.authenticator);
-      return new User({ authenticator, ...json });
+    if (!json) {
+      return;
     }
+
+    const authenticator = Authenticator.fromJson(json.authenticator);
+    const accounts = Account.fromJson(json.accounts);
+    return new User({ authenticator, accounts, ...json });
   }
 }

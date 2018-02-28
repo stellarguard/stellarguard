@@ -17,7 +17,6 @@ const styles = theme => ({
     width: '100%',
     marginLeft: -theme.drawer.width,
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen

@@ -46,7 +46,7 @@ class AppHeader extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="static" elevation={0}>
+        <AppBar position="static">
           <Toolbar>
             {/* <IconButton
               className={classes.menuButton}

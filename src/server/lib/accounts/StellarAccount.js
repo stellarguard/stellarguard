@@ -1,10 +1,16 @@
-const { crypto } = require('../utils');
 class StellarAccount {
-  constructor({ id, userId, publicKey, isActive = false }) {
+  constructor({ id, userId, publicKey }) {
     this.id = id;
     this.userId = userId;
     this.publicKey = publicKey;
-    this.isActive = isActive;
+  }
+
+  toJSON() {
+    return {
+      id: this.id,
+      userId: this.userId,
+      publicKey: this.publicKey
+    };
   }
 }
 

@@ -11,7 +11,15 @@ export default class Account {
     this.publicKey = publicKey;
   }
 
-  static fromJson(account) {
-    return new Account(account);
+  static fromJson(json) {
+    if (!json) {
+      return;
+    }
+
+    if (Array.isArray(json)) {
+      return json.map(account => new Account(account));
+    }
+
+    return new Account(json);
   }
 }

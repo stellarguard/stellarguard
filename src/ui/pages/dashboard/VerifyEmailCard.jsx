@@ -72,7 +72,7 @@ class VerifyEmailCard extends React.Component {
         <CardContent className={classes.content}>
           <Typography className={classes.line} component="p">
             You must verify your email address by clicking the link in your
-            verification email.
+            welcome email.
           </Typography>
           <Typography className={classes.line2} component="p">
             You will not be able to receive transaction authorization emails if

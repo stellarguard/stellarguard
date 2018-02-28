@@ -5,6 +5,7 @@ import { Page, SubmitTransactionFab } from '../../components';
 import VerifyEmailCard from './VerifyEmailCard';
 import AddFirstStellarAccountCard from './AddFirstStellarAccountCard';
 import AddTwoFactorAuthCard from './tfa/AddTwoFactorAuthCard';
+import StellarAccountsCard from './StellarAccountsCard';
 
 import { inject, observer } from 'mobx-react';
 
@@ -35,7 +36,7 @@ class DashboardPage extends Component {
   }
 
   addTwoFactorAuthCard() {
-    if (this.props.rootStore.sessionStore.currentUser.hasAuthenticator) {
+    if (this.props.rootStore.currentUser.hasAuthenticator) {
       return null;
     }
 
@@ -46,14 +47,28 @@ class DashboardPage extends Component {
     );
   }
 
+  stellarAccountsCard() {
+    if (
+      this.props.rootStore.currentUser.accounts &&
+      this.props.rootStore.currentUser.accounts.length
+    ) {
+      return (
+        <Grid item xs={12}>
+          <StellarAccountsCard />
+        </Grid>
+      );
+    }
+  }
+
   render() {
     const { classes } = this.props;
     return (
       <Page>
         <Grid container justify="space-around">
           {this.verifyEmailCard()}
-          {this.addFirstStellarAccountCard()}
           {this.addTwoFactorAuthCard()}
+          {this.stellarAccountsCard()}
+          {this.addFirstStellarAccountCard()}
         </Grid>
         <SubmitTransactionFab />
       </Page>

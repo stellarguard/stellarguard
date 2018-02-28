@@ -9,19 +9,6 @@ class StellarAccountsRepository {
     this.userDb = require('../users/userDb');
   }
 
-  async getAccounts({ cursor, limit }) {
-    const accounts = this.stellarAccountsDb
-      .getAll()
-      .filter(account => !cursor.hasValue() || account.id > cursor.getValue())
-      .slice(0, limit)
-      .map(account => new StellarAccount(account));
-
-    return {
-      cursor: Cursor.fromValue(accounts[accounts.length - 1]),
-      accounts
-    };
-  }
-
   async createAccount({ userId, publicKey }) {
     const newAccount = await this.stellarAccountsDb.create({
       userId,
@@ -31,7 +18,10 @@ class StellarAccountsRepository {
   }
 
   async getAccountById(id) {
-    return new StellarAccount(await this.stellarAccountsDb.getById(id));
+    const account = await this.stellarAccountsDb.getById(id);
+    if (account) {
+      return new StellarAccount(account);
+    }
   }
 
   async getAccountsByUserId(userId) {
@@ -39,7 +29,7 @@ class StellarAccountsRepository {
     return accounts.map(account => new StellarAccount(account));
   }
 
-  async findAccountByPublicKey(publicKey) {
+  async findAccountsByPublicKey(publicKey) {
     const accountsData =
       this.stellarAccountsDb.get(publicKey, 'publicKey') || [];
     return accountsData.map(accountData => new StellarAccount(accountData))[0];
