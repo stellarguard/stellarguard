@@ -1,3 +1,5 @@
+const express = require('express');
+
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
@@ -11,8 +13,9 @@ const {
   InvalidAuthenticatorCodeError
 } = require('errors/session');
 
-function configure(app) {
-  app.use(
+function configure() {
+  const router = new express.Router();
+  router.use(
     session({
       store: new PgSession({
         pool: db.pg.pool
@@ -27,8 +30,8 @@ function configure(app) {
     })
   );
 
-  app.use(passport.initialize());
-  app.use(passport.session());
+  router.use(passport.initialize());
+  router.use(passport.session());
 
   passport.use(
     new LocalStrategy(
@@ -68,6 +71,8 @@ function configure(app) {
     const user = await users.userService.getUserById(id);
     cb(null, user);
   });
+
+  return router;
 }
 
 function ensureLoggedIn(options) {

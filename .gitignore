@@ -3,4 +3,4 @@ dbs
 .cache
 dist
 
-.env.local
+.env.*

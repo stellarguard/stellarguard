@@ -1,8 +1,9 @@
 const url = require('url');
+const config = require('../../config');
 
 class Urls {
   withHost(url) {
-    return `https://stellarguard.me${url}`;
+    return `${config.domainName}${url}`;
   }
 
   verifyEmail({ user }) {

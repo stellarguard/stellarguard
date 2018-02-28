@@ -1,17 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-
-const localEnvFile = path.resolve(__dirname, '.env.local');
-if (fs.existsSync(localEnvFile)) {
-  require('dotenv').config({ path: localEnvFile });
-}
-
 const env = {
   devMode: !!process.env.DEV_MODE,
 
   port: process.env.port || 3000,
 
-  signerSecretKey: process.env.STELLAR_SIGNER_SECRET_KEY,
   sessionSecret: process.env.SESSION_SECRET,
   useStellarPublicNetwork: !!process.env.USE_STELLAR_PUBLIC_NETWORK,
 
@@ -25,11 +16,7 @@ const env = {
 };
 
 function validateEnv(env) {
-  if (!env.signerSecretKey) {
-    throw 'Missing STELLAR_SIGNER_SECRET_KEY env variable.';
-  }
-
-  if (!env.signerSecretKey) {
+  if (!env.sessionSecret) {
     throw 'Missing SESSION_SECRET';
   }
 }
