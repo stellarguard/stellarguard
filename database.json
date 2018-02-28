@@ -6,9 +6,20 @@
     "database": "stellarguard",
     "schema": "public"
   },
+  "test": {
+    "driver": "pg",
+    "user": { "ENV": "PG_USER" },
+    "password": { "ENV": "PG_PASSWORD" },
+    "host": "localhost",
+    "database": "stellarguard",
+    "schema": "public"
+  },
   "prod": {
     "driver": "pg",
-    "user": { "ENV": "PG_PROD_USERNAME" },
-    "password": { "ENV": "PG_PROD_PASSWORD" }
+    "user": { "ENV": "PG_USER" },
+    "password": { "ENV": "PG_PASSWORD" },
+    "host": "localhost",
+    "database": "stellarguard",
+    "schema": "public"
   }
 }

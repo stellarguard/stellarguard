@@ -10,6 +10,8 @@ import { Menu as MenuIcon } from 'material-ui-icons';
 import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import ToolbarActions from './ToolbarActions';
+import MouseoverPopover from './MouseoverPopover';
+import config from '../config';
 
 const styles = theme => ({
   root: {
@@ -24,6 +26,14 @@ const styles = theme => ({
     marginRight: 20
   }
 });
+
+function AppName() {
+  if (config.isTestNetwork) {
+    return 'StellarGuard.me - TestNet';
+  } else {
+    return 'StellarGuard.me';
+  }
+}
 
 @inject('rootStore')
 @observer
@@ -53,7 +63,7 @@ class AppHeader extends Component {
               component={Link}
               to="/"
             >
-              StellarGuard.me
+              <AppName />
             </Typography>
             <ToolbarActions />
           </Toolbar>

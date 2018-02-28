@@ -41,6 +41,8 @@ Nice to Have
 [] Expiring transactions
 [] One-time-use of totp codes
 
+https://cloud.google.com/kms/
+
 PROTECTED ACCOUNT:
 
 // GAGFWJVTYUEPG7EQCUET5CI2AAATOLLYLXUWIHF6JRD2SQXN3EJGVNGL SDZ3UUJHTHWCMTW63PF4P42TEHHD7BC4OTTIBBLKXXB4EIZFN7XKFGFC
@@ -58,3 +60,9 @@ Proper Order:
 @withRouter
 @inject('rootStore')
 @observer
+
+Cloud Sql
+
+cloud_sql_proxy -instances=stellarguard-test:us-central1:stellarguard=tcp:5432
+
+source .env.test && db-migrate -e test

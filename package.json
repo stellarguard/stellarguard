@@ -6,6 +6,9 @@
   "author": "Paul Selden <pselden4@gmail.com>",
   "license": "none",
   "private": true,
+  "engines": {
+    "node": "9.x"
+  },
   "dependencies": {
     "@sendgrid/mail": "^6.2.1",
     "axios": "^0.17.1",
@@ -50,10 +53,19 @@
     "yup": "^0.24.0"
   },
   "scripts": {
-    "start": "NODE_PATH=src/shared node ./src/web/bin/www",
-    "build": "parcel build src/ui/index.html",
+    "start": "NODE_PATH=src/shared node ./src/server/bin/www",
+    "build:dev": "source .env.dev && parcel build src/ui/index.html",
+    "prebuild:test": "yarn clean",
+    "build:test": "source .env.test && parcel build src/ui/index.html",
+    "predeploy:test": "yarn build:test",
+    "deploy:test":
+      "gcloud app deploy app-test.yaml --project=stellarguard-test",
+    "prebuild:prod": "yarn clean",
+    "build:prod": "source .env.prod && parcel build src/ui/index.html",
+    "predeploy:prod": "yarn build:prod",
+    "deploy:prod": "gcloud app deploy app.yaml --project=stellarguard",
     "dev":
-      "NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
+      "source .env.dev && NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
     "run-job": "NODE_PATH=src/shared node ./src/jobs/run",
     "clean": "rm -rf dist"
   },
