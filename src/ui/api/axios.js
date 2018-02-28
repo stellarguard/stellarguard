@@ -25,8 +25,9 @@ async function call(method, args) {
     const result = await apiClient[method].apply(apiClient, args);
     return result.data;
   } catch (err) {
-    if (err.response.data && err.response.data.code) {
-      throw new AppError(err.response.data);
+    const data = (err.response && err.response.data) || err.data;
+    if (data && data.code) {
+      throw new AppError(data);
     } else {
       console.error(err);
       throw new UnknownError();

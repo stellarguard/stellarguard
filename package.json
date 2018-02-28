@@ -65,7 +65,7 @@
     "predeploy:prod": "yarn build:prod",
     "deploy:prod": "gcloud app deploy app.yaml --project=stellarguard",
     "dev":
-      "source .env.dev && NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
+      "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
     "run-job": "NODE_PATH=src/shared node ./src/jobs/run",
     "clean": "rm -rf dist"
   },
