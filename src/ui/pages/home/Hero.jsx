@@ -54,6 +54,7 @@ const styles = theme => ({
   }
 });
 
+@withStyles(styles)
 @inject('rootStore')
 @observer
 class Hero extends Component {
@@ -88,7 +89,7 @@ class Hero extends Component {
               color="inherit"
               className={classes.headline}
             >
-              {'Keep your XLM safe and secure.'}
+              {'Secure your XLM with Multi-sig and Two Factor Auth'}
             </Typography>
             <div className={classes.actions}>
               <div className={classes.buttons}>
@@ -99,9 +100,6 @@ class Hero extends Component {
                   onClick={this.handleRegisterOpen}
                 >
                   Get Started
-                </Button>
-                <Button color="inherit" className={classes.learnMore}>
-                  Learn More
                 </Button>
               </div>
               <Typography color="inherit" variant="subheading">
@@ -118,4 +116,4 @@ class Hero extends Component {
   }
 }
 
-export default withStyles(styles)(Hero);
+export default Hero;
