@@ -3,13 +3,14 @@ import {
   withStyles,
   Grid,
   Card,
-  CardHeader,
   CardContent,
   Avatar,
   Typography,
   List,
   ListItem,
-  ListItemText
+  ListItemText,
+  Snackbar,
+  Button
 } from 'material-ui';
 import {
   Security as SecurityIcon,
@@ -194,32 +195,58 @@ class TwoFactorAutheInfoCard extends React.Component {
   }
 }
 
-function HomePage(props) {
-  const classes = props.classes;
-
-  return (
-    <div className={classes.root}>
-      <Helmet>
-        <title>StellarGuard</title>
-      </Helmet>
-      <Hero />
-      <div className={classes.gridContainer}>
-        <Grid container justify="space-around" spacing={16}>
-          <Grid item sm={12} md={6}>
-            <SecurityInfoCard />
+@withStyles(styles)
+class HomePage extends React.Component {
+  state = { showToast: false };
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ showToast: true });
+      setTimeout(() => {
+        this.setState({ showToast: false });
+      }, 10000);
+    }, 2500);
+  }
+  render() {
+    const { classes } = this.props;
+    const { showToast } = this.state;
+    return (
+      <div className={classes.root}>
+        <Helmet>
+          <title>StellarGuard</title>
+        </Helmet>
+        <Snackbar
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+          open={showToast}
+          message="This is the test version of StellarGuard. All transactions will be submitted to the Stellar Testnet."
+          action={
+            <Button
+              color="secondary"
+              size="small"
+              onClick={() => this.setState({ showToast: false })}
+            >
+              OK
+            </Button>
+          }
+        />
+        <Hero />
+        <div className={classes.gridContainer}>
+          <Grid container justify="space-around" spacing={16}>
+            <Grid item xs={12} sm={12} md={6}>
+              <SecurityInfoCard />
+            </Grid>
+            <Grid item xs={12} sm={12} md={6}>
+              <UseYourWalletInfoCard />
+            </Grid>
+            <Grid item xs={12} sm={12} md={6}>
+              <GetStartedInfoCard />
+            </Grid>
+            <Grid item xs={12} sm={12} md={6}>
+              <TwoFactorAutheInfoCard />
+            </Grid>
           </Grid>
-          <Grid item sm={12} md={6}>
-            <UseYourWalletInfoCard />
-          </Grid>
-          <Grid item sm={12} md={6}>
-            <GetStartedInfoCard />
-          </Grid>
-          <Grid item sm={12} md={6}>
-            <TwoFactorAutheInfoCard />
-          </Grid>
-        </Grid>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
-export default withStyles(styles)(HomePage);
+export default HomePage;

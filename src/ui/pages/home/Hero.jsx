@@ -99,7 +99,7 @@ class Hero extends Component {
                   variant="raised"
                   onClick={this.handleRegisterOpen}
                 >
-                  Get Started
+                  Get Started for Free
                 </Button>
               </div>
               <Typography color="inherit" variant="subheading">
