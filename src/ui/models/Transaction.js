@@ -64,7 +64,16 @@ class Transaction {
 
   @computed
   get resultJson() {
-    return JSON.stringify(JSON.parse(this.result), null, 2);
+    let obj = this.result;
+    if (!obj) {
+      return;
+    }
+
+    if (typeof obj === 'string') {
+      obj = JSON.parse(this.result);
+    }
+
+    return JSON.stringify(obj, null, 2);
   }
 
   static fromJson(json) {
