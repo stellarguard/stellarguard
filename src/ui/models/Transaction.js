@@ -34,7 +34,7 @@ class Transaction {
   @computed
   get memoText() {
     const memo = this.stellarTransaction.memo;
-    return (memo && memo.type !== 'none' && memo.value()) || '';
+    return (memo && memo.type !== 'none' && memo.value) || '';
   }
 
   @computed
