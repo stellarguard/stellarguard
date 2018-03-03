@@ -72,7 +72,11 @@ class Hero extends Component {
     return (
       <div className={classes.hero}>
         <div className={classes.content}>
-          <img src={logo} alt="StellarGuard Logo" className={classes.logo} />
+          <img
+            src={logo}
+            alt="StellarGuard Logo - by https://www.reddit.com/user/b1tcc"
+            className={classes.logo}
+          />
           <div className={classes.text}>
             <Typography
               variant="display2"

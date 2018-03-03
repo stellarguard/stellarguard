@@ -8,7 +8,7 @@ const styles = theme => ({
   },
   footer: {
     display: 'flex',
-    padding: theme.spacing.unit
+    padding: theme.spacing.unit * 2
   },
   links: {
     marginLeft: 'auto',
