@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withStyles, Typography, Button } from 'material-ui';
 import { inject, observer } from 'mobx-react';
 
-import logo from '../../images/logo.png';
+import logo from '../../images/logo.svg';
 
 const styles = theme => ({
   hero: {
@@ -21,8 +21,8 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    paddingTop: theme.spacing.unit * 8,
-    paddingBottom: theme.spacing.unit * 8
+    paddingTop: theme.spacing.unit * 4,
+    paddingBottom: theme.spacing.unit * 4
   },
   actions: {
     marginTop: theme.spacing.unit * 4
@@ -44,7 +44,7 @@ const styles = theme => ({
     justifyContent: 'center'
   },
   headline: {
-    maxWidth: 500,
+    maxWidth: 600,
     textAlign: 'center'
   },
   logo: {
