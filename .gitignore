@@ -4,3 +4,9 @@ dbs
 dist
 
 .env.*
+
+# this is built from a template
+app.yaml
+
+yarn-error.log
+npm-error.log
