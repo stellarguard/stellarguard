@@ -37,6 +37,7 @@ class TfaController extends Controller {
 
 const controller = new TfaController();
 
+router.use(session.csrf);
 router.use(session.ensureLoggedIn());
 router.post('/', controller.createTfaStrategy);
 router.post('/authenticator/secret', controller.generateAuthenticatorSecret);

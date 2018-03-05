@@ -18,6 +18,7 @@
     "connect-pg-simple": "^4.2.1",
     "cookie-parser": "~1.4.3",
     "cryptr": "^2.0.0",
+    "csurf": "^1.9.0",
     "debug": "~2.6.9",
     "dotenv": "^5.0.0",
     "dumb-passwords": "^0.2.1",
@@ -58,14 +59,12 @@
     "prebuild:test": "yarn clean",
     "build:test": "source .env.test && parcel build src/ui/index.html",
     "predeploy:test": "yarn build:test",
-    "deploy:test":
-      "gcloud app deploy app-test.yaml --project=stellarguard-test",
+    "deploy:test": "gcloud app deploy app-test.yaml --project=stellarguard-test",
     "prebuild:prod": "yarn clean",
     "build:prod": "source .env.prod && parcel build src/ui/index.html",
     "predeploy:prod": "yarn build:prod",
     "deploy:prod": "gcloud app deploy app.yaml --project=stellarguard",
-    "dev":
-      "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
+    "dev": "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
     "run-job": "NODE_PATH=src/shared node ./src/jobs/run",
     "clean": "rm -rf dist"
   },

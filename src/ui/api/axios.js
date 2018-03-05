@@ -14,6 +14,11 @@ export const del = wrap('delete');
 
 export default { get, post, put, delete: del };
 
+export function setCsrf(csrf) {
+  console.log(csrf);
+  apiClient.defaults.headers.common['x-csrf-token'] = csrf;
+}
+
 function wrap(method) {
   return function() {
     return call(method, arguments);

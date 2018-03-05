@@ -20,10 +20,12 @@ class SessionController extends Controller {
 
   async getSession(req, res) {
     const user = req.user;
+    const csrf = req.csrfToken();
     if (user) {
-      return res.json(await users.userService.getFullUser(user));
+      const fullUser = await users.userService.getFullUser(user);
+      return res.json({ user: fullUser, csrf });
     } else {
-      return res.send();
+      return res.send({ csrf });
     }
   }
 
@@ -35,6 +37,7 @@ class SessionController extends Controller {
 
 const controller = new SessionController();
 
+router.use(session.csrf);
 router.post('/', controller.signIn);
 router.get('/', controller.getSession);
 router.delete('/', session.ensureLoggedIn(), controller.signOut);

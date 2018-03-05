@@ -39,6 +39,7 @@ class UserController extends Controller {
 
 const controller = new UserController();
 
+router.use(session.csrf);
 // logged out routes
 router.post('/', controller.createUser);
 
