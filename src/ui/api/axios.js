@@ -12,10 +12,8 @@ export const post = wrap('post');
 export const put = wrap('put');
 export const del = wrap('delete');
 
-export default { get, post, put, delete: del };
-
 export function setCsrf(csrf) {
-  console.log(csrf);
+  apiClient.defaults.headers = apiClient.defaults.headers || { common: {} };
   apiClient.defaults.headers.common['x-csrf-token'] = csrf;
 }
 
@@ -39,3 +37,5 @@ async function call(method, args) {
     }
   }
 }
+
+export default { get, post, put, delete: del };

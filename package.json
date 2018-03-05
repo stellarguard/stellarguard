@@ -20,7 +20,7 @@
     "cryptr": "^2.0.0",
     "csurf": "^1.9.0",
     "debug": "~2.6.9",
-    "dotenv": "^5.0.0",
+    "dotenv": "^5.0.1",
     "dumb-passwords": "^0.2.1",
     "ejs": "~2.5.7",
     "express": "^4.16.2",
@@ -54,19 +54,13 @@
     "yup": "^0.24.0"
   },
   "scripts": {
-    "start": "NODE_PATH=src/shared node ./src/server/bin/www",
-    "build:dev": "source .env.dev && parcel build src/ui/index.html",
-    "prebuild:test": "yarn clean",
-    "build:test": "source .env.test && parcel build src/ui/index.html",
-    "predeploy:test": "yarn build:test",
-    "deploy:test": "gcloud app deploy app-test.yaml --project=stellarguard-test",
-    "prebuild:prod": "yarn clean",
-    "build:prod": "source .env.prod && parcel build src/ui/index.html",
-    "predeploy:prod": "yarn build:prod",
-    "deploy:prod": "gcloud app deploy app.yaml --project=stellarguard",
-    "dev": "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
-    "run-job": "NODE_PATH=src/shared node ./src/jobs/run",
-    "clean": "rm -rf dist"
+    "start":
+      "source .env.dev && NODE_PATH=src/shared node ./src/server/bin/www",
+    "deploy:test": "node ./scripts/deploy test",
+    "deploy:prod": "node ./scripts/deploy prod",
+    "dev":
+      "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
+    "run-job": "NODE_PATH=src/shared node ./src/jobs/run"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.5",
@@ -95,6 +89,7 @@
     "mobx-react-devtools": "^4.2.15",
     "parcel-bundler": "^1.6.2",
     "postcss-modules": "^1.1.0",
+    "rimraf": "^2.6.2",
     "supervisor": "^0.12.0"
   }
 }

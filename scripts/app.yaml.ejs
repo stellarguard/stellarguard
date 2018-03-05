@@ -1,0 +1,17 @@
+runtime: nodejs
+env: flex
+
+skip_files:
+- ^\.cache/.*
+- ^node_modules/.*
+
+env_variables:
+  SESSION_SECRET: <%- locals.SESSION_SECRET %>
+  DOMAIN_NAME: <%- locals.DOMAIN_NAME %>
+  PG_HOST: /cloudsql/<%- locals.CLOUD_SQL_INSTANCE %>
+  PG_USER: <%- locals.PG_USER %>
+  PG_PASSWORD: <%- locals.PG_PASSWORD %>
+  SEND_GRID_API_KEY: <%- locals.SEND_GRID_API_KEY %>
+  
+beta_settings:
+  cloud_sql_instances: <%- locals.CLOUD_SQL_INSTANCE %>

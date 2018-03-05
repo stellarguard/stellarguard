@@ -4,8 +4,8 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+const version = require('../../package.json').version;
 const session = require('./session');
-
 const apiRoutes = require('./api');
 
 var app = express();
@@ -16,11 +16,19 @@ app.set('view engine', 'ejs');
 app.set('trust proxy', true);
 
 const UI_DIST = path.join(__dirname, '../../dist');
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+
 if (!config.isDevMode) {
-  app.use('/dist', express.static(UI_DIST));
+  app.use(logger('combined'));
+  app.use(
+    '/dist',
+    express.static(UI_DIST, {
+      fallthrough: false,
+      immutable: true,
+      maxAge: '1y'
+    })
+  );
+} else {
+  app.use(logger('dev'));
 }
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,7 +38,7 @@ const sessionMiddleware = session.configure();
 app.use('/api', sessionMiddleware, apiRoutes);
 if (!config.isDevMode) {
   app.get('/*', function(req, res) {
-    res.sendFile(path.join(UI_DIST, 'index.html'));
+    res.sendFile(path.join(UI_DIST, version, 'index.html'));
   });
 }
 
