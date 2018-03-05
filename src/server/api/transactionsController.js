@@ -66,10 +66,11 @@ class TransactionsController extends Controller {
 }
 
 const controller = new TransactionsController();
-
+// open route, no csrf or login required
 router.post('/', controller.createTransaction);
 
 // logged in routes
+router.use(session.csrf);
 router.use(session.ensureLoggedIn());
 router.get('/:id', controller.getTransaction);
 

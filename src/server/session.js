@@ -5,6 +5,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const config = require('./config');
 const PgSession = require('connect-pg-simple')(session);
+const csrf = require('csurf')();
 
 const { users, db, tfa } = require('./lib');
 const {
@@ -121,5 +122,6 @@ module.exports = {
   logout,
   authenticateLocal,
   ensureLoggedOut,
-  ensureLoggedIn
+  ensureLoggedIn,
+  csrf
 };

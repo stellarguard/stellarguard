@@ -55,6 +55,7 @@ class AccountsController extends Controller {
 
 const accountsController = new AccountsController();
 
+router.use(session.csrf);
 router.use(session.ensureLoggedIn());
 router.post('/', accountsController.createAccount);
 

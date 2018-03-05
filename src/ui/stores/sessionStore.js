@@ -1,44 +1,54 @@
 import { observable, computed, action, runInAction } from 'mobx';
-import { sessionApi, usersApi } from '../api';
+import { sessionApi, usersApi, setCsrf } from '../api';
 import history from '../history';
 
 import User from '../models/User';
-class CurrentUserCache {
+class SessionCache {
   static UserKey = 'sgUser';
+  static CrsfKey = 'sgCrsf';
 
-  get() {
+  get user() {
     try {
       return User.fromJson(
-        JSON.parse(localStorage.getItem(CurrentUserCache.UserKey))
+        JSON.parse(localStorage.getItem(SessionCache.UserKey))
       );
     } catch (e) {
-      this.remove();
+      this.user = null;
       return null;
     }
   }
 
-  set(user) {
+  set user(user) {
     if (!user) {
-      this.remove();
+      localStorage.removeItem(SessionCache.UserKey);
     } else {
-      localStorage.setItem(CurrentUserCache.UserKey, JSON.stringify(user));
+      localStorage.setItem(SessionCache.UserKey, JSON.stringify(user));
     }
   }
 
-  remove() {
-    localStorage.removeItem(CurrentUserCache.UserKey);
+  get crsf() {
+    return localStorage.getItem(SessionCache.CrsfKey);
+  }
+
+  set csrf(csrf) {
+    localStorage.setItem(SessionCache.CrsfKey, csrf);
+  }
+
+  clear() {
+    this.user = null;
   }
 }
 
 export default class SessionStore {
-  currentUserCache = new CurrentUserCache();
+  sessionCache = new SessionCache();
 
   @observable currentUser = null;
   @observable _isSessionLoading = true;
 
   constructor(rootStore) {
     this.rootStore = rootStore;
-    this.currentUser = this.currentUserCache.get();
+    this.currentUser = this.sessionCache.user;
+    this.csrf = this.sessionCache.csrf;
   }
 
   @computed
@@ -50,9 +60,11 @@ export default class SessionStore {
   async loadSession() {
     this.setSessionLoading(true);
     try {
-      const user = await sessionApi.getSession();
+      const { user, csrf } = await sessionApi.getSession();
       this.setCurrentUser(user);
+      this.setCsrf(csrf);
     } catch (e) {
+      console.error(e);
       this.setCurrentUser(null);
     } finally {
       this.setSessionLoading(false);
@@ -74,7 +86,7 @@ export default class SessionStore {
   @observable returnUrl;
 
   @action
-  async setReturnUrl(returnUrl) {
+  setReturnUrl(returnUrl) {
     this.returnUrl = returnUrl;
   }
 
@@ -93,7 +105,13 @@ export default class SessionStore {
   @action
   setCurrentUser(user) {
     this.currentUser = user;
-    this.currentUserCache.set(user);
+    this.sessionCache.user = user;
+  }
+
+  @action
+  setCsrf(csrf) {
+    this.sessionCache.csrf = csrf;
+    setCsrf(csrf);
   }
 
   @action
