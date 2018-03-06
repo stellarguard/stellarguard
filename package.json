@@ -1,6 +1,6 @@
 {
   "name": "stellarguard",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "index.js",
   "repository": "https://github.com/pselden/stellarguard.git",
   "author": "Paul Selden <pselden4@gmail.com>",
@@ -54,12 +54,10 @@
     "yup": "^0.24.0"
   },
   "scripts": {
-    "start":
-      "source .env.dev && NODE_PATH=src/shared node ./src/server/bin/www",
+    "start": "NODE_PATH=src/shared node ./src/server/bin/www",
     "deploy:test": "node ./scripts/deploy test",
     "deploy:prod": "node ./scripts/deploy prod",
-    "dev":
-      "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
+    "dev": "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
     "run-job": "NODE_PATH=src/shared node ./src/jobs/run"
   },
   "devDependencies": {
