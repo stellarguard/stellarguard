@@ -101,7 +101,7 @@ function deploy() {
     PG_USER: process.env.PG_USER,
     PG_PASSWORD: process.env.PG_PASSWORD,
     SEND_GRID_API_KEY: process.env.SEND_GRID_API_KEY,
-    USE_STELLAR_PUBLIC_NETWORK: process.env.USE_STELLAR_PUBLIC_NETWORK || ''
+    USE_STELLAR_PUBLIC_NETWORK: process.env.USE_STELLAR_PUBLIC_NETWORK
   });
 
   const fs = require('fs');
