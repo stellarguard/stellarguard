@@ -1,18 +1,17 @@
 const version = require('../package.json').version;
+const util = require('util');
 process.env.NODE_ENV = 'production';
 const env = process.argv[2];
 const path = require('path');
-const rimraf = require('rimraf');
+const rimraf = util.promisify(require('rimraf'));
 
 const envConfig = {
   test: {
     dotenv: '.env.test',
-    appyaml: 'app.test.yaml.ejs',
     project: 'stellarguard-test'
   },
   prod: {
     dotenv: '.env.prod',
-    appyaml: 'app.prod.yaml.ejs',
     project: 'stellarguard'
   }
 };
@@ -30,27 +29,17 @@ function loadEnv() {
 }
 
 function clean() {
-  const dist = new Promise(function(resolve, reject) {
-    rimraf('./dist', {}, function(err) {
-      if (err) {
-        return reject(err);
-      }
-
-      resolve();
-    });
-  });
-
-  const appYaml = new Promise(function(resolve, reject) {
-    rimraf('./app.yaml', {}, function(err) {
-      if (err) {
-        return reject(err);
-      }
-
-      resolve();
-    });
-  });
+  const dist = rimraf('./dist', {});
+  const appYaml = rimraf('./app.yaml', {});
 
   return Promise.all([dist, appYaml]);
+}
+
+function bumpVersion() {
+  if (env === 'test') {
+    // prod is expected to have been bumped already by test
+    require('child_process').execSync(`yarn version`, { stdio: [0, 1, 2] });
+  }
 }
 
 async function build() {
@@ -88,15 +77,20 @@ function deploy() {
   console.log(`Deploying ${version} with app.yaml:`);
   console.log(appYaml);
 
-  // require('child_process').execSync(
-  //   `gcloud app deploy app.yaml --project=${config.project} -v ${version}`,
-  //   { stdio: [0, 1, 2] }
-  // );
+  const gcloudVersion = version.replace(/\./g, '-');
+
+  require('child_process').execSync(
+    `gcloud app deploy app.yaml --project=${
+      config.project
+    } -v ${gcloudVersion}`,
+    { stdio: [0, 1, 2] }
+  );
 }
 
 (async () => {
   await loadEnv();
   await clean();
+  await bumpVersion();
   await build();
   await deploy();
 })();
