@@ -1,9 +1,11 @@
-const version = require('../package.json').version;
+let version;
 const util = require('util');
 process.env.NODE_ENV = 'production';
 const env = process.argv[2];
 const path = require('path');
 const rimraf = util.promisify(require('rimraf'));
+
+const { execSync, spawn } = require('child_process');
 
 const envConfig = {
   test: {
@@ -12,7 +14,7 @@ const envConfig = {
   },
   prod: {
     dotenv: '.env.prod',
-    project: 'stellarguard'
+    project: 'stellarguard-prod'
   }
 };
 
@@ -38,8 +40,10 @@ function clean() {
 function bumpVersion() {
   if (env === 'test') {
     // prod is expected to have been bumped already by test
-    require('child_process').execSync(`yarn version`, { stdio: [0, 1, 2] });
+    execSync(`yarn version`, { stdio: [0, 1, 2] });
   }
+
+  version = require('../package.json').version;
 }
 
 async function build() {
@@ -59,6 +63,34 @@ async function build() {
   return await bundler.bundle();
 }
 
+async function migrate() {
+  const instance = process.env.CLOUD_SQL_INSTANCE;
+  const sqlProxy = spawn(
+    `cloud_sql_proxy`,
+    [`-instances=${instance}=tcp:5432`],
+    {
+      stdio: [0, 1, 2]
+    }
+  );
+
+  sqlProxy.on('error', err => {
+    console.error(err);
+  });
+
+  await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        execSync(`db-migrate up -e ${env}`, { stdio: [0, 1, 2] });
+      } catch (e) {
+        reject(e);
+      }
+
+      resolve();
+    }, 1000);
+  });
+  sqlProxy.kill();
+}
+
 function deploy() {
   require('ejs');
   const template = require('./app.yaml.ejs');
@@ -68,7 +100,8 @@ function deploy() {
     CLOUD_SQL_INSTANCE: process.env.CLOUD_SQL_INSTANCE,
     PG_USER: process.env.PG_USER,
     PG_PASSWORD: process.env.PG_PASSWORD,
-    SEND_GRID_API_KEY: process.env.SEND_GRID_API_KEY
+    SEND_GRID_API_KEY: process.env.SEND_GRID_API_KEY,
+    USE_STELLAR_PUBLIC_NETWORK: process.env.USE_STELLAR_PUBLIC_NETWORK
   });
 
   const fs = require('fs');
@@ -79,7 +112,7 @@ function deploy() {
 
   const gcloudVersion = version.replace(/\./g, '-');
 
-  require('child_process').execSync(
+  execSync(
     `gcloud app deploy app.yaml --project=${
       config.project
     } -v ${gcloudVersion}`,
@@ -92,5 +125,6 @@ function deploy() {
   await clean();
   await bumpVersion();
   await build();
+  await migrate();
   await deploy();
 })();
