@@ -64,6 +64,7 @@ async function build() {
 }
 
 async function migrate() {
+  execSync('brew services stop postgres || 0');
   const instance = process.env.CLOUD_SQL_INSTANCE;
   const sqlProxy = spawn(
     `cloud_sql_proxy`,
