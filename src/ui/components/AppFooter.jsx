@@ -1,59 +1,94 @@
-import React, { Component } from 'react';
-import { withStyles, Divider } from 'material-ui';
-import grey from 'material-ui/colors/grey';
+import React, { Component, Fragment } from 'react';
+import { withStyles, Divider, Typography, Grid } from 'material-ui';
+
+import DonateDialog from './DonateDialog';
 
 const styles = theme => ({
   root: {
-    backgroundColor: grey[200]
+    backgroundColor: theme.palette.primary.light
   },
   footer: {
-    display: 'flex',
+    color: '#FFF',
     padding: theme.spacing.unit * 2
   },
-  links: {
-    marginLeft: 'auto',
-    marginRight: theme.spacing.unit
-  },
   link: {
-    marginRight: theme.spacing.unit * 2,
-    color: grey[900],
     textDecoration: 'none',
     cursor: 'pointer'
+  },
+  gridItem: {
+    marginBottom: theme.spacing.unit * 2
   }
+});
+
+const FooterLink = withStyles(styles)(({ children, classes, ...rest }) => {
+  return (
+    <Typography
+      gutterBottom
+      component="a"
+      target="_blank"
+      color="inherit"
+      rel="noopener noreferrer"
+      className={classes.link}
+      {...rest}
+    >
+      {children}
+    </Typography>
+  );
 });
 
 @withStyles(styles)
 class AppFooter extends Component {
+  state = {
+    isDonateOpen: false
+  };
+
   render() {
     const { classes } = this.props;
+    const { isDonateOpen } = this.state;
     return (
-      <div className={classes.root}>
-        <Divider />
-        <div className={classes.footer}>
-          <div className={classes.copyright}>2018 © StellarGuard</div>
-          <div className={classes.links}>
-            <a
-              href="https://github.com/stellarguard/stellarguard-issues/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={classes.link}
-            >
-              Bugs and Feature Requests
-            </a>
-            <a
-              href="https://www.reddit.com/r/StellarGuard/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={classes.link}
-            >
-              Discussion Forum
-            </a>
-            {/* <a className={classes.link}>Donate</a> */}
-          </div>
+      <Fragment>
+        <div className={classes.root}>
+          <Divider />
+          <Grid container spacing={0} className={classes.footer}>
+            <Grid item xs={12} md={6} className={classes.gridItem}>
+              <Typography
+                variant="headline"
+                color="inherit"
+                gutterBottom
+                className={classes.stellarguard}
+              >
+                StellarGuard.me
+              </Typography>
+              <Typography color="inherit" className={classes.copyright}>
+                2018 © StellarGuard L.L.C.
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography color="inherit" variant="title" gutterBottom>
+                Links
+              </Typography>
+              <FooterLink onClick={this.openDonateDialog}>Donate</FooterLink>
+              <FooterLink href="https://github.com/stellarguard/stellarguard-issues/issues">
+                Request a Feature or Report a Bug
+              </FooterLink>
+              <FooterLink href="https://www.reddit.com/r/StellarGuard/">
+                Discussion Forum
+              </FooterLink>
+            </Grid>
+          </Grid>
         </div>
-      </div>
+        <DonateDialog open={isDonateOpen} onClose={this.closeDonateDialog} />
+      </Fragment>
     );
   }
+
+  openDonateDialog = () => {
+    this.setState({ isDonateOpen: true });
+  };
+
+  closeDonateDialog = () => {
+    this.setState({ isDonateOpen: false });
+  };
 }
 
 export default AppFooter;

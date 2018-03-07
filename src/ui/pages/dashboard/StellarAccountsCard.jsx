@@ -18,6 +18,9 @@ import green from 'material-ui/colors/green';
 const styles = theme => ({
   avatar: {
     backgroundColor: green[500]
+  },
+  publicKey: {
+    overflowWrap: 'break-word'
   }
 });
 
@@ -48,7 +51,13 @@ class StellarAccountsCard extends Component {
                     <LockIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={account.publicKey} />
+                <ListItemText
+                  primary={
+                    <span className={classes.publicKey}>
+                      {account.publicKey}
+                    </span>
+                  }
+                />
               </ListItem>
             ))}
           </List>
