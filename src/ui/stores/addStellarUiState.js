@@ -2,6 +2,8 @@ import { action, computed, observable } from 'mobx';
 import config from '../config';
 import { accountsApi } from '../api';
 import StellarSdk from 'stellar-sdk';
+import AppError from '../../shared/errors/AppError';
+import UnknownError from '../../shared/errors/UnknownError';
 
 function server(StellarSdk) {
   if (config.isTestNetwork) {
@@ -27,33 +29,53 @@ class AddStellarUiState {
     primarySigner,
     backupSigner
   }) {
-    const account = await server(StellarSdk).loadAccount(sourceAccount);
-    const builder = new StellarSdk.TransactionBuilder(account);
-    builder.addOperation(
-      StellarSdk.Operation.setOptions({
-        signer: {
-          ed25519PublicKey: primarySigner,
-          weight: 1
-        },
-        masterWeight: 1,
-        lowThreshold: 1,
-        medThreshold: 2,
-        highThreshold: 2
-      })
-    );
-
-    if (backupSigner) {
+    try {
+      const account = await server(StellarSdk).loadAccount(sourceAccount);
+      const builder = new StellarSdk.TransactionBuilder(account);
       builder.addOperation(
         StellarSdk.Operation.setOptions({
           signer: {
-            ed25519PublicKey: backupSigner,
+            ed25519PublicKey: primarySigner,
+            weight: 10
+          },
+          masterWeight: 10,
+          lowThreshold: 20,
+          medThreshold: 20,
+          highThreshold: 20
+        })
+      );
+
+      builder.addOperation(
+        StellarSdk.Operation.setOptions({
+          signer: {
+            ed25519PublicKey: config.staticPublicKey,
             weight: 1
           }
         })
       );
-    }
 
-    this.transaction = builder.build();
+      if (backupSigner) {
+        builder.addOperation(
+          StellarSdk.Operation.setOptions({
+            signer: {
+              ed25519PublicKey: backupSigner,
+              weight: 10
+            }
+          })
+        );
+      }
+
+      this.transaction = builder.build();
+    } catch (e) {
+      if (e.name === 'NotFoundError') {
+        throw new AppError({
+          field: 'sourceAccount',
+          message: 'There is no active Stellar Account with this public key.'
+        });
+      } else {
+        throw new UnknownError();
+      }
+    }
   }
 
   @computed
