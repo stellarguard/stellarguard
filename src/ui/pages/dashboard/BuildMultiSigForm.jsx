@@ -11,6 +11,7 @@ import {
 import { inject, observer } from 'mobx-react';
 
 import multiSigValidator from '../../../shared/validators/multiSig';
+import { FormError, FormFieldHelperText } from '../../components';
 
 const styles = theme => ({
   divider: {
@@ -36,7 +37,18 @@ const styles = theme => ({
       backupSigner: ''
     };
   },
-  handleSubmit() {},
+  async handleSubmit(values, { props, setSubmitting, setErrors }) {
+    try {
+      await props.rootStore.uiState.addStellarUiState.buildMultiSigTransaction(
+        values
+      );
+      props.onSubmit();
+    } catch (error) {
+      setErrors(error.toFormError());
+    } finally {
+      setSubmitting(false);
+    }
+  },
   validationSchema: multiSigValidator.schema
 })
 @withStyles(styles)
@@ -63,8 +75,9 @@ class BuildMultiSigForm extends Component {
     } = this.props;
 
     return (
-      <Form onSubmit={this.onSubmit} id="build-multisig-form" noValidate>
+      <Form id="build-multisig-form" noValidate>
         <Typography variant="title">Build Multisig Transaction</Typography>
+        <FormError touched={touched} errors={errors} />
         <TextField
           fullWidth
           required
@@ -78,6 +91,14 @@ class BuildMultiSigForm extends Component {
           inputProps={{ onBlur: handleBlur }}
           value={values.sourceAccount}
           error={!!(touched.sourceAccount && errors.sourceAccount)}
+          helperText={
+            <FormFieldHelperText
+              error={errors.sourceAccount}
+              touched={touched.sourceAccount}
+            >
+              This is the account you want protected with StellarGuard
+            </FormFieldHelperText>
+          }
         />
         <div className={classes.signersHeader}>
           <Typography variant="title">Signers </Typography>
