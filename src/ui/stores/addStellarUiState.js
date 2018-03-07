@@ -45,10 +45,12 @@ class AddStellarUiState {
         })
       );
 
+      // by adding a static public key that doesn't enough weight to actually do any signing
+      // we make it easier for third parties to check whether StellarGuard is enabled on the account
       builder.addOperation(
         StellarSdk.Operation.setOptions({
           signer: {
-            ed25519PublicKey: config.staticPublicKey,
+            ed25519PublicKey: config.stellarGuardPublicKey,
             weight: 1
           }
         })
