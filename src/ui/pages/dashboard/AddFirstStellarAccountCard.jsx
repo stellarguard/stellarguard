@@ -64,8 +64,7 @@ class AddFirstStellarAccountCard extends React.Component {
     this.setState({ isMultiSigFormValid });
   };
 
-  handleMultiSigSubmit = async values => {
-    await this.uiState.buildMultiSigTransaction(values);
+  handleMultiSigSubmit = () => {
     this.goNext();
   };
 
