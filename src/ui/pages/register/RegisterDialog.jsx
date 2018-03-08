@@ -6,6 +6,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  DialogContentText,
   withMobileDialog
 } from 'material-ui';
 import RegisterForm from './RegisterForm';
@@ -29,7 +30,16 @@ class RegisterDialog extends Component {
         onClose={onClose}
         aria-labelledby="register-dialog"
       >
-        <DialogTitle id="register-dialog">Register</DialogTitle>
+        <DialogTitle id="register-dialog">
+          Register for StellarGuard
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Your password must be at least 8 characters in length. We strongly
+            encourage you to include a combination of letters, numbers, and
+            special characters (such as !@#$%^*).
+          </DialogContentText>
+        </DialogContent>
         <DialogContent className={classes.content}>
           <RegisterForm onRegister={onRegister} includeActions={false} />
         </DialogContent>
