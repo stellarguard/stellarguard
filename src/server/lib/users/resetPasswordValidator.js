@@ -1,4 +1,4 @@
-const resetpassword = require('validators/resetpassword');
+const resetpassword = require('validators/resetPassword');
 const passwordValidator = require('./passwordValidator');
 const ms = require('ms');
 
