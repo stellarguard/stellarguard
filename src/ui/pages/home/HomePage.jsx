@@ -33,6 +33,10 @@ const styles = theme => {
       color: theme.palette.primary.main,
       textDecoration: 'none'
     },
+    secondaryLink: {
+      color: theme.palette.secondary.main,
+      textDecoration: 'none'
+    },
     infoCard: {},
     cardHeadline: {
       marginBottom: theme.spacing.unit
@@ -162,7 +166,7 @@ class GetStartedInfoCard extends React.Component {
 }
 
 @withStyles(styles)
-class TwoFactorAutheInfoCard extends React.Component {
+class TwoFactorAuthInfoCard extends React.Component {
   render() {
     const { classes } = this.props;
     return (
@@ -217,7 +221,21 @@ class HomePage extends React.Component {
         <Snackbar
           anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
           open={showToast}
-          message="This is the test version of StellarGuard. All transactions will be submitted to the Stellar Testnet."
+          message={
+            <div>
+              This is the test version of StellarGuard. All transactions will be
+              submitted to the Stellar Testnet. To create a Stellar account on
+              the Testnet,{' '}
+              <a
+                className={classes.secondaryLink}
+                href="https://www.stellar.org/laboratory/#account-creator?network=test"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                go here.
+              </a>
+            </div>
+          }
           action={
             <Button
               color="secondary"
@@ -241,7 +259,7 @@ class HomePage extends React.Component {
               <GetStartedInfoCard />
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
-              <TwoFactorAutheInfoCard />
+              <TwoFactorAuthInfoCard />
             </Grid>
           </Grid>
         </div>
