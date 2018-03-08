@@ -1,4 +1,4 @@
-const forgotPassword = require('validators/forgotpassword');
+const forgotPassword = require('validators/forgotPassword');
 
 const { NoUserForEmail } = require('errors/user');
 
