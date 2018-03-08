@@ -5,6 +5,8 @@ import { inject, observer } from 'mobx-react';
 import HomePage from './pages/home/HomePage';
 import FourOhFourPage from './pages/errors/FourOhFourPage';
 import SignInPage from './pages/signIn/SignInPage';
+import ForgotPasswordPage from './pages/signIn/ForgotPasswordPage';
+import ResetPasswordPage from './pages/signIn/ResetPasswordPage';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import VerifyEmailPage from './pages/email/VerifyEmailPage';
 import SubmitTransactionPage from './pages/transactions/SubmitTransactionPage';
@@ -28,6 +30,8 @@ class AppRoutes extends React.Component {
           exact
           component={SubmitTransactionPage}
         />
+        <Route exact path="/forgot-password" component={ForgotPasswordPage} />
+        <Route exact path="/reset-password" component={ResetPasswordPage} />
         <Route path="/" component={ProtectedRoutes} />
         <Route component={FourOhFourPage} />
       </Switch>

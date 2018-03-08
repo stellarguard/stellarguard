@@ -36,6 +36,7 @@
     "mobx": "^3.4.1",
     "mobx-react": "^4.3.5",
     "morgan": "~1.9.0",
+    "ms": "^2.1.1",
     "nodemailer": "^4.4.2",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",

@@ -55,4 +55,18 @@ export default class UiStateStore {
   setResendVerifyEmailStatus(status) {
     this.resendVerifyEmailStatus = status;
   }
+
+  @observable snackbar;
+
+  @action
+  showSnackbar(message) {
+    this.snackbar = {
+      message
+    };
+  }
+
+  @action
+  closeSnackbar() {
+    this.snackbar = null;
+  }
 }

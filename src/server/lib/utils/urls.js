@@ -30,6 +30,19 @@ class Urls {
       query
     });
   }
+
+  resetPassword({ code }) {
+    const pathname = `/reset-password`;
+    const query = {};
+    if (code) {
+      query.code = code;
+    }
+
+    return url.format({
+      pathname,
+      query
+    });
+  }
 }
 
 module.exports = new Urls();

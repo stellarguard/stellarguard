@@ -82,6 +82,17 @@ class UserDb {
 
     return rows[0];
   }
+
+  async updatePassword({ id, passwordHash }) {
+    const { rows } = await this.db.pg.query(
+      `UPDATE "user"
+       SET password_hash = $2
+       WHERE id = $1`,
+      [id, passwordHash]
+    );
+
+    return rows[0];
+  }
 }
 
 module.exports = new UserDb({ db });

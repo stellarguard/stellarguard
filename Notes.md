@@ -49,6 +49,13 @@ pselden4@gmail.com
 GDM44B674RGB27TO2IBZL6TQNHDEWM7OJZMEXQR4CZ7QCHFVP6B2WOAX
 SCGJAARQ35WE36EAT5PSCJZ3XLC2MPBOA3B37EREZXTJDT3ISYSIKVV6
 
+GCQCE5R5T5FTLMEVYIKMRJ6QDCN7OMJVO6HCHYZ665YQQDB5OQ2JHVQK
+SCJY3BXQGUBMD44XM7MFGGA2ZLQQVYJH456UB6LZCGJRRT7BUIXJL4IG
+
+pselden4@gmail.com - Test
+GCIY6H26OGKQ5YZDIOBELMTNNUBBOCZRQSJMCWS2IFEI7257YAOT22AU
+SDQ6EV2HQRK6GCESVTM4ERIPLNKGOLHSK6QNF7RP2H33HJDY6H4IEFRX
+
 TODO:
 Proper Order:
 
@@ -60,8 +67,10 @@ Proper Order:
 Cloud Sql
 
 cloud_sql_proxy -instances=stellarguard-test:us-central1:stellarguard=tcp:5432
+cloud_sql_proxy -instances=stellarguard-prod:us-central1:stellarguard-prod=tcp:5432
 
 source .env.test && db-migrate -e test
+source .env.prod && db-migrate -e prod
 
 Home Page:
 
@@ -73,3 +82,19 @@ Footer:
 Contact Us
 FAQ
 Donations
+
+Next:
+
+* Forgot Password
+* Change Password/Email - Settings page?
+* Remove authenticator
+* Remove StellarGuard
+* Footer
+  * Contact?
+  * Remove Issues
+  * FAQ
+* CDN
+* Payments builder in submit transaction
+* Better home page descriptions (how does this work?)
+* Fund Public Key
+* Explain what a backup signer is

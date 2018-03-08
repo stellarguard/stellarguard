@@ -6,6 +6,7 @@ import AppFooter from './components/AppFooter';
 import AppTheme from './AppTheme';
 import AppContent from './AppContent';
 import AppDialogs from './AppDialogs';
+import AppSnackbar from './AppSnackbar';
 
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router';
@@ -31,6 +32,7 @@ class App extends React.Component {
       <AppTheme>
         <Reboot />
         <AppDialogs />
+        <AppSnackbar />
         <AppHeader />
         <AppContent />
         <AppFooter />

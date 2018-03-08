@@ -1,5 +1,5 @@
 const mailer = require('./mailer');
-const { Welcome, AuthorizeTransaction } = require('./emails');
+const { Welcome, AuthorizeTransaction, ResetPassword } = require('./emails');
 
 class EmailService {
   async sendWelcomeEmail({ user }) {
@@ -9,6 +9,11 @@ class EmailService {
 
   async sendTransactionAuthorizationEmail({ user, transaction }) {
     const email = new AuthorizeTransaction({ user, transaction });
+    return await mailer.sendEmail(email);
+  }
+
+  async sendResetPasswordEmail({ user, code }) {
+    const email = new ResetPassword({ user, code });
     return await mailer.sendEmail(email);
   }
 }

@@ -18,3 +18,14 @@ export async function register({ password, email }) {
   const user = await axios.post('/users', { password, email });
   return User.fromJson(user);
 }
+
+export async function forgotPassword({ email }) {
+  return await axios.post('/users/forgot-password', { email });
+}
+
+export async function resetPassword({ code, password }) {
+  return await axios.post('/users/reset-password', {
+    code,
+    password
+  });
+}

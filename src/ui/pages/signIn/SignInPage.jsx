@@ -31,7 +31,7 @@ class SignInPage extends React.Component {
         <Grid
           className={classes.root}
           container
-          spacing={24}
+          spacing={0}
           alignItems="center"
           justify="center"
         >
