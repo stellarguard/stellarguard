@@ -19,4 +19,14 @@ export default class UserStore {
     accounts.push(account);
     this.rootStore.currentUser.accounts = accounts;
   }
+
+  @action
+  async forgotPassword({ email }) {
+    await usersApi.forgotPassword({ email });
+  }
+
+  @action
+  async resetPassword({ code, password }) {
+    await usersApi.resetPassword({ code, password });
+  }
 }

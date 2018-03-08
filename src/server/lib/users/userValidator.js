@@ -1,11 +1,8 @@
-const dumbPasswords = require('dumb-passwords');
+const passwordValidator = require('./passwordValidator');
 const users = require('validators/users');
+const { CommonPasswordError } = require('errors/user');
 
 exports.validate = async function(user) {
   await users.validate(user);
-  if (dumbPasswords.check(user.password)) {
-    throw {
-      password: 'Your password is a common password, please use another.'
-    };
-  }
+  await passwordValidator.validate(user.password);
 };

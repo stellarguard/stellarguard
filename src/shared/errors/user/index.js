@@ -20,7 +20,51 @@ class InvalidEmailVerificationCodeError extends AppError {
   }
 }
 
+class NoUserForEmail extends AppError {
+  constructor() {
+    super({
+      code: 4003,
+      statusCode: 404,
+      field: 'email',
+      message: 'No user found with this email address'
+    });
+  }
+}
+
+class InvalidPasswordResetCodeError extends AppError {
+  constructor() {
+    super({
+      code: 4004,
+      field: 'code',
+      message: 'Your reset code is invalid.'
+    });
+  }
+}
+
+class PasswordResetCodeExpiredError extends AppError {
+  constructor() {
+    super({
+      code: 4005,
+      field: 'code',
+      message: 'Reset code has expired.'
+    });
+  }
+}
+
+class CommonPasswordError extends AppError {
+  constructor() {
+    super({
+      code: 4006,
+      field: 'password',
+      message: 'Your password is a common password, please use another.'
+    });
+  }
+}
 module.exports = {
   DuplicateEmailError,
-  InvalidEmailVerificationCodeError
+  InvalidEmailVerificationCodeError,
+  NoUserForEmail,
+  InvalidPasswordResetCodeError,
+  PasswordResetCodeExpiredError,
+  CommonPasswordError
 };

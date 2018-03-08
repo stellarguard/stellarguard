@@ -28,7 +28,7 @@ class UserRepository {
   }
 
   async getUserByEmail(email) {
-    const data = await this.userDb.getByEmail(email);
+    const data = await this.userDb.getByEmail(email.toLowerCase());
     if (data) {
       return new User(data);
     }
@@ -56,6 +56,13 @@ class UserRepository {
     });
     user.isEmailVerified = isEmailVerified;
     return user;
+  }
+
+  async updatePassword({ id, passwordHash }) {
+    return await this.userDb.updatePassword({
+      id: id,
+      passwordHash
+    });
   }
 }
 

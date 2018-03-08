@@ -35,6 +35,18 @@ class UserController extends Controller {
     await users.userService.verifyEmail(req.user, code);
     return res.json({});
   }
+
+  async forgotPassword(req, res) {
+    const { email } = req.body;
+    await users.userService.forgotPassword({ email });
+    return res.json({});
+  }
+
+  async resetPassword(req, res) {
+    const { code, password } = req.body;
+    await users.userService.resetPassword({ code, password });
+    return res.json({});
+  }
 }
 
 const controller = new UserController();
@@ -42,7 +54,8 @@ const controller = new UserController();
 router.use(session.csrf);
 // logged out routes
 router.post('/', controller.createUser);
-
+router.post('/forgot-password', controller.forgotPassword);
+router.post('/reset-password', controller.resetPassword);
 // logged in routes
 router.use(session.ensureLoggedIn());
 router.get('/me', controller.getCurrentUser);

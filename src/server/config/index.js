@@ -10,6 +10,10 @@ class Config {
     return this.sessionSecret;
   }
 
+  get cryptoSecret() {
+    return this.sessionSecret;
+  }
+
   get pg() {
     return pg;
   }

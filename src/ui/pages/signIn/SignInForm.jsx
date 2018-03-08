@@ -1,14 +1,21 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { withStyles, TextField, Button } from 'material-ui';
+import { withStyles, TextField, Button, Typography } from 'material-ui';
 import { inject, observer } from 'mobx-react';
+
+import { Link } from 'react-router-dom';
 
 import { FormError, FormActions, FormFieldHelperText } from '../../components';
 import AuthenticatorSignInForm from './AuthenticatorSignInForm';
 import signInValidator from '../../../shared/validators/signIn';
 
-const styles = () => ({});
+const styles = () => ({
+  forgotPassword: {
+    cursor: 'poinner'
+  }
+});
 
+@withStyles(styles)
 @inject('rootStore')
 @observer
 class SignInForm extends React.Component {
@@ -43,7 +50,7 @@ class SignInForm extends React.Component {
   };
 
   render() {
-    const { includeActions = true, id = 'sign-in-form' } = this.props;
+    const { includeActions = true, id = 'sign-in-form', classes } = this.props;
     const { showAuthenticatorForm } = this.state;
 
     return (
@@ -107,7 +114,25 @@ class SignInForm extends React.Component {
                   inputProps={{ onBlur: handleBlur }}
                   value={values.password}
                   error={!!(touched.password && errors.password)}
+                  helperText={
+                    <FormFieldHelperText
+                      error={errors.password}
+                      touched={touched.password}
+                    >
+                      {' '}
+                    </FormFieldHelperText>
+                  }
                 />
+                <Typography
+                  component={Link}
+                  to="/forgot-password"
+                  onClick={this.forgotPassword}
+                  className={classes.forgotPassword}
+                  color="primary"
+                  variant="caption"
+                >
+                  Forgot your password?
+                </Typography>
               </React.Fragment>
             )}
             {includeActions && (
@@ -129,4 +154,4 @@ class SignInForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(SignInForm);
+export default SignInForm;
