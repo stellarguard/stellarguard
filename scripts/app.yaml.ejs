@@ -15,6 +15,11 @@ env_variables:
 <% if(locals.USE_STELLAR_PUBLIC_NETWORK) { %>
   USE_STELLAR_PUBLIC_NETWORK: <%- locals.USE_STELLAR_PUBLIC_NETWORK %>
 <% } %>
-  
+
+automatic_scaling:
+  min_num_instances: <%- locals.scalingMinInstances %>
+  cpu_utilization:
+    target_utilization: <%- locals.cpuTargetUtilization %>
+
 beta_settings:
   cloud_sql_instances: <%- locals.CLOUD_SQL_INSTANCE %>

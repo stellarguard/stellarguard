@@ -8,6 +8,8 @@ const version = require('../../package.json').version;
 const session = require('./session');
 const apiRoutes = require('./api');
 
+const { UnknownError } = require('errors');
+
 var app = express();
 
 // view engine setup
@@ -37,8 +39,12 @@ app.use(cookieParser(config.sessionSecret));
 const sessionMiddleware = session.configure();
 app.use('/api', sessionMiddleware, apiRoutes);
 if (!config.isDevMode) {
-  app.get('/*', function(req, res) {
-    res.sendFile(path.join(UI_DIST, version, 'index.html'));
+  app.get('/*', function(req, res, next) {
+    if (req.accepts('html')) {
+      res.sendFile(path.join(UI_DIST, version, 'index.html'));
+    } else {
+      next();
+    }
   });
 }
 
@@ -58,13 +64,11 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  if (err.status === 404) {
+    res.status(404).json({ message: 'Not Found' });
+  } else {
+    res.status(500).json(new UnknownError());
+  }
 });
 
 module.exports = app;

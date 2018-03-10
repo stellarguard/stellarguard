@@ -10,11 +10,19 @@ const { execSync, spawn } = require('child_process');
 const envConfig = {
   test: {
     dotenv: '.env.test',
-    project: 'stellarguard-test'
+    project: 'stellarguard-test',
+    appYaml: {
+      scalingMinInstances: 1,
+      cpuTargetUtilization: 0.8
+    }
   },
   prod: {
     dotenv: '.env.prod',
-    project: 'stellarguard-prod'
+    project: 'stellarguard-prod',
+    appYaml: {
+      scalingMinInstances: 1,
+      cpuTargetUtilization: 0.7
+    }
   }
 };
 
@@ -96,7 +104,7 @@ async function migrate() {
 function deploy() {
   require('ejs');
   const template = require('./app.yaml.ejs');
-  const appYaml = template({
+  const appConfig = {
     SESSION_SECRET: process.env.SESSION_SECRET,
     DOMAIN_NAME: process.env.DOMAIN_NAME,
     CLOUD_SQL_INSTANCE: process.env.CLOUD_SQL_INSTANCE,
@@ -104,8 +112,9 @@ function deploy() {
     PG_PASSWORD: process.env.PG_PASSWORD,
     SEND_GRID_API_KEY: process.env.SEND_GRID_API_KEY,
     USE_STELLAR_PUBLIC_NETWORK: process.env.USE_STELLAR_PUBLIC_NETWORK
-  });
-
+  };
+  Object.assign(appConfig, envConfig.appYaml);
+  const appYaml = template(appConfig);
   const fs = require('fs');
   fs.writeFileSync('app.yaml', appYaml);
 
