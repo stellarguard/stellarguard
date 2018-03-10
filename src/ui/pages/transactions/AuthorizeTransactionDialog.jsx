@@ -13,9 +13,9 @@ dialogTypes.set('authenticator', AuthenticatorAuthorizeDialog);
 
 const styles = theme => ({});
 
+@withStyles(styles)
 @inject('rootStore')
 @observer
-@withStyles(styles)
 class AuthorizeTransactionDialog extends Component {
   onSuccess = () => {
     this.props.onClose(this.props.transaction);

@@ -32,6 +32,29 @@ class AddStellarUiState {
     try {
       const account = await server(StellarSdk).loadAccount(sourceAccount);
       const builder = new StellarSdk.TransactionBuilder(account);
+
+      builder.addOperation(
+        StellarSdk.Operation.setOptions({
+          signer: {
+            ed25519PublicKey: config.stellarGuardPublicKey,
+            weight: 1
+          }
+        })
+      );
+
+      // by adding a static public key that doesn't enough weight to actually do any signing
+      // we make it easier for third parties to check whether StellarGuard is enabled on the account
+      if (backupSigner) {
+        builder.addOperation(
+          StellarSdk.Operation.setOptions({
+            signer: {
+              ed25519PublicKey: backupSigner,
+              weight: 10
+            }
+          })
+        );
+      }
+
       builder.addOperation(
         StellarSdk.Operation.setOptions({
           signer: {
@@ -44,28 +67,6 @@ class AddStellarUiState {
           highThreshold: 20
         })
       );
-
-      // by adding a static public key that doesn't enough weight to actually do any signing
-      // we make it easier for third parties to check whether StellarGuard is enabled on the account
-      builder.addOperation(
-        StellarSdk.Operation.setOptions({
-          signer: {
-            ed25519PublicKey: config.stellarGuardPublicKey,
-            weight: 1
-          }
-        })
-      );
-
-      if (backupSigner) {
-        builder.addOperation(
-          StellarSdk.Operation.setOptions({
-            signer: {
-              ed25519PublicKey: backupSigner,
-              weight: 10
-            }
-          })
-        );
-      }
 
       this.transaction = builder.build();
     } catch (e) {

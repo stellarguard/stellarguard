@@ -17,6 +17,13 @@ class StellarAccountsRepository {
     return new StellarAccount(newAccount);
   }
 
+  async deactivateAccount({ userId, publicKey }) {
+    return await this.stellarAccountsDb.deactivate({
+      userId,
+      publicKey
+    });
+  }
+
   async getAccountById(id) {
     const account = await this.stellarAccountsDb.getById(id);
     if (account) {
@@ -44,13 +51,6 @@ class StellarAccountsRepository {
 
   async activateAccount(account) {
     account.isActive = true;
-    const { id, userId, publicKey, isActive } = account;
-    this.stellarAccountsDb.update({ id, userId, publicKey, isActive });
-    return account;
-  }
-
-  async deactivateAccount(account) {
-    account.isActive = false;
     const { id, userId, publicKey, isActive } = account;
     this.stellarAccountsDb.update({ id, userId, publicKey, isActive });
     return account;

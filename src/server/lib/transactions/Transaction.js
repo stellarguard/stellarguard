@@ -1,5 +1,7 @@
 const stellar = require('../stellar');
 const { crypto } = require('../utils');
+const config = require('../../config');
+
 class Transaction {
   static fromXdr(xdr) {
     return new Transaction({ xdr });
@@ -31,6 +33,15 @@ class Transaction {
     return stellar.transactions.toXdr(this.stellarTransaction);
   }
 
+  get isDeactivateAccountTransaction() {
+    return this.stellarTransaction.operations.some(
+      operation =>
+        operation.signer &&
+        operation.signer.ed25519PublicKey === config.stellarGuardPublicKey &&
+        operation.signer.weight === 0
+    );
+  }
+
   async hasValidSignatures() {
     return await stellar.transactions.hasValidSignatures(
       this.stellarTransaction
@@ -38,7 +49,7 @@ class Transaction {
   }
 
   getAuthorizationCode() {
-    return crypto.getHmac(this.id, 20);
+    return crypto.getHmac(this.id);
   }
 
   /**
@@ -68,7 +79,8 @@ class Transaction {
       xdr: this.xdr,
       status: this.status,
       result: this.result,
-      dateCreated: this.dateCreated
+      dateCreated: this.dateCreated,
+      isDeactivateAccountTransaction: this.isDeactivateAccountTransaction
     };
   }
 }

@@ -1,6 +1,8 @@
 import { action } from 'mobx';
 import { usersApi } from '../api';
 
+import remove from 'lodash.remove';
+
 export default class UserStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -18,6 +20,12 @@ export default class UserStore {
     const accounts = this.rootStore.currentUser.accounts || [];
     accounts.push(account);
     this.rootStore.currentUser.accounts = accounts;
+  }
+
+  @action
+  removeAccount({ publicKey }) {
+    const accounts = this.rootStore.currentUser.accounts || [];
+    remove(accounts, account => account.publicKey === publicKey);
   }
 
   @action

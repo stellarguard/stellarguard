@@ -33,6 +33,10 @@ class Config {
   get domainName() {
     return env.domainName;
   }
+
+  get stellarGuardPublicKey() {
+    return 'GCVHEKSRASJBD6O2Z532LWH4N2ZLCBVDLLTLKSYCSMBLOYTNMEEGUARD';
+  }
 }
 
 const config = new Config();

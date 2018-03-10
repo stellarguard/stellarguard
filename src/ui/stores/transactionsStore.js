@@ -32,6 +32,9 @@ export default class TransactionsStore {
     const transaction = await transactionsApi.authorizeTransaction(id, {
       code
     });
+    if (transaction.isDeactivateAccountTransaction) {
+      this.rootStore.userStore.removeAccount({ publicKey: transaction.source });
+    }
     this.addTransaction(transaction);
     return transaction;
   }

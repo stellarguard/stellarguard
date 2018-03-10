@@ -7,13 +7,22 @@ class Transaction {
   @observable userId;
   @observable status;
   @observable result;
+  @observable isDeactivateAccountTransaction;
 
-  constructor({ id, xdr, userId, status, result }) {
+  constructor({
+    id,
+    xdr,
+    userId,
+    status,
+    result,
+    isDeactivateAccountTransaction
+  }) {
     this.id = id;
     this.xdr = xdr;
     this.userId = userId;
     this.status = status;
     this.result = result;
+    this.isDeactivateAccountTransaction = isDeactivateAccountTransaction;
   }
 
   @computed

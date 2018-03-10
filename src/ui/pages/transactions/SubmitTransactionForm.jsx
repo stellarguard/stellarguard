@@ -39,12 +39,12 @@ class SubmitTransactionForm extends React.Component {
   };
 
   render() {
-    const { includeActions = true } = this.props;
+    const { includeActions = true, xdr } = this.props;
 
     return (
       <Formik
         initialValues={{
-          xdr: ''
+          xdr: xdr || ''
         }}
         onSubmit={this.onSubmit}
         validate={this.validate}
