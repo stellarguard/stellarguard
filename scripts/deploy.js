@@ -113,12 +113,13 @@ function deploy() {
     SEND_GRID_API_KEY: process.env.SEND_GRID_API_KEY,
     USE_STELLAR_PUBLIC_NETWORK: process.env.USE_STELLAR_PUBLIC_NETWORK
   };
-  Object.assign(appConfig, envConfig.appYaml);
-  const appYaml = template(appConfig);
+  const locals = Object.assign({}, appConfig, config.appYaml);
+  const appYaml = template(locals);
   const fs = require('fs');
   fs.writeFileSync('app.yaml', appYaml);
 
-  console.log(`Deploying ${version} with app.yaml:`);
+  console.log('--------------------------------------------');
+  console.log(`Deploying ${version} to ${env} with app.yaml:`);
   console.log(appYaml);
 
   const gcloudVersion = version.replace(/\./g, '-');
