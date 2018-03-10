@@ -6,6 +6,7 @@ const session = require('express-session');
 const config = require('./config');
 const PgSession = require('connect-pg-simple')(session);
 const csrf = require('csurf')();
+const ms = require('ms');
 
 const { users, db, tfa } = require('./lib');
 const {
@@ -19,14 +20,16 @@ function configure() {
   router.use(
     session({
       store: new PgSession({
-        pool: db.pg.pool
+        pool: db.pg.pool,
+        pruneSessionInterval: ms('5m')
       }),
       secret: config.sessionSecret,
       resave: false,
       saveUninitialized: false,
       cookie: {
         path: '/',
-        httpOnly: true
+        httpOnly: true,
+        maxAge: ms('30d')
       }
     })
   );
