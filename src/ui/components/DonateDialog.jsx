@@ -11,7 +11,7 @@ import {
   Button
 } from 'material-ui';
 
-import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { CopyToClipboard } from '../components';
 
 import config from '../config';
 
@@ -40,7 +40,7 @@ class DonateDialog extends Component {
             development.
           </DialogContentText>
           <DialogContentText className={classes.dialogText}>
-            To donate, send to the following address (click to copy):
+            To donate, send XLM to the following address (click to copy):
           </DialogContentText>
           <CopyToClipboard text={config.stellarGuardPublicKey}>
             <Typography color="primary" className={classes.publicKey}>

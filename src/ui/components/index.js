@@ -7,3 +7,4 @@ export { default as Link } from './Link';
 export { default as DashboardFab } from './DashboardFab';
 export { default as SubmitTransactionFab } from './SubmitTransactionFab';
 export { default as ButtonLink } from './ButtonLink';
+export { default as CopyToClipboard } from './CopyToClipboard';

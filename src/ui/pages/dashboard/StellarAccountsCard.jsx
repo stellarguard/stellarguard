@@ -8,12 +8,21 @@ import {
   List,
   ListItem,
   ListItemAvatar,
-  ListItemText
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton,
+  Tooltip
 } from 'material-ui';
-import { Security as SecurityIcon, Lock as LockIcon } from 'material-ui-icons';
+import {
+  Security as SecurityIcon,
+  Lock as LockIcon,
+  Delete as DeleteIcon
+} from 'material-ui-icons';
 import { inject, observer } from 'mobx-react';
 
 import green from 'material-ui/colors/green';
+
+import DeactivateAccountDialog from '../accounts/DeactivateAccountDialog';
 
 const styles = theme => ({
   avatar: {
@@ -28,43 +37,71 @@ const styles = theme => ({
 @inject('rootStore')
 @observer
 class StellarAccountsCard extends Component {
+  state = { accountToDeactivate: null };
+
   render() {
     const { classes, rootStore } = this.props;
+    const { accountToDeactivate } = this.state;
 
     return (
-      <Card>
-        <CardHeader
-          avatar={
-            <Avatar className={classes.avatar}>
-              <SecurityIcon />
-            </Avatar>
-          }
-          title="Your Linked Stellar Accounts"
-          subheader="These accounts are protected by StellarGuard"
+      <Fragment>
+        <Card>
+          <CardHeader
+            avatar={
+              <Avatar className={classes.avatar}>
+                <SecurityIcon />
+              </Avatar>
+            }
+            title="Your Linked Stellar Accounts"
+            subheader="These accounts are protected by StellarGuard"
+          />
+          <CardContent>
+            <List>
+              {rootStore.currentUser.accounts.map(account => (
+                <ListItem key={account.id}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <LockIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={
+                      <span className={classes.publicKey}>
+                        {account.publicKey}
+                      </span>
+                    }
+                  />
+                  <ListItemSecondaryAction>
+                    <Tooltip title="Deactivate StellarGuard">
+                      <IconButton
+                        aria-label="Deactivate"
+                        onClick={() => this.deactivateStellarAccount(account)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              ))}
+            </List>
+          </CardContent>
+        </Card>
+        <DeactivateAccountDialog
+          open={!!accountToDeactivate}
+          onClose={this.onDeactivateDialogClose}
+          account={accountToDeactivate}
         />
-        <CardContent>
-          <List>
-            {rootStore.currentUser.accounts.map(account => (
-              <ListItem key={account.id}>
-                <ListItemAvatar>
-                  <Avatar>
-                    <LockIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={
-                    <span className={classes.publicKey}>
-                      {account.publicKey}
-                    </span>
-                  }
-                />
-              </ListItem>
-            ))}
-          </List>
-        </CardContent>
-      </Card>
+      </Fragment>
     );
   }
+
+  deactivateStellarAccount = account => {
+    this.setState({ accountToDeactivate: account });
+  };
+
+  onDeactivateDialogClose = () => {
+    this.setState({ accountToDeactivate: null });
+  };
 }
 
 export default StellarAccountsCard;

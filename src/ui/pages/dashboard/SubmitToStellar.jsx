@@ -11,6 +11,8 @@ import {
 import { inject, observer } from 'mobx-react';
 import config from '../../config';
 
+import { CopyToClipboard } from '../../components';
+
 const styles = theme => ({
   numbers: {
     backgroundColor: theme.palette.primary.main
@@ -38,7 +40,8 @@ class SubmitMultiSigToStellar extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, rootStore } = this.props;
+    const xdr = this.props.rootStore.uiState.addStellarUiState.xdr;
     return (
       <div>
         <Typography variant="title">
@@ -49,14 +52,22 @@ class SubmitMultiSigToStellar extends Component {
             <Avatar className={classes.numbers}>1</Avatar>
             <ListItemText
               primary={
-                <a
-                  className={classes.link}
-                  href={this.stellarTransactionSignerHref}
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Click here to sign and submit the transaction at Stellar.org
-                </a>
+                <div>
+                  <a
+                    className={classes.link}
+                    href={this.stellarTransactionSignerHref}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Sign and submit the transaction at Stellar.org
+                  </a>{' '}
+                  or{' '}
+                  <CopyToClipboard text={xdr}>
+                    <span className={classes.link}>
+                      Copy the transaction XDR to submit to your own wallet
+                    </span>
+                  </CopyToClipboard>
+                </div>
               }
             />
           </ListItem>

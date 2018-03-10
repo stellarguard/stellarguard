@@ -3,6 +3,7 @@ const transactionsValidator = require('./transactionsValidator');
 const stellar = require('../stellar');
 const Transaction = require('./Transaction');
 const { userService } = require('../users');
+const { accountsService } = require('../accounts');
 const { emailService } = require('../email');
 const { authenticatorService } = require('../tfa');
 
@@ -60,6 +61,13 @@ class TransactionService {
     const result = await stellar.transactions.submitTransaction(
       transaction.stellarTransaction
     );
+
+    if (transaction.isDeactivateAccountTransaction) {
+      await accountsService.deactivateAccount({
+        userId: transaction.userId,
+        publicKey: transaction.source
+      });
+    }
 
     return await transactionsRepository.updateStatus(transaction, {
       status: Transaction.Status.Success,

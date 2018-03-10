@@ -53,6 +53,17 @@ class StellarAccountDb {
       }
     }
   }
+
+  async deactivate({ userId, publicKey }) {
+    const { count } = await this.db.pg.query(
+      `
+      DELETE FROM stellar_account
+      WHERE user_id = $1 AND public_key = $2`,
+      [userId, publicKey]
+    );
+
+    return count;
+  }
 }
 
 module.exports = new StellarAccountDb({ db });
