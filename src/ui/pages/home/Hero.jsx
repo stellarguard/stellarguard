@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withStyles, Typography, Button } from 'material-ui';
 import { inject, observer } from 'mobx-react';
 
+import config from '../../config';
+
 import logo from '../../images/logo.svg';
 
 const styles = theme => ({
@@ -93,7 +95,7 @@ class Hero extends Component {
               color="inherit"
               className={classes.headline}
             >
-              {'Secure your XLM with Multi-sig and Two Factor Auth'}
+              {'Secure your XLM with Two Factor Auth and Multi-Sig'}
             </Typography>
             <div className={classes.actions}>
               <div className={classes.buttons}>
@@ -106,12 +108,24 @@ class Hero extends Component {
                   Get Started for Free
                 </Button>
               </div>
-              <Typography color="inherit" variant="subheading">
+              <Typography color="inherit" gutterBottom variant="subheading">
                 Already have an account?{' '}
                 <Button color="secondary" onClick={this.handleSignInOpen}>
-                  Sign in.
+                  Sign in
                 </Button>
               </Typography>
+              {config.isPublicNetwork && (
+                <Typography color="inherit" variant="subheading">
+                  Want to try it out on the Stellar Testnet first?
+                  <Button
+                    component="a"
+                    color="secondary"
+                    href="https://test.stellarguard.me"
+                  >
+                    Go here
+                  </Button>
+                </Typography>
+              )}
             </div>
           </div>
         </div>

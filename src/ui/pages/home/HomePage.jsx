@@ -2,8 +2,6 @@ import React from 'react';
 import {
   withStyles,
   Grid,
-  Card,
-  CardContent,
   Avatar,
   Typography,
   List,
@@ -20,6 +18,8 @@ import {
 import { Helmet } from 'react-helmet';
 import Hero from './Hero';
 
+import { observer, inject } from 'mobx-react';
+
 const styles = theme => {
   return {
     root: {
@@ -31,15 +31,18 @@ const styles = theme => {
     },
     link: {
       color: theme.palette.primary.main,
+      cursor: 'pointer',
       textDecoration: 'none'
     },
     secondaryLink: {
       color: theme.palette.secondary.main,
       textDecoration: 'none'
     },
-    infoCard: {},
+    infoCard: {
+      padding: theme.spacing.unit
+    },
     cardHeadline: {
-      marginBottom: theme.spacing.unit
+      marginBottom: theme.spacing.unit * 2
     },
     cardParagraph: {
       marginTop: theme.spacing.unit
@@ -48,23 +51,27 @@ const styles = theme => {
 };
 
 @withStyles(styles)
+@observer
 class HomeInfoCard extends React.Component {
   render() {
-    const { classes, children, title, icon } = this.props;
+    const { classes, children, title } = this.props;
     return (
-      <Card>
-        <CardContent className={classes.infoCard}>
-          <Typography className={classes.cardHeadline} variant="headline">
-            {title}
-          </Typography>
-          {children}
-        </CardContent>
-      </Card>
+      <div className={classes.infoCard}>
+        <Typography
+          className={classes.cardHeadline}
+          gutterBottom
+          variant="headline"
+        >
+          {title}
+        </Typography>
+        <Typography variant="body1">{children}</Typography>
+      </div>
     );
   }
 }
 
 @withStyles(styles)
+@observer
 class SecurityInfoCard extends React.Component {
   render() {
     const { classes } = this.props;
@@ -74,7 +81,7 @@ class SecurityInfoCard extends React.Component {
         title="Your XLM stays safe, even if your Secret Key is not"
       >
         <InfoCardParagraph>
-          StellarGuard utilizes the Stellar network's{' '}
+          StellarGuard utilizes the Stellar network&apos;s{' '}
           <a
             className={classes.link}
             href="https://www.stellar.org/developers/guides/concepts/multi-sig.html"
@@ -99,11 +106,12 @@ class SecurityInfoCard extends React.Component {
 }
 
 @withStyles(styles)
+@observer
 class InfoCardParagraph extends React.Component {
   render() {
-    const { classes, children } = this.props;
+    const { children } = this.props;
     return (
-      <Typography component="p" className={classes.cardParagraph}>
+      <Typography variant="body1" paragraph>
         {children}
       </Typography>
     );
@@ -111,6 +119,7 @@ class InfoCardParagraph extends React.Component {
 }
 
 @withStyles(styles)
+@observer
 class UseYourWalletInfoCard extends React.Component {
   render() {
     const { classes } = this.props;
@@ -130,6 +139,8 @@ class UseYourWalletInfoCard extends React.Component {
 }
 
 @withStyles(styles)
+@inject('rootStore')
+@observer
 class GetStartedInfoCard extends React.Component {
   render() {
     const { classes } = this.props;
@@ -140,12 +151,7 @@ class GetStartedInfoCard extends React.Component {
             <Avatar className={classes.numbers}>1</Avatar>
             <ListItemText
               primary={
-                <a
-                  className={classes.link}
-                  href={this.stellarTransactionSignerHref}
-                  target="_blank"
-                  rel="noopener"
-                >
+                <a className={classes.link} onClick={this.onRegisterClick}>
                   Register for your FREE StellarGuard account
                 </a>
               }
@@ -163,9 +169,12 @@ class GetStartedInfoCard extends React.Component {
       </HomeInfoCard>
     );
   }
+
+  onRegisterClick = () => this.props.rootStore.uiState.openRegisterDialog();
 }
 
 @withStyles(styles)
+@observer
 class TwoFactorAuthInfoCard extends React.Component {
   render() {
     const { classes } = this.props;
@@ -190,7 +199,7 @@ class TwoFactorAuthInfoCard extends React.Component {
             </Avatar>
             <ListItemText
               primary="Authenticator"
-              secondary="Use an authenticator app with rotating passcodes"
+              secondary="Use a free authenticator app with rotating passcodes"
             />
           </ListItem>
         </List>
@@ -200,6 +209,7 @@ class TwoFactorAuthInfoCard extends React.Component {
 }
 
 @withStyles(styles)
+@observer
 class HomePage extends React.Component {
   state = { showToast: false };
   componentDidMount() {
