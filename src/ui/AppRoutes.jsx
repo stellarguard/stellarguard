@@ -11,6 +11,7 @@ import DashboardPage from './pages/dashboard/DashboardPage';
 import VerifyEmailPage from './pages/email/VerifyEmailPage';
 import SubmitTransactionPage from './pages/transactions/SubmitTransactionPage';
 import AuthorizeTransactionPage from './pages/transactions/AuthorizeTransactionPage';
+import FaqPage from './pages/misc/FaqPage';
 
 import AppLoader from './AppLoader';
 
@@ -32,6 +33,7 @@ class AppRoutes extends React.Component {
         />
         <Route exact path="/forgot-password" component={ForgotPasswordPage} />
         <Route exact path="/reset-password" component={ResetPasswordPage} />
+        <Route exact path="/faq" component={FaqPage} />
         <Route path="/" component={ProtectedRoutes} />
         <Route component={FourOhFourPage} />
       </Switch>
