@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles, Typography, Button } from 'material-ui';
 import { inject, observer } from 'mobx-react';
+import { Link } from 'react-router-dom';
 
 import config from '../../config';
 
@@ -106,6 +107,14 @@ class Hero extends Component {
                   onClick={this.handleRegisterOpen}
                 >
                   Get Started for Free
+                </Button>
+                <Button
+                  to="/faq"
+                  component={Link}
+                  className={classes.learnMore}
+                  color="inherit"
+                >
+                  Learn More
                 </Button>
               </div>
               <Typography color="inherit" gutterBottom variant="subheading">
