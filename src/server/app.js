@@ -40,7 +40,10 @@ app.use(cookieParser(config.sessionSecret));
 const sessionMiddleware = session.configure();
 app.use('/api', sessionMiddleware, apiRoutes);
 if (!config.isDevMode) {
-  const indexHtml = fs.readFileSync(path.join(UI_DIST, version, 'index.html'));
+  const indexHtml = fs.readFileSync(
+    path.join(UI_DIST, version, 'index.html'),
+    'utf8'
+  );
   app.get('/*', function(req, res, next) {
     if (req.accepts('html')) {
       res.send(indexHtml.replace('%CSRF_TOKEN%', req.csrfToken()));
@@ -69,6 +72,7 @@ app.use(function(err, req, res, next) {
   if (err.status === 404) {
     res.status(404).json({ message: 'Not Found' });
   } else {
+    console.error(err);
     res.status(500).json(new UnknownError());
   }
 });
