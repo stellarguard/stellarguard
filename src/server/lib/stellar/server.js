@@ -1,4 +1,5 @@
 const StellarSdk = require('stellar-sdk');
+const config = require('../../config');
 
 function server() {
   if (isTestNetwork()) {
@@ -11,7 +12,7 @@ function server() {
 }
 
 function isTestNetwork() {
-  return !process.env.USE_STELLAR_PUBLIC_NETWORK;
+  return !config.useStellarPublicNetwork;
 }
 
 module.exports = {

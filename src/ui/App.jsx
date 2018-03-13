@@ -11,18 +11,10 @@ import AppSnackbar from './AppSnackbar';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router';
 
-import config from './config';
-
 @withRouter
 @inject('rootStore')
 @observer
 class App extends React.Component {
-  componentWillMount() {
-    if (config.isPublicNetwork) {
-      window.location = 'https://test.stellarguard.me';
-    }
-  }
-
   componentDidMount() {
     this.props.rootStore.sessionStore.loadSession();
   }
