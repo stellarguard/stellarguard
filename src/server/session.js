@@ -5,7 +5,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const config = require('./config');
 const PgSession = require('connect-pg-simple')(session);
-const csrfMiddleware = require('csurf')();
+const csrfMiddleware = require('csurf')({ cookie: true });
 const ms = require('ms');
 
 const { users, db, tfa } = require('./lib');
@@ -120,14 +120,7 @@ async function logout(req) {
   req.logout();
 }
 
-function csrf(req, res, next) {
-  if (config.isDevMode) {
-    // disable csrf in dev mode until I can figure out a better way to use parcel
-    return next();
-  } else {
-    return csrfMiddleware(req, res, next);
-  }
-}
+const csrf = config.isDevMode ? undefined : csrfMiddleware;
 
 module.exports = {
   configure,
