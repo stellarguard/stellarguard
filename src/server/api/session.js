@@ -20,12 +20,11 @@ class SessionController extends Controller {
 
   async getSession(req, res) {
     const user = req.user;
-    const csrf = req.csrfToken();
     if (user) {
       const fullUser = await users.userService.getFullUser(user);
-      return res.json({ user: fullUser, csrf });
+      return res.json({ user: fullUser });
     } else {
-      return res.send({ csrf });
+      return res.send({});
     }
   }
 

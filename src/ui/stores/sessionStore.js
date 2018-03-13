@@ -1,11 +1,10 @@
 import { observable, computed, action, runInAction } from 'mobx';
-import { sessionApi, usersApi, setCsrf } from '../api';
+import { sessionApi, usersApi } from '../api';
 import history from '../history';
 
 import User from '../models/User';
 class SessionCache {
   static UserKey = 'sgUser';
-  static CrsfKey = 'sgCrsf';
 
   get user() {
     try {
@@ -26,14 +25,6 @@ class SessionCache {
     }
   }
 
-  get crsf() {
-    return localStorage.getItem(SessionCache.CrsfKey);
-  }
-
-  set csrf(csrf) {
-    localStorage.setItem(SessionCache.CrsfKey, csrf);
-  }
-
   clear() {
     this.user = null;
   }
@@ -48,7 +39,6 @@ export default class SessionStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.currentUser = this.sessionCache.user;
-    this.csrf = this.sessionCache.csrf;
   }
 
   @computed
@@ -60,9 +50,8 @@ export default class SessionStore {
   async loadSession() {
     this.setSessionLoading(true);
     try {
-      const { user, csrf } = await sessionApi.getSession();
+      const { user } = await sessionApi.getSession();
       this.setCurrentUser(user);
-      this.setCsrf(csrf);
     } catch (e) {
       console.error(e);
       this.setCurrentUser(null);
@@ -106,12 +95,6 @@ export default class SessionStore {
   setCurrentUser(user) {
     this.currentUser = user;
     this.sessionCache.user = user;
-  }
-
-  @action
-  setCsrf(csrf) {
-    this.sessionCache.csrf = csrf;
-    setCsrf(csrf);
   }
 
   @action
