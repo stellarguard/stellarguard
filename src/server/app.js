@@ -1,6 +1,7 @@
 const config = require('./config');
 
 var express = require('express');
+const fs = require('fs');
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -39,9 +40,10 @@ app.use(cookieParser(config.sessionSecret));
 const sessionMiddleware = session.configure();
 app.use('/api', sessionMiddleware, apiRoutes);
 if (!config.isDevMode) {
+  const indexHtml = fs.readFileSync(path.join(UI_DIST, version, 'index.html'));
   app.get('/*', function(req, res, next) {
     if (req.accepts('html')) {
-      res.sendFile(path.join(UI_DIST, version, 'index.html'));
+      res.send(indexHtml.replace('%CSRF_TOKEN%', req.csrfToken()));
     } else {
       next();
     }

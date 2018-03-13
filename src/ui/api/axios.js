@@ -3,9 +3,15 @@ import axios from 'axios';
 import AppError from '../../shared/errors/AppError';
 import UnknownError from '../../shared/errors/UnknownError';
 
+const csrfToken = document
+  .querySelector('meta[name="csrf-token"]')
+  .getAttribute('content');
+
 const apiClient = axios.create({
   baseURL: '/api/'
 });
+
+setCsrf(csrfToken);
 
 export const get = wrap('get');
 export const post = wrap('post');

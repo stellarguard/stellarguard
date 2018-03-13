@@ -2,15 +2,14 @@ import axios from './axios';
 import User from '../models/User';
 
 export async function getSession() {
-  const { user, csrf } = await axios.get('/session');
+  const { user } = await axios.get('/session');
   if (user) {
     return {
-      user: User.fromJson(user),
-      csrf
+      user: User.fromJson(user)
     };
   }
 
-  return { csrf };
+  return {};
 }
 
 export async function signIn({ email, password, code }) {
