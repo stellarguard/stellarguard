@@ -20,6 +20,8 @@ import Hero from './Hero';
 
 import { observer, inject } from 'mobx-react';
 
+import config from '../../config';
+
 const styles = theme => {
   return {
     root: {
@@ -213,12 +215,14 @@ class TwoFactorAuthInfoCard extends React.Component {
 class HomePage extends React.Component {
   state = { showToast: false };
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({ showToast: true });
+    if (config.isTestNetwork) {
       setTimeout(() => {
-        this.setState({ showToast: false });
-      }, 10000);
-    }, 2500);
+        this.setState({ showToast: true });
+        setTimeout(() => {
+          this.setState({ showToast: false });
+        }, 10000);
+      }, 2500);
+    }
   }
   render() {
     const { classes } = this.props;
