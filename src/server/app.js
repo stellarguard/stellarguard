@@ -44,7 +44,7 @@ if (!config.isDevMode) {
     path.join(UI_DIST, version, 'index.html'),
     'utf8'
   );
-  app.get('/*', function(req, res, next) {
+  app.get('/*', session.csrf, function(req, res, next) {
     if (req.accepts('html')) {
       res.send(indexHtml.replace('%CSRF_TOKEN%', req.csrfToken()));
     } else {
