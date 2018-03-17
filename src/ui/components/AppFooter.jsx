@@ -77,9 +77,14 @@ class AppFooter extends Component {
               >
                 StellarGuard.me
               </Typography>
-              <Typography color="inherit" className={classes.copyright}>
+              <Typography
+                color="inherit"
+                className={classes.copyright}
+                gutterBottom
+              >
                 2018 © StellarGuard L.L.C.
               </Typography>
+              <Typography color="inherit">help@stellarguard.me</Typography>
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography color="inherit" variant="title" gutterBottom>

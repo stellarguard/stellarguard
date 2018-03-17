@@ -114,6 +114,14 @@ class BuildMultiSigForm extends Component {
             }
             label="Add a Backup Signer"
           />
+          <Typography
+            variant="caption"
+            component="a"
+            href="/faq#backup-signer"
+            target="_blank"
+          >
+            What&apos;s this?
+          </Typography>
         </div>
         <TextField
           fullWidth
