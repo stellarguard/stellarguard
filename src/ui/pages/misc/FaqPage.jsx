@@ -27,13 +27,11 @@ const styles = theme => {
 @withStyles(styles)
 class FaqGridItem extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, ...rest } = this.props;
     const initialCollapsed =
       window.location.hash && window.location.hash !== `#${this.props.id}`;
-    const scrollIntoView = !initialCollapsed;
-    const faqItem = (
-      <FaqItem {...this.props} initialCollapsed={initialCollapsed} />
-    );
+    const scrollIntoView = !window.location.hash === `#${this.props.id}`;
+    const faqItem = <FaqItem {...rest} initialCollapsed={initialCollapsed} />;
     return (
       <Grid item xs={12} className={classes.gridItem}>
         {scrollIntoView ? <ScrollIntoView>{faqItem}</ScrollIntoView> : faqItem}
@@ -203,7 +201,7 @@ class SubmitTransactionPage extends Component {
               copy the signed XDR before it is submitted to the Stellar network.
             </Typography>
             <Typography paragraph>Wallets that support this are: </Typography>
-            <Typography>
+            <Typography paragraph component="div">
               <ul>
                 <li>
                   <a
@@ -238,7 +236,7 @@ class SubmitTransactionPage extends Component {
               There are two steps to submit transactions directly to
               StellarGuard via the API.
             </Typography>
-            <Typography>
+            <Typography paragraph component="div">
               <ol>
                 <li>
                   Check if a Stellar account is protected by StellarGuard. This
