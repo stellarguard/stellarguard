@@ -32,13 +32,17 @@ const styles = theme => ({
 @withStyles(styles)
 class FaqItem extends Component {
   state = { expanded: true };
+  constructor(props) {
+    super();
+    this.state = { expanded: !props.initialCollapsed };
+  }
 
   render() {
-    const { classes, children, question } = this.props;
+    const { classes, children, question, id } = this.props;
     const { expanded } = this.state;
     return (
       <div className={classes.root}>
-        <div className={classes.questionRoot} onClick={this.toggle}>
+        <div className={classes.questionRoot} onClick={this.toggle} id={id}>
           <Typography variant="title" gutterBottom className={classes.question}>
             {question}
           </Typography>

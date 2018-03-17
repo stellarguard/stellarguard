@@ -120,7 +120,7 @@ async function logout(req) {
   req.logout();
 }
 
-const csrf = config.isDevMode ? undefined : csrfMiddleware;
+const csrf = config.isDevMode ? (req, res, next) => next() : csrfMiddleware;
 
 module.exports = {
   configure,

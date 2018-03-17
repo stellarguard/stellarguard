@@ -5,11 +5,14 @@ import { Helmet } from 'react-helmet';
 import { observer } from 'mobx-react';
 import { withRouter } from 'react-router';
 
-import { Page, DashboardFab } from '../../components';
+import { Page, DashboardFab, ScrollIntoView } from '../../components';
 import FaqItem from './FaqItem';
 
 const styles = theme => {
   return {
+    gridItem: {
+      paddingBottom: theme.spacing.unit * 2
+    },
     publicKey: {
       color: theme.palette.primary.main,
       overflowWrap: 'break-word'
@@ -21,11 +24,19 @@ const styles = theme => {
   };
 };
 
+@withStyles(styles)
 class FaqGridItem extends Component {
   render() {
+    const { classes } = this.props;
+    const initialCollapsed =
+      window.location.hash && window.location.hash !== `#${this.props.id}`;
+    const scrollIntoView = !initialCollapsed;
+    const faqItem = (
+      <FaqItem {...this.props} initialCollapsed={initialCollapsed} />
+    );
     return (
-      <Grid item xs={12}>
-        <FaqItem {...this.props} />
+      <Grid item xs={12} className={classes.gridItem}>
+        {scrollIntoView ? <ScrollIntoView>{faqItem}</ScrollIntoView> : faqItem}
       </Grid>
     );
   }
@@ -44,7 +55,10 @@ class SubmitTransactionPage extends Component {
           <title>StellarGuard | FAQ</title>
         </Helmet>
         <Grid container spacing={0}>
-          <FaqGridItem question="How does StellarGuard work?">
+          <FaqGridItem
+            question="How does StellarGuard work?"
+            id="how-does-stellarguard-work"
+          >
             <Typography paragraph>
               StellarGuard uses the Stellar&apos;s built in multi-signature
               technology to require a transaction to be signed both by you and
@@ -76,7 +90,10 @@ class SubmitTransactionPage extends Component {
               in or authorize transactions.
             </Typography>
           </FaqGridItem>
-          <FaqGridItem question="How much does it cost?">
+          <FaqGridItem
+            question="How much does it cost?"
+            id="how-much-does-it-cost"
+          >
             <Typography paragraph>
               StellarGuard is currently 100% free.
             </Typography>
@@ -87,7 +104,10 @@ class SubmitTransactionPage extends Component {
               account, even you have not yet paid.
             </Typography>
           </FaqGridItem>
-          <FaqGridItem question="If I am using StellarGuard and a hacker steals my private key, do I lose my XLM?">
+          <FaqGridItem
+            question="If I am using StellarGuard and a hacker steals my private key, do I lose my XLM?"
+            id="hacker-lose-my-xlm"
+          >
             <Typography paragraph>
               No! StellarGuard was designed with this scenario. Because your
               account is protected with multisig, a hacker will not be able to
@@ -105,31 +125,72 @@ class SubmitTransactionPage extends Component {
               </a>, your XLM would have been completely safe.
             </Typography>
           </FaqGridItem>
-          <FaqGridItem question="What would happen if StellarGuard was hacked? Do I lose my XLM?">
+          <FaqGridItem
+            question="What would happen if StellarGuard was hacked? Do I lose my XLM?"
+            id="stellarguard-hacked"
+          >
             <Typography paragraph>
               No! Because StellarGuard does not ask you for your own secret key,
               a hacker who is able to infiltrate StellarGuard still cannot
               create valid transactions.
             </Typography>
           </FaqGridItem>
-          <FaqGridItem question="What does adding a backup signer do when setting up multisig?">
+          <FaqGridItem
+            question="What does adding a backup signer do when setting up multisig?"
+            id="backup-signer"
+          >
             <Typography paragraph>
               If you feel more comfortable not completely relying on
               StellarGuard, you have the option to add a &quot;Backup
               Signer&quot; when enabling multisig. A backup signer is an
               additional public key that you know the secret key to (does not
-              have to be a funded account) which is added with the same weight
-              as your source key and your StellarGuard key. This means that you
-              can create valid transactions with any 2 of the 3 keys (this is
-              known as 2/3 multisig).
+              have to be a funded account) which can be used instead of your
+              primary secret key to sign transactions. StellarGuard does not
+              save the backup signer key.
             </Typography>
             <Typography paragraph>
               If you do choose to add a backup signer, you should make sure you
               keep it in a safe place and do not use it for day-to-day
-              transactions, and only use it in an emergency.
+              transactions, and only use it in an emergency. If a hacker steals
+              the backup signer, they will be able to steal your XLM. You may
+              add a backup signer at any time by submitting it as a normal
+              transaction.
             </Typography>
           </FaqGridItem>
-          <FaqGridItem question="Does StellarGuard work with my existing wallet?">
+          <FaqGridItem
+            question="What are the weights and keys used when setting up multisig through StellarGuard?"
+            id="multisig-explained"
+          >
+            <Typography paragraph>
+              The transaction XDR created when setting up multisig with
+              StellarGuard is composed of the following parts:
+            </Typography>
+            <Typography paragraph component="div">
+              <ol>
+                <li>All signing thresholds are set to 20.</li>
+                <li>The master signing key weight is set to 10.</li>
+                <li>
+                  Your StellarGuard signing key is added as a signer with weight
+                  set to 10.
+                </li>
+                <li>
+                  A static StellarGuard key (ends with MEEGUARD) is added as a
+                  signer with weight set to 1 - this key is not able to sign
+                  transactions and is instead used as an indicator for third
+                  party wallets that transactions for this account should be
+                  submitted to StellarGuard.
+                </li>
+                <li>
+                  If a backup signer was set, it is added as a signer with
+                  weight set to 20.
+                </li>
+              </ol>
+            </Typography>
+          </FaqGridItem>
+          <FaqGridItem
+            question="Does StellarGuard work with my existing wallet?"
+            id="supported-wallets"
+          >
             <Typography paragraph>
               StellarGuard requires you to use{' '}
               <a
@@ -155,7 +216,10 @@ class SubmitTransactionPage extends Component {
               </ul>
             </Typography>
           </FaqGridItem>
-          <FaqGridItem question="Why do I need to copy and paste transaction XDRs to StellarGuard instead of just submitting to Stellar network?">
+          <FaqGridItem
+            question="Why do I need to copy and paste transaction XDRs to StellarGuard instead of just submitting to Stellar network?"
+            id="copy-xdrs"
+          >
             <Typography paragraph>
               Unfortunately Stellar does not have a notion of
               &quot;half-signed&quot; multi-signature transactions that can be
@@ -166,7 +230,10 @@ class SubmitTransactionPage extends Component {
               submit the fully-signed, valid transaction to the Stellar network.
             </Typography>
           </FaqGridItem>
-          <FaqGridItem question="I'm a wallet developer, how do I submit my users' transactions directly to StellarGuard?">
+          <FaqGridItem
+            question="I'm a wallet developer, how do I submit my users' transactions directly to StellarGuard?"
+            id="wallet-developers"
+          >
             <Typography paragraph>
               There are two steps to submit transactions directly to
               StellarGuard via the API.
