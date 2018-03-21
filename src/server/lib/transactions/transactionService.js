@@ -2,7 +2,6 @@ const transactionsRepository = require('./transactionsRepository');
 const transactionsValidator = require('./transactionsValidator');
 const stellar = require('../stellar');
 const Transaction = require('./Transaction');
-const { userService } = require('../users');
 const { accountsService } = require('../accounts');
 const { emailService } = require('../email');
 const { authenticatorService } = require('../tfa');
@@ -19,9 +18,13 @@ class TransactionService {
     return await transactionsRepository.getTransaction(id);
   }
 
-  async createTransaction(transaction) {
-    const source = transaction.source;
-    const user = await userService.getUserByAccountPublicKey(source);
+  async getForUser(user) {
+    return await transactionsRepository.getTransactionsForUserId(user.id, {
+      status: Transaction.Status.Pending
+    });
+  }
+
+  async createTransaction(transaction, user) {
     transaction.userId = user && user.id;
     await transactionsValidator.validate(transaction);
     const newTransaction = await transactionsRepository.createTransaction(
@@ -58,21 +61,30 @@ class TransactionService {
 
     transaction.sign(user.signerSecretKey);
 
-    const result = await stellar.transactions.submitTransaction(
-      transaction.stellarTransaction
-    );
+    try {
+      const result = await stellar.transactions.submitTransaction(
+        transaction.stellarTransaction
+      );
 
-    if (transaction.isDeactivateAccountTransaction) {
-      await accountsService.deactivateAccount({
-        userId: transaction.userId,
-        publicKey: transaction.source
+      if (transaction.isDeactivateAccountTransaction) {
+        await accountsService.deactivateAccount({
+          userId: transaction.userId,
+          publicKey: transaction.source
+        });
+      }
+
+      return await transactionsRepository.updateStatus(transaction, {
+        status: Transaction.Status.Success,
+        result
       });
+    } catch (e) {
+      if (e.data) {
+        return await transactionsRepository.updateStatus(transaction, {
+          status: Transaction.Status.Error,
+          result: JSON.stringify(e.data)
+        });
+      }
     }
-
-    return await transactionsRepository.updateStatus(transaction, {
-      status: Transaction.Status.Success,
-      result
-    });
   }
 
   async denyTransaction({ transaction, user }) {

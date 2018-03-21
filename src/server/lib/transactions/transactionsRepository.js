@@ -23,8 +23,10 @@ class TransactionRepository {
     return new Transaction(transaction);
   }
 
-  async getTransactionsForUserId(userId) {
-    const transactions = await this.transactionDb.getByUserId(userId);
+  async getTransactionsForUserId(userId, { status }) {
+    const transactions = await this.transactionDb.getByUserId(userId, {
+      status
+    });
     return transactions.map(transaction => new Transaction(transaction));
   }
 

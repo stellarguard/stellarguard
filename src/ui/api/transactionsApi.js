@@ -6,6 +6,13 @@ export async function submitTransaction({ xdr }) {
   return Transaction.fromJson(transaction);
 }
 
+export async function getTransactions() {
+  const result = await axios.get(`/transactions`);
+  return result.transactions.map(transaction =>
+    Transaction.fromJson(transaction)
+  );
+}
+
 export async function getTransaction(id) {
   const transaction = await axios.get(`/transactions/${id}`);
   return Transaction.fromJson(transaction);

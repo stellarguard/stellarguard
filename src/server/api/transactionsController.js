@@ -12,8 +12,12 @@ class TransactionsController extends Controller {
     const { xdr } = req.body;
     const ipAddress = req.ip;
     const transaction = new transactions.Transaction({ xdr, ipAddress });
+    const user = await users.userService.getUserByAccountPublicKey(
+      transaction.source
+    );
     const newTransaction = await transactions.transactionService.createTransaction(
-      transaction
+      transaction,
+      user
     );
 
     return res.json(newTransaction);
@@ -32,6 +36,11 @@ class TransactionsController extends Controller {
     }
 
     return res.json(transaction);
+  }
+
+  async getTransactions(req, res) {
+    const trans = await transactions.transactionService.getForUser(req.user);
+    return res.json({ transactions: trans });
   }
 
   async authorizeTransaction(req, res, next) {
@@ -73,6 +82,7 @@ router.post('/', controller.createTransaction);
 router.use(session.csrf);
 router.use(session.ensureLoggedIn());
 router.get('/:id', controller.getTransaction);
+router.get('/', controller.getTransactions);
 
 // scenarios to test
 // public key matches to no accounts

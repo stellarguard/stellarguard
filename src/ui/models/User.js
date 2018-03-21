@@ -1,6 +1,7 @@
 import { observable, computed } from 'mobx';
 import Authenticator from './Authenticator';
 import Account from './Account';
+import Transaction from './Transaction';
 
 export default class User {
   @observable email;
@@ -9,6 +10,7 @@ export default class User {
   @observable authenticator;
   @observable accounts;
   @observable transactionVerificationType;
+  @observable transactions;
 
   constructor({
     id,
@@ -17,7 +19,8 @@ export default class User {
     signerPublicKey,
     authenticator,
     accounts,
-    transactionVerificationType
+    transactionVerificationType,
+    transactions = []
   }) {
     this.id = id;
     this.email = email;
@@ -26,11 +29,17 @@ export default class User {
     this.authenticator = authenticator;
     this.transactionVerificationType = transactionVerificationType;
     this.accounts = accounts;
+    this.transactions = transactions;
   }
 
   @computed
   get hasAuthenticator() {
     return !!this.authenticator;
+  }
+
+  @computed
+  get pendingTransactions() {
+    return this.transactions.filter(transaction => transaction.isPending);
   }
 
   static fromJson(json) {
@@ -40,6 +49,7 @@ export default class User {
 
     const authenticator = Authenticator.fromJson(json.authenticator);
     const accounts = Account.fromJson(json.accounts);
-    return new User({ authenticator, accounts, ...json });
+    const transactions = (json.transactions || []).map(Transaction.fromJson);
+    return new User({ ...json, authenticator, accounts, transactions });
   }
 }

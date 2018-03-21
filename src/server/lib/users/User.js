@@ -22,7 +22,8 @@ class User {
     signerPublicKey,
     signerSecretKey,
     authenticator,
-    accounts
+    accounts,
+    transactions: transactions
   }) {
     this.id = id;
     this.email = email;
@@ -32,6 +33,7 @@ class User {
     this.signerSecretKey = signerSecretKey;
     this.authenticator = authenticator;
     this.accounts = accounts;
+    this.transactions = transactions;
   }
 
   async verifyPassword(password) {
@@ -66,7 +68,8 @@ class User {
       signerPublicKey: this.signerPublicKey,
       authenticator: this.authenticator,
       accounts: this.accounts,
-      transactionVerificationType: this.transactionVerificationType
+      transactionVerificationType: this.transactionVerificationType,
+      transactions: this.transactions
     };
   }
 }
