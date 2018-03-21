@@ -11,6 +11,7 @@ import DashboardPage from './pages/dashboard/DashboardPage';
 import VerifyEmailPage from './pages/email/VerifyEmailPage';
 import SubmitTransactionPage from './pages/transactions/SubmitTransactionPage';
 import AuthorizeTransactionPage from './pages/transactions/AuthorizeTransactionPage';
+import TransactionsPage from './pages/transactions/TransactionsPage';
 import FaqPage from './pages/misc/FaqPage';
 
 import AppLoader from './AppLoader';
@@ -59,6 +60,7 @@ class ProtectedRoutes extends React.Component {
     return (
       <Switch>
         <Route exact path="/" component={DashboardPage} />
+        <Route exact path="/transactions" component={TransactionsPage} />
         <Route
           exact
           path="/transactions/:id"

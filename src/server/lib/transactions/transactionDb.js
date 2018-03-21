@@ -14,10 +14,10 @@ class TransactionDb {
     return rows[0];
   }
 
-  async getByUserId(userId) {
+  async getByUserId(userId, { status }) {
     const { rows } = await this.db.pg.query(
-      'SELECT * FROM "transaction" WHERE user_id = $1',
-      [userId]
+      'SELECT * FROM "transaction" WHERE user_id = $1 AND status = $2',
+      [userId, status]
     );
 
     return rows;

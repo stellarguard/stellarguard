@@ -48,6 +48,7 @@ class Transaction {
 
   @computed
   get isPending() {
+    console.log(this.status);
     return this.status === Transaction.Status.Pending;
   }
 
@@ -86,6 +87,10 @@ class Transaction {
   }
 
   static fromJson(json) {
+    if (!json) {
+      return;
+    }
+
     return new Transaction(json);
   }
 

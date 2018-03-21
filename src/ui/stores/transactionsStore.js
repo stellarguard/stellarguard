@@ -1,4 +1,4 @@
-import { action, observable } from 'mobx';
+import { action, observable, computed } from 'mobx';
 import { transactionsApi } from '../api';
 
 export default class TransactionsStore {
@@ -18,6 +18,19 @@ export default class TransactionsStore {
     transaction = await transactionsApi.getTransaction(id);
     this.addTransaction(transaction);
     return transaction;
+  }
+
+  @action
+  async getTransactions() {
+    const transactions = await transactionsApi.getTransactions();
+    transactions.forEach(transaction => this.addTransaction(transaction));
+  }
+
+  @computed
+  get pendingTransactions() {
+    return this.transactions
+      .values()
+      .filter(transaction => transaction.isPending);
   }
 
   @action

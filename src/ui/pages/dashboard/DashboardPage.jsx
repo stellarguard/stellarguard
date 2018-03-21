@@ -6,15 +6,35 @@ import VerifyEmailCard from './VerifyEmailCard';
 import AddFirstStellarAccountCard from './AddFirstStellarAccountCard';
 import AddTwoFactorAuthCard from './tfa/AddTwoFactorAuthCard';
 import StellarAccountsCard from './StellarAccountsCard';
+import SummaryCard from './SummaryCard';
 
 import { inject, observer } from 'mobx-react';
 
-const styles = theme => ({});
+const styles = theme => ({
+  sideColumn: {
+    [theme.breakpoints.down('sm')]: {
+      order: 0
+    }
+  },
+  contentColumn: {
+    [theme.breakpoints.down('sm')]: {
+      order: 1
+    }
+  }
+});
 
 @withStyles(styles)
 @inject('rootStore')
 @observer
 class DashboardPage extends Component {
+  summaryCard() {
+    return (
+      <Grid item xs={12}>
+        <SummaryCard />
+      </Grid>
+    );
+  }
+
   verifyEmailCard() {
     if (this.props.rootStore.sessionStore.currentUser.isEmailVerified) {
       return null;
@@ -61,14 +81,36 @@ class DashboardPage extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, rootStore } = this.props;
+    const hasSideColumn = rootStore.currentUser.pendingTransactions.length > 0;
     return (
       <Page>
-        <Grid container justify="space-around">
-          {this.verifyEmailCard()}
-          {this.addTwoFactorAuthCard()}
-          {this.stellarAccountsCard()}
-          {this.addFirstStellarAccountCard()}
+        <Grid container>
+          <Grid
+            container
+            item
+            xs={12}
+            sm={12}
+            md={hasSideColumn ? 9 : 12}
+            className={classes.contentColumn}
+          >
+            {this.verifyEmailCard()}
+            {this.addTwoFactorAuthCard()}
+            {this.stellarAccountsCard()}
+            {this.addFirstStellarAccountCard()}
+          </Grid>
+          {hasSideColumn ? (
+            <Grid
+              container
+              item
+              xs={12}
+              sm={12}
+              md={3}
+              className={classes.sideColumn}
+            >
+              {this.summaryCard()}
+            </Grid>
+          ) : null}
         </Grid>
         <SubmitTransactionFab />
       </Page>
