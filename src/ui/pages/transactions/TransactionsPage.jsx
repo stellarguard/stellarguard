@@ -11,7 +11,11 @@ import { Page, DashboardFab } from '../../components';
 import TransactionCard from './TransactionCard';
 
 const styles = theme => {
-  return {};
+  return {
+    goBack: {
+      textDecoration: 'none'
+    }
+  };
 };
 
 @withStyles(styles)
@@ -33,7 +37,8 @@ class TransactionsPage extends Component {
   render() {
     const { classes } = this.props;
     const transactions = this.transactions;
-    const loading = !transactions;
+    const loading = this.props.rootStore.transactionsStore
+      .areTransactionsLoading;
 
     return (
       <Page title="Pending Transactions" loading={loading}>
@@ -61,6 +66,7 @@ class TransactionsPage extends Component {
                   color="primary"
                   variant="display1"
                   component={Link}
+                  className={classes.goBack}
                   to="/"
                 >
                   Go Back Home

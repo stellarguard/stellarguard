@@ -1,7 +1,8 @@
-import { action, observable, computed } from 'mobx';
+import { action, observable, computed, runInAction } from 'mobx';
 import { transactionsApi } from '../api';
 
 export default class TransactionsStore {
+  @observable areTransactionsLoading = false;
   @observable transactions = new Map();
 
   constructor(rootStore) {
@@ -22,8 +23,17 @@ export default class TransactionsStore {
 
   @action
   async getTransactions() {
-    const transactions = await transactionsApi.getTransactions();
-    transactions.forEach(transaction => this.addTransaction(transaction));
+    this.areTransactionsLoading = true;
+    try {
+      const transactions = await transactionsApi.getTransactions();
+      transactions.forEach(transaction => this.addTransaction(transaction));
+    } catch (e) {
+      // TODO: Handle
+    } finally {
+      runInAction(() => {
+        this.areTransactionsLoading = false;
+      });
+    }
   }
 
   @computed
