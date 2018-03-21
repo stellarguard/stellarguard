@@ -159,6 +159,24 @@ class TransactionCard extends Component {
               </Button>
             </CardActions>
           )}
+          {transaction.isError && (
+            <CardActions>
+              <LoadingButton
+                loading={this.state.isDenyLoading}
+                className={classes.denyButton}
+                color="inherit"
+                onClick={this.onDenyTransactionClick}
+              >
+                Deny
+              </LoadingButton>
+              <Button
+                color="primary"
+                onClick={this.onAuthorizeTransactionClick}
+              >
+                Try Again
+              </Button>
+            </CardActions>
+          )}
           {transaction.isSuccessful ||
             (transaction.isError && (
               <React.Fragment>
