@@ -3,6 +3,7 @@ const router = express.Router();
 
 const session = require('../session');
 const config = require('../config');
+const cors = require('cors');
 
 const { transactions, users } = require('../lib');
 const Controller = require('./Controller');
@@ -76,7 +77,7 @@ class TransactionsController extends Controller {
 
 const controller = new TransactionsController();
 // open route, no csrf or login required
-router.post('/', controller.createTransaction);
+router.post('/', cors(), controller.createTransaction);
 
 // logged in routes
 router.use(session.csrf);
