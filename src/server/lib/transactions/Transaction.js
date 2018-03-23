@@ -1,6 +1,7 @@
 const stellar = require('../stellar');
 const { crypto } = require('../utils');
 const config = require('../../config');
+const { urls } = require('../utils');
 
 class Transaction {
   static fromXdr(xdr) {
@@ -73,15 +74,22 @@ class Transaction {
   }
 
   toJSON() {
-    return {
+    const json = {
       id: this.id,
-      userId: this.userId,
       xdr: this.xdr,
       status: this.status,
       result: this.result,
       dateCreated: this.dateCreated,
-      isDeactivateAccountTransaction: this.isDeactivateAccountTransaction
+      stellarGuard: true,
+      url: urls.withHost(urls.authorizeTransaction({ transaction: this }))
     };
+
+    const isDeactivateAccountTransaction = this.isDeactivateAccountTransaction;
+    if (isDeactivateAccountTransaction) {
+      json.isDeactivateAccountTransaction = isDeactivateAccountTransaction;
+    }
+
+    return json;
   }
 }
 

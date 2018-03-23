@@ -4,22 +4,13 @@ import StellarSdk from 'stellar-sdk'; // TODO -- lazy-load?
 class Transaction {
   @observable id;
   @observable xdr;
-  @observable userId;
   @observable status;
   @observable result;
   @observable isDeactivateAccountTransaction;
 
-  constructor({
-    id,
-    xdr,
-    userId,
-    status,
-    result,
-    isDeactivateAccountTransaction
-  }) {
+  constructor({ id, xdr, status, result, isDeactivateAccountTransaction }) {
     this.id = id;
     this.xdr = xdr;
-    this.userId = userId;
     this.status = status;
     this.result = result;
     this.isDeactivateAccountTransaction = isDeactivateAccountTransaction;
@@ -48,7 +39,6 @@ class Transaction {
 
   @computed
   get isPending() {
-    console.log(this.status);
     return this.status === Transaction.Status.Pending;
   }
 
