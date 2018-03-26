@@ -93,9 +93,8 @@ class AppFooter extends Component {
               <ExternalFooterLink onClick={this.openDonateDialog}>
                 Donate
               </ExternalFooterLink>
-              <FooterLink className={classes.link} to="/faq">
-                FAQ
-              </FooterLink>
+              <FooterLink to="/faq">FAQ</FooterLink>
+              <FooterLink to="/supported-wallets">Supported Wallets</FooterLink>
               <ExternalFooterLink href="https://github.com/stellarguard/stellarguard-issues/issues">
                 Request a Feature or Report a Bug
               </ExternalFooterLink>
