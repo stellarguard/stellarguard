@@ -190,6 +190,18 @@ class SubmitTransactionPage extends Component {
             id="supported-wallets"
           >
             <Typography paragraph>
+              These wallets fully support StellarGuard.
+            </Typography>
+            <Typography paragraph component="div">
+              <ul>
+                <li>
+                  <a className={classes.link} href="https://mystellar.tools">
+                    MyStellar.Tools
+                  </a>
+                </li>
+              </ul>
+            </Typography>
+            <Typography paragraph>
               StellarGuard requires you to use{' '}
               <a
                 className={classes.link}
@@ -197,8 +209,9 @@ class SubmitTransactionPage extends Component {
               >
                 signed transaction XDRs
               </a>{' '}
-              in order to submit a transaction. Your wallet must allow you to
-              copy the signed XDR before it is submitted to the Stellar network.
+              in order to submit a transaction. Some wallets do not directly
+              support StellarGuard, but may allow you to copy the signed XDR
+              before it is submitted to the Stellar network.
             </Typography>
             <Typography paragraph>Wallets that support this are: </Typography>
             <Typography paragraph component="div">
@@ -232,6 +245,16 @@ class SubmitTransactionPage extends Component {
             question="I'm a wallet developer, how do I submit my users' transactions directly to StellarGuard?"
             id="wallet-developers"
           >
+            <Typography paragraph>
+              Check out the convient{' '}
+              <a
+                className={classes.link}
+                href="https://github.com/stellarguard/stellarguard-js-sdk"
+              >
+                StellarGuard JavaScript SDK
+              </a>{' '}
+              for implementation details and examples.
+            </Typography>
             <Typography paragraph>
               There are two steps to submit transactions directly to
               StellarGuard via the API.

@@ -13,6 +13,7 @@ import SubmitTransactionPage from './pages/transactions/SubmitTransactionPage';
 import AuthorizeTransactionPage from './pages/transactions/AuthorizeTransactionPage';
 import TransactionsPage from './pages/transactions/TransactionsPage';
 import FaqPage from './pages/misc/FaqPage';
+import SupportedWallets from './pages/misc/SupportedWalletsPage';
 
 import AppLoader from './AppLoader';
 
@@ -35,6 +36,7 @@ class AppRoutes extends React.Component {
         <Route exact path="/forgot-password" component={ForgotPasswordPage} />
         <Route exact path="/reset-password" component={ResetPasswordPage} />
         <Route exact path="/faq" component={FaqPage} />
+        <Route exact path="/supported-wallets" component={SupportedWallets} />
         <Route path="/" component={ProtectedRoutes} />
         <Route component={FourOhFourPage} />
       </Switch>
