@@ -33,6 +33,7 @@ if (!config.isDevMode) {
 } else {
   app.use(logger('dev'));
 }
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(config.sessionSecret));
@@ -51,6 +52,8 @@ if (!config.isDevMode) {
       next();
     }
   });
+
+  require('./listeners').start();
 }
 
 if (config.isDevMode) {

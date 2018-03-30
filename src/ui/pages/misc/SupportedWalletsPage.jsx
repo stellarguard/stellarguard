@@ -37,7 +37,8 @@ class SubmitTransactionPage extends Component {
             </Typography>
             <Typography variant="subheading">
               Instead of copying your transaction to StellarGuard you can use
-              the wallet like normal and it will submit to StellarGuard for you.
+              the wallet like normal and transactions will be submited to
+              StellarGuard.
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>

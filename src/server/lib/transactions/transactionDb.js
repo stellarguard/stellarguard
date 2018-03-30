@@ -1,5 +1,8 @@
 const db = require('../db');
 
+const { UNIQUE_VIOLATION } = require('pg-error-constants');
+const { DuplicateTransactionError } = require('errors/transaction');
+
 class TransactionDb {
   constructor({ db }) {
     this.db = db;
@@ -23,14 +26,23 @@ class TransactionDb {
     return rows;
   }
 
-  async create({ userId, xdr, ipAddress }) {
-    const { rows } = await this.db.pg.query(
-      `INSERT INTO "transaction" (user_id, xdr, ip_address)
-       VALUES ($1, $2, $3)
+  async create({ userId, xdr, ipAddress, hash, submittedFrom }) {
+    try {
+      const { rows } = await this.db.pg.query(
+        `INSERT INTO "transaction" (user_id, xdr, ip_address, hash, submitted_from)
+       VALUES ($1, $2, $3, $4, $5)
        RETURNING *`,
-      [userId, xdr, ipAddress]
-    );
-    return rows[0];
+        [userId, xdr, ipAddress, hash, submittedFrom]
+      );
+      return rows[0];
+    } catch (e) {
+      switch (e.code) {
+        case UNIQUE_VIOLATION:
+          throw new DuplicateTransactionError();
+        default:
+          throw e;
+      }
+    }
   }
 
   async updateStatus({ id, status, result }) {

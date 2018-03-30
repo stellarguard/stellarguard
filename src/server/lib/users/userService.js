@@ -7,9 +7,6 @@ const userRepository = require('./userRepository');
 const { InvalidEmailVerificationCodeError } = require('errors/user');
 const passwords = require('./passwords');
 
-const { authenticatorService } = require('../tfa');
-const { accountsService } = require('../accounts');
-const { transactionService } = require('../transactions');
 const stellar = require('../stellar');
 const { emailService } = require('../email');
 const userValidator = require('./userValidator');
@@ -52,20 +49,6 @@ class UserService {
 
     await userRepository.verifyEmail(user);
     return true;
-  }
-
-  async getFullUser(user) {
-    const requests = [
-      user.authenticator || authenticatorService.getForUser(user),
-      user.accounts || accountsService.getForUser(user),
-      user.transactions || transactionService.getForUser(user)
-    ];
-
-    const [authenticator, accounts, transactions] = await Promise.all(requests);
-    user.authenticator = authenticator;
-    user.accounts = accounts;
-    user.transactions = transactions;
-    return user;
   }
 
   /**

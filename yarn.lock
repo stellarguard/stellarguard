@@ -361,6 +361,13 @@ axios@^0.12.0:
   dependencies:
     follow-redirects "0.0.7"
 
+axios@^0.16.1:
+  version "0.16.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.16.2.tgz#ba4f92f17167dfbab40983785454b9ac149c3c6d"
+  dependencies:
+    follow-redirects "^1.2.3"
+    is-buffer "^1.1.5"
+
 axios@^0.17.1:
   version "0.17.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.17.1.tgz#2d8e3e5d0bdbd7327f91bc814f5c57660f81824d"
@@ -1758,6 +1765,13 @@ constants-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/constants-browserify/-/constants-browserify-1.0.0.tgz#c20b96d8c617748aaf1c16021760cd27fcb8cb75"
 
+constellation-api@johansten/constellation-api:
+  version "1.0.0"
+  resolved "https://codeload.github.com/johansten/constellation-api/tar.gz/4a2139fa13df42a65f299133480a5cd87614145a"
+  dependencies:
+    axios "^0.16.1"
+    eventsource "^0.2.2"
+
 contains-path@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/contains-path/-/contains-path-0.1.0.tgz#fe8cf184ff6670b6baef01a9d4861a5cbec4120a"
@@ -2525,7 +2539,7 @@ events@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/events/-/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
 
-eventsource@^0.2.1:
+eventsource@^0.2.1, eventsource@^0.2.2:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/eventsource/-/eventsource-0.2.3.tgz#30b8f21b40d86968eaeebd199a95072ee54b0df3"
   dependencies:
@@ -2785,7 +2799,7 @@ follow-redirects@0.0.7:
     debug "^2.2.0"
     stream-consume "^0.1.0"
 
-follow-redirects@^1.2.5:
+follow-redirects@^1.2.3, follow-redirects@^1.2.5:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.4.1.tgz#d8120f4518190f55aac65bb6fc7b85fcd666d6aa"
   dependencies:

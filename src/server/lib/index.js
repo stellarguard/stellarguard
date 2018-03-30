@@ -6,5 +6,6 @@ module.exports = {
   payments: require('./payments'),
   accounts: require('./accounts'),
   utils: require('./utils'),
+  constellation: require('./constellation'),
   db: require('./db')
 };
