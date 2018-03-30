@@ -3,7 +3,7 @@ import { withStyles, Grid, Typography } from 'material-ui';
 import { Helmet } from 'react-helmet';
 
 import { observer } from 'mobx-react';
-import { withRouter } from 'react-router';
+import { withRouter, Link } from 'react-router-dom';
 
 import { Page, DashboardFab, ScrollIntoView } from '../../components';
 import FaqItem from './FaqItem';
@@ -190,41 +190,22 @@ class SubmitTransactionPage extends Component {
             id="supported-wallets"
           >
             <Typography paragraph>
-              These wallets fully support StellarGuard.
-            </Typography>
-            <Typography paragraph component="div">
-              <ul>
-                <li>
-                  <a className={classes.link} href="https://mystellar.tools">
-                    MyStellar.Tools
-                  </a>
-                </li>
-              </ul>
+              See the{' '}
+              <Link to="/supported-wallets" className={classes.link}>
+                Supported Wallets page
+              </Link>{' '}
+              for a full list of supported wallets.
             </Typography>
             <Typography paragraph>
-              StellarGuard requires you to use{' '}
+              Even if your wallet is not listed there, you still may be able to
+              use it if it lets you copy{' '}
               <a
                 className={classes.link}
                 href="https://www.stellar.org/developers/horizon/reference/xdr.html"
               >
                 signed transaction XDRs
               </a>{' '}
-              in order to submit a transaction. Some wallets do not directly
-              support StellarGuard, but may allow you to copy the signed XDR
-              before it is submitted to the Stellar network.
-            </Typography>
-            <Typography paragraph>Wallets that support this are: </Typography>
-            <Typography paragraph component="div">
-              <ul>
-                <li>
-                  <a
-                    className={classes.link}
-                    href="https://www.stellar.org/laboratory/#txbuilder?network=public"
-                  >
-                    Stellar.org Transaction Builder
-                  </a>
-                </li>
-              </ul>
+              so you can submit them to StellarGuard.
             </Typography>
           </FaqGridItem>
           <FaqGridItem

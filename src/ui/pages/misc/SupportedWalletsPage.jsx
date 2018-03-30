@@ -7,10 +7,18 @@ import { withRouter } from 'react-router';
 
 import { Page, DashboardFab } from '../../components';
 
-import { MyStellarToolsCard, StellarLaboratoryCard } from './Wallets';
+import {
+  MyStellarToolsCard,
+  StellarLaboratoryCard,
+  StargazerCard,
+  StellarSignerCard
+} from './Wallets';
 
 const styles = theme => ({
   partialSupport: {
+    marginTop: theme.spacing.unit * 2
+  },
+  walletDevs: {
     marginTop: theme.spacing.unit * 2
   }
 });
@@ -42,8 +50,11 @@ class SubmitTransactionPage extends Component {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6}>
-            <MyStellarToolsCard />
+            <StargazerCard />
           </Grid>
+          {/* <Grid item xs={12} sm={6}>
+            <MyStellarToolsCard />
+          </Grid> */}
           <Grid item xs={12} className={classes.partialSupport}>
             <Typography variant="title" gutterBottom>
               Partially Supported Wallets
@@ -56,6 +67,15 @@ class SubmitTransactionPage extends Component {
           <Grid item xs={12} sm={6}>
             <StellarLaboratoryCard />
           </Grid>
+          <Grid item xs={12} sm={6}>
+            <StellarSignerCard />
+          </Grid>
+        </Grid>
+        <Grid item xs={12} className={classes.walletDevs}>
+          <Typography variant="subheading" gutterBottom>
+            Are you a wallet developer and want to integrate StellarGuard and be
+            featured here? Email developers@stellarguard.me
+          </Typography>
         </Grid>
         <DashboardFab />
       </Page>
