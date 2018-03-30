@@ -57,7 +57,7 @@ class StellarAccountsCard extends Component {
           />
           <CardContent>
             <List>
-              {rootStore.currentUser.accounts.map(account => (
+              {(rootStore.currentUser.accounts || []).map(account => (
                 <ListItem key={account.id}>
                   <ListItemAvatar>
                     <Avatar>

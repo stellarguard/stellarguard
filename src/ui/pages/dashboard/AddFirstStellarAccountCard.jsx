@@ -55,7 +55,7 @@ class AddFirstStellarAccountCard extends React.Component {
 
     this.state = {
       isMultiSigFormValid: false,
-      isExpanded: !props.rootStore.currentUser.accounts.length
+      isExpanded: !(props.rootStore.currentUser.accounts || []).length
     };
   }
 
