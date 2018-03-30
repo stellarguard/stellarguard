@@ -1,7 +1,5 @@
 const User = require('./User');
 
-const accountsRepository = require('../accounts/stellarAccountsRepository');
-
 class UserRepository {
   constructor() {
     this.userDb = require('./userDb');

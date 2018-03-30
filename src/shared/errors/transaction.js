@@ -68,6 +68,16 @@ class TransactionAlreadySubmittedError extends AppError {
   }
 }
 
+class DuplicateTransactionError extends AppError {
+  constructor() {
+    super({
+      code: 208,
+      message:
+        'This transaction has already been submitted to StellarGuard. Please create a new transaction and submit again.'
+    });
+  }
+}
+
 module.exports = {
   NoUserForSourceError,
   VariedSourceAccountsError,
@@ -75,5 +85,6 @@ module.exports = {
   TransactionNotFoundError,
   TransactionNotOwnedByUserError,
   InvalidAuthorizationCodeError,
-  TransactionAlreadySubmittedError
+  TransactionAlreadySubmittedError,
+  DuplicateTransactionError
 };

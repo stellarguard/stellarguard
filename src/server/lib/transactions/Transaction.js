@@ -15,7 +15,8 @@ class Transaction {
     status = Transaction.Status.Pending,
     dateCreated,
     ipAddress,
-    result
+    result,
+    submittedFrom
   }) {
     this.id = id;
     this.userId = userId;
@@ -24,6 +25,7 @@ class Transaction {
     this.dateCreated = dateCreated;
     this.result = result;
     this.ipAddress = ipAddress;
+    this.submittedFrom = submittedFrom;
   }
 
   get source() {
@@ -44,9 +46,14 @@ class Transaction {
   }
 
   async hasValidSignatures() {
-    return await stellar.transactions.hasValidSignatures(
-      this.stellarTransaction
+    return (
+      this.isFromConstellation() ||
+      (await stellar.transactions.hasValidSignatures(this.stellarTransaction))
     );
+  }
+
+  get hash() {
+    return this.stellarTransaction.hash().toString('hex');
   }
 
   getAuthorizationCode() {
@@ -71,6 +78,10 @@ class Transaction {
       this.stellarTransaction,
       secretKey
     );
+  }
+
+  isFromConstellation() {
+    return this.submittedFrom === 'constellation';
   }
 
   toJSON() {

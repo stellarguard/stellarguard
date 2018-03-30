@@ -50,7 +50,10 @@ class TransactionService {
       throw new TransactionNotOwnedByUserError();
     }
 
-    if (transaction.status !== Transaction.Status.Pending) {
+    if (
+      transaction.status !== Transaction.Status.Pending &&
+      transaction.status != Transaction.Status.Error
+    ) {
       throw new TransactionAlreadySubmittedError();
     }
 
@@ -62,9 +65,17 @@ class TransactionService {
     transaction.sign(user.signerSecretKey);
 
     try {
-      const result = await stellar.transactions.submitTransaction(
-        transaction.stellarTransaction
-      );
+      let result;
+      if (transaction.isFromConstellation()) {
+        // TODO -- this is a super dirty hack to get around circular dependency
+        await require('../constellation').constellationService.submitSignatures(
+          transaction
+        );
+      } else {
+        result = await stellar.transactions.submitTransaction(
+          transaction.stellarTransaction
+        );
+      }
 
       if (transaction.isDeactivateAccountTransaction) {
         await accountsService.deactivateAccount({
@@ -83,6 +94,8 @@ class TransactionService {
           status: Transaction.Status.Error,
           result: JSON.stringify(e.data)
         });
+      } else {
+        throw e;
       }
     }
   }
@@ -96,7 +109,10 @@ class TransactionService {
       throw new TransactionNotOwnedByUserError();
     }
 
-    if (transaction.status !== Transaction.Status.Pending) {
+    if (
+      transaction.status !== Transaction.Status.Pending &&
+      transaction.status != Transaction.Status.Error
+    ) {
       throw new TransactionAlreadySubmittedError();
     }
 
