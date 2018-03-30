@@ -99,7 +99,7 @@ class SubmitTransactionPage extends Component {
             <Typography paragraph>
               In the future, if a paid plan is introduced you will ALWAYS have
               the option to remove the StellarGuard signers from your Stellar
-              account, even you have not yet paid.
+              account, even if you have not yet paid.
             </Typography>
           </FaqGridItem>
           <FaqGridItem
@@ -225,6 +225,21 @@ class SubmitTransactionPage extends Component {
                   </a>
                 </li>
               </ul>
+            </Typography>
+          </FaqGridItem>
+          <FaqGridItem
+            question="Is there a version that uses the Stellar Testnet so I can try it out first?"
+            id="testnet"
+          >
+            <Typography paragraph>
+              Yes.{' '}
+              <a
+                className={classes.link}
+                href="https://www.stellar.org/laboratory/#txbuilder?network=public"
+              >
+                https://test.stellarguard.me
+              </a>{' '}
+              uses the Testnet.
             </Typography>
           </FaqGridItem>
           <FaqGridItem
