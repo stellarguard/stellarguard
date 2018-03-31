@@ -1,3 +1,4 @@
+.DS_Store
 node_modules
 dbs
 .cache
@@ -10,3 +11,4 @@ app.yaml
 
 yarn-error.log
 npm-error.log
+
