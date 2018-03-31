@@ -10,3 +10,4 @@ export { default as ButtonLink } from './ButtonLink';
 export { default as CopyToClipboard } from './CopyToClipboard';
 export { default as OnClickPopover } from './OnClickPopover';
 export { default as ScrollIntoView } from './ScrollIntoView';
+export { default as LogoAvatar } from './LogoAvatar';

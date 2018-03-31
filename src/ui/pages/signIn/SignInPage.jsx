@@ -4,7 +4,7 @@ import { Redirect } from 'react-router';
 import { inject, observer } from 'mobx-react';
 
 import SignInForm from './SignInForm';
-import Page from '../../components/Page';
+import { Page, LogoAvatar } from '../../components';
 
 const styles = () => ({
   root: {
@@ -40,6 +40,7 @@ class SignInPage extends React.Component {
               <CardHeader
                 title="Sign in"
                 subheader="with your StellarGuard account"
+                avatar={<LogoAvatar />}
               />
               <CardContent>
                 <SignInForm />
