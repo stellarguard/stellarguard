@@ -9,16 +9,12 @@ const styles = () => ({});
 @inject('rootStore')
 @observer
 class AppSnackbar extends Component {
-  get uiState() {
-    return this.props.rootStore.uiState;
-  }
-
   closeSnackbar = () => {
-    this.uiState.closeSnackbar();
+    this.props.rootStore.uiState.closeSnackbar();
   };
 
   render() {
-    const snackbar = this.uiState.snackbar;
+    const snackbar = this.props.rootStore.uiState.snackbar;
     if (!snackbar) {
       return null;
     }
@@ -26,8 +22,8 @@ class AppSnackbar extends Component {
     return (
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        autoHideDuration={8000}
-        open={true}
+        autoHideDuration={5000}
+        open={!!snackbar}
         onClose={this.closeSnackbar}
         message={snackbar.message}
         action={
