@@ -52,6 +52,7 @@ function bumpVersion() {
   }
 
   version = require('../package.json').version;
+  process.env.APP_VERSION = version;
 }
 
 async function build() {

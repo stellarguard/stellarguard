@@ -3,6 +3,8 @@ import { withStyles, Divider, Typography, Grid } from 'material-ui';
 
 import DonateDialog from './DonateDialog';
 
+import config from '../config';
+
 import { Link } from 'react-router-dom';
 
 const styles = theme => ({
@@ -84,7 +86,12 @@ class AppFooter extends Component {
               >
                 2018 © StellarGuard LLC
               </Typography>
-              <Typography color="inherit">help@stellarguard.me</Typography>
+              <Typography color="inherit" gutterBottom>
+                help@stellarguard.me
+              </Typography>
+              <Typography color="inherit" gutterBottom>
+                v{config.version}
+              </Typography>
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography color="inherit" variant="title" gutterBottom>
