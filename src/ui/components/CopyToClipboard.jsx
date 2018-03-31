@@ -19,6 +19,7 @@ class CopyToClipboard extends Component {
           anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
           open={snackbarOpen}
           onClose={this.closeSnackbar}
+          autoHideDuration={2000}
           message="Copied to Clipboard"
         />
         <ReactCopyToClipboard text={text} onCopy={this.onCopy}>
