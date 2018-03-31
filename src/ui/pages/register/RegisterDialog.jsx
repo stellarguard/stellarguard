@@ -7,9 +7,12 @@ import {
   DialogContent,
   DialogTitle,
   DialogContentText,
+  Typography,
   withMobileDialog
 } from 'material-ui';
 import RegisterForm from './RegisterForm';
+
+import { LogoAvatar } from '../../components';
 
 const styles = theme => ({
   content: {
@@ -17,6 +20,13 @@ const styles = theme => ({
     [theme.breakpoints.down('sm')]: {
       width: 'auto'
     }
+  },
+  title: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  logo: {
+    marginRight: theme.spacing.unit
   }
 });
 
@@ -30,8 +40,13 @@ class RegisterDialog extends Component {
         onClose={onClose}
         aria-labelledby="register-dialog"
       >
-        <DialogTitle id="register-dialog">
-          Register for StellarGuard
+        <DialogTitle
+          disableTypography
+          className={classes.title}
+          id="register-dialog"
+        >
+          <LogoAvatar className={classes.logo} />
+          <Typography variant="title">Register for StellarGuard</Typography>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>

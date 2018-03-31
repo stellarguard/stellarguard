@@ -6,10 +6,12 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Typography,
   withMobileDialog
 } from 'material-ui';
 
 import SignInForm from './SignInForm';
+import { LogoAvatar } from '../../components';
 
 const styles = theme => ({
   content: {
@@ -17,6 +19,13 @@ const styles = theme => ({
     [theme.breakpoints.down('sm')]: {
       width: 'auto'
     }
+  },
+  title: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  logo: {
+    marginRight: theme.spacing.unit
   }
 });
 
@@ -30,7 +39,14 @@ class SignInDialog extends Component {
         onClose={onClose}
         aria-labelledby="sign-in-dialog"
       >
-        <DialogTitle id="sign-in-dialog">Sign in to StellarGuard</DialogTitle>
+        <DialogTitle
+          disableTypography
+          className={classes.title}
+          id="sign-in-dialog"
+        >
+          <LogoAvatar className={classes.logo} />
+          <Typography variant="title">Sign in to StellarGuard</Typography>
+        </DialogTitle>
         <DialogContent className={classes.content}>
           <SignInForm
             id="sign-in-form-for-dialog"

@@ -95,12 +95,20 @@ class SecurityInfoCard extends React.Component {
           to protect your account.
         </InfoCardParagraph>
         <InfoCardParagraph>
-          That means that even if a hacker steals your secret key, StellarGuard
-          will prevent him from taking your XLM.
+          That means that even if a hacker steals your secret key or the wallet
+          you&apos;re using is not untrustworthy, StellarGuard will prevent them
+          from taking your XLM.
         </InfoCardParagraph>
         <InfoCardParagraph>
-          If StellarGuard had been around during the Blackwallet hack, accounts
-          protected by it would have been completely safe.
+          If StellarGuard had been around during{' '}
+          <a
+            className={classes.link}
+            href="https://cointelegraph.com/news/blackwallet-hack-400k-in-stellar-stolen-hosting-provider-possibly-at-fault"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            the BlackWallet hack
+          </a>, accounts protected by it would have been completely safe.
         </InfoCardParagraph>
       </HomeInfoCard>
     );
