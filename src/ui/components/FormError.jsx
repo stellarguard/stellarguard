@@ -4,24 +4,29 @@ import { withStyles, Typography } from 'material-ui';
 const styles = theme => ({
   root: {
     color: theme.palette.error.main,
-    marginBottom: theme.spacing.unit * 2
+    marginBottom: theme.spacing.unit
   }
 });
 
 class FormError extends Component {
+  get hasErrors() {
+    const errors = this.props.errors;
+    return errors && errors.error;
+  }
+
   render() {
     const { classes, errors } = this.props;
+    if (!this.hasErrors) {
+      return null;
+    }
+
     return (
       <div className={classes.root}>
         <Typography color="error" variant="subheading">
-          {this.renderErrors(errors)}
+          {errors.error}
         </Typography>
       </div>
     );
-  }
-
-  renderErrors(errors) {
-    return (errors && errors.error) || null;
   }
 }
 
