@@ -61,8 +61,10 @@
     "start": "NODE_PATH=src/shared node ./src/server/bin/www",
     "deploy:test": "node ./scripts/deploy test",
     "deploy:prod": "node ./scripts/deploy prod",
-    "dev": "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
-    "run-job": "NODE_PATH=src/shared node ./src/jobs/run"
+    "dev":
+      "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
+    "run-job": "NODE_PATH=src/shared node ./src/jobs/run",
+    "watch": "parcel watch src/ui/index.html"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.5",
