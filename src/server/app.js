@@ -57,6 +57,8 @@ if (!config.isDevMode) {
 }
 
 if (config.isDevMode) {
+  const version = require('../../package.json').version;
+  process.env.APP_VERSION = version;
   const Bundler = require('parcel-bundler');
   const bundler = new Bundler(path.resolve(__dirname, '../ui/index.html'));
   bundler.bundle();
