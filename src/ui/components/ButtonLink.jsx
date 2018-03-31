@@ -3,12 +3,7 @@ import { withStyles, Button } from 'material-ui';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 
-const styles = theme => ({
-  link: {
-    color: theme.palette.primary.main,
-    textDecoration: 'none'
-  }
-});
+const styles = theme => ({});
 
 @withStyles(styles)
 @observer

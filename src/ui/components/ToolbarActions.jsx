@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
-import { withStyles, Menu, MenuItem, Button } from 'material-ui';
-import AccountCircle from 'material-ui-icons/AccountCircle';
+import {
+  withStyles,
+  Menu,
+  MenuItem,
+  Button,
+  Divider,
+  Hidden
+} from 'material-ui';
+import { AccountCircle, Add } from 'material-ui-icons';
 import { inject, observer } from 'mobx-react';
+
+import { ButtonLink } from '../components';
 
 const styles = theme => ({
   leftIcon: {
@@ -23,6 +32,7 @@ class ToolbarActions extends Component {
   };
 
   handleSignOutClick = () => {
+    this.handleUserMenuClose();
     this.props.rootStore.sessionStore.signOut();
   };
 
@@ -32,15 +42,26 @@ class ToolbarActions extends Component {
     if (rootStore.sessionStore.isSignedIn) {
       return (
         <div>
-          <Button color="inherit" onClick={this.handleUserMenuOpen}>
-            <AccountCircle className={classes.leftIcon}>me</AccountCircle>
-            {rootStore.sessionStore.currentUser.email}
+          {rootStore.currentUser.hasAccounts && (
+            <ButtonLink color="inherit" to="/transactions/new" size="small">
+              <Add className={classes.leftIcon}>New Transacation</Add>
+              <Hidden xsDown>New Transaction</Hidden>
+            </ButtonLink>
+          )}
+          <Button
+            color="inherit"
+            onClick={this.handleUserMenuOpen}
+            size="small"
+          >
+            <AccountCircle>me</AccountCircle>
           </Button>
           <Menu
             anchorEl={menuAnchor}
-            open={Boolean(menuAnchor)}
+            open={!!menuAnchor}
             onClose={this.handleUserMenuClose}
           >
+            <MenuItem disabled>{rootStore.currentUser.email}</MenuItem>
+            <Divider />
             <MenuItem onClick={this.handleSignOutClick}>Sign out</MenuItem>
           </Menu>
         </div>
