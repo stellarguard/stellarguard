@@ -68,10 +68,7 @@ class DashboardPage extends Component {
   }
 
   stellarAccountsCard() {
-    if (
-      this.props.rootStore.currentUser.accounts &&
-      this.props.rootStore.currentUser.accounts.length
-    ) {
+    if (this.props.rootStore.currentUser.hasAccounts) {
       return (
         <Grid item xs={12}>
           <StellarAccountsCard />

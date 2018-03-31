@@ -33,6 +33,11 @@ export default class User {
   }
 
   @computed
+  get hasAccounts() {
+    return this.accounts && this.accounts.length;
+  }
+
+  @computed
   get hasAuthenticator() {
     return !!this.authenticator;
   }
