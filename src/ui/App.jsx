@@ -1,5 +1,5 @@
 import React from 'react';
-import { Reboot } from 'material-ui';
+import { CssBaseline } from 'material-ui';
 
 import AppHeader from './components/AppHeader';
 import AppFooter from './components/AppFooter';
@@ -22,7 +22,7 @@ class App extends React.Component {
   render() {
     return (
       <AppTheme>
-        <Reboot />
+        <CssBaseline />
         <AppDialogs />
         <AppSnackbar />
         <AppHeader />

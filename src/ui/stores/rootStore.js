@@ -5,9 +5,9 @@ import TransactionsStore from './transactionsStore';
 import TfaStore from './tfaStore.js';
 import AccountsStore from './accountsStore';
 
-import { configure, computed } from 'mobx';
+import { useStrict, computed } from 'mobx';
 
-configure({ enforceActions: true });
+useStrict(true);
 
 export default class RootStore {
   uiState = new UiStateStore(this);
