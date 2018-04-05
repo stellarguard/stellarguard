@@ -41,10 +41,7 @@ app.use(cookieParser(config.sessionSecret));
 const sessionMiddleware = session.configure();
 app.use('/api', sessionMiddleware, apiRoutes);
 if (!config.isDevMode) {
-  const indexHtml = fs.readFileSync(
-    path.join(UI_DIST, version, 'index.html'),
-    'utf8'
-  );
+  const indexHtml = fs.readFileSync(path.join(UI_DIST, 'index.html'), 'utf8');
   app.get('/*', session.csrf, function(req, res, next) {
     if (req.accepts('html')) {
       res.send(indexHtml.replace('%CSRF_TOKEN%', req.csrfToken()));
@@ -57,7 +54,6 @@ if (!config.isDevMode) {
 }
 
 if (config.isDevMode) {
-  const version = require('../../package.json').version;
   process.env.APP_VERSION = version;
   const Bundler = require('parcel-bundler');
   const bundler = new Bundler(path.resolve(__dirname, '../ui/index.html'));
