@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   withStyles,
   Card,
@@ -17,7 +17,7 @@ import cx from 'classnames';
 
 import { Operations } from './operations';
 import AuthorizeTransactionDialog from './AuthorizeTransactionDialog';
-import { LoadingButton } from '../../components';
+import { LoadingButton, PublicKey } from '../../components';
 
 const styles = theme => ({
   denyButton: {
@@ -41,6 +41,11 @@ const styles = theme => ({
   },
   error: {
     backgroundColor: theme.palette.error.main
+  },
+  publicKey: {
+    width: 255,
+    minWidth: '100%',
+    display: 'block'
   }
 });
 
@@ -129,12 +134,17 @@ class TransactionCard extends Component {
             avatar={<TransactionHeaderAvatar transaction={transaction} />}
             title={<TransactionStatus transaction={transaction} />}
             subheader={
-              <div>
-                <div>Source: {transaction.source}</div>
+              <Fragment>
+                <div>
+                  Source:{' '}
+                  <PublicKey className={classes.publicKey}>
+                    {transaction.source}
+                  </PublicKey>
+                </div>
                 {transaction.memoText && (
                   <div>Memo: {transaction.memoText}</div>
                 )}
-              </div>
+              </Fragment>
             }
           />
           <CardContent>
