@@ -4,6 +4,7 @@ process.env.NODE_ENV = 'production';
 const env = process.argv[2];
 const path = require('path');
 const rimraf = util.promisify(require('rimraf'));
+const dryRun = !!process.env.DRY_RUN;
 
 const { execSync, spawn } = require('child_process');
 
@@ -134,10 +135,16 @@ function deploy() {
 }
 
 (async () => {
-  await loadEnv();
-  await clean();
-  await bumpVersion();
-  await build();
-  await migrate();
-  await deploy();
+  if (dryRun) {
+    await loadEnv();
+    await clean();
+    await build();
+  } else {
+    await loadEnv();
+    await clean();
+    await bumpVersion();
+    await build();
+    await migrate();
+    await deploy();
+  }
 })();
