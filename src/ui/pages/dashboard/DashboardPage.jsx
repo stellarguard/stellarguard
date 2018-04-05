@@ -82,9 +82,10 @@ class DashboardPage extends Component {
     const hasSideColumn = rootStore.currentUser.pendingTransactions.length > 0;
     return (
       <Page>
-        <Grid container>
+        <Grid container spacing={16}>
           <Grid
             container
+            spacing={16}
             item
             xs={12}
             sm={12}
@@ -99,6 +100,7 @@ class DashboardPage extends Component {
           {hasSideColumn ? (
             <Grid
               container
+              spacing={16}
               item
               xs={12}
               sm={12}

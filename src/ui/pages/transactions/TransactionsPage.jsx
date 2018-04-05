@@ -47,7 +47,7 @@ class TransactionsPage extends Component {
         </Helmet>
         <DashboardFab />
         {!loading && (
-          <Grid container>
+          <Grid container spacing={16}>
             {transactions.length ? (
               transactions.map(transaction => (
                 <Grid key={transaction.id} item xs={12}>
