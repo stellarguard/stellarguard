@@ -11,7 +11,8 @@ import {
   MyStellarToolsCard,
   StellarLaboratoryCard,
   StargazerCard,
-  StellarSignerCard
+  StellarSignerCard,
+  PegasusWalletCard
 } from './Wallets';
 
 const styles = theme => ({
@@ -22,6 +23,17 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 2
   }
 });
+
+class WalletGridItem extends Component {
+  render() {
+    const { children } = this.props;
+    return (
+      <Grid item xs={12} sm={6}>
+        {children}
+      </Grid>
+    );
+  }
+}
 
 @withStyles(styles)
 @withRouter
@@ -49,12 +61,15 @@ class SubmitTransactionPage extends Component {
               StellarGuard.
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <WalletGridItem>
             <StargazerCard />
-          </Grid>
-          {/* <Grid item xs={12} sm={6}>
+          </WalletGridItem>
+          <WalletGridItem>
+            <PegasusWalletCard />
+          </WalletGridItem>
+          {/* <WalletGridItem>
             <MyStellarToolsCard />
-          </Grid> */}
+          </WalletGridItem> */}
           <Grid item xs={12} className={classes.partialSupport}>
             <Typography variant="title" gutterBottom>
               Partially Supported Wallets
@@ -64,12 +79,12 @@ class SubmitTransactionPage extends Component {
               can submit it yourself to StellarGuard.
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <WalletGridItem>
             <StellarLaboratoryCard />
-          </Grid>
-          <Grid item xs={12} sm={6}>
+          </WalletGridItem>
+          <WalletGridItem>
             <StellarSignerCard />
-          </Grid>
+          </WalletGridItem>
         </Grid>
         <Grid item xs={12} className={classes.walletDevs}>
           <Typography variant="subheading" gutterBottom>
