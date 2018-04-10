@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import cx from 'classnames';
 import { withStyles, Typography, Card, CardContent } from 'material-ui';
 
-import stargazerLogo from './stargazer_logo.png';
-import stellarLabsLogo from './stellar_rocket.png';
-import stellarSignerLogo from './stellarsigner_logo.png';
-
 import config from '../../config';
 
 const styles = theme => ({
@@ -117,6 +113,8 @@ class MyStellarToolsCard extends Component {
   }
 }
 
+import stargazerLogo from './stargazer_logo.png';
+
 @withStyles(styles)
 class StargazerCard extends Component {
   get title() {
@@ -154,6 +152,49 @@ class StargazerCard extends Component {
     );
   }
 }
+
+import pegasusLogo from './pegasus_logo.png';
+
+@withStyles(styles)
+class PegasusWalletCard extends Component {
+  get title() {
+    return 'Pegasus';
+  }
+  get to() {
+    return 'https://pegasuswallet.com/';
+  }
+
+  get name() {
+    return <span>Pegasus</span>;
+  }
+
+  get logo() {
+    return pegasusLogo;
+  }
+
+  get description() {
+    return (
+      <span>
+        Pegasus is a light and easy to use multi-wallet / multi-currency mobile
+        app to manage your Lumens!
+      </span>
+    );
+  }
+
+  render() {
+    return (
+      <WalletCard
+        title={this.title}
+        to={this.to}
+        name={this.name}
+        logo={this.logo}
+        description={this.description}
+      />
+    );
+  }
+}
+
+import stellarLabsLogo from './stellar_rocket.png';
 
 @withStyles(styles)
 class StellarLaboratoryCard extends Component {
@@ -196,6 +237,8 @@ class StellarLaboratoryCard extends Component {
     );
   }
 }
+
+import stellarSignerLogo from './stellarsigner_logo.png';
 
 @withStyles(styles)
 class StellarSignerCard extends Component {
@@ -243,5 +286,6 @@ export {
   MyStellarToolsCard,
   StellarLaboratoryCard,
   StargazerCard,
-  StellarSignerCard
+  StellarSignerCard,
+  PegasusWalletCard
 };
