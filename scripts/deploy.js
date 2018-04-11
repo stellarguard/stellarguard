@@ -80,7 +80,7 @@ async function build() {
 
 async function uploadFiles() {
   return await execSync(
-    `gsutil -h "Cache-Control:max-age=3600000, immutable" -m cp -Z -n -r dist gs://${
+    `gsutil -h "Cache-Control:max-age=3600000, immutable" -m cp -Z -n dist/* gs://${
       config.cloudStorageBucket
     }/assets`
   );
@@ -150,8 +150,8 @@ function deploy() {
 (async () => {
   if (dryRun) {
     await loadEnv();
-    // await clean();
-    // await build();
+    await clean();
+    await build();
     await uploadFiles();
   } else {
     await loadEnv();
