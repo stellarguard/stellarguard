@@ -26,10 +26,10 @@ const envConfig = {
     appYaml: {
       scalingMinInstances: 1,
       cpuTargetUtilization: 0.7
-    }
-  },
-  cloudStorageBucket: 'cdn.stellarguard.me',
-  publicUrl: '//cdn.stellarguard.me/assets'
+    },
+    cloudStorageBucket: 'cdn.stellarguard.me',
+    publicUrl: '//cdn.stellarguard.me/assets'
+  }
 };
 
 const config = envConfig[env];
