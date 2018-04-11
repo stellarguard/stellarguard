@@ -19,20 +19,17 @@ app.set('view engine', 'ejs');
 app.set('trust proxy', true);
 
 const UI_DIST = path.join(__dirname, '../../dist');
+const UI_PUBLIC = path.join(__dirname, '../ui/public');
 
 if (!config.isDevMode) {
   app.use(logger('combined'));
-  app.use(
-    '/dist',
-    express.static(UI_DIST, {
-      fallthrough: false,
-      immutable: true,
-      maxAge: '1y'
-    })
-  );
 } else {
   app.use(logger('dev'));
 }
+
+app.get('/robots.txt', (req, res) => {
+  res.sendFile(UI_PUBLIC + '/robots.txt');
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
