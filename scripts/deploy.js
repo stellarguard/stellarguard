@@ -4,6 +4,7 @@ process.env.NODE_ENV = 'production';
 const env = process.argv[2];
 const path = require('path');
 const rimraf = util.promisify(require('rimraf'));
+const fs = require('fs');
 const dryRun = !!process.env.DRY_RUN;
 
 const { execSync, spawn } = require('child_process');
@@ -15,7 +16,9 @@ const envConfig = {
     appYaml: {
       scalingMinInstances: 1,
       cpuTargetUtilization: 0.8
-    }
+    },
+    cloudStorageBucket: 'cdn-test.stellarguard.me',
+    publicUrl: '//cdn-test.stellarguard.me/assets/'
   },
   prod: {
     dotenv: '.env.prod',
@@ -24,7 +27,9 @@ const envConfig = {
       scalingMinInstances: 1,
       cpuTargetUtilization: 0.7
     }
-  }
+  },
+  cloudStorageBucket: 'cdn.stellarguard.me',
+  publicUrl: '//cdn.stellarguard.me/assets'
 };
 
 const config = envConfig[env];
@@ -61,7 +66,7 @@ async function build() {
 
   const options = {
     outDir: `./dist/`,
-    publicUrl: `/dist/`,
+    publicUrl: config.publicUrl,
     watch: false, // whether to watch the files and rebuild them on change, defaults to process.env.NODE_ENV !== 'production'
     cache: false, // Enabled or disables caching, defaults to true
     minify: true, // Minify files, enabled if process.env.NODE_ENV === 'production'
@@ -71,6 +76,14 @@ async function build() {
 
   const bundler = new Bundler('./src/ui/index.html', options);
   return await bundler.bundle();
+}
+
+async function uploadFiles() {
+  return await execSync(
+    `gsutil -h "Cache-Control:max-age=3600000, immutable" -m cp -Z -n -r dist gs://${
+      config.cloudStorageBucket
+    }/assets`
+  );
 }
 
 async function migrate() {
@@ -137,13 +150,15 @@ function deploy() {
 (async () => {
   if (dryRun) {
     await loadEnv();
-    await clean();
-    await build();
+    // await clean();
+    // await build();
+    await uploadFiles();
   } else {
     await loadEnv();
     await clean();
     await bumpVersion();
     await build();
+    await uploadFiles();
     await migrate();
     await deploy();
   }
