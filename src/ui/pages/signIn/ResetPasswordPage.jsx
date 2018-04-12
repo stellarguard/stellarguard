@@ -70,9 +70,10 @@ class ResetPasswordPage extends React.Component {
   }
 
   onResetPassword = () => {
-    this.props.rootStore.uiState.showSnackbar(
-      'Your password has been reset. Please log in with your new password.'
-    );
+    this.props.rootStore.uiState.showSnackbar({
+      message:
+        'Your password has been reset. Please log in with your new password.'
+    });
     this.setState({ goToSignInPage: true });
   };
 }
