@@ -19,10 +19,15 @@ class AppSnackbar extends Component {
       return null;
     }
 
+    const anchorOrigin = {
+      vertical: snackbar.position || 'top',
+      horizontal: 'center'
+    };
+
     return (
       <Snackbar
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        autoHideDuration={5000}
+        anchorOrigin={anchorOrigin}
+        autoHideDuration={snackbar.duration || 5000}
         open={!!snackbar}
         onClose={this.closeSnackbar}
         message={snackbar.message}

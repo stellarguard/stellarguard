@@ -59,9 +59,11 @@ export default class UiStateStore {
   @observable snackbar;
 
   @action
-  showSnackbar(message) {
+  showSnackbar({ message, duration, position }) {
     this.snackbar = {
-      message
+      message,
+      duration,
+      position
     };
   }
 

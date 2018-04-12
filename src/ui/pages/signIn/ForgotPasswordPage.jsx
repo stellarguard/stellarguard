@@ -64,9 +64,9 @@ class ForgotPasswordPage extends React.Component {
   }
 
   goToResetPassword = () => {
-    this.props.rootStore.uiState.showSnackbar(
-      `We have sent you instructions to your email about how to reset your StellarGuard password. Look for the subject line "Instructions for changing your StellarGuard password".`
-    );
+    this.props.rootStore.uiState.showSnackbar({
+      message: `We have sent you instructions to your email about how to reset your StellarGuard password. Look for the subject line "Instructions for changing your StellarGuard password".`
+    });
     this.setState({ goToResetPassword: true });
   };
 }
