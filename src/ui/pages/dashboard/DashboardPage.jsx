@@ -28,11 +28,13 @@ const styles = theme => ({
 @observer
 class DashboardPage extends Component {
   summaryCard() {
-    return (
-      <Grid item xs={12}>
-        <SummaryCard />
-      </Grid>
-    );
+    if (this.props.rootStore.currentUser.hasAccounts) {
+      return (
+        <Grid item xs={12}>
+          <SummaryCard />
+        </Grid>
+      );
+    }
   }
 
   verifyEmailCard() {
@@ -79,7 +81,6 @@ class DashboardPage extends Component {
 
   render() {
     const { classes, rootStore } = this.props;
-    const hasSideColumn = rootStore.currentUser.pendingTransactions.length > 0;
     return (
       <Page>
         <Grid container spacing={16}>
@@ -88,28 +89,14 @@ class DashboardPage extends Component {
             spacing={16}
             item
             xs={12}
-            sm={12}
-            md={hasSideColumn ? 9 : 12}
             className={classes.contentColumn}
           >
+            {this.summaryCard()}
             {this.verifyEmailCard()}
             {this.addTwoFactorAuthCard()}
             {this.stellarAccountsCard()}
             {this.addFirstStellarAccountCard()}
           </Grid>
-          {hasSideColumn ? (
-            <Grid
-              container
-              spacing={16}
-              item
-              xs={12}
-              sm={12}
-              md={3}
-              className={classes.sideColumn}
-            >
-              {this.summaryCard()}
-            </Grid>
-          ) : null}
         </Grid>
         <SubmitTransactionFab />
       </Page>
