@@ -19,32 +19,16 @@ class AccountsService {
     return await stellarAccountsRepository.getAccountsByUserId(user.id);
   }
 
-  async findAccountsByPublicKey(publicKey, options) {
+  async findAccountsByPublicKey(publicKey) {
     return await stellarAccountsRepository.findAccountsByPublicKey(publicKey);
   }
 
   async activateAccount(account) {
-    return await stellarAccountsRepository.activateAccount(account);
+    return await this.createAccount(account);
   }
 
   async deactivateAccount(account) {
     return await stellarAccountsRepository.deactivateAccount(account);
-  }
-
-  async getMultiSigActivationTransaction(account, user, { backupSigner }) {
-    const transaction = await stellar.multisig.buildMultiSigTransaction(
-      account.publicKey,
-      {
-        memoText: user.memoText,
-        backupSigner
-      }
-    );
-
-    const xdr = stellar.transactions.toXdr(transaction);
-    return {
-      transaction,
-      xdr
-    };
   }
 }
 

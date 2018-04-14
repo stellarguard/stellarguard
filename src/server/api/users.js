@@ -4,6 +4,7 @@ const router = express.Router();
 const { users } = require('../lib');
 const session = require('../session');
 const Controller = require('./Controller');
+const { RequiredParamError } = require('errors/common');
 
 class UserController extends Controller {
   async createUser(req, res, next) {
@@ -47,15 +48,35 @@ class UserController extends Controller {
     await users.userService.resetPassword({ code, password });
     return res.json({});
   }
+
+  async getMultisigSetup(req, res) {
+    const { email } = req.params;
+    const { publicKey, backupSignerPublicKey } = req.query;
+    if (!publicKey) {
+      throw new RequiredParamError({ name: 'publicKey' });
+    }
+
+    const multiSigSetup = await users.userService.getMultisigSetup({
+      email,
+      publicKey,
+      backupSigner: backupSignerPublicKey
+    });
+
+    return res.json(multiSigSetup);
+  }
 }
 
 const controller = new UserController();
+
+// fully exposed routes
+router.get('/:email/multisig', controller.getMultisigSetup);
 
 router.use(session.csrf);
 // logged out routes
 router.post('/', controller.createUser);
 router.post('/forgot-password', controller.forgotPassword);
 router.post('/reset-password', controller.resetPassword);
+
 // logged in routes
 router.use(session.ensureLoggedIn());
 router.get('/me', controller.getCurrentUser);
