@@ -1,47 +1,65 @@
 const StellarSdk = require('stellar-sdk');
 const config = require('../../config');
 const server = require('./server').server();
-const accounts = require('./accounts');
+const { AppError } = require('errors');
 
-async function buildMultiSigTransaction(
-  accountPublicKey,
-  { memoText, backupSigner }
-) {
-  const memo = StellarSdk.Memo.text(memoText);
-  const account = await server.loadAccount(accountPublicKey);
-  const builder = new StellarSdk.TransactionBuilder(account);
-  builder.addMemo(memo).addOperation(
-    StellarSdk.Operation.setOptions({
-      signer: {
-        ed25519PublicKey: config.signerPublicKey,
-        weight: 1
-      }
-    })
-  );
+async function buildMultisigTransaction({
+  source,
+  primarySigner,
+  backupSigner
+}) {
+  try {
+    console.log(source, primarySigner, backupSigner);
+    const account = await server.loadAccount(source);
+    const builder = new StellarSdk.TransactionBuilder(account);
 
-  if (backupSigner) {
+    // by adding a static public key that doesn't enough weight to actually do any signing
+    // we make it easier for third parties to check whether StellarGuard is enabled on the account
     builder.addOperation(
       StellarSdk.Operation.setOptions({
         signer: {
-          ed25519PublicKey: backupSigner,
+          ed25519PublicKey: config.stellarGuardPublicKey,
           weight: 1
         }
       })
     );
+
+    if (backupSigner) {
+      builder.addOperation(
+        StellarSdk.Operation.setOptions({
+          signer: {
+            ed25519PublicKey: backupSigner,
+            weight: 20
+          }
+        })
+      );
+    }
+
+    builder.addOperation(
+      StellarSdk.Operation.setOptions({
+        signer: {
+          ed25519PublicKey: primarySigner,
+          weight: 10
+        },
+        masterWeight: 10,
+        lowThreshold: 20,
+        medThreshold: 20,
+        highThreshold: 20
+      })
+    );
+
+    return builder.build();
+  } catch (e) {
+    if (e.name === 'NotFoundError') {
+      throw new AppError({
+        message: 'There is no active Stellar Account with this public key.'
+      });
+    } else {
+      throw e;
+    }
   }
-
-  builder.addOperation(
-    StellarSdk.Operation.setOptions({
-      masterWeight: 1,
-      lowThreshold: 1,
-      medThreshold: 2,
-      highThreshold: 2
-    })
-  );
-
-  return builder.build();
 }
 
 module.exports = {
-  buildMultiSigTransaction
+  buildMultisigTransaction
 };

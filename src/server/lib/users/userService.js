@@ -1,7 +1,6 @@
 const config = require('../../config');
 const Cryptr = require('cryptr');
 const cryptr = new Cryptr(config.cryptoSecret);
-const ms = require('ms');
 
 const userRepository = require('./userRepository');
 const { InvalidEmailVerificationCodeError } = require('errors/user');
@@ -12,6 +11,7 @@ const { emailService } = require('../email');
 const userValidator = require('./userValidator');
 const forgotPasswordValidator = require('./forgotPasswordValidator');
 const resetPasswordValidator = require('./resetPasswordValidator');
+const { NoUserForEmail } = require('errors/user');
 
 class UserService {
   async createUser({ email, password }) {
@@ -89,6 +89,25 @@ class UserService {
     } catch (e) {
       return;
     }
+  }
+
+  async getMultisigSetup({ email, publicKey, backupSigner }) {
+    const user = await this.getUserByEmail(email);
+    if (!user) {
+      throw new NoUserForEmail();
+    }
+
+    const primarySigner = user.signerPublicKey;
+    const transaction = await stellar.multisig.buildMultisigTransaction({
+      source: publicKey,
+      primarySigner,
+      backupSigner
+    });
+
+    const xdr = stellar.transactions.toXdr(transaction);
+    return {
+      xdr
+    };
   }
 }
 
