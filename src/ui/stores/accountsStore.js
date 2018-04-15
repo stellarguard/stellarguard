@@ -21,7 +21,6 @@ class AccountsStore {
   @action
   async getDeactivateAccountTransaction({ publicKey }) {
     const primarySigner = this.rootStore.currentUser.signerPublicKey;
-    console.log(primarySigner);
     try {
       const account = await server(StellarSdk).loadAccount(publicKey);
       const builder = new StellarSdk.TransactionBuilder(account);

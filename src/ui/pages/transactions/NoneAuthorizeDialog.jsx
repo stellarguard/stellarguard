@@ -59,7 +59,6 @@ class NoneAuthorizeDialog extends Component {
   }
 
   onSubmit = async (_, { setSubmitting, setErrors }) => {
-    console.log('submitting');
     this.setState({ isSubmitting: true });
     try {
       await this.props.rootStore.transactionsStore.authorize(

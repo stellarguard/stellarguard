@@ -9,7 +9,6 @@ async function buildMultisigTransaction({
   backupSigner
 }) {
   try {
-    console.log(source, primarySigner, backupSigner);
     const account = await server.loadAccount(source);
     const builder = new StellarSdk.TransactionBuilder(account);
 
