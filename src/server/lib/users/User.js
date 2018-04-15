@@ -23,7 +23,8 @@ class User {
     signerSecretKey,
     authenticator,
     accounts,
-    transactions: transactions
+    transactions,
+    externalId
   }) {
     this.id = id;
     this.email = email;
@@ -34,6 +35,7 @@ class User {
     this.authenticator = authenticator;
     this.accounts = accounts;
     this.transactions = transactions;
+    this.externalId = externalId;
   }
 
   async verifyPassword(password) {
@@ -69,7 +71,8 @@ class User {
       authenticator: this.authenticator,
       accounts: this.accounts,
       transactionVerificationType: this.transactionVerificationType,
-      transactions: this.transactions
+      transactions: this.transactions,
+      externalId: this.externalId
     };
   }
 }

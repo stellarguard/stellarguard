@@ -11,7 +11,7 @@ const commonNames = Object.getOwnPropertyNames(
 class Controller {
   constructor() {
     Object.getOwnPropertyNames(Object.getPrototypeOf(this))
-      .filter(name => !commonNames.includes(name))
+      .filter(name => !commonNames.includes(name) && !name.startsWith('_'))
       .forEach(name => {
         const method = this[name].bind(this);
         this[name] = async (req, res, next) => {

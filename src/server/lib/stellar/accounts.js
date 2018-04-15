@@ -1,5 +1,5 @@
 const StellarSdk = require('stellar-sdk');
-
+const config = require('../../config');
 const server = require('./server').server();
 
 async function getPayments(publicKey, { cursor, limit }) {
@@ -33,7 +33,7 @@ async function getAccount(publicKey) {
 }
 
 async function getAccounts(publicKeys = []) {
-  return Promise.all(publicKeys.map(publicKey => getAccount(publicKey)));
+  return await Promise.all(publicKeys.map(publicKey => getAccount(publicKey)));
 }
 
 function watchForPayments(publicKey, { onPayment, cursor }) {
@@ -73,13 +73,24 @@ function watchForPayments(publicKey, { onPayment, cursor }) {
   });
 }
 
-async function getMultiSigSetup(publicKey, targetSignerPublicKey) {
-  const account = await getAccount(publicKey);
-  if (!doesAccountHaveSigner(account, targetSignerPublicKey)) {
-    return;
+// returns a list of signers that could potentially be StellarGuard signers.\
+function getPossibleStellarGuardSigners(account) {
+  if (!doesAccountHaveSigner(account, config.stellarGuardPublicKey)) {
+    return [];
   }
 
-  return {};
+  return account.signers.filter(
+    signer =>
+      signer.public_key !== account.id &&
+      signer.public_key != config.stellarGuardPublicKey
+  );
+}
+
+function hasStellarGuardMultisigSetup(account, targetSignerPublicKey) {
+  return (
+    doesAccountHaveSigner(account, targetSignerPublicKey) &&
+    doesAccountHaveSigner(account, config.stellarGuardPublicKey)
+  );
 }
 
 function doesAccountHaveSigner(account, requiredSigner) {
@@ -98,5 +109,6 @@ module.exports = {
   getEffects,
   getOperations,
   watchForPayments,
-  getMultiSigSetup
+  hasStellarGuardMultisigSetup,
+  getPossibleStellarGuardSigners
 };

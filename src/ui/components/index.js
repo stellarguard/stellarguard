@@ -12,3 +12,4 @@ export { default as OnClickPopover } from './OnClickPopover';
 export { default as ScrollIntoView } from './ScrollIntoView';
 export { default as LogoAvatar } from './LogoAvatar';
 export { default as PublicKey } from './PublicKey';
+export { default as Field } from './Field';

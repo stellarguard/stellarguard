@@ -60,6 +60,15 @@ class UserDb {
     return rows[0];
   }
 
+  async getByExternalId(externalId) {
+    const { rows } = await this.db.pg.query(
+      `SELECT * from "user" WHERE external_id = $1`,
+      [externalId]
+    );
+
+    return rows[0];
+  }
+
   async getByAccountPublicKey(publicKey) {
     const { rows } = await this.db.pg.query(
       `SELECT u.* from "user" u

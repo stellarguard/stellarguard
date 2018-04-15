@@ -11,6 +11,7 @@ export default class User {
   @observable accounts;
   @observable transactionVerificationType;
   @observable transactions;
+  @observable externalId;
 
   constructor({
     id,
@@ -20,9 +21,11 @@ export default class User {
     authenticator,
     accounts,
     transactionVerificationType,
-    transactions = []
+    transactions = [],
+    externalId
   }) {
     this.id = id;
+    this.externalId = externalId;
     this.email = email;
     this.isEmailVerified = isEmailVerified;
     this.signerPublicKey = signerPublicKey;

@@ -46,6 +46,13 @@ class UserRepository {
     }
   }
 
+  async getUserByExternalId(externalId) {
+    const data = await this.userDb.getByExternalId(externalId);
+    if (data) {
+      return new User(data);
+    }
+  }
+
   async verifyEmail(user) {
     const isEmailVerified = true;
     await this.userDb.updateIsEmailVerified({
