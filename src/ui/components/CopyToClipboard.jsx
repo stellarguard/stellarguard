@@ -9,8 +9,6 @@ const styles = theme => ({});
 @inject('rootStore')
 @observer
 class CopyToClipboard extends Component {
-  state = { snackbarOpen: false };
-
   render() {
     const { children, text } = this.props;
     return (

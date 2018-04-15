@@ -10,6 +10,7 @@ import {
 import { AccountCircle, Add } from 'material-ui-icons';
 import { inject, observer } from 'mobx-react';
 
+import history from '../history';
 import { ButtonLink } from '../components';
 
 const styles = theme => ({
@@ -29,6 +30,11 @@ class ToolbarActions extends Component {
 
   handleUserMenuClose = () => {
     this.setState({ menuAnchor: null });
+  };
+
+  goToSettingsPage = () => {
+    this.handleUserMenuClose();
+    history.push('/settings');
   };
 
   handleSignOutClick = () => {
@@ -60,7 +66,7 @@ class ToolbarActions extends Component {
             open={!!menuAnchor}
             onClose={this.handleUserMenuClose}
           >
-            <MenuItem disabled>{rootStore.currentUser.email}</MenuItem>
+            <MenuItem onClick={this.goToSettingsPage}>Settings</MenuItem>
             <Divider />
             <MenuItem onClick={this.handleSignOutClick}>Sign out</MenuItem>
           </Menu>

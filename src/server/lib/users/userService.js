@@ -11,7 +11,7 @@ const { emailService } = require('../email');
 const userValidator = require('./userValidator');
 const forgotPasswordValidator = require('./forgotPasswordValidator');
 const resetPasswordValidator = require('./resetPasswordValidator');
-const { NoUserForEmail } = require('errors/user');
+const { NoUserForIdError } = require('errors/user');
 
 class UserService {
   async createUser({ email, password }) {
@@ -60,6 +60,14 @@ class UserService {
     return await userRepository.getUserByAccountPublicKey(publicKey);
   }
 
+  async getUserBySignerPublicKey(publicKey) {
+    return await userRepository.getUserBySignerPublicKey(publicKey);
+  }
+
+  async getUserByExternalId(externalId) {
+    return await userRepository.getUserByExternalId(externalId);
+  }
+
   async forgotPassword({ email }) {
     const user = await userRepository.getUserByEmail(email);
     await forgotPasswordValidator.validate({ email, user });
@@ -91,10 +99,10 @@ class UserService {
     }
   }
 
-  async getMultisigSetup({ email, publicKey, backupSigner }) {
-    const user = await this.getUserByEmail(email);
+  async getMultisigSetup({ externalId, publicKey, backupSigner }) {
+    const user = await this.getUserByExternalId(externalId);
     if (!user) {
-      throw new NoUserForEmail();
+      throw new NoUserForIdError();
     }
 
     const primarySigner = user.signerPublicKey;

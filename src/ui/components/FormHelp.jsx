@@ -11,7 +11,7 @@ class FormHelp extends Component {
     const { classes, children } = this.props;
     return (
       <MouseoverPopover popover={children}>
-        <HelpIcon />
+        <HelpIcon style={{ fontSize: 18 }} />
       </MouseoverPopover>
     );
   }

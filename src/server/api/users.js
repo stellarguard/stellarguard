@@ -50,14 +50,19 @@ class UserController extends Controller {
   }
 
   async getMultisigSetup(req, res) {
-    const { email } = req.params;
+    const { externalId } = req.params;
     const { publicKey, backupSignerPublicKey } = req.query;
+
+    if (!externalId) {
+      throw new RequiredParamError({ name: 'externalId' });
+    }
+
     if (!publicKey) {
       throw new RequiredParamError({ name: 'publicKey' });
     }
 
     const multiSigSetup = await users.userService.getMultisigSetup({
-      email,
+      externalId,
       publicKey,
       backupSigner: backupSignerPublicKey
     });
@@ -69,7 +74,7 @@ class UserController extends Controller {
 const controller = new UserController();
 
 // fully exposed routes
-router.get('/:email/multisig', controller.getMultisigSetup);
+router.get('/:externalId/multisig', controller.getMultisigSetup);
 
 router.use(session.csrf);
 // logged out routes

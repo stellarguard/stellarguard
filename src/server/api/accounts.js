@@ -1,31 +1,30 @@
 const express = require('express');
 const router = express.Router();
 
-const session = require('../session');
 const { accounts, stellar, users } = require('../lib');
 const { MultiSigNotActiveError } = require('errors/account');
-const { NoUserForEmailError } = require('errors/user');
 const Controller = require('./Controller');
 
 class AccountsController extends Controller {
   async createAccount(req, res) {
-    const { publicKey } = req.params;
-    const { email } = req.query;
+    const { publicKey } = req.body;
 
     let user = req.user;
-    if (!user && email) {
-      user = await users.userService.getUserByEmail(email);
-      if (!user) {
-        throw new NoUserForEmailError();
-      }
+    const stellarAccount = await stellar.accounts.getAccount(publicKey);
+    if (!user) {
+      user = await this._findUserFromAccountSigners(stellarAccount);
     }
 
-    const multiSigSetup = await stellar.accounts.getMultiSigSetup(
-      publicKey,
+    if (!user) {
+      throw new MultiSigNotActiveError();
+    }
+
+    const hasMultiSigSetup = stellar.accounts.hasStellarGuardMultisigSetup(
+      stellarAccount,
       user.signerPublicKey
     );
 
-    if (!multiSigSetup) {
+    if (!hasMultiSigSetup) {
       throw new MultiSigNotActiveError(user.signerPublicKey);
     }
 
@@ -33,13 +32,31 @@ class AccountsController extends Controller {
       publicKey,
       userId: user.id
     });
+
     res.json(account);
+  }
+
+  async _findUserFromAccountSigners(stellarAccount) {
+    const signers = stellar.accounts.getPossibleStellarGuardSigners(
+      stellarAccount
+    );
+
+    // we need to try to find the StellarGuard user from the signer
+    for (let signer of signers) {
+      const user = await users.userService.getUserBySignerPublicKey(
+        signer.public_key
+      );
+
+      if (user) {
+        return user;
+      }
+    }
   }
 }
 
 const accountsController = new AccountsController();
 
 // public api
-router.post('/:publicKey?', accountsController.createAccount);
+router.post('/', accountsController.createAccount);
 
 module.exports = router;

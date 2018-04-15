@@ -14,7 +14,7 @@ import AuthorizeTransactionPage from './pages/transactions/AuthorizeTransactionP
 import TransactionsPage from './pages/transactions/TransactionsPage';
 import FaqPage from './pages/misc/FaqPage';
 import SupportedWallets from './pages/misc/SupportedWalletsPage';
-
+import SettingsPage from './pages/user/SettingsPage';
 import AppLoader from './AppLoader';
 
 @withRouter
@@ -62,6 +62,7 @@ class ProtectedRoutes extends React.Component {
     return (
       <Switch>
         <Route exact path="/" component={DashboardPage} />
+        <Route exact path="/settings" component={SettingsPage} />
         <Route exact path="/transactions" component={TransactionsPage} />
         <Route
           exact
