@@ -3,11 +3,12 @@ const router = express.Router();
 
 const { accounts, stellar, users } = require('../lib');
 const { MultiSigNotActiveError } = require('errors/account');
+const { RequiredParamError } = require('errors/common');
 const Controller = require('./Controller');
 
 class AccountsController extends Controller {
   async createAccount(req, res) {
-    const { publicKey } = req.body;
+    const { publicKey } = req.params;
 
     let user = req.user;
     const stellarAccount = await stellar.accounts.getAccount(publicKey);
@@ -52,11 +53,38 @@ class AccountsController extends Controller {
       }
     }
   }
+
+  async getMultisigSetup(req, res) {
+    const { publicKey } = req.params;
+    const { stellarGuardPublicKey, backupSignerPublicKey } = req.query;
+
+    const examplePublicKey =
+      'GAGFWJVTYUEPG7EQCUET5CI2AAATOLLYLXUWIHF6JRD2SQXN3EJGVNGL';
+    const exampleStellarGuardPublicKey =
+      'GBRHFF3JCFNKFFKUINLUNADMBH6BC4E7JYS757Y6OZAT5PY5ZIBFA3UQ';
+    const example = `/api/accounts/${examplePublicKey}?stellarGuardPublicKey=${exampleStellarGuardPublicKey}`;
+    if (!publicKey) {
+      throw new RequiredParamError({ name: 'publicKey', example });
+    }
+
+    if (!stellarGuardPublicKey) {
+      throw new RequiredParamError({ name: 'stellarGuardPublicKey', example });
+    }
+
+    const multiSigSetup = await users.userService.getMultisigSetup({
+      publicKey,
+      stellarGuardPublicKey,
+      backupSignerPublicKey
+    });
+
+    return res.json(multiSigSetup);
+  }
 }
 
 const accountsController = new AccountsController();
 
 // public api
-router.post('/', accountsController.createAccount);
+router.post('/:publicKey', accountsController.createAccount);
+router.get('/:publicKey/multisig', accountsController.getMultisigSetup);
 
 module.exports = router;

@@ -36,25 +36,12 @@ class StellarAccountsRepository {
     return accounts.map(account => new StellarAccount(account));
   }
 
-  async findAccountsByPublicKey(publicKey) {
-    const accountsData =
-      this.stellarAccountsDb.get(publicKey, 'publicKey') || [];
-    return accountsData.map(accountData => new StellarAccount(accountData))[0];
-  }
-
-  async getPayments(userId) {
-    const user = this.userDb.get(userId);
-    return Object.values(this.paymentsDb.db.data.id)
-      .map(paymentDto => new StellarPayment(paymentDto))
-      .filter(payment => payment.memo === user.username);
-  }
-
-  async activateAccount(account) {
-    account.isActive = true;
-    const { id, userId, publicKey, isActive } = account;
-    this.stellarAccountsDb.update({ id, userId, publicKey, isActive });
-    return account;
-  }
+  // async getPayments(userId) {
+  //   const user = this.userDb.get(userId);
+  //   return Object.values(this.paymentsDb.db.data.id)
+  //     .map(paymentDto => new StellarPayment(paymentDto))
+  //     .filter(payment => payment.memo === user.username);
+  // }
 }
 
 module.exports = new StellarAccountsRepository();

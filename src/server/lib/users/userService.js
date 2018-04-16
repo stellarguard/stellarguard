@@ -99,23 +99,21 @@ class UserService {
     }
   }
 
-  async getMultisigSetup({ externalId, publicKey, backupSigner }) {
-    const user = await this.getUserByExternalId(externalId);
+  async getMultisigSetup({
+    publicKey,
+    stellarGuardPublicKey,
+    backupSignerPublicKey
+  }) {
+    const user = await this.getUserBySignerPublicKey(stellarGuardPublicKey);
     if (!user) {
       throw new NoUserForIdError();
     }
 
-    const primarySigner = user.signerPublicKey;
-    const transaction = await stellar.multisig.buildMultisigTransaction({
+    return await stellar.multisig.buildMultisigTransaction({
       source: publicKey,
-      primarySigner,
-      backupSigner
+      primarySignerPublicKey: user.signerPublicKey,
+      backupSignerPublicKey: backupSignerPublicKey
     });
-
-    const xdr = stellar.transactions.toXdr(transaction);
-    return {
-      xdr
-    };
   }
 }
 

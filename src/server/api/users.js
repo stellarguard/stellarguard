@@ -4,7 +4,6 @@ const router = express.Router();
 const { users } = require('../lib');
 const session = require('../session');
 const Controller = require('./Controller');
-const { RequiredParamError } = require('errors/common');
 
 class UserController extends Controller {
   async createUser(req, res, next) {
@@ -48,33 +47,9 @@ class UserController extends Controller {
     await users.userService.resetPassword({ code, password });
     return res.json({});
   }
-
-  async getMultisigSetup(req, res) {
-    const { externalId } = req.params;
-    const { publicKey, backupSignerPublicKey } = req.query;
-
-    if (!externalId) {
-      throw new RequiredParamError({ name: 'externalId' });
-    }
-
-    if (!publicKey) {
-      throw new RequiredParamError({ name: 'publicKey' });
-    }
-
-    const multiSigSetup = await users.userService.getMultisigSetup({
-      externalId,
-      publicKey,
-      backupSigner: backupSignerPublicKey
-    });
-
-    return res.json(multiSigSetup);
-  }
 }
 
 const controller = new UserController();
-
-// fully exposed routes
-router.get('/:externalId/multisig', controller.getMultisigSetup);
 
 router.use(session.csrf);
 // logged out routes

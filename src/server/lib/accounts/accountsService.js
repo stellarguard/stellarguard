@@ -19,10 +19,6 @@ class AccountsService {
     return await stellarAccountsRepository.getAccountsByUserId(user.id);
   }
 
-  async findAccountsByPublicKey(publicKey) {
-    return await stellarAccountsRepository.findAccountsByPublicKey(publicKey);
-  }
-
   async activateAccount(account) {
     return await this.createAccount(account);
   }
