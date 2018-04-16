@@ -11,7 +11,11 @@ import {
 import { inject, observer } from 'mobx-react';
 
 import multiSigValidator from '../../../shared/validators/multiSig';
-import { FormError, FormFieldHelperText } from '../../components';
+import {
+  FormError,
+  FormFieldHelperText,
+  CopyToClipboard
+} from '../../components';
 
 const styles = theme => ({
   divider: {
@@ -86,7 +90,7 @@ class BuildMultiSigForm extends Component {
           id="sourceAccount"
           name="sourceAccount"
           placeholder="Example: GCPG4BXCMCD4JSH5EC3SD2HMIGTLNXUZKOUSLP7MEY63HICHNNHI6KO7"
-          label="Your Stellar Public Key"
+          label="Your Public Key"
           onChange={handleChange}
           inputProps={{ onBlur: handleBlur }}
           value={values.sourceAccount}
@@ -123,17 +127,19 @@ class BuildMultiSigForm extends Component {
             What&apos;s this?
           </Typography>
         </div>
-        <TextField
-          fullWidth
-          margin="normal"
-          type="text"
-          id="primarySigner"
-          name="primarySigner"
-          label="StellarGuard Public Key"
-          onChange={handleChange}
-          value={values.primarySigner}
-          disabled
-        />
+        <CopyToClipboard text={values.primarySigner}>
+          <TextField
+            fullWidth
+            margin="normal"
+            type="text"
+            id="primarySigner"
+            name="primarySigner"
+            label="StellarGuard Public Key"
+            onChange={handleChange}
+            value={values.primarySigner}
+            inputProps={{ readOnly: true }}
+          />
+        </CopyToClipboard>
         {values.addBackupSigner && (
           <TextField
             fullWidth
