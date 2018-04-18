@@ -214,10 +214,7 @@ class SubmitTransactionPage extends Component {
           >
             <Typography paragraph>
               Yes.{' '}
-              <a
-                className={classes.link}
-                href="https://www.stellar.org/laboratory/#txbuilder?network=public"
-              >
+              <a className={classes.link} href="https://test.stellarguard.me">
                 https://test.stellarguard.me
               </a>{' '}
               uses the Testnet.
