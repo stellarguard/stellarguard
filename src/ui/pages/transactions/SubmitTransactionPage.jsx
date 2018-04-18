@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import { withStyles, Grid, Paper, Card, CardContent } from 'material-ui';
+import {
+  withStyles,
+  Grid,
+  Paper,
+  Card,
+  CardContent,
+  Typography
+} from 'material-ui';
 import { Helmet } from 'react-helmet';
 
-import { Page, DashboardFab } from '../../components';
+import { Page, DashboardFab, Link } from '../../components';
 import SubmitTransactionForm from './SubmitTransactionForm';
 import SubmitTransactionSuccess from './SubmitTransactionSuccess';
 
@@ -28,19 +35,19 @@ class SubmitTransactionPage extends Component {
           <title>StellarGuard | New Transaction</title>
         </Helmet>
         <DashboardFab />
-        <Grid container justify="space-around" spacing={16}>
-          <Grid item xs={12}>
-            <Card>
-              <CardContent>
-                {transaction ? (
-                  <SubmitTransactionSuccess transaction={transaction} />
-                ) : (
-                  <SubmitTransactionForm onSuccess={this.handleSubmitSuccess} />
-                )}
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
+        <Typography variant="subheading" gutterBottom>
+          For instructions about how to build a signed transaction XDR{' '}
+          <Link to="/help/new-transaction-stellar-labs">click here.</Link>
+        </Typography>
+        <Card>
+          <CardContent>
+            {transaction ? (
+              <SubmitTransactionSuccess transaction={transaction} />
+            ) : (
+              <SubmitTransactionForm onSuccess={this.handleSubmitSuccess} />
+            )}
+          </CardContent>
+        </Card>
       </Page>
     );
   }

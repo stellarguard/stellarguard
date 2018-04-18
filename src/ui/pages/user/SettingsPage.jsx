@@ -39,14 +39,6 @@ class SettingsPage extends Component {
                   User Info
                 </Typography>
                 <Field label="Email:">{email}</Field>
-                <Field label="External Id:">
-                  <CopyToClipboard text={externalId}>
-                    <span>
-                      {externalId} -{' '}
-                      <span className={classes.copyExternalId}>Copy</span>
-                    </span>
-                  </CopyToClipboard>
-                </Field>
               </CardContent>
             </Card>
           </Grid>

@@ -15,6 +15,8 @@ import TransactionsPage from './pages/transactions/TransactionsPage';
 import FaqPage from './pages/misc/FaqPage';
 import SupportedWallets from './pages/misc/SupportedWalletsPage';
 import SettingsPage from './pages/user/SettingsPage';
+import TutorialsRoutes from './pages/misc/help/TutorialsRoutes';
+
 import AppLoader from './AppLoader';
 
 @withRouter
@@ -37,6 +39,7 @@ class AppRoutes extends React.Component {
         <Route exact path="/reset-password" component={ResetPasswordPage} />
         <Route exact path="/faq" component={FaqPage} />
         <Route exact path="/supported-wallets" component={SupportedWallets} />
+        <Route path="/help" component={TutorialsRoutes} />
         <Route path="/" component={ProtectedRoutes} />
         <Route component={FourOhFourPage} />
       </Switch>
