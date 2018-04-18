@@ -43,7 +43,7 @@ class FaqGridItem extends Component {
 @withStyles(styles)
 @withRouter
 @observer
-class SubmitTransactionPage extends Component {
+class FaqPage extends Component {
   render() {
     const { classes } = this.props;
 
@@ -290,4 +290,4 @@ class SubmitTransactionPage extends Component {
   }
 }
 
-export default SubmitTransactionPage;
+export default FaqPage;
