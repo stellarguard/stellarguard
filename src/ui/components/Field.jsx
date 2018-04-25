@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles, Typography } from 'material-ui';
 import { observer } from 'mobx-react';
+import cx from 'classnames';
 
 import FormHelp from './FormHelp';
 
@@ -14,7 +15,6 @@ const styles = theme => ({
   },
   label: {
     fontWeight: 500,
-    width: '80px',
     textAlign: 'right',
     display: 'inline-block',
     [theme.breakpoints.down('xs')]: {
@@ -37,10 +37,10 @@ const styles = theme => ({
 @observer
 class Field extends Component {
   render() {
-    const { classes, label, children, help } = this.props;
+    const { classes, label, children, help, labelClass } = this.props;
     return (
       <Typography component="div" className={classes.field} gutterBottom>
-        <label className={classes.label}>
+        <label className={cx(classes.label, labelClass)}>
           {label}
           {help && <FormHelp>{help}</FormHelp>}
         </label>

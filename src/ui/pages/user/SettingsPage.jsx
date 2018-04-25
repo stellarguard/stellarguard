@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
-import { withStyles, Grid, Typography, Card, CardContent } from 'material-ui';
+import {
+  withStyles,
+  Button,
+  Grid,
+  Typography,
+  Card,
+  CardContent
+} from 'material-ui';
 import { Helmet } from 'react-helmet';
 
 import { observer, inject } from 'mobx-react';
 import { withRouter } from 'react-router';
 
-import { Page, DashboardFab, Field, CopyToClipboard } from '../../components';
+import { Page, DashboardFab, Field, Action } from '../../components';
 
 const styles = theme => ({
   subheading: {
     marginBottom: theme.spacing.unit * 2
   },
-  copyExternalId: {
-    cursor: 'pointer',
-    color: theme.palette.primary.main
+  label: {
+    width: 150
   }
 });
 
@@ -24,21 +30,24 @@ const styles = theme => ({
 class SettingsPage extends Component {
   render() {
     const { classes, rootStore } = this.props;
-    const { email, externalId } = rootStore.currentUser;
+    const { email } = rootStore.currentUser;
 
     return (
       <Page title="Settings">
         <Helmet>
           <title>StellarGuard | Settings</title>
         </Helmet>
-        <Grid container spacing={8}>
+        <Grid container>
           <Grid item xs={12}>
             <Card>
               <CardContent>
                 <Typography className={classes.subheading} variant="subheading">
-                  User Info
+                  Settings
                 </Typography>
-                <Field label="Email:">{email}</Field>
+                <Field label="Email:" labelClass={classes.label}>
+                  {email}
+                </Field>
+                {this.renderTwoFactorAuthField()}
               </CardContent>
             </Card>
           </Grid>
@@ -47,6 +56,41 @@ class SettingsPage extends Component {
       </Page>
     );
   }
+
+  renderTwoFactorAuthField() {
+    let contents;
+    if (this.props.rootStore.currentUser.hasAuthenticator) {
+      contents = (
+        <span>
+          Active - <Action onClick={this.removeAuthenticator}>Remove</Action>
+        </span>
+      );
+    } else {
+      contents = (
+        <span>
+          Not Active -{' '}
+          <Action onClick={this.enableAuthenticator}>Enable</Action>
+        </span>
+      );
+    }
+
+    return (
+      <Field
+        labelClass={this.props.classes.label}
+        label="2-factor Authentication:"
+      >
+        {contents}
+      </Field>
+    );
+  }
+
+  enableAuthenticator = () => {
+    this.props.rootStore.tfaStore.openAddAuthenticatorDialog();
+  };
+
+  removeAuthenticator = () => {
+    this.props.rootStore.tfaStore.openRemoveAuthenticatorDialog();
+  };
 }
 
 export default SettingsPage;

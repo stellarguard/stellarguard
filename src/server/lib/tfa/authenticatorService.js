@@ -1,5 +1,8 @@
 const otp = require('./otp');
-const { AuthenticatorVerificationError } = require('errors/authenticator');
+const {
+  AuthenticatorVerificationError,
+  AuthenticatorNotActiveError
+} = require('errors/authenticator');
 const authenticatorRepository = require('./authenticatorRepository');
 
 class AuthenticatorService {
@@ -13,6 +16,20 @@ class AuthenticatorService {
     }
 
     return await authenticatorRepository.enableAuthenticator(user, { secret });
+  }
+
+  async removeAuthenticator(user, { verificationCode }) {
+    const authenticator = await this.getForUser(user);
+
+    if (!authenticator) {
+      throw new AuthenticatorNotActiveError();
+    }
+
+    if (!otp.verifyToken(verificationCode, authenticator.secret)) {
+      throw new AuthenticatorVerificationError();
+    }
+
+    return await authenticatorRepository.removeAuthenticator(user);
   }
 
   async getForUser(userId) {

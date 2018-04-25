@@ -19,7 +19,17 @@ class AuthenticatorAlreadyActiveError extends AppError {
   }
 }
 
+class AuthenticatorNotActiveError extends AppError {
+  constructor() {
+    super({
+      code: 5003,
+      message: `You do not have an active authenticator.`
+    });
+  }
+}
+
 module.exports = {
   AuthenticatorVerificationError,
-  AuthenticatorAlreadyActiveError
+  AuthenticatorAlreadyActiveError,
+  AuthenticatorNotActiveError
 };

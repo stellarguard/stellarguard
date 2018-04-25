@@ -140,12 +140,7 @@ class AddAuthenticatorDialog extends Component {
           <Button color="primary" onClick={this.handleClose}>
             Cancel
           </Button>
-          <Button
-            type="submit"
-            form="enter-code"
-            color="primary"
-            onClick={this.handleEnable}
-          >
+          <Button type="submit" form="enter-code" color="primary">
             Enable
           </Button>
         </DialogActions>

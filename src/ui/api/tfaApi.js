@@ -10,3 +10,9 @@ export async function enableAuthenticator({ secret, verificationCode }) {
     verificationCode
   });
 }
+
+export async function removeAuthenticator({ verificationCode }) {
+  return await axios.delete(
+    `/tfa/authenticator?verificationCode=${verificationCode}`
+  );
+}

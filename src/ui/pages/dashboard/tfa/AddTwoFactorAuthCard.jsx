@@ -13,8 +13,6 @@ import { PhonelinkLock } from 'material-ui-icons';
 import teal from 'material-ui/colors/teal';
 import { inject, observer } from 'mobx-react';
 
-import AddAuthenticatorDialog from './AddAuthenticatorDialog';
-
 const styles = theme => ({
   actions: {
     display: 'flex'
@@ -31,26 +29,15 @@ const styles = theme => ({
   }
 });
 
+@withStyles(styles)
 @inject('rootStore')
 @observer
-@withStyles(styles)
 class AddTwoFactorAuthCard extends Component {
-  state = {
-    dialogOpen: true
-  };
-
   render() {
-    const { classes, rootStore } = this.props;
-    const secret = rootStore.tfaStore.secret;
-    const { dialogOpen } = this.state;
+    const { classes } = this.props;
 
     return (
       <Card>
-        <AddAuthenticatorDialog
-          open={dialogOpen && !!secret}
-          secret={secret}
-          onClose={this.handleDialogClose}
-        />
         <CardHeader
           avatar={
             <Avatar className={classes.avatar}>
@@ -76,12 +63,7 @@ class AddTwoFactorAuthCard extends Component {
   }
 
   handleSetUpTwoFactorAuthClick = async () => {
-    await this.props.rootStore.tfaStore.generateAuthenticatorSecret();
-    this.setState({ dialogOpen: true });
-  };
-
-  handleDialogClose = () => {
-    this.setState({ dialogOpen: false });
+    await this.props.rootStore.tfaStore.openAddAuthenticatorDialog();
   };
 }
 
