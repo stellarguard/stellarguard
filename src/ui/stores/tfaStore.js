@@ -20,6 +20,16 @@ class TfaStore {
     return authenticator;
   }
 
+  @action
+  async removeAuthenticator({ verificationCode }) {
+    await tfaApi.removeAuthenticator({
+      verificationCode
+    });
+    runInAction(() => {
+      this.rootStore.currentUser.authenticator = null;
+    });
+  }
+
   @observable secret;
 
   @action
@@ -32,6 +42,31 @@ class TfaStore {
   @action
   setSecret(secret) {
     this.secret = secret;
+  }
+
+  @observable isAddAuthenticatorDialogOpen = false;
+
+  @action
+  async openAddAuthenticatorDialog() {
+    await this.generateAuthenticatorSecret();
+    runInAction(() => (this.isAddAuthenticatorDialogOpen = true));
+  }
+
+  @action
+  closeAddAuthenticatorDialog() {
+    this.isAddAuthenticatorDialogOpen = false;
+  }
+
+  @observable isRemoveAuthenticatorDialogOpen = false;
+
+  @action
+  openRemoveAuthenticatorDialog() {
+    this.isRemoveAuthenticatorDialogOpen = true;
+  }
+
+  @action
+  closeRemoveAuthenticatorDialog() {
+    this.isRemoveAuthenticatorDialogOpen = false;
   }
 }
 

@@ -35,6 +35,16 @@ class AuthenticatorDb {
       }
     }
   }
+
+  async delete({ userId }) {
+    const { rowCount } = await this.db.pg.query(
+      `DELETE FROM authenticator
+         WHERE user_id = $1`,
+      [userId]
+    );
+
+    return rowCount;
+  }
 }
 
 module.exports = new AuthenticatorDb({ db });

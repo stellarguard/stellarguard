@@ -13,6 +13,12 @@ class AuthenticatorRepository {
     return new Authenticator(authenticator);
   }
 
+  async removeAuthenticator(user) {
+    await this.authenticatorDb.delete({
+      userId: user.id
+    });
+  }
+
   async getForUser(user) {
     const authenticator = await this.authenticatorDb.getByUserId(user.id);
     if (authenticator) {

@@ -6,17 +6,6 @@ const { tfa } = require('../lib');
 const Controller = require('./Controller');
 
 class TfaController extends Controller {
-  async createTfaStrategy(req, res) {
-    const { type } = req.body;
-    // TODO -- see if we need to sanitize the body at all
-    const tfaStrategy = await tfa.tfaStrategyService.createStrategy({
-      type,
-      userId: req.user.id,
-      username: req.user.username
-    });
-    res.json(tfaStrategy);
-  }
-
   async generateAuthenticatorSecret(req, res) {
     const secret = await tfa.authenticatorService.generateSecret(req.user);
     return res.json(secret);
@@ -33,14 +22,22 @@ class TfaController extends Controller {
     );
     res.json(secrets);
   }
+
+  async removeAuthenticator(req, res) {
+    const { verificationCode } = req.query;
+    await tfa.authenticatorService.removeAuthenticator(req.user, {
+      verificationCode
+    });
+    res.json({});
+  }
 }
 
 const controller = new TfaController();
 
 router.use(session.csrf);
 router.use(session.ensureLoggedIn());
-router.post('/', controller.createTfaStrategy);
 router.post('/authenticator/secret', controller.generateAuthenticatorSecret);
 router.post('/authenticator', controller.enableAuthenticator);
+router.delete('/authenticator', controller.removeAuthenticator);
 
 module.exports = router;
