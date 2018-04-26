@@ -62,6 +62,7 @@ app.use(
         'fonts.googleapis.com',
         'fonts.gstatic.com'
       ],
+      'base-uri': [csp.SELF],
       'img-src': ['*'],
       'block-all-mixed-content': true
     }

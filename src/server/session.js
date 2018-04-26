@@ -29,7 +29,7 @@ function configure() {
       cookie: {
         path: '/',
         httpOnly: true,
-        secure: true,
+        secure: !config.isDevMode,
         sameSite: true,
         maxAge: ms('30d')
       }
