@@ -6,6 +6,8 @@ const { MultiSigNotActiveError } = require('errors/account');
 const { RequiredParamError } = require('errors/common');
 const Controller = require('./Controller');
 
+const cors = require('cors');
+
 class AccountsController extends Controller {
   async createAccount(req, res) {
     const { publicKey } = req.params;
@@ -84,7 +86,7 @@ class AccountsController extends Controller {
 const accountsController = new AccountsController();
 
 // public api
-router.post('/:publicKey', accountsController.createAccount);
-router.get('/:publicKey/multisig', accountsController.getMultisigSetup);
+router.post('/:publicKey', cors(), accountsController.createAccount);
+router.get('/:publicKey/multisig', cors(), accountsController.getMultisigSetup);
 
 module.exports = router;

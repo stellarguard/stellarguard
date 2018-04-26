@@ -8,6 +8,8 @@ var cookieParser = require('cookie-parser');
 const version = require('../../package.json').version;
 const session = require('./session');
 const apiRoutes = require('./api');
+const csp = require('express-csp-header');
+const helmet = require('helmet');
 
 const { UnknownError } = require('errors');
 
@@ -34,6 +36,37 @@ app.get('/robots.txt', (req, res) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(config.sessionSecret));
+app.use(
+  helmet({
+    hsts: false // handled by cloudflare in production
+  })
+);
+app.use(helmet.referrerPolicy());
+app.use(
+  csp({
+    policies: {
+      'default-src': [csp.SELF, '*.stellarguard.me'].concat(
+        config.isDevMode ? [csp.INLINE, csp.EVAL, 'ws://localhost:*'] : []
+      ),
+      'style-src': [
+        csp.SELF,
+        csp.INLINE,
+        '*.stellarguard.me',
+        'fonts.googleapis.com',
+        'fonts.gstatic.com'
+      ],
+      'font-src': [
+        csp.SELF,
+        csp.INLINE,
+        '*.stellarguard.me',
+        'fonts.googleapis.com',
+        'fonts.gstatic.com'
+      ],
+      'img-src': ['*'],
+      'block-all-mixed-content': true
+    }
+  })
+);
 
 const sessionMiddleware = session.configure();
 app.use('/api', sessionMiddleware, apiRoutes);
