@@ -5,8 +5,15 @@ const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const config = require('./config');
 const PgSession = require('connect-pg-simple')(session);
-const csrfMiddleware = require('csurf')({ cookie: true });
 const ms = require('ms');
+const cookie = {
+  path: '/',
+  httpOnly: true,
+  secure: !config.isDevMode,
+  sameSite: true,
+  maxAge: ms('30d')
+};
+const csrfMiddleware = require('csurf')({ cookie });
 
 const { users, db, tfa } = require('./lib');
 const {
@@ -26,13 +33,7 @@ function configure() {
       secret: config.sessionSecret,
       resave: false,
       saveUninitialized: false,
-      cookie: {
-        path: '/',
-        httpOnly: true,
-        secure: !config.isDevMode,
-        sameSite: true,
-        maxAge: ms('30d')
-      }
+      cookie
     })
   );
 
