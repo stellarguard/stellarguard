@@ -45,8 +45,8 @@ app.use(helmet.referrerPolicy());
 app.use(
   csp({
     policies: {
-      'default-src': [csp.SELF, '*.stellarguard.me'].concat(
-        config.isDevMode ? [csp.INLINE, csp.EVAL, 'ws://localhost:*'] : []
+      'default-src': [csp.SELF, csp.EVAL, '*.stellarguard.me'].concat(
+        config.isDevMode ? [csp.INLINE, 'ws://localhost:*'] : []
       ),
       'style-src': [
         csp.SELF,
