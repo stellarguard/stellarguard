@@ -29,6 +29,8 @@ function configure() {
       cookie: {
         path: '/',
         httpOnly: true,
+        secure: true,
+        sameSite: true,
         maxAge: ms('30d')
       }
     })
@@ -46,7 +48,7 @@ function configure() {
           return done(new InvalidCredentialsError());
         }
 
-        if (!await user.verifyPassword(password)) {
+        if (!(await user.verifyPassword(password))) {
           return done(new InvalidCredentialsError());
         }
 
