@@ -29,9 +29,9 @@ const styles = theme => ({
 
 function AppName() {
   if (config.isTestNetwork) {
-    return 'StellarGuard.me - TestNet';
+    return 'StellarGuard - TestNet';
   } else {
-    return 'StellarGuard.me';
+    return 'StellarGuard';
   }
 }
 
