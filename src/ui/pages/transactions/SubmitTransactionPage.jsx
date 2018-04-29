@@ -36,7 +36,12 @@ class SubmitTransactionPage extends Component {
         </Helmet>
         <DashboardFab />
         <Typography variant="subheading" gutterBottom>
-          For instructions about how to build a signed transaction XDR{' '}
+          For instructions about how to get the transaction XDR from the Stellar
+          Account Viewer payments{' '}
+          <Link to="/help/new-transaction-account-viewer">click here.</Link>
+        </Typography>
+        <Typography variant="subheading" gutterBottom>
+          For intructions about more advanced operations{' '}
           <Link to="/help/new-transaction-stellar-labs">click here.</Link>
         </Typography>
         <Card>
