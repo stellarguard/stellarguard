@@ -77,7 +77,7 @@ class AppFooter extends Component {
                 gutterBottom
                 className={classes.stellarguard}
               >
-                StellarGuard.me
+                StellarGuard
               </Typography>
               <Typography
                 color="inherit"

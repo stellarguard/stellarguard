@@ -1,7 +1,7 @@
 const speakeasy = require('speakeasy');
 const qrcode = require('qrcode');
 
-const ISSUER = 'StellarGuard.me';
+const ISSUER = 'StellarGuard';
 
 async function generateSecret(email) {
   const speakeasySecret = speakeasy.generateSecret({
