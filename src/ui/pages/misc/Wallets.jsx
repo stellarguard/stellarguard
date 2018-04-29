@@ -194,6 +194,48 @@ class PegasusWalletCard extends Component {
   }
 }
 
+import stellarAccountViewerLogo from './stellar_rocket.png';
+
+@withStyles(styles)
+class StellarAccountViewerCard extends Component {
+  get title() {
+    return 'Stellar.org Account Viewer';
+  }
+
+  get to() {
+    return `https://www.stellar.org/account-viewer`;
+  }
+
+  get logo() {
+    return stellarAccountViewerLogo;
+  }
+
+  get name() {
+    return <span>Stellar.org Account Viewer</span>;
+  }
+
+  get description() {
+    return (
+      <span>
+        Official wallet of Stellar.org. Use this lightweight client to send and
+        receive lumens over the Stellar network.
+      </span>
+    );
+  }
+
+  render() {
+    return (
+      <WalletCard
+        title={this.title}
+        to={this.to}
+        logo={this.logo}
+        name={this.name}
+        description={this.description}
+      />
+    );
+  }
+}
+
 import stellarLabsLogo from './stellar_rocket.png';
 
 @withStyles(styles)
@@ -219,8 +261,8 @@ class StellarLaboratoryCard extends Component {
     return (
       <span>
         The Stellar Laboratory is a set of tools that enables people to try out
-        and learn about the Stellar network. The laboratory can build
-        transactions, sign them, and submit them to the network.
+        and learn about the Stellar network. The laboratory can build all types
+        of transactions, sign them, and submit them to the network.
       </span>
     );
   }
@@ -284,6 +326,7 @@ class StellarSignerCard extends Component {
 
 export {
   MyStellarToolsCard,
+  StellarAccountViewerCard,
   StellarLaboratoryCard,
   StargazerCard,
   StellarSignerCard,

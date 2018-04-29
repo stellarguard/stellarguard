@@ -12,7 +12,8 @@ import {
   StellarLaboratoryCard,
   StargazerCard,
   StellarSignerCard,
-  PegasusWalletCard
+  PegasusWalletCard,
+  StellarAccountViewerCard
 } from './Wallets';
 
 const styles = theme => ({
@@ -76,9 +77,13 @@ class SubmitTransactionPage extends Component {
             </Typography>
             <Typography variant="subheading" gutterBottom>
               These wallets allow you to copy the signed transaction XDR so you
-              can submit it yourself to StellarGuard.
+              can submit it yourself to StellarGuard. There may be more wallets
+              that support this method than those listed here.
             </Typography>
           </Grid>
+          <WalletGridItem>
+            <StellarAccountViewerCard />
+          </WalletGridItem>
           <WalletGridItem>
             <StellarLaboratoryCard />
           </WalletGridItem>
