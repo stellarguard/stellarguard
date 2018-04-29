@@ -22,6 +22,8 @@ import { observer, inject } from 'mobx-react';
 
 import config from '../../config';
 
+import { Link } from '../../components';
+
 const styles = theme => {
   return {
     root: {
@@ -96,7 +98,7 @@ class SecurityInfoCard extends React.Component {
         </InfoCardParagraph>
         <InfoCardParagraph>
           That means that even if a hacker steals your secret key or the wallet
-          you&apos;re using is not untrustworthy, StellarGuard will prevent them
+          you&apos;re using has a security flaw, StellarGuard will prevent them
           from taking your XLM.
         </InfoCardParagraph>
         <InfoCardParagraph>
@@ -137,7 +139,8 @@ class UseYourWalletInfoCard extends React.Component {
       <HomeInfoCard title="Works with your existing Stellar Wallet">
         <InfoCardParagraph>
           Already using a Stellar wallet? No problem! StellarGuard was built to
-          work with your existing wallet.
+          work with your existing wallet. See some of the{' '}
+          <Link to="/supported-wallets">supported wallets</Link>.
         </InfoCardParagraph>
         <InfoCardParagraph>
           StellarGuard can enhance any wallet by adding multi-sig and two-factor
