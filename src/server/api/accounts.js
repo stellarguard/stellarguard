@@ -86,6 +86,7 @@ class AccountsController extends Controller {
 const accountsController = new AccountsController();
 
 // public api
+router.options('/:publicKey', cors());
 router.post('/:publicKey', cors(), accountsController.createAccount);
 router.get('/:publicKey/multisig', cors(), accountsController.getMultisigSetup);
 

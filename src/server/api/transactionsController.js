@@ -77,6 +77,7 @@ class TransactionsController extends Controller {
 
 const controller = new TransactionsController();
 // open route, no csrf or login required
+router.options('/', cors());
 router.post('/', cors(), controller.createTransaction);
 
 // logged in routes
