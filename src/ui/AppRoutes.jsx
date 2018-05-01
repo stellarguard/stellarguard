@@ -17,6 +17,7 @@ import SupportedWallets from './pages/misc/SupportedWalletsPage';
 import SettingsPage from './pages/user/SettingsPage';
 import TutorialsRoutes from './pages/misc/help/TutorialsRoutes';
 import PrivacyPolicyPage from './pages/misc/legal/PrivacyPolicyPage';
+import TermsOfServicePage from './pages/misc/legal/TermsOfServicePage';
 
 import AppLoader from './AppLoader';
 
@@ -40,6 +41,7 @@ class AppRoutes extends React.Component {
         <Route exact path="/reset-password" component={ResetPasswordPage} />
         <Route exact path="/faq" component={FaqPage} />
         <Route exact path="/supported-wallets" component={SupportedWallets} />
+        <Route exact path="/terms-of-service" component={TermsOfServicePage} />
         <Route exact path="/privacy-policy" component={PrivacyPolicyPage} />
         <Route path="/help" component={TutorialsRoutes} />
         <Route path="/" component={ProtectedRoutes} />
