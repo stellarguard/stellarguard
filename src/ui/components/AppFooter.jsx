@@ -108,6 +108,7 @@ class AppFooter extends Component {
               <ExternalFooterLink href="https://www.reddit.com/r/StellarGuard/">
                 Discussion Forum
               </ExternalFooterLink>
+              <FooterLink to="/privacy-policy">Privacy Policy</FooterLink>
             </Grid>
           </Grid>
         </div>
