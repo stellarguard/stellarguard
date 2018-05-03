@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { observer } from 'mobx-react';
 import { withRouter } from 'react-router';
 
-import { Page, DashboardFab } from '../../components';
+import { Page, DashboardFab } from '../../../components';
 
 import {
   MyStellarToolsCard,
@@ -13,6 +13,7 @@ import {
   StargazerCard,
   StellarSignerCard,
   PegasusWalletCard,
+  StellarportCard,
   StellarAccountViewerCard
 } from './Wallets';
 
@@ -83,6 +84,9 @@ class SubmitTransactionPage extends Component {
           </Grid>
           <WalletGridItem>
             <StellarAccountViewerCard />
+          </WalletGridItem>
+          <WalletGridItem>
+            <StellarportCard />
           </WalletGridItem>
           <WalletGridItem>
             <StellarLaboratoryCard />

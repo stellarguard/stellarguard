@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import cx from 'classnames';
 import { withStyles, Typography, Card, CardContent } from 'material-ui';
 
-import config from '../../config';
+import { ExternalLink } from '../../../components';
+import config from '../../../config';
 
 const styles = theme => ({
   link: {
@@ -194,6 +195,60 @@ class PegasusWalletCard extends Component {
   }
 }
 
+import stellarportLogo from './stellarport_logo.png';
+
+@withStyles(styles)
+class StellarportCard extends Component {
+  get signerLink() {
+    const network = config.isTestNetwork ? 'test' : 'public';
+    return `https://www.stellar.org/laboratory/#txsigner?network=${network}`;
+  }
+
+  get title() {
+    return 'Stellarport';
+  }
+
+  get to() {
+    return `https://stellarport.io/`;
+  }
+
+  get logo() {
+    return stellarportLogo;
+  }
+
+  get name() {
+    return <span>Stellarport</span>;
+  }
+
+  get description() {
+    return (
+      <div>
+        <p>
+          Manage your Stellar wallet and trade on the Stellar decentralized
+          exchange.
+        </p>
+        <p>
+          * You must use readonly mode (sign in with Public Key) to be able copy
+          the transaction XDR and then sign it in a different tool like{' '}
+          <ExternalLink href={this.signerLink}>Stellar Laboratory</ExternalLink>.
+        </p>
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <WalletCard
+        title={this.title}
+        to={this.to}
+        logo={this.logo}
+        name={this.name}
+        description={this.description}
+      />
+    );
+  }
+}
+
 import stellarAccountViewerLogo from './stellar_rocket.png';
 
 @withStyles(styles)
@@ -328,6 +383,7 @@ export {
   MyStellarToolsCard,
   StellarAccountViewerCard,
   StellarLaboratoryCard,
+  StellarportCard,
   StargazerCard,
   StellarSignerCard,
   PegasusWalletCard

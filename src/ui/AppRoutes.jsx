@@ -13,7 +13,7 @@ import SubmitTransactionPage from './pages/transactions/SubmitTransactionPage';
 import AuthorizeTransactionPage from './pages/transactions/AuthorizeTransactionPage';
 import TransactionsPage from './pages/transactions/TransactionsPage';
 import FaqPage from './pages/misc/FaqPage';
-import SupportedWallets from './pages/misc/SupportedWalletsPage';
+import SupportedWallets from './pages/misc/supported-wallets/SupportedWalletsPage';
 import SettingsPage from './pages/user/SettingsPage';
 import TutorialsRoutes from './pages/misc/help/TutorialsRoutes';
 import PrivacyPolicyPage from './pages/misc/legal/PrivacyPolicyPage';
