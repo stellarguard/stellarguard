@@ -28,6 +28,7 @@ async function hasValidSignatures(stellarTransaction) {
   }
 
   const account = await server.loadAccount(stellarTransaction.source);
+  // every signature on the transaction must match to one of the signers on the account
   return stellarTransaction.signatures.every(signature => {
     return account.signers.some(requiredSigner => {
       const signer = StellarSdk.Keypair.fromPublicKey(
