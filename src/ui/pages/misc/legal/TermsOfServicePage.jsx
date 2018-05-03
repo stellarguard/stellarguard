@@ -25,9 +25,7 @@ class TermsOfServicePage extends Component {
           <Typography variant="headline" gutterBottom>
             Terms of Service
           </Typography>
-          <Typography paragraph>
-            Last updated <strong>April 30, 2018</strong>
-          </Typography>
+          <Typography paragraph>Last updated May 02, 2018</Typography>
 
           <Typography paragraph>
             By using StellarGuard LLC products, software, services or web sites
@@ -50,7 +48,7 @@ class TermsOfServicePage extends Component {
             Stellar.org or the Stellar Development Foundation.
           </Typography>
           <Typography variant="title" gutterBottom>
-            Financial Loss
+            Risk of Loss
           </Typography>
           <Typography paragraph>
             In no event will we be liable for any loss or damage including
@@ -121,6 +119,14 @@ class TermsOfServicePage extends Component {
             transactions. Users are encouraged to add a backup signer to their
             accounts to be able to continue to sign transactions even without
             StellarGuard.
+          </Typography>
+          <Typography variant="title" gutterBottom>
+            Paid Features
+          </Typography>
+          <Typography paragraph>
+            StellarGuard LLC reserves the right to add paid or premium features
+            at any time and features that were at one time free may fall under
+            the paid plan in the future.
           </Typography>
         </div>
         <DashboardFab />
