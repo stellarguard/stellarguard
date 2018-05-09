@@ -1,15 +1,71 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
 import { withStyles, Typography, Card, CardContent } from 'material-ui';
+import green from 'material-ui/colors/green';
 
 import { ExternalLink } from '../../../components';
 import config from '../../../config';
+
+const ribbonStyles = theme => ({
+  ribbon: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    width: 150,
+    height: 30,
+    boxShadow: '0 0 3px rgba(0,0,0,.3)',
+    color: '#FFF'
+  },
+  wallet: {
+    top: 20,
+    left: -40,
+    transform: 'rotate(-45deg)',
+    backgroundColor: theme.palette.primary.light
+  },
+  exchange: {
+    top: 20,
+    right: -40,
+    transform: 'rotate(45deg)',
+    backgroundColor: green[500]
+  }
+});
+
+@withStyles(ribbonStyles)
+class Ribbon extends Component {
+  render() {
+    const { classes, children, wallet, exchange } = this.props;
+    const className = cx(classes.ribbon, {
+      [classes.wallet]: wallet,
+      [classes.exchange]: exchange
+    });
+    return (
+      <Typography variant="body1" className={className}>
+        {children}
+      </Typography>
+    );
+  }
+}
+
+@withStyles(ribbonStyles)
+class WalletRibbon extends Component {
+  render() {
+    return <Ribbon wallet>Wallet</Ribbon>;
+  }
+}
+
+@withStyles(ribbonStyles)
+class ExchangeRibbon extends Component {
+  render() {
+    return <Ribbon exchange>Exchange</Ribbon>;
+  }
+}
 
 const styles = theme => ({
   link: {
     textDecoration: 'none'
   },
-  card: {},
+  card: { position: 'relative', overflow: 'hidden' },
   content: {
     height: theme.spacing.unit * 30,
     display: 'flex',
@@ -51,7 +107,16 @@ const styles = theme => ({
 class WalletCard extends Component {
   state = { hovered: false };
   render() {
-    const { classes, name, logo, description, className, to } = this.props;
+    const {
+      classes,
+      name,
+      logo,
+      description,
+      className,
+      to,
+      wallet,
+      exchange
+    } = this.props;
     const { hovered } = this.state;
     return (
       <a
@@ -63,6 +128,8 @@ class WalletCard extends Component {
         onMouseLeave={() => this.setState({ hovered: false })}
       >
         <Card className={cx({ [classes.hovered]: hovered }, classes.card)}>
+          {exchange && <ExchangeRibbon />}
+          {wallet && <WalletRibbon />}
           <CardContent className={classes.content}>
             <div className={cx(classes.innerContent, className)}>
               <Typography className={classes.name} gutterBottom>
@@ -114,6 +181,49 @@ class MyStellarToolsCard extends Component {
   }
 }
 
+import interstellarExchangeLogo from './interstellar_exchange_logo.png';
+
+@withStyles(styles)
+class InterstellarExchangeCard extends Component {
+  get title() {
+    return 'Interstellar';
+  }
+
+  get to() {
+    if (config.isTestNetwork) {
+      return 'https://testnet.interstellar.exchange';
+    } else {
+      return 'https://interstellar.exchange';
+    }
+  }
+
+  get logo() {
+    return interstellarExchangeLogo;
+  }
+
+  get name() {
+    return <span>Interstellar</span>;
+  }
+
+  get description() {
+    return <div>A Multi-Awesome Wallet and Decentralized Exchange</div>;
+  }
+
+  render() {
+    return (
+      <WalletCard
+        wallet
+        exchange
+        title={this.title}
+        to={this.to}
+        logo={this.logo}
+        name={this.name}
+        description={this.description}
+      />
+    );
+  }
+}
+
 import stargazerLogo from './stargazer_logo.png';
 
 @withStyles(styles)
@@ -144,6 +254,7 @@ class StargazerCard extends Component {
   render() {
     return (
       <WalletCard
+        wallet
         title={this.title}
         to={this.to}
         name={this.name}
@@ -185,6 +296,7 @@ class PegasusWalletCard extends Component {
   render() {
     return (
       <WalletCard
+        wallet
         title={this.title}
         to={this.to}
         name={this.name}
@@ -239,6 +351,8 @@ class StellarportCard extends Component {
   render() {
     return (
       <WalletCard
+        wallet
+        exchange
         title={this.title}
         to={this.to}
         logo={this.logo}
@@ -281,6 +395,7 @@ class StellarAccountViewerCard extends Component {
   render() {
     return (
       <WalletCard
+        wallet
         title={this.title}
         to={this.to}
         logo={this.logo}
@@ -325,6 +440,7 @@ class StellarLaboratoryCard extends Component {
   render() {
     return (
       <WalletCard
+        wallet
         title={this.title}
         to={this.to}
         logo={this.logo}
@@ -386,5 +502,6 @@ export {
   StellarportCard,
   StargazerCard,
   StellarSignerCard,
-  PegasusWalletCard
+  PegasusWalletCard,
+  InterstellarExchangeCard
 };

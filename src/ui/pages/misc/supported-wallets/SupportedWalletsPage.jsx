@@ -14,7 +14,8 @@ import {
   StellarSignerCard,
   PegasusWalletCard,
   StellarportCard,
-  StellarAccountViewerCard
+  StellarAccountViewerCard,
+  InterstellarExchangeCard
 } from './Wallets';
 
 const styles = theme => ({
@@ -68,6 +69,9 @@ class SubmitTransactionPage extends Component {
           </WalletGridItem>
           <WalletGridItem>
             <PegasusWalletCard />
+          </WalletGridItem>
+          <WalletGridItem>
+            <InterstellarExchangeCard />
           </WalletGridItem>
           {/* <WalletGridItem>
             <MyStellarToolsCard />

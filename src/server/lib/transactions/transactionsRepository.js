@@ -14,13 +14,21 @@ class TransactionRepository {
     return new Transaction(data);
   }
 
-  async createTransaction({ userId, xdr, ipAddress, hash, submittedFrom }) {
+  async createTransaction({
+    userId,
+    xdr,
+    ipAddress,
+    hash,
+    submittedFrom,
+    externalId
+  }) {
     const transaction = await this.transactionDb.create({
       userId,
       xdr,
       hash,
       ipAddress,
-      submittedFrom
+      submittedFrom,
+      externalId
     });
     return new Transaction(transaction);
   }

@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^6.2.1",
+    "@stomp/stompjs": "^4.0.2",
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
     "bcrypt": "^1.0.3",

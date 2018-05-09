@@ -16,7 +16,8 @@ class Transaction {
     dateCreated,
     ipAddress,
     result,
-    submittedFrom
+    submittedFrom,
+    externalId
   }) {
     this.id = id;
     this.userId = userId;
@@ -26,6 +27,7 @@ class Transaction {
     this.result = result;
     this.ipAddress = ipAddress;
     this.submittedFrom = submittedFrom;
+    this.externalId = externalId;
   }
 
   get source() {
@@ -48,6 +50,7 @@ class Transaction {
   async hasValidSignatures() {
     return (
       this.isFromConstellation() ||
+      this.isFromInterstellarExchange() ||
       (await stellar.transactions.hasValidSignatures(this.stellarTransaction))
     );
   }
@@ -82,6 +85,17 @@ class Transaction {
 
   isFromConstellation() {
     return this.submittedFrom === 'constellation';
+  }
+
+  isFromInterstellarExchange() {
+    return this.submittedFrom === 'interstellar.exchange';
+  }
+
+  getSignatureForAccount(publicKey) {
+    return stellar.signer.getSignatureForPublicKey(
+      this.stellarTransaction,
+      publicKey
+    );
   }
 
   toJSON() {

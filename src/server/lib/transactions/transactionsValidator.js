@@ -19,7 +19,7 @@ async function validate(transaction) {
     throw new VariedSourceAccountsError();
   }
 
-  if (!await transaction.hasValidSignatures()) {
+  if (!(await transaction.hasValidSignatures())) {
     throw new InvalidSignaturesError();
   }
 }

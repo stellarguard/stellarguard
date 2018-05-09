@@ -84,9 +84,9 @@ if (!config.isDevMode) {
       next();
     }
   });
-
-  require('./listeners').start();
 }
+
+require('./listeners').start();
 
 if (config.isDevMode) {
   process.env.APP_VERSION = version;

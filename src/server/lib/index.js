@@ -7,5 +7,6 @@ module.exports = {
   accounts: require('./accounts'),
   utils: require('./utils'),
   constellation: require('./constellation'),
+  interstellarExchange: require('./interstellarExchange'),
   db: require('./db')
 };

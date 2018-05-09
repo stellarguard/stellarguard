@@ -10,7 +10,29 @@ function signTransactionWithKeyPair(transaction, signerKeypair) {
   return transaction;
 }
 
+function addSignature(transaction, signatureXdr) {
+  var buffer = new Buffer(signatureXdr, 'base64');
+  var signature = StellarSdk.xdr.DecoratedSignature.fromXDR(buffer);
+  transaction.signatures.push(signature);
+  return transaction;
+}
+
+function getSignatureForPublicKey(transaction, publicKey) {
+  const signerHint = StellarSdk.Keypair.fromPublicKey(publicKey)
+    .signatureHint()
+    .toString('hex');
+  const signature = transaction.signatures.find(
+    signature => signature.hint().toString('hex') === signerHint
+  );
+
+  if (signature) {
+    return signature.toXDR().toString('base64');
+  }
+}
+
 module.exports = {
   signTransactionWithSecretKey,
-  signTransactionWithKeyPair
+  signTransactionWithKeyPair,
+  addSignature,
+  getSignatureForPublicKey
 };

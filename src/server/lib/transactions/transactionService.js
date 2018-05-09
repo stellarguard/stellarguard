@@ -2,6 +2,7 @@ const transactionsRepository = require('./transactionsRepository');
 const transactionsValidator = require('./transactionsValidator');
 const stellar = require('../stellar');
 const Transaction = require('./Transaction');
+const { interstellarExchangeService } = require('../interstellarExchange');
 const { accountsService } = require('../accounts');
 const { emailService } = require('../email');
 const { authenticatorService } = require('../tfa');
@@ -71,6 +72,11 @@ class TransactionService {
         await require('../constellation').constellationService.submitSignatures(
           transaction
         );
+      } else if (transaction.isFromInterstellarExchange()) {
+        await interstellarExchangeService.approveTransaction(
+          transaction,
+          user.signerPublicKey
+        );
       } else {
         result = await stellar.transactions.submitTransaction(
           transaction.stellarTransaction
@@ -114,6 +120,14 @@ class TransactionService {
       transaction.status != Transaction.Status.Error
     ) {
       throw new TransactionAlreadySubmittedError();
+    }
+
+    if (transaction.isFromInterstellarExchange()) {
+      transaction.sign(user.signerSecretKey); // rejections are required to be signed for this API
+      await interstellarExchangeService.rejectTransaction(
+        transaction,
+        user.signerPublicKey
+      );
     }
 
     return await transactionsRepository.updateStatus(transaction, {

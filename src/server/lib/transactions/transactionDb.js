@@ -26,13 +26,13 @@ class TransactionDb {
     return rows;
   }
 
-  async create({ userId, xdr, ipAddress, hash, submittedFrom }) {
+  async create({ userId, xdr, ipAddress, hash, submittedFrom, externalId }) {
     try {
       const { rows } = await this.db.pg.query(
-        `INSERT INTO "transaction" (user_id, xdr, ip_address, hash, submitted_from)
-       VALUES ($1, $2, $3, $4, $5)
+        `INSERT INTO "transaction" (user_id, xdr, ip_address, hash, submitted_from, external_id)
+       VALUES ($1, $2, $3, $4, $5, $6)
        RETURNING *`,
-        [userId, xdr, ipAddress, hash, submittedFrom]
+        [userId, xdr, ipAddress, hash, submittedFrom, externalId]
       );
       return rows[0];
     } catch (e) {
