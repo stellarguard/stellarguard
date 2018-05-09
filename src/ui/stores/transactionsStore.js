@@ -58,6 +58,10 @@ export default class TransactionsStore {
     if (transaction.isDeactivateAccountTransaction) {
       this.rootStore.userStore.removeAccount({ publicKey: transaction.source });
     }
+    this.rootStore.uiState.showSnackbar({
+      message: `Transaction Authorized`,
+      duration: 2500
+    });
     this.addTransaction(transaction);
     return transaction;
   }
@@ -65,6 +69,10 @@ export default class TransactionsStore {
   @action
   async deny({ id }) {
     const transaction = await transactionsApi.denyTransaction(id);
+    this.rootStore.uiState.showSnackbar({
+      message: `Transaction Denied`,
+      duration: 2500
+    });
     this.addTransaction(transaction);
     return transaction;
   }
