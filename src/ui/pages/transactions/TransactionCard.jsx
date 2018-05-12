@@ -85,9 +85,33 @@ class TransactionStatus extends Component {
   }
 }
 
+import {
+  MoreHoriz as PendingIcon,
+  Done as SuccessIcon,
+  Cancel as DenyIcon,
+  ErrorOutline as ErrorIcon
+} from 'material-ui-icons';
+
 @withStyles(styles)
 @observer
 class TransactionHeaderAvatar extends Component {
+  renderIcon() {
+    const { transaction } = this.props;
+    if (transaction.isPending) {
+      return <PendingIcon />;
+    }
+
+    if (transaction.isSuccessful) {
+      return <SuccessIcon />;
+    }
+
+    if (transaction.isDenied) {
+      return <DenyIcon />;
+    }
+
+    return <ErrorIcon />;
+  }
+
   render() {
     const { classes, transaction } = this.props;
     const statusClasses = {
@@ -99,7 +123,7 @@ class TransactionHeaderAvatar extends Component {
     };
     return (
       <Avatar className={cx(classes.avatar, statusClasses)}>
-        {transaction.id}
+        {this.renderIcon()}
       </Avatar>
     );
   }

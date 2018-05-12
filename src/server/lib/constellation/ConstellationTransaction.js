@@ -6,7 +6,9 @@ class ConstellationTransaction {
     this.xdr = xdr;
     this.progress = progress;
     this.network = network;
-    this.sourceAccount = this.toStellarTransaction().source;
+    const stellarTransaction = this.toStellarTransaction();
+    this.id = stellarTransaction.hash();
+    this.sourceAccount = stellarTransaction.source;
   }
 
   isSignedBySourceAccount() {

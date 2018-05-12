@@ -16,11 +16,12 @@ class InterstellarExchangeListener {
   }
 
   async _onTransaction(interstellarExchangeTransaction) {
-    console.log('Got transaction from interstellar.exchange');
     // transactions not signed by source account are not ready to be submitted to StellarGuard
     if (!interstellarExchangeTransaction.isSignedBySourceAccount()) {
       return;
     }
+
+    console.log('Got transaction from interstellar.exchange');
 
     try {
       const transaction = new Transaction({
