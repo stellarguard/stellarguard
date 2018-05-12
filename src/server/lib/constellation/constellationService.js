@@ -1,31 +1,22 @@
 const constellationApi = require('constellation-api');
 const config = require('../../config');
-const { Transaction, transactionService } = require('../transactions');
-const { userService } = require('../users');
+const ConstellationTransaction = require('./ConstellationTransaction');
 
 class ConstellationService {
   constructor() {
     this.constellationServer = constellationApi.Server();
   }
 
-  isTestNetworkTransaction(payload) {
-    return payload.network === constellationApi.Network.testnet;
-  }
-
-  isPublicNetworkTransaction(payload) {
-    return payload.network === constellationApi.Network.live;
-  }
-
-  isTransactionToCurrentNetwork(payload) {
+  isTransactionToCurrentNetwork(constellationTransaction) {
     if (
-      this.isTestNetworkTransaction(payload) &&
-      !config.useStellarPublicNetwork
+      constellationTransaction.isTestNetwork &&
+      config.useStellarTestNetwork
     ) {
       return true;
     }
 
     if (
-      this.isPublicNetworkTransaction(payload) &&
+      constellationTransaction.isPublicNetwork &&
       config.useStellarPublicNetwork
     ) {
       return true;
@@ -34,32 +25,23 @@ class ConstellationService {
     return false;
   }
 
-  listenForTransactions() {
-    this.constellationServer.subscribe(config.stellarGuardPublicKey, payload =>
-      this._onTransaction(payload)
-    );
-  }
-
-  async _onTransaction(payload) {
-    console.log('Got transaction from Constellation API', payload);
-    if (this.isTransactionToCurrentNetwork(payload)) {
-      const xdr = payload.txenv;
-      const transaction = new Transaction({
-        xdr,
-        submittedFrom: 'constellation'
-      });
-      const isSignedByTransactionSource = payload.progress[transaction.source];
-      if (isSignedByTransactionSource) {
-        try {
-          const user = await userService.getUserByAccountPublicKey(
-            transaction.source
-          );
-          await transactionService.createTransaction(transaction, user);
-        } catch (e) {
-          console.error('Error submitting Constellation Transaction', e);
+  listenForTransactions(onTransaction) {
+    const eventSource = this.constellationServer.subscribe(
+      config.stellarGuardPublicKey,
+      payload => {
+        const constellationTransaction = ConstellationTransaction.fromJson(
+          payload
+        );
+        console.log('payload', payload);
+        console.log(constellationTransaction);
+        if (this.isTransactionToCurrentNetwork(constellationTransaction)) {
+          onTransaction(constellationTransaction);
         }
       }
-    }
+    );
+    return () => {
+      eventSource.close();
+    };
   }
 
   async submitSignatures(transaction) {

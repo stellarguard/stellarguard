@@ -1,9 +1,9 @@
 const stellar = require('../stellar');
 
 class InterstellarExchangeTransaction {
-  constructor({ id, envelope, status, sourceAccount, signatures }) {
+  constructor({ id, xdr, status, sourceAccount, signatures }) {
     this.id = id;
-    this.envelope = envelope;
+    this.xdr = xdr;
     this.status = status;
     this.sourceAccount = sourceAccount;
     this.signatures = signatures || [];
@@ -17,7 +17,7 @@ class InterstellarExchangeTransaction {
   }
 
   toStellarTransaction() {
-    return stellar.transactions.fromXdr(this.envelope);
+    return stellar.transactions.fromXdr(this.xdr);
   }
 
   static fromJson(json) {
@@ -25,7 +25,7 @@ class InterstellarExchangeTransaction {
     const signatures = json.signatures;
     return new InterstellarExchangeTransaction({
       id,
-      envelope,
+      xdr: envelope,
       status,
       sourceAccount,
       signatures

@@ -1,19 +1,21 @@
 const config = require('./config');
 
-var express = require('express');
+const express = require('express');
 const fs = require('fs');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
+const path = require('path');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
+const csp = require('express-csp-header');
+const ms = require('ms');
+
 const version = require('../../package.json').version;
 const session = require('./session');
 const apiRoutes = require('./api');
-const csp = require('express-csp-header');
-const helmet = require('helmet');
 
 const { UnknownError } = require('errors');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -86,8 +88,6 @@ if (!config.isDevMode) {
   });
 }
 
-require('./listeners').start();
-
 if (config.isDevMode) {
   process.env.APP_VERSION = version;
   const Bundler = require('parcel-bundler');
@@ -112,5 +112,14 @@ app.use(function(err, req, res, next) {
     res.status(500).json(new UnknownError());
   }
 });
+
+activateListeners();
+
+function activateListeners() {
+  const listeners = require('./listeners');
+  listeners.start();
+  // restart listeners every so often in case they have disconnected and did not recover
+  setInterval(() => listeners.restart(), ms('30m'));
+}
 
 module.exports = app;

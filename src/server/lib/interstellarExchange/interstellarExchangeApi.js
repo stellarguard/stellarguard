@@ -8,9 +8,6 @@ class InterstellarExchangeApi {
     this.axiosClient = axios.create({
       baseURL: `https://${host}/backend/api/v1`
     });
-
-    this.stompClient = Stomp.client(`wss://${host}/backend/ws`);
-    this.stompClient.reconnect_delay = 2000;
   }
 
   static testnet() {
@@ -45,21 +42,6 @@ class InterstellarExchangeApi {
     );
     return (response.data || []).map(json =>
       InterstellarExchangeTransaction.fromJson(json)
-    );
-  }
-
-  subscribeToPendingTransactions() {
-    this.stompClient.connect(
-      {},
-      frame => {
-        console.log(frame);
-        this.stompClient.subscribe('/topic/multisig', message => {
-          console.log(message);
-        });
-      },
-      err => {
-        console.log(err);
-      }
     );
   }
 }

@@ -22,6 +22,10 @@ class Config {
     return env.useStellarPublicNetwork || false;
   }
 
+  get useStellarTestNetwork() {
+    return !this.useStellarPublicNetwork;
+  }
+
   get isDevMode() {
     return env.devMode || false;
   }

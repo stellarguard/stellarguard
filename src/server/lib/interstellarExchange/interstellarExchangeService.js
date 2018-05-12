@@ -1,5 +1,8 @@
 const InterstellarExchangeApi = require('./interstellarExchangeApi');
 const config = require('../../config');
+const ms = require('ms');
+
+const POLLING_INTERVAL_MS = ms('15s');
 
 class InterstellarExchangeService {
   constructor() {
@@ -12,7 +15,7 @@ class InterstellarExchangeService {
     this._getPendingTransactions(onTransaction);
     const intervalId = setInterval(() => {
       this._getPendingTransactions(onTransaction);
-    }, 15000);
+    }, POLLING_INTERVAL_MS);
 
     return () => clearInterval(intervalId);
   }

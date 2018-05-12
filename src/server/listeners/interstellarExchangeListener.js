@@ -1,7 +1,6 @@
 const { interstellarExchangeService } = require('../lib/interstellarExchange');
 const { Transaction, transactionService } = require('../lib/transactions');
 const { userService } = require('../lib/users');
-const stellar = require('../lib/stellar');
 const { DuplicateTransactionError } = require('errors/transaction');
 
 class InterstellarExchangeListener {
@@ -13,6 +12,7 @@ class InterstellarExchangeListener {
 
   stop() {
     this.stopListening && this.stopListening();
+    this.stopListening = null;
   }
 
   async _onTransaction(interstellarExchangeTransaction) {
@@ -22,17 +22,13 @@ class InterstellarExchangeListener {
       return;
     }
 
-    const xdr = stellar.transactions.toXdr(
-      interstellarExchangeTransaction.toStellarTransaction()
-    );
-
-    const transaction = new Transaction({
-      xdr,
-      externalId: interstellarExchangeTransaction.id,
-      submittedFrom: 'interstellar.exchange'
-    });
-
     try {
+      const transaction = new Transaction({
+        xdr: interstellarExchangeTransaction.xdr,
+        externalId: interstellarExchangeTransaction.id,
+        submittedFrom: 'interstellar.exchange'
+      });
+
       const user = await userService.getUserByAccountPublicKey(
         transaction.source
       );
