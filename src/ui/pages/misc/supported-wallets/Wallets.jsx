@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
-import { withStyles, Typography, Card, CardContent } from 'material-ui';
+import { withStyles, Typography, Card, CardContent, Paper } from 'material-ui';
 import green from 'material-ui/colors/green';
 
-import { ExternalLink } from '../../../components';
+import { ExternalLink, ButtonLink } from '../../../components';
 import config from '../../../config';
 
 const ribbonStyles = theme => ({
@@ -40,9 +40,11 @@ class Ribbon extends Component {
       [classes.exchange]: exchange
     });
     return (
-      <Typography variant="body1" className={className}>
-        {children}
-      </Typography>
+      <Paper elevation={5}>
+        <Typography variant="body1" className={className}>
+          {children}
+        </Typography>
+      </Paper>
     );
   }
 }
@@ -67,7 +69,7 @@ const styles = theme => ({
   },
   card: { position: 'relative', overflow: 'hidden' },
   content: {
-    height: theme.spacing.unit * 30,
+    height: theme.spacing.unit * 35,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
@@ -75,7 +77,8 @@ const styles = theme => ({
   innerContent: {
     display: 'flex',
     alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    height: '100%'
   },
   logo: {
     height: 30,
@@ -83,6 +86,7 @@ const styles = theme => ({
     marginRight: theme.spacing.unit
   },
   name: {
+    flex: 1,
     display: 'flex',
     alignItems: 'center',
     transform: 'translateY(0)',
@@ -97,6 +101,12 @@ const styles = theme => ({
     '& $name': {
       transform: 'translateY(-10px)'
     }
+  },
+  description: {
+    flex: 1
+  },
+  tutorial: {
+    justifySelf: 'flex-end'
   },
   stellar: {
     color: '#2196f3'
@@ -114,6 +124,7 @@ class WalletCard extends Component {
       description,
       className,
       to,
+      tutorial,
       wallet,
       exchange
     } = this.props;
@@ -136,7 +147,18 @@ class WalletCard extends Component {
                 {logo && <img className={classes.logo} src={logo} />}
                 {name}
               </Typography>
-              <Typography variant="body1">{description}</Typography>
+              <Typography className={classes.description} variant="body1">
+                {description}
+              </Typography>
+              {tutorial && (
+                <ButtonLink
+                  color="primary"
+                  className={classes.tutorial}
+                  to={tutorial}
+                >
+                  View Tutorials
+                </ButtonLink>
+              )}
             </div>
           </CardContent>
         </Card>
@@ -186,7 +208,7 @@ import interstellarExchangeLogo from './interstellar_exchange_logo.png';
 @withStyles(styles)
 class InterstellarExchangeCard extends Component {
   get title() {
-    return 'Interstellar';
+    return 'Interstellar.Exchange';
   }
 
   get to() {
@@ -202,11 +224,15 @@ class InterstellarExchangeCard extends Component {
   }
 
   get name() {
-    return <span>Interstellar</span>;
+    return <span>Interstellar.Exchange</span>;
   }
 
   get description() {
     return <div>A Multi-Awesome Wallet and Decentralized Exchange</div>;
+  }
+
+  get tutorial() {
+    return '/help/trade-on-interstellar-exchange';
   }
 
   render() {
@@ -219,6 +245,7 @@ class InterstellarExchangeCard extends Component {
         logo={this.logo}
         name={this.name}
         description={this.description}
+        tutorial={this.tutorial}
       />
     );
   }

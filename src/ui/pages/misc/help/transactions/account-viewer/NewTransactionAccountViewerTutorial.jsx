@@ -58,7 +58,7 @@ class NewTransactionAccountViewerTutorial extends Component {
         <TutorialLine imgSrc={submitTransactionImg}>
           Step 6: Click &quot;Send lumens&quot; to be taken to a confirmation
           page. Verify that the payment information is correct and click
-          &quote;Submit transaction&quot;.
+          &quot;Submit transaction&quot;.
         </TutorialLine>
         <TutorialLine imgSrc={copyXdrImg}>
           Step 7: Select and copy the transaction XDR listed in the page.
