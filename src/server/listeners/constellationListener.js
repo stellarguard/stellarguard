@@ -23,6 +23,7 @@ class ConstellationListener {
     try {
       const transaction = new Transaction({
         xdr: constellationTransaction.xdr,
+        externalId: constellationTransaction.externalId,
         submittedFrom: 'constellation'
       });
 
