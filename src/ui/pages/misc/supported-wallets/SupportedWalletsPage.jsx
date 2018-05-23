@@ -65,13 +65,16 @@ class SubmitTransactionPage extends Component {
             </Typography>
           </Grid>
           <WalletGridItem>
+            <StellarportCard />
+          </WalletGridItem>
+          <WalletGridItem>
+            <InterstellarExchangeCard />
+          </WalletGridItem>
+          <WalletGridItem>
             <StargazerCard />
           </WalletGridItem>
           <WalletGridItem>
             <PegasusWalletCard />
-          </WalletGridItem>
-          <WalletGridItem>
-            <InterstellarExchangeCard />
           </WalletGridItem>
           {/* <WalletGridItem>
             <MyStellarToolsCard />
@@ -88,9 +91,6 @@ class SubmitTransactionPage extends Component {
           </Grid>
           <WalletGridItem>
             <StellarAccountViewerCard />
-          </WalletGridItem>
-          <WalletGridItem>
-            <StellarportCard />
           </WalletGridItem>
           <WalletGridItem>
             <StellarLaboratoryCard />

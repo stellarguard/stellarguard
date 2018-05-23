@@ -44,7 +44,7 @@ class NewTransactionInterstellarExchangeTutorial extends Component {
         <TutorialLine>
           Step 1: Go to{' '}
           <ExternalLink href={this.url}>InterStellar.Exchange</ExternalLink> and
-          click and click &quot;Enter Account&quot;
+          click &quot;Enter Account&quot;
         </TutorialLine>
         <TutorialLine imgSrc={importWalletImg}>
           Step 2: Set a new password for your account and click

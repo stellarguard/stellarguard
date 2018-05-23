@@ -209,6 +209,18 @@ class FaqPage extends Component {
             </Typography>
           </FaqGridItem>
           <FaqGridItem
+            question="Does StellarGuard work with the Stellar Decentralized Exchange (SDEX)?"
+            id="sdex"
+          >
+            <Typography paragraph>
+              Yes! See the{' '}
+              <Link to="/supported-wallets" className={classes.link}>
+                Supported Wallets page
+              </Link>{' '}
+              for a full list of supported exchanges.
+            </Typography>
+          </FaqGridItem>
+          <FaqGridItem
             question="Is there a version that uses the Stellar Testnet so I can try it out first?"
             id="testnet"
           >

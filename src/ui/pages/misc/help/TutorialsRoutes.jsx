@@ -4,9 +4,10 @@ import { observer } from 'mobx-react';
 
 import NewTransactionStellarLabsTutorial from './transactions/NewTransactionStellarLabsTutorial';
 import NewTransactionAccountViewerTutorial from './transactions/account-viewer/NewTransactionAccountViewerTutorial';
-import FourOhFourPage from '../../errors/FourOhFourPage';
 import NewTransactionInterstellarExchangeTutorial from './interstellar-exchange/NewTransactionInterstellarExchangeTutorial';
+import StellarportTransactionTutorial from './stellarport/StellarportTransactionTutorial';
 
+import FourOhFourPage from '../../errors/FourOhFourPage';
 @withRouter
 @observer
 class TutorialsRoutes extends Component {
@@ -27,6 +28,11 @@ class TutorialsRoutes extends Component {
           exact
           path="/help/trade-on-interstellar-exchange"
           component={NewTransactionInterstellarExchangeTutorial}
+        />
+        <Route
+          exact
+          path="/help/trade-on-stellarport"
+          component={StellarportTransactionTutorial}
         />
         <Route component={FourOhFourPage} />
       </Switch>

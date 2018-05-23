@@ -338,11 +338,6 @@ import stellarportLogo from './stellarport_logo.png';
 
 @withStyles(styles)
 class StellarportCard extends Component {
-  get signerLink() {
-    const network = config.isTestNetwork ? 'test' : 'public';
-    return `https://www.stellar.org/laboratory/#txsigner?network=${network}`;
-  }
-
   get title() {
     return 'Stellarport';
   }
@@ -359,19 +354,16 @@ class StellarportCard extends Component {
     return <span>Stellarport</span>;
   }
 
+  get tutorial() {
+    return `/help/trade-on-stellarport`;
+  }
+
   get description() {
     return (
-      <div>
-        <p>
-          Manage your Stellar wallet and trade on the Stellar decentralized
-          exchange.
-        </p>
-        <p>
-          * You must use readonly mode (sign in with Public Key) to be able copy
-          the transaction XDR and then sign it in a different tool like{' '}
-          <ExternalLink href={this.signerLink}>Stellar Laboratory</ExternalLink>.
-        </p>
-      </div>
+      <span>
+        Manage your Stellar wallet and trade on the Stellar decentralized
+        exchange.
+      </span>
     );
   }
 
@@ -385,6 +377,7 @@ class StellarportCard extends Component {
         logo={this.logo}
         name={this.name}
         description={this.description}
+        tutorial={this.tutorial}
       />
     );
   }
@@ -419,6 +412,10 @@ class StellarAccountViewerCard extends Component {
     );
   }
 
+  get tutorial() {
+    return `/help/new-transaction-account-viewer`;
+  }
+
   render() {
     return (
       <WalletCard
@@ -428,6 +425,7 @@ class StellarAccountViewerCard extends Component {
         logo={this.logo}
         name={this.name}
         description={this.description}
+        tutorial={this.tutorial}
       />
     );
   }
@@ -464,6 +462,10 @@ class StellarLaboratoryCard extends Component {
     );
   }
 
+  get tutorial() {
+    return `/help/new-transaction-stellar-labs`;
+  }
+
   render() {
     return (
       <WalletCard
@@ -473,6 +475,7 @@ class StellarLaboratoryCard extends Component {
         logo={this.logo}
         name={this.name}
         description={this.description}
+        tutorial={this.tutorial}
       />
     );
   }
