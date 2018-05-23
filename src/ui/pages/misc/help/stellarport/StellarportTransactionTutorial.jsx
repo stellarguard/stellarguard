@@ -41,8 +41,9 @@ class StellarportTransactionTutorial extends Component {
           &quot;Sign In&quot;
         </TutorialLine>
         <TutorialLine imgSrc={loginSecretKeyImg}>
-          Step 2: Choose &quot;Secret Key&quot; as your login method and enter
-          the secret key of your StellarGuard protected account.
+          Step 2: Log in to Stellarport with your preferred method. In this
+          tutorial we&apos;ll choose &quot;Secret Key&quot; and will enter the
+          secret key of a StellarGuard protected account.
         </TutorialLine>
         <TutorialLine imgSrc={chooseAssetImg}>
           Step 3: Click on &quot;Exchange&quot; in the menu bar and then choose
@@ -62,9 +63,13 @@ class StellarportTransactionTutorial extends Component {
         </TutorialLine>
         <TutorialLine imgSrc={authorizeTransactionImg}>
           Step 7: Authorize the transaction in StellarGuard and it will be
-          submitted to the Stellar network and your new assets will appear in
+          submitted to the Stellar network. Your new assets will appear in
           Stellarport. Note: the transaction details will include a Manage Offer
           operation as well as a Payment for the Stellarport trading fee.
+        </TutorialLine>
+        <TutorialLine imgSrc={submittedToStellarGuardImg}>
+          Step 8 (optional): Go back to the Stellarport popup and click
+          &quot;Done&quot; to finish.
         </TutorialLine>
         <TutorialLine>
           Congratulations! You&apos;ve learned how to buy an asset on
