@@ -42,10 +42,32 @@ class NoUserForIdError extends AppError {
   }
 }
 
-class InvalidPasswordResetCodeError extends AppError {
+class NoUserForSignerPublicKeyError extends AppError {
   constructor() {
     super({
       code: 4005,
+      statusCode: 404,
+      field: 'publicKey',
+      message: 'No user found with this StellarGuard public key.'
+    });
+  }
+}
+
+class NoUserForAccountPublicKeyError extends AppError {
+  constructor() {
+    super({
+      code: 4006,
+      statusCode: 404,
+      field: 'publicKey',
+      message: 'No user found with this public key.'
+    });
+  }
+}
+
+class InvalidPasswordResetCodeError extends AppError {
+  constructor() {
+    super({
+      code: 4007,
       field: 'code',
       message: 'Your reset code is invalid.'
     });
@@ -55,7 +77,7 @@ class InvalidPasswordResetCodeError extends AppError {
 class PasswordResetCodeExpiredError extends AppError {
   constructor() {
     super({
-      code: 4006,
+      code: 4008,
       field: 'code',
       message: 'Reset code has expired.'
     });
@@ -65,7 +87,7 @@ class PasswordResetCodeExpiredError extends AppError {
 class CommonPasswordError extends AppError {
   constructor() {
     super({
-      code: 4007,
+      code: 4009,
       field: 'password',
       message: 'Your password is a common password, please use another.'
     });
@@ -79,5 +101,7 @@ module.exports = {
   NoUserForIdError,
   InvalidPasswordResetCodeError,
   PasswordResetCodeExpiredError,
-  CommonPasswordError
+  CommonPasswordError,
+  NoUserForSignerPublicKeyError,
+  NoUserForAccountPublicKeyError
 };

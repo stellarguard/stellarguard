@@ -11,7 +11,7 @@ const { emailService } = require('../email');
 const userValidator = require('./userValidator');
 const forgotPasswordValidator = require('./forgotPasswordValidator');
 const resetPasswordValidator = require('./resetPasswordValidator');
-const { NoUserForIdError } = require('errors/user');
+const { NoUserForSignerPublicKeyError } = require('errors/user');
 
 class UserService {
   async createUser({ email, password }) {
@@ -106,7 +106,7 @@ class UserService {
   }) {
     const user = await this.getUserBySignerPublicKey(stellarGuardPublicKey);
     if (!user) {
-      throw new NoUserForIdError();
+      throw new NoUserForSignerPublicKeyError();
     }
 
     return await stellar.multisig.buildMultisigTransaction({

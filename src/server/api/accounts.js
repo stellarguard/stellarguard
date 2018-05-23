@@ -4,6 +4,7 @@ const router = express.Router();
 const { accounts, stellar, users } = require('../lib');
 const { MultiSigNotActiveError } = require('errors/account');
 const { RequiredParamError } = require('errors/common');
+const { NoUserForAccountPublicKeyError } = require('errors/user');
 const Controller = require('./Controller');
 
 const cors = require('cors');
@@ -81,6 +82,20 @@ class AccountsController extends Controller {
 
     return res.json(multiSigSetup);
   }
+
+  async getAccount(req, res) {
+    const { publicKey } = req.params;
+    const user = await users.userService.getUserByAccountPublicKey(publicKey);
+    if (!user) {
+      throw new NoUserForAccountPublicKeyError();
+    }
+
+    return res.json({
+      userId: user.id,
+      publicKey: publicKey,
+      stellarGuardSignerPublicKey: user.signerPublicKey
+    });
+  }
 }
 
 const accountsController = new AccountsController();
@@ -88,6 +103,7 @@ const accountsController = new AccountsController();
 // public api
 router.options('/:publicKey', cors());
 router.post('/:publicKey', cors(), accountsController.createAccount);
+router.get('/:publicKey', cors(), accountsController.getAccount);
 router.get('/:publicKey/multisig', cors(), accountsController.getMultisigSetup);
 
 module.exports = router;
