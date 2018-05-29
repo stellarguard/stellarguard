@@ -69,7 +69,7 @@ app.use(
         'fonts.gstatic.com'
       ],
       'base-uri': [csp.SELF],
-      'img-src': ['*'],
+      'img-src': ['*', 'data:'],
       'block-all-mixed-content': true
     }
   })
