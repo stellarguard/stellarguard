@@ -65,8 +65,8 @@ class TransactionService {
     }
 
     let secretKey;
-    if (user.signerSecretKeyEncrypted) {
-      secretKey = await crypto.encrypt(user.signerSecretKeyEncrypted);
+    if (user.encryptedSignerSecretKey) {
+      secretKey = await crypto.decrypt(user.encryptedSignerSecretKey);
     } else {
       secretKey = user.signerSecretKey;
     }
