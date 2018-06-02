@@ -57,11 +57,9 @@ async function decrypt(
     }
   };
 
-  console.log(Buffer.from(dataToDecrypt).toString('base64'));
   const response = await kms.projects.locations.keyRings.cryptoKeys.decrypt(
     request
   );
-  console.log(response);
 
   return Buffer.from(response.data.plaintext, 'base64');
 }
