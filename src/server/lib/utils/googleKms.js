@@ -37,7 +37,7 @@ async function encrypt(
     request
   );
 
-  return Buffer.from(response.data.ciphertext, 'base64');
+  return Buffer.from(response.data.ciphertext, 'base64').toString('hex');
 }
 
 async function decrypt(
@@ -53,7 +53,7 @@ async function decrypt(
   const request = {
     name: `projects/${projectId}/locations/${locationId}/keyRings/${keyRingId}/cryptoKeys/${cryptoKeyId}`,
     resource: {
-      ciphertext: Buffer.from(dataToDecrypt).toString('base64')
+      ciphertext: Buffer.from(dataToDecrypt, 'hex').toString('base64')
     }
   };
 
@@ -61,7 +61,7 @@ async function decrypt(
     request
   );
 
-  return Buffer.from(response.data.plaintext, 'base64');
+  return Buffer.from(response.data.plaintext, 'base64').toString();
 }
 
 module.exports = {

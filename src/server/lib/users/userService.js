@@ -90,14 +90,12 @@ class UserService {
 
   async generatePasswordResetCode(user) {
     const payload = { userId: user.id, ts: Date.now() };
-    const encryptedPayload = await crypto.encrypt(JSON.stringify(payload));
-    return Buffer.from(encryptedPayload).toString('hex'); // only include readable chars
+    return await crypto.encrypt(JSON.stringify(payload));
   }
 
   async decryptPasswordResetCode(code) {
     try {
-      const encryptedPayload = Buffer.from(code, 'hex');
-      return JSON.parse(await crypto.decrypt(encryptedPayload));
+      return JSON.parse(await crypto.decrypt(code));
     } catch (e) {
       return;
     }
