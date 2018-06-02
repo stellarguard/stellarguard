@@ -43,7 +43,7 @@ class Config {
   }
 
   get useGoogleKms() {
-    return env.useGoogleKms || false;
+    return !env.devMode;
   }
 }
 
