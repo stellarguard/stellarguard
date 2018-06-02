@@ -41,6 +41,10 @@ class Config {
   get stellarGuardPublicKey() {
     return 'GCVHEKSRASJBD6O2Z532LWH4N2ZLCBVDLLTLKSYCSMBLOYTNMEEGUARD';
   }
+
+  get useGoogleKms() {
+    return env.useGoogleKms || false;
+  }
 }
 
 const config = new Config();

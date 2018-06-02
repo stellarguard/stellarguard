@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const Cryptr = require('cryptr');
 const config = require('../../config');
 
 /**
@@ -19,6 +20,25 @@ function getHmac(data, length = 0) {
   return hmac.slice(-length);
 }
 
+let encrypt = encryptLocal;
+let decrypt = decryptLocal;
+if (config.useGoogleKms) {
+  const googleKms = require('./googleKms');
+  encrypt = googleKms.encrypt;
+  decrypt = googleKms.decrypt;
+}
+
+const cryptr = new Cryptr(config.cryptoSecret, 'aes256');
+async function encryptLocal(text) {
+  return cryptr.encrypt(text);
+}
+
+async function decryptLocal(text) {
+  return cryptr.decrypt(text);
+}
+
 module.exports = {
-  getHmac
+  getHmac,
+  encrypt,
+  decrypt
 };

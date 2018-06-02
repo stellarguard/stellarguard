@@ -30,14 +30,25 @@ class UserDb {
     isEmailVerified,
     passwordHash,
     signerPublicKey,
-    signerSecretKey
+    signerSecretKey,
+    encryptedSignerSecretKey,
+    encryptedRecoveryPhrase
   }) {
     try {
       const { rows } = await this.db.pg.query(
-        `INSERT INTO "user" (email, is_email_verified, password_hash, signer_public_key, signer_secret_key)
-         VALUES ($1, $2, $3, $4, $5)
+        `INSERT INTO "user" (email, is_email_verified, password_hash, signer_public_key, signer_secret_key, 
+          encrypted_signer_secret_key, encrypted_recovery_phrase)
+         VALUES ($1, $2, $3, $4, $5, $6, $7)
          RETURNING *`,
-        [email, isEmailVerified, passwordHash, signerPublicKey, signerSecretKey]
+        [
+          email,
+          isEmailVerified,
+          passwordHash,
+          signerPublicKey,
+          signerSecretKey,
+          encryptedSignerSecretKey,
+          encryptedRecoveryPhrase
+        ]
       );
 
       return rows[0];

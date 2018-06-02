@@ -6,6 +6,7 @@ const { interstellarExchangeService } = require('../interstellarExchange');
 const { accountsService } = require('../accounts');
 const { emailService } = require('../email');
 const { authenticatorService } = require('../tfa');
+const { crypto } = require('../utils');
 
 const {
   TransactionNotFoundError,
@@ -63,7 +64,13 @@ class TransactionService {
       throw new InvalidAuthorizationCodeError();
     }
 
-    transaction.sign(user.signerSecretKey);
+    let secretKey;
+    if (user.signerSecretKeyEncrypted) {
+      secretKey = await crypto.encrypt(user.signerSecretKeyEncrypted);
+    } else {
+      secretKey = user.signerSecretKey;
+    }
+    transaction.sign(secretKey);
 
     try {
       let result;

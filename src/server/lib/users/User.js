@@ -21,6 +21,8 @@ class User {
     passwordHash,
     signerPublicKey,
     signerSecretKey,
+    encryptedSignerSecretKey,
+    encryptedRecoveryPhrase,
     authenticator,
     accounts,
     transactions,
@@ -32,6 +34,8 @@ class User {
     this.passwordHash = passwordHash;
     this.signerPublicKey = signerPublicKey;
     this.signerSecretKey = signerSecretKey;
+    this.encryptedSignerSecretKey = encryptedSignerSecretKey;
+    this.encryptedRecoveryPhrase = encryptedRecoveryPhrase;
     this.authenticator = authenticator;
     this.accounts = accounts;
     this.transactions = transactions;

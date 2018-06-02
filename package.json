@@ -30,6 +30,7 @@
     "express-csp-header": "^2.2.0",
     "express-session": "^1.15.6",
     "formik": "^0.11.3",
+    "googleapis": "^31.0.2",
     "helmet": "^3.12.0",
     "history": "^4.7.2",
     "lodash.camelcase": "^4.3.0",
@@ -57,7 +58,7 @@
     "react-router-dom": "^4.2.2",
     "serve-favicon": "~2.4.5",
     "speakeasy": "^2.0.0",
-    "stellar-hd-wallet": "^0.0.5",
+    "stellar-hd-wallet": "^0.0.6",
     "stellar-sdk": "^0.8.0",
     "yup": "^0.24.0"
   },

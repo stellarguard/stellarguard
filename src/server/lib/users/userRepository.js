@@ -5,13 +5,22 @@ class UserRepository {
     this.userDb = require('./userDb');
   }
 
-  async createUser({ email, passwordHash, signerPublicKey, signerSecretKey }) {
+  async createUser({
+    email,
+    passwordHash,
+    signerPublicKey,
+    signerSecretKey,
+    encryptedSignerSecretKey,
+    encryptedRecoveryPhrase
+  }) {
     const user = {
       email,
       passwordHash,
       isEmailVerified: false,
       signerPublicKey,
-      signerSecretKey
+      signerSecretKey,
+      encryptedSignerSecretKey,
+      encryptedRecoveryPhrase
     };
 
     const newUser = await this.userDb.create(user);

@@ -1,6 +1,4 @@
-const config = require('../../config');
-const Cryptr = require('cryptr');
-const cryptr = new Cryptr(config.cryptoSecret);
+const { crypto } = require('../utils');
 
 const userRepository = require('./userRepository');
 const { InvalidEmailVerificationCodeError } = require('errors/user');
@@ -17,12 +15,16 @@ class UserService {
   async createUser({ email, password }) {
     await userValidator.validate({ email, password });
     const passwordHash = await passwords.hash(password);
-    const keyPair = stellar.keys.random();
+    const { mnemonic, keypair } = stellar.keys.hdRandom();
+    const encryptedSignerSecretKey = await crypto.encrypt(keypair.secret());
+    const encryptedRecoveryPhrase = await crypto.encrypt(mnemonic);
     const user = await userRepository.createUser({
       email: email.toLowerCase(),
       passwordHash,
-      signerPublicKey: keyPair.publicKey(),
-      signerSecretKey: keyPair.secret()
+      signerPublicKey: keypair.publicKey(),
+      signerSecretKey: keypair.secret(),
+      encryptedSignerSecretKey,
+      encryptedRecoveryPhrase
     });
 
     emailService.sendWelcomeEmail({ user });
@@ -71,12 +73,12 @@ class UserService {
   async forgotPassword({ email }) {
     const user = await userRepository.getUserByEmail(email);
     await forgotPasswordValidator.validate({ email, user });
-    const code = this.generatePasswordResetCode(user);
+    const code = await this.generatePasswordResetCode(user);
     await emailService.sendResetPasswordEmail({ user, code });
   }
 
   async resetPassword({ code, password }) {
-    const payload = this.decryptPasswordResetCode(code);
+    const payload = await this.decryptPasswordResetCode(code);
     await resetPasswordValidator.validate({ code, password, payload });
 
     const passwordHash = await passwords.hash(password);
@@ -86,14 +88,16 @@ class UserService {
     });
   }
 
-  generatePasswordResetCode(user) {
+  async generatePasswordResetCode(user) {
     const payload = { userId: user.id, ts: Date.now() };
-    return cryptr.encrypt(JSON.stringify(payload));
+    const encryptedPayload = await crypto.encrypt(JSON.stringify(payload));
+    return Buffer.from(encryptedPayload).toString('hex'); // only include readable chars
   }
 
-  decryptPasswordResetCode(code) {
+  async decryptPasswordResetCode(code) {
     try {
-      return JSON.parse(cryptr.decrypt(code));
+      const encryptedPayload = Buffer.from(code, 'hex');
+      return JSON.parse(await crypto.decrypt(encryptedPayload));
     } catch (e) {
       return;
     }
