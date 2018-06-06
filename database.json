@@ -1,7 +1,6 @@
 {
   "dev": {
     "driver": "pg",
-    "user": "paul.selden",
     "host": "localhost",
     "database": "stellarguard",
     "schema": "public"
