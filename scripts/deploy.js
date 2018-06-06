@@ -6,7 +6,6 @@ const path = require('path');
 const rimraf = util.promisify(require('rimraf'));
 const fs = require('fs');
 const dryRun = !!process.env.DRY_RUN;
-
 const { execSync, spawn } = require('child_process');
 
 const envConfig = {
@@ -88,6 +87,7 @@ async function uploadFiles() {
 
 async function migrate() {
   execSync('brew services stop postgres || echo already stopped');
+  execSync(`gcloud config set project ${config.project}`); // we need to run migrations in the current project so things like KMS work properly
   const instance = process.env.CLOUD_SQL_INSTANCE;
   const sqlProxy = spawn(
     `cloud_sql_proxy`,
