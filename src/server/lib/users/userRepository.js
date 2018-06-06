@@ -9,7 +9,6 @@ class UserRepository {
     email,
     passwordHash,
     signerPublicKey,
-    signerSecretKey,
     encryptedSignerSecretKey,
     encryptedRecoveryPhrase
   }) {
@@ -18,7 +17,6 @@ class UserRepository {
       passwordHash,
       isEmailVerified: false,
       signerPublicKey,
-      signerSecretKey,
       encryptedSignerSecretKey,
       encryptedRecoveryPhrase
     };

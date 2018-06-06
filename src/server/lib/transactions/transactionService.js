@@ -64,12 +64,7 @@ class TransactionService {
       throw new InvalidAuthorizationCodeError();
     }
 
-    let secretKey;
-    if (user.encryptedSignerSecretKey) {
-      secretKey = await crypto.decrypt(user.encryptedSignerSecretKey);
-    } else {
-      secretKey = user.signerSecretKey;
-    }
+    const secretKey = await crypto.decrypt(user.encryptedSignerSecretKey);
     transaction.sign(secretKey);
 
     try {

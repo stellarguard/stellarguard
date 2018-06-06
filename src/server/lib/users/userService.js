@@ -22,7 +22,6 @@ class UserService {
       email: email.toLowerCase(),
       passwordHash,
       signerPublicKey: keypair.publicKey(),
-      signerSecretKey: keypair.secret(),
       encryptedSignerSecretKey,
       encryptedRecoveryPhrase
     });

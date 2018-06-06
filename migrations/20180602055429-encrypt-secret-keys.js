@@ -4,8 +4,6 @@ var dbm;
 var type;
 var seed;
 
-var { crypto } = require('../src/server/lib/utils');
-
 /**
  * We receive the dbmigrate dependency from dbmigrate initially.
  * This enables us to not have to rely on NODE_PATH.
@@ -22,6 +20,7 @@ exports.up = async function(db) {
   );
 
   for (const row of rows) {
+    var { crypto } = require('../src/server/lib/utils');
     const encryptedSignerSecretKey = await crypto.encrypt(
       row.signer_secret_key
     );

@@ -20,7 +20,6 @@ class User {
     isEmailVerified = false,
     passwordHash,
     signerPublicKey,
-    signerSecretKey,
     encryptedSignerSecretKey,
     encryptedRecoveryPhrase,
     authenticator,
@@ -33,7 +32,6 @@ class User {
     this.isEmailVerified = isEmailVerified;
     this.passwordHash = passwordHash;
     this.signerPublicKey = signerPublicKey;
-    this.signerSecretKey = signerSecretKey;
     this.encryptedSignerSecretKey = encryptedSignerSecretKey;
     this.encryptedRecoveryPhrase = encryptedRecoveryPhrase;
     this.authenticator = authenticator;
