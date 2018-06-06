@@ -51,7 +51,7 @@ export default class TransactionsStore {
   }
 
   @action
-  async authorize({ id }, { code }) {
+  async authorize({ id }, { code } = {}) {
     const transaction = await transactionsApi.authorizeTransaction(id, {
       code
     });
