@@ -1,4 +1,11 @@
-const mailer = require('./mailer');
+const config = require('../../config');
+let mailer;
+if (!config.sendGridApiKey) {
+  mailer = require('./mailer');
+} else {
+  mailer = require('./etherealMailer'); // for development use only
+}
+
 const { Welcome, AuthorizeTransaction, ResetPassword } = require('./emails');
 
 class EmailService {
