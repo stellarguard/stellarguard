@@ -11,11 +11,6 @@ class RecaptchaApi {
   }
 
   async verify({ token, ipAddress }) {
-    console.log({
-      secret: this.secret,
-      response: token,
-      remoteip: ipAddress
-    });
     const response = await this.axiosClient.post(
       '/siteverify',
       querystring.stringify({
@@ -24,7 +19,7 @@ class RecaptchaApi {
         remoteip: ipAddress
       })
     );
-    console.log(response);
+
     return response.data;
   }
 }
