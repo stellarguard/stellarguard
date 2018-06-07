@@ -1,6 +1,6 @@
 const config = require('../../config');
 let mailer;
-if (!config.sendGridApiKey) {
+if (config.sendGridApiKey) {
   mailer = require('./mailer');
 } else {
   mailer = require('./etherealMailer'); // for development use only
