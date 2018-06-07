@@ -68,7 +68,7 @@ class InvalidPasswordResetCodeError extends AppError {
   constructor() {
     super({
       code: 4007,
-      field: 'code',
+      field: 'all',
       message: 'Your reset code is invalid.'
     });
   }
@@ -94,6 +94,16 @@ class CommonPasswordError extends AppError {
   }
 }
 
+class RecaptchaRegisterError extends AppError {
+  constructor() {
+    super({
+      code: 4010,
+      message:
+        'Google thinks you are a robot. Please try doing some non-robot things and trying again later'
+    });
+  }
+}
+
 module.exports = {
   DuplicateEmailError,
   InvalidEmailVerificationCodeError,
@@ -103,5 +113,6 @@ module.exports = {
   PasswordResetCodeExpiredError,
   CommonPasswordError,
   NoUserForSignerPublicKeyError,
-  NoUserForAccountPublicKeyError
+  NoUserForAccountPublicKeyError,
+  RecaptchaRegisterError
 };

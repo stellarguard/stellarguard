@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 
 import { observer } from 'mobx-react';
 
-import { Page, DashboardFab } from '../../../components';
+import { Page, DashboardFab, ExternalLink } from '../../../components';
 
 const styles = theme => {
   return {};
@@ -241,6 +241,22 @@ class PrivacyPolicyPage extends Component {
             of our policies, suspected fraud, situations involving potential
             threats to the safety of any person and illegal activities, or as
             evidence in litigation in which we are involved.
+          </Typography>
+          <Typography variant="subheading" gutterBottom>
+            For use in reCAPTCHA v3
+          </Typography>
+          <Typography paragraph>
+            We use reCAPTCHA v3 to protect our site from automated registrations
+            and sign ins. Your IP address will be sent to reCAPTCHA to help
+            determine if you are a robot. Your use of reCAPTCHA v3 is subject to
+            the{' '}
+            <ExternalLink href="https://www.google.com/intl/en/policies/privacy/">
+              Google Privacy Policy
+            </ExternalLink>{' '}
+            and{' '}
+            <ExternalLink href="https://www.google.com/intl/en/policies/terms/">
+              Terms of Use
+            </ExternalLink>.
           </Typography>
           <Typography variant="subheading" gutterBottom>
             Business Transfers.

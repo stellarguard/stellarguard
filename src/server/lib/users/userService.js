@@ -12,8 +12,13 @@ const resetPasswordValidator = require('./resetPasswordValidator');
 const { NoUserForSignerPublicKeyError } = require('errors/user');
 
 class UserService {
-  async createUser({ email, password }) {
-    await userValidator.validate({ email, password });
+  async createUser({ email, password, recaptchaToken, ipAddress }) {
+    await userValidator.validate({
+      email,
+      password,
+      recaptchaToken,
+      ipAddress
+    });
     const passwordHash = await passwords.hash(password);
     const { mnemonic, keypair } = stellar.keys.hdRandom();
     const encryptedSignerSecretKey = await crypto.encrypt(keypair.secret());

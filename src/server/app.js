@@ -52,7 +52,11 @@ app.use(
         csp.EVAL,
         '*.stellarguard.me',
         'stellar.org',
-        '*.stellar.org'
+        '*.stellar.org',
+        'google.com',
+        '*.google.com',
+        'gstatic.com',
+        '*.gstatic.com'
       ].concat(config.isDevMode ? [csp.INLINE, 'ws://localhost:*'] : []),
       'style-src': [
         csp.SELF,

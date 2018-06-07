@@ -14,8 +14,8 @@ export async function verifyEmailAddress({ code }) {
   return await axios.post('/users/me/verifyemail', { code });
 }
 
-export async function register({ password, email }) {
-  const user = await axios.post('/users', { password, email });
+export async function register({ password, email, recaptchaToken }) {
+  const user = await axios.post('/users', { password, email, recaptchaToken });
   return User.fromJson(user);
 }
 

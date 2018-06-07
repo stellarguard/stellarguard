@@ -4,7 +4,7 @@ import { withStyles, TextField, Button } from 'material-ui';
 import { inject, observer } from 'mobx-react';
 
 import { validate } from '../../../shared/validators/users';
-import { FormActions, FormFieldHelperText } from '../../components';
+import { FormActions, FormFieldHelperText, FormError } from '../../components';
 
 const styles = () => ({});
 
@@ -57,6 +57,7 @@ class RegisterForm extends React.Component {
           isSubmitting
         }) => (
           <Form id="register-form" noValidate>
+            <FormError errors={errors} />
             <TextField
               autoFocus
               fullWidth

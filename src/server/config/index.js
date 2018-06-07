@@ -45,6 +45,14 @@ class Config {
   get useGoogleKms() {
     return !env.devMode;
   }
+
+  get recaptchaSiteKey() {
+    return env.recaptchaSiteKey;
+  }
+
+  get recaptchaSecret() {
+    return env.recaptchaSecret;
+  }
 }
 
 const config = new Config();

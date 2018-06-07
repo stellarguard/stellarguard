@@ -9,6 +9,9 @@ const env = {
   domainName: process.env.DOMAIN_NAME,
   sendGridApiKey: process.env.SEND_GRID_API_KEY,
 
+  recaptchaSiteKey: process.env.RECAPTCHA_SITE_KEY,
+  recaptchaSecret: process.env.RECAPTCHA_SECRET,
+
   // postgres
   pgHost: process.env.PG_HOST,
   pgUser: process.env.PG_USER,

@@ -48,12 +48,12 @@ class ToolbarActions extends Component {
     if (rootStore.sessionStore.isSignedIn) {
       return (
         <div>
-          {rootStore.currentUser.hasAccounts && (
+          {rootStore.currentUser.hasAccounts ? (
             <ButtonLink color="inherit" to="/transactions/new" size="small">
               <Add className={classes.leftIcon}>New Transacation</Add>
               <Hidden xsDown>New Transaction</Hidden>
             </ButtonLink>
-          )}
+          ) : null}
           <Button
             color="inherit"
             onClick={this.handleUserMenuOpen}

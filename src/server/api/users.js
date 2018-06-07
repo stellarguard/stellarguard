@@ -7,10 +7,12 @@ const Controller = require('./Controller');
 
 class UserController extends Controller {
   async createUser(req, res, next) {
-    const { email, password } = req.body;
+    const { email, password, recaptchaToken } = req.body;
     const user = await users.userService.createUser({
       email,
-      password
+      password,
+      recaptchaToken,
+      ipAddress: req.ip
     });
 
     req.login(user, function(err) {

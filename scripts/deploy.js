@@ -126,6 +126,8 @@ function deploy() {
     PG_USER: process.env.PG_USER,
     PG_PASSWORD: process.env.PG_PASSWORD,
     SEND_GRID_API_KEY: process.env.SEND_GRID_API_KEY,
+    RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
+    RECAPTCHA_SECRET: process.env.RECAPTCHA_SECRET,
     USE_STELLAR_PUBLIC_NETWORK: process.env.USE_STELLAR_PUBLIC_NETWORK
   };
   const locals = Object.assign({}, appConfig, config.appYaml);

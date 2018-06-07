@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const styles = theme => ({
   button: {
     position: 'fixed',
-    bottom: theme.spacing.unit * 2,
+    bottom: theme.spacing.unit * 10,
     right: theme.spacing.unit * 2
   }
 });
