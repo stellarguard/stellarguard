@@ -23,6 +23,10 @@ export default class UserStore {
   }
 
   _executeRecaptcha(action) {
+    if (!config.recaptchaSiteKey) {
+      return 'off';
+    }
+
     return new Promise((resolve, reject) => {
       window.grecaptcha.ready(async () => {
         try {

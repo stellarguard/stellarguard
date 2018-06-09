@@ -53,6 +53,10 @@ class Config {
   get recaptchaSecret() {
     return env.recaptchaSecret;
   }
+
+  get isRecaptchaEnabled() {
+    return this.recaptchaSiteKey && this.recaptchaSecret;
+  }
 }
 
 const config = new Config();
