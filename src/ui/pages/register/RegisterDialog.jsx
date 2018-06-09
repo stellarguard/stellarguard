@@ -62,7 +62,12 @@ class RegisterDialog extends Component {
           <Button tabIndex={-1} onClick={onClose} color="primary">
             Cancel
           </Button>
-          <Button type="submit" color="primary" form="register-form">
+          <Button
+            data-test="register-dialog-register-button"
+            type="submit"
+            color="primary"
+            form="register-form"
+          >
             Register
           </Button>
         </DialogActions>

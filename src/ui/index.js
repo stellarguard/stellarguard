@@ -8,6 +8,7 @@ import App from './App';
 import RootStore from './stores/rootStore';
 import history from './history';
 import externalScripts from './externalScripts';
+import config from './config';
 
 const rootStore = new RootStore();
 
@@ -35,4 +36,7 @@ const app = (
 );
 
 ReactDOM.render(app, document.getElementById('root'));
-externalScripts.loadRecaptcha();
+
+if (config.recaptchaSiteKey) {
+  externalScripts.loadRecaptcha();
+}

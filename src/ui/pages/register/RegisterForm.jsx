@@ -59,6 +59,7 @@ class RegisterForm extends React.Component {
           <Form id="register-form" noValidate>
             <FormError errors={errors} />
             <TextField
+              data-test="email-field"
               autoFocus
               fullWidth
               margin="normal"
@@ -82,9 +83,11 @@ class RegisterForm extends React.Component {
               }
             />
             <TextField
+              data-test="password-field"
               fullWidth
               margin="normal"
               type="password"
+              id="password"
               name="password"
               label="Password"
               required
@@ -104,6 +107,7 @@ class RegisterForm extends React.Component {
             {includeActions && (
               <FormActions>
                 <Button
+                  data-test="register-form-register-button"
                   type="submit"
                   disabled={isSubmitting}
                   variant="raised"

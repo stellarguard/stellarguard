@@ -67,10 +67,12 @@
     "deploy:test": "node ./scripts/deploy test",
     "deploy:prod": "node ./scripts/deploy prod",
     "deploy:dry": "DRY_RUN=1 node ./scripts/deploy test",
-    "dev": "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
+    "dev":
+      "source .env.dev && NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
     "run-job": "NODE_PATH=src/shared node ./src/jobs/run",
     "watch": "parcel watch src/ui/index.html",
-    "console": "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared node"
+    "console": "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared node",
+    "cypress": "cypress open"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.5",
@@ -89,9 +91,11 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "cypress": "^3.0.1",
     "db-migrate-pg": "^0.3.1",
     "eslint": "^4.17.0",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-cypress": "^2.0.1",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.6.1",

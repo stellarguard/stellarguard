@@ -49,7 +49,12 @@ class ToolbarActions extends Component {
       return (
         <div>
           {rootStore.currentUser.hasAccounts ? (
-            <ButtonLink color="inherit" to="/transactions/new" size="small">
+            <ButtonLink
+              color="inherit"
+              to="/transactions/new"
+              size="small"
+              data-test="toolbar-actions-new-transaction"
+            >
               <Add className={classes.leftIcon}>New Transacation</Add>
               <Hidden xsDown>New Transaction</Hidden>
             </ButtonLink>
@@ -58,6 +63,7 @@ class ToolbarActions extends Component {
             color="inherit"
             onClick={this.handleUserMenuOpen}
             size="small"
+            data-test="toolbar-actions-user-menu-button"
           >
             <AccountCircle>me</AccountCircle>
           </Button>
@@ -66,9 +72,19 @@ class ToolbarActions extends Component {
             open={!!menuAnchor}
             onClose={this.handleUserMenuClose}
           >
-            <MenuItem onClick={this.goToSettingsPage}>Settings</MenuItem>
+            <MenuItem
+              data-test="toolbar-actions-menu-settings"
+              onClick={this.goToSettingsPage}
+            >
+              Settings
+            </MenuItem>
             <Divider />
-            <MenuItem onClick={this.handleSignOutClick}>Sign out</MenuItem>
+            <MenuItem
+              data-test="toolbar-actions-menu-signout"
+              onClick={this.handleSignOutClick}
+            >
+              Sign out
+            </MenuItem>
           </Menu>
         </div>
       );
@@ -77,12 +93,14 @@ class ToolbarActions extends Component {
     return (
       <div>
         <Button
+          data-test="toolbar-actions-register"
           color="inherit"
           onClick={() => rootStore.uiState.openRegisterDialog()}
         >
           Register
         </Button>
         <Button
+          data-test="toolbar-actions-signin"
           color="inherit"
           onClick={() => rootStore.uiState.openSignInDialog()}
         >
