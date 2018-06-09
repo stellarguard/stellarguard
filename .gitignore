@@ -1,17 +1,25 @@
+# OS cruft
 .DS_Store
+
+# Node/NPM stuff
 node_modules
-dbs
+yarn-error.log
+npm-error.log
+
+# build artifacts
 .cache
 dist
-
-.env.*
 
 # this is built from a template
 app.yaml
 
-yarn-error.log
-npm-error.log
+# user-specific environment files that should not be checked in
+.env.dev.local
+.env.test
+.env.prod
 
+# IDE
 .vscode
 
+# misc
 Notes.md

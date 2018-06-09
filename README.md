@@ -9,13 +9,15 @@
 In order to develop locally, you will need to install the following on your system:
 
 [NodeJS](https://nodejs.org/en/) - Requires Node 9 or above, used for building the UI code and running the server
+
 [Yarn](https://yarnpkg.com/en/) - Used for package management
+
 [Postgres](https://www.postgresql.org/download/) - Requires Postgres 9.3 or above
 
 After forking and cloning the repo:
 
-1.  Start the postgres server
-1.  `./setup.sh` - This will create your .env.dev configuration file, install project dependencies, and create the stellarguard database
+1.  Start the Postgres server
+1.  `./setup.sh` - This will create your .env.dev.local configuration file, install project dependencies, and create the `stellarguard` database
 
 ## Running the develoment server
 
@@ -23,11 +25,15 @@ After forking and cloning the repo:
 
 # Project Structure
 
-`src/server` - Code for the NodeJS server
-`src/ui` - Code for the React-based UI
-`src/shared` - Code that is shared in both the UI and Server (such as validations)
-`migrations` - This is where database migrations are stored (using `db-migrate create <migration name>`)
-`scripts` - Standalone scripts such as deployment scripts and configuration
+**src/server** - Code for the NodeJS server
+
+**src/ui** - Code for the React-based UI
+
+**src/shared** - Code that is shared in both the UI and Server (such as validations)
+
+**migrations** - This is where database migrations are stored. Run migrations using `db-migrate up` and create migrations with `db-migrate create <migration name>`). See https://db-migrate.readthedocs.io/ for usage instructions
+
+**scripts** - Standalone scripts such as deployment scripts and configuration
 
 # License
 
