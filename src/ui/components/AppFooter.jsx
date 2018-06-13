@@ -102,11 +102,14 @@ class AppFooter extends Component {
               </ExternalFooterLink>
               <FooterLink to="/faq">FAQ</FooterLink>
               <FooterLink to="/supported-wallets">Supported Wallets</FooterLink>
-              <ExternalFooterLink href="https://github.com/stellarguard/stellarguard-issues/issues">
+              <ExternalFooterLink href="https://github.com/stellarguard/stellarguard/issues">
                 Request a Feature or Report a Bug
               </ExternalFooterLink>
               <ExternalFooterLink href="https://www.reddit.com/r/StellarGuard/">
-                Discussion Forum
+                Discuss StellarGuard
+              </ExternalFooterLink>
+              <ExternalFooterLink href="https://github.com/stellarguard/stellarguard">
+                Source Code
               </ExternalFooterLink>
               <FooterLink to="/terms-of-service">Terms of Service</FooterLink>
               <FooterLink to="/privacy-policy">Privacy Policy</FooterLink>
