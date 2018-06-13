@@ -58,7 +58,12 @@ class SignInDialog extends Component {
           <Button onClick={onClose} color="primary">
             Cancel
           </Button>
-          <Button type="submit" color="primary" form="sign-in-form-for-dialog">
+          <Button
+            data-test="signin-dialog-signin-button"
+            type="submit"
+            color="primary"
+            form="sign-in-form-for-dialog"
+          >
             Sign in
           </Button>
         </DialogActions>

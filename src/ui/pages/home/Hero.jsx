@@ -101,6 +101,7 @@ class Hero extends Component {
             <div className={classes.actions}>
               <div className={classes.buttons}>
                 <Button
+                  data-test="hero-get-started-button"
                   className={classes.getStarted}
                   color="secondary"
                   variant="raised"
@@ -119,7 +120,11 @@ class Hero extends Component {
               </div>
               <Typography color="inherit" gutterBottom variant="subheading">
                 Already have an account?{' '}
-                <Button color="secondary" onClick={this.handleSignInOpen}>
+                <Button
+                  data-test="hero-sign-in-button"
+                  color="secondary"
+                  onClick={this.handleSignInOpen}
+                >
                   Sign in
                 </Button>
               </Typography>

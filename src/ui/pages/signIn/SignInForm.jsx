@@ -106,6 +106,7 @@ class SignInForm extends React.Component {
                 />
                 <TextField
                   fullWidth
+                  id="password"
                   margin="normal"
                   type="password"
                   name="password"
@@ -138,6 +139,7 @@ class SignInForm extends React.Component {
             {includeActions && (
               <FormActions>
                 <Button
+                  data-test="signin-form-signin-button"
                   type="submit"
                   disabled={isSubmitting}
                   variant="raised"
