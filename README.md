@@ -23,6 +23,23 @@ After forking and cloning the repo:
 
 `yarn dev` - This builds the UI and starts a nodejs server on port 3000. Open your browser to http://localhost:3000 after running this
 
+# Technologies Used
+
+## Server
+
+* [NodeJS](https://nodejs.org/en/)
+* [Express](https://expressjs.com/)
+
+## Front End
+
+* [React](https://reactjs.org/)
+* [Material UI](https://material-ui.com/)
+* [MobX](https://mobx.js.org/)
+
+## Database
+
+* [Postgres](https://www.postgresql.org/)
+
 # Project Structure
 
 **src/server** - Code for the NodeJS server
