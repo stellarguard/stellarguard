@@ -1,7 +1,6 @@
 import { action } from 'mobx';
 import { usersApi } from '../api';
-import config from '../config';
-
+import { executeRecaptcha } from './recaptcha';
 import remove from 'lodash.remove';
 
 export default class UserStore {
@@ -13,35 +12,13 @@ export default class UserStore {
   async register({ password, email }) {
     let recaptchaToken = '';
     try {
-      recaptchaToken = await this._executeRecaptcha('register');
+      recaptchaToken = await executeRecaptcha('register');
     } catch (e) {
       console.error(e);
     }
     const user = await usersApi.register({ password, email, recaptchaToken });
     this.rootStore.sessionStore.setCurrentUser(user);
     return user;
-  }
-
-  _executeRecaptcha(action) {
-    if (!config.recaptchaSiteKey) {
-      return 'off';
-    }
-
-    return new Promise((resolve, reject) => {
-      window.grecaptcha.ready(async () => {
-        try {
-          const token = await window.grecaptcha.execute(
-            config.recaptchaSiteKey,
-            {
-              action
-            }
-          );
-          resolve(token);
-        } catch (e) {
-          reject(e);
-        }
-      });
-    });
   }
 
   @action

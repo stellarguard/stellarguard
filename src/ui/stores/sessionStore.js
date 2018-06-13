@@ -1,6 +1,7 @@
 import { observable, computed, action, runInAction } from 'mobx';
 import { sessionApi, usersApi } from '../api';
 import history from '../history';
+import { executeRecaptcha } from './recaptcha';
 
 import User from '../models/User';
 class SessionCache {
@@ -67,7 +68,18 @@ export default class SessionStore {
 
   @action
   async signIn({ email, password, code }) {
-    const user = await sessionApi.signIn({ email, password, code });
+    let recaptchaToken = '';
+    try {
+      recaptchaToken = await executeRecaptcha('signin');
+    } catch (e) {
+      console.error(e);
+    }
+    const user = await sessionApi.signIn({
+      email,
+      password,
+      code,
+      recaptchaToken
+    });
     this.setCurrentUser(user);
     return user;
   }

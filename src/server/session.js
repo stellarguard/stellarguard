@@ -44,6 +44,11 @@ function configure() {
     new LocalStrategy(
       { usernameField: 'email', passReqToCallback: true },
       async function(req, email, password, done) {
+        const { recaptchaToken } = req.body;
+        await users.recaptchaValidator.validateSignin({
+          recaptchaToken,
+          ipAddress: req.ip
+        });
         const user = await users.userService.getUserByEmail(email);
         if (!user) {
           return done(new InvalidCredentialsError());

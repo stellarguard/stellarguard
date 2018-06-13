@@ -12,11 +12,12 @@ export async function getSession() {
   return {};
 }
 
-export async function signIn({ email, password, code }) {
+export async function signIn({ email, password, code, recaptchaToken }) {
   const user = await axios.post('/session', {
     email,
     password,
-    code: code || undefined
+    code: code || undefined,
+    recaptchaToken
   });
 
   return User.fromJson(user);
