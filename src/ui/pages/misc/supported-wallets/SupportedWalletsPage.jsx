@@ -15,7 +15,8 @@ import {
   PegasusWalletCard,
   StellarportCard,
   StellarAccountViewerCard,
-  InterstellarExchangeCard
+  InterstellarExchangeCard,
+  RocketWalletCard
 } from './Wallets';
 
 const styles = theme => ({
@@ -76,9 +77,9 @@ class SubmitTransactionPage extends Component {
           <WalletGridItem>
             <PegasusWalletCard />
           </WalletGridItem>
-          {/* <WalletGridItem>
-            <MyStellarToolsCard />
-          </WalletGridItem> */}
+          <WalletGridItem>
+            <RocketWalletCard />
+          </WalletGridItem>
           <Grid item xs={12} className={classes.partialSupport}>
             <Typography variant="title" gutterBottom>
               Partially Supported Wallets

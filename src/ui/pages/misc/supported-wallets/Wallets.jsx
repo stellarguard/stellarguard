@@ -525,6 +525,49 @@ class StellarSignerCard extends Component {
   }
 }
 
+import rocketWalletLogo from './rocketwallet_logo.png';
+
+@withStyles(styles)
+class RocketWalletCard extends Component {
+  get title() {
+    return 'Rocket Wallet';
+  }
+
+  get to() {
+    return 'http://rocketwallet.xyz';
+  }
+
+  get name() {
+    return <span>Rocket Wallet</span>;
+  }
+
+  get logo() {
+    return rocketWalletLogo;
+  }
+
+  get description() {
+    return (
+      <span>
+        A native iOS app focusing on a great user experience, allowing user to
+        effortlessly interact with the Stellar Network.
+      </span>
+    );
+  }
+
+  render() {
+    return (
+      <WalletCard
+        wallet
+        title={this.title}
+        to={this.to}
+        logo={this.logo}
+        name={this.name}
+        description={this.description}
+      />
+    );
+  }
+}
+
 export {
   MyStellarToolsCard,
   StellarAccountViewerCard,
@@ -533,5 +576,6 @@ export {
   StargazerCard,
   StellarSignerCard,
   PegasusWalletCard,
-  InterstellarExchangeCard
+  InterstellarExchangeCard,
+  RocketWalletCard
 };
