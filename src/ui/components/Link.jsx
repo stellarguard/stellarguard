@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui';
+import { withStyles } from '@material-ui/core';
 import { observer } from 'mobx-react';
 import { Link as RouterLink } from 'react-router-dom';
 

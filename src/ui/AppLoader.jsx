@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, LinearProgress } from 'material-ui';
+import { withStyles, LinearProgress } from '@material-ui/core';
 
 const styles = () => ({});
 

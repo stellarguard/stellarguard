@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, Snackbar, Button } from 'material-ui';
+import { withStyles, Snackbar, Button } from '@material-ui/core';
 
 import { inject, observer } from 'mobx-react';
 

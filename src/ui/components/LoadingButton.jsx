@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, Button, CircularProgress } from 'material-ui';
+import { withStyles, Button, CircularProgress } from '@material-ui/core';
 import cx from 'classnames';
 
 const styles = theme => ({

@@ -9,7 +9,7 @@ import {
   DialogContentText,
   Typography,
   withMobileDialog
-} from 'material-ui';
+} from '@material-ui/core';
 import RegisterForm from './RegisterForm';
 
 import { LogoAvatar } from '../../components';

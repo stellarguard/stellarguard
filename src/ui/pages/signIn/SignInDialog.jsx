@@ -8,7 +8,7 @@ import {
   DialogTitle,
   Typography,
   withMobileDialog
-} from 'material-ui';
+} from '@material-ui/core';
 
 import SignInForm from './SignInForm';
 import { LogoAvatar } from '../../components';

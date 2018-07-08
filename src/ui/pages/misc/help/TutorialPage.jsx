@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
-import { withStyles } from 'material-ui';
+import { withStyles } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 
 import { Page, DashboardFab } from '../../../components';
-import { Typography } from 'material-ui';
+import { Typography } from '@material-ui/core';
 
 const styles = theme => {
   return {

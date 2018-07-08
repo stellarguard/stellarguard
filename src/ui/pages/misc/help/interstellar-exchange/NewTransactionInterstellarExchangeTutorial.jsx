@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
-import { withStyles } from 'material-ui';
+import { withStyles } from '@material-ui/core';
 
 import TutorialPage from '../TutorialPage';
 import TutorialLine from '../TutorialLine';

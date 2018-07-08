@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, Grid, Card, CardHeader, CardContent } from 'material-ui';
+import { withStyles, Grid, Card, CardHeader, CardContent } from '@material-ui/core';
 import { Redirect } from 'react-router';
 import { inject, observer } from 'mobx-react';
 

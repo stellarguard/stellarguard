@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, Typography } from 'material-ui';
+import { withStyles, Typography } from '@material-ui/core';
 import Operation from './Operation';
 
 const styles = theme => ({

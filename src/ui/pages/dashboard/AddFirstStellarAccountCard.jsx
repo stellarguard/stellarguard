@@ -12,8 +12,8 @@ import {
   Paper,
   Collapse,
   Typography
-} from 'material-ui';
-import { Security as SecurityIcon } from 'material-ui-icons';
+} from '@material-ui/core';
+import { Security as SecurityIcon } from '@material-ui/icons';
 import { inject, observer } from 'mobx-react';
 
 import BuildMultiSigForm from './BuildMultiSigForm';

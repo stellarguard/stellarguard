@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, List, ListItem, ListItemText, Avatar } from 'material-ui';
+import { withStyles, List, ListItem, ListItemText, Avatar } from '@material-ui/core';
 import { observer, inject } from 'mobx-react';
 
 import config from '../../config';

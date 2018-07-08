@@ -2,7 +2,12 @@
   "plugins": [
     [
       "direct-import",
-      ["material-ui", "react-router", "react-router-dom", "material-ui-icons"]
+      [
+        "@material-ui/core",
+        "@material-ui/icons",
+        "react-router",
+        "react-router-dom"
+      ]
     ],
     "transform-decorators-legacy",
     "transform-export-extensions",

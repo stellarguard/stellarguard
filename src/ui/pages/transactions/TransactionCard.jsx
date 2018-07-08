@@ -9,9 +9,9 @@ import {
   CardActions,
   Typography,
   Button
-} from 'material-ui';
-import grey from 'material-ui/colors/grey';
-import green from 'material-ui/colors/green';
+} from '@material-ui/core';
+import grey from '@material-ui/core/colors/grey';
+import green from '@material-ui/core/colors/green';
 import { observer, inject } from 'mobx-react';
 import cx from 'classnames';
 
@@ -90,7 +90,7 @@ import {
   Done as SuccessIcon,
   Cancel as DenyIcon,
   ErrorOutline as ErrorIcon
-} from 'material-ui-icons';
+} from '@material-ui/icons';
 
 @withStyles(styles)
 @observer

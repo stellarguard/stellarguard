@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, Grid } from 'material-ui';
+import { withStyles, Grid } from '@material-ui/core';
 import { Page, SubmitTransactionFab } from '../../components';
 
 import VerifyEmailCard from './VerifyEmailCard';

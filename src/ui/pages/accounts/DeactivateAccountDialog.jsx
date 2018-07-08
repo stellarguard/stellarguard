@@ -9,7 +9,7 @@ import {
   DialogContent,
   DialogActions,
   DialogContentText
-} from 'material-ui';
+} from '@material-ui/core';
 import { observer, inject } from 'mobx-react';
 
 import DeactivateAccount from './DeactivateAccount';

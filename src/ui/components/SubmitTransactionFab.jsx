@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { withStyles, Button, Tooltip } from 'material-ui';
-import { Add as AddIcon } from 'material-ui-icons';
+import { withStyles, Button, Tooltip } from '@material-ui/core';
+import { Add as AddIcon } from '@material-ui/icons';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 

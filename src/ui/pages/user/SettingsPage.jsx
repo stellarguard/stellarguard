@@ -6,7 +6,7 @@ import {
   Typography,
   Card,
   CardContent
-} from 'material-ui';
+} from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 
 import { observer, inject } from 'mobx-react';

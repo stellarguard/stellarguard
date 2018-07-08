@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { withStyles, Avatar, Typography } from 'material-ui';
-import { CheckCircle } from 'material-ui-icons';
-import green from 'material-ui/colors/green';
+import { withStyles, Avatar, Typography } from '@material-ui/core';
+import { CheckCircle } from '@material-ui/icons';
+import green from '@material-ui/core/colors/green';
 
 import { Link } from '../../components';
 

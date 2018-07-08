@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui';
-import { Help as HelpIcon } from 'material-ui-icons';
+import { withStyles } from '@material-ui/core';
+import { Help as HelpIcon } from '@material-ui/icons';
 
 import MouseoverPopover from './MouseoverPopover';
 

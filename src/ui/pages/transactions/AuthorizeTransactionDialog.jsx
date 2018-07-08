@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui';
+import { withStyles } from '@material-ui/core';
 import { observer, inject } from 'mobx-react';
 
 import NoneAuthorizeDialog from './NoneAuthorizeDialog';

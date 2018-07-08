@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, Grid, Typography } from 'material-ui';
+import { withStyles, Grid, Typography } from '@material-ui/core';
 import { withRouter } from 'react-router';
 import { Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';

@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogActions,
   Button
-} from 'material-ui';
+} from '@material-ui/core';
 
 import { CopyToClipboard } from '../components';
 

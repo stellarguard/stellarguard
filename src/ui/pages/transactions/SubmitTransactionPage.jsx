@@ -6,7 +6,7 @@ import {
   Card,
   CardContent,
   Typography
-} from 'material-ui';
+} from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 
 import { Page, DashboardFab, Link } from '../../components';

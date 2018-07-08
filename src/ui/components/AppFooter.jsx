@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { withStyles, Divider, Typography, Grid } from 'material-ui';
+import { withStyles, Divider, Typography, Grid } from '@material-ui/core';
 
 import DonateDialog from './DonateDialog';
 

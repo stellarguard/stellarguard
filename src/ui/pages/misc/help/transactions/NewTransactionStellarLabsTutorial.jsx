@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
-import { withStyles, Typography } from 'material-ui';
+import { withStyles, Typography } from '@material-ui/core';
 
 import config from '../../../../config';
 import TutorialPage from '../TutorialPage';

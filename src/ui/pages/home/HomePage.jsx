@@ -9,12 +9,12 @@ import {
   ListItemText,
   Snackbar,
   Button
-} from 'material-ui';
+} from '@material-ui/core';
 import {
   Security as SecurityIcon,
   Email as EmailIcon,
   PhonelinkLock as PhonelinkLockIcon
-} from 'material-ui-icons';
+} from '@material-ui/icons';
 import { Helmet } from 'react-helmet';
 import Hero from './Hero';
 

@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import { withStyles, Typography, Collapse, IconButton } from 'material-ui';
+import {
+  withStyles,
+  Typography,
+  Collapse,
+  IconButton
+} from '@material-ui/core';
 
-import { ExpandMore } from 'material-ui-icons';
+import { ExpandMore } from '@material-ui/icons';
 
 import cx from 'classnames';
 

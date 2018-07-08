@@ -8,9 +8,9 @@ import {
   Typography,
   CardActions,
   Button
-} from 'material-ui';
-import { PhonelinkLock } from 'material-ui-icons';
-import teal from 'material-ui/colors/teal';
+} from '@material-ui/core';
+import { PhonelinkLock } from '@material-ui/icons';
+import teal from '@material-ui/core/colors/teal';
 import { inject, observer } from 'mobx-react';
 
 const styles = theme => ({

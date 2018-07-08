@@ -6,7 +6,7 @@ import {
   ListItem,
   Avatar,
   ListItemText
-} from 'material-ui';
+} from '@material-ui/core';
 
 import { inject, observer } from 'mobx-react';
 import config from '../../config';

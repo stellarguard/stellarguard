@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, Paper } from 'material-ui';
+import { withStyles, Paper } from '@material-ui/core';
 import { observer } from 'mobx-react';
 
 import PaymentOperation from './PaymentOperation';

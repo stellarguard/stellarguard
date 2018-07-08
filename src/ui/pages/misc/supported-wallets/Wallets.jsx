@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
-import { withStyles, Typography, Card, CardContent, Paper } from 'material-ui';
-import green from 'material-ui/colors/green';
+import {
+  withStyles,
+  Typography,
+  Card,
+  CardContent,
+  Paper
+} from '@material-ui/core';
+import green from '@material-ui/core/colors/green';
 
 import { ExternalLink, ButtonLink } from '../../../components';
 import config from '../../../config';

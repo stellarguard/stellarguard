@@ -1,5 +1,5 @@
 import React from 'react';
-import { CssBaseline } from 'material-ui';
+import { CssBaseline } from '@material-ui/core';
 
 import AppHeader from './components/AppHeader';
 import AppFooter from './components/AppFooter';

@@ -7,7 +7,7 @@ import {
   Typography,
   FormControlLabel,
   Checkbox
-} from 'material-ui';
+} from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
 
 import multiSigValidator from '../../../shared/validators/multiSig';

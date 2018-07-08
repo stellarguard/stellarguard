@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions
-} from 'material-ui';
+} from '@material-ui/core';
 import { observer, inject } from 'mobx-react';
 import { Formik, Form } from 'formik';
 

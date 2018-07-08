@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, Grid } from 'material-ui';
+import { withStyles, Grid } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 
 import { inject, observer } from 'mobx-react';

@@ -6,8 +6,8 @@ import {
   Button,
   Divider,
   Hidden
-} from 'material-ui';
-import { AccountCircle, Add } from 'material-ui-icons';
+} from '@material-ui/core';
+import { AccountCircle, Add } from '@material-ui/icons';
 import { inject, observer } from 'mobx-react';
 
 import history from '../history';

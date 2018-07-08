@@ -5,8 +5,8 @@ import {
   AppBar,
   Toolbar,
   IconButton
-} from 'material-ui';
-import { Menu as MenuIcon } from 'material-ui-icons';
+} from '@material-ui/core';
+import { Menu as MenuIcon } from '@material-ui/icons';
 import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import ToolbarActions from './ToolbarActions';

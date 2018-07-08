@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { withStyles } from 'material-ui';
+import { withStyles } from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
 
 import RegisterDialog from './pages/register/RegisterDialog';

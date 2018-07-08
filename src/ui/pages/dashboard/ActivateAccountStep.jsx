@@ -5,10 +5,10 @@ import {
   Avatar,
   Typography,
   Button
-} from 'material-ui';
-import grey from 'material-ui/colors/grey';
-import green from 'material-ui/colors/green';
-import { CheckCircle, Check, Error } from 'material-ui-icons';
+} from '@material-ui/core';
+import grey from '@material-ui/core/colors/grey';
+import green from '@material-ui/core/colors/green';
+import { CheckCircle, Check, Error } from '@material-ui/icons';
 import { inject, observer } from 'mobx-react';
 import cx from 'classnames';
 

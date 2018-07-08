@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles } from 'material-ui';
+import { withStyles } from '@material-ui/core';
 import PageTitle from './PageTitle';
 import AppLoader from '../AppLoader';
 const styles = theme => ({

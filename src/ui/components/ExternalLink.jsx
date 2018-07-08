@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import cx from 'classnames';
-import { withStyles } from 'material-ui';
+import { withStyles } from '@material-ui/core';
 import { observer } from 'mobx-react';
 
 const styles = theme => ({

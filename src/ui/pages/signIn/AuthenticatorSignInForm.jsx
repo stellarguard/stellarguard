@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, TextField, Typography } from 'material-ui';
+import { withStyles, TextField, Typography } from '@material-ui/core';
 import { observer } from 'mobx-react';
 
 import { FormFieldHelperText } from '../../components';

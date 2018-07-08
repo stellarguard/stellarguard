@@ -1,5 +1,5 @@
 import React from 'react';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 
 const theme = createMuiTheme({
   drawer: {

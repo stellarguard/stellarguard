@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, Button } from 'material-ui';
+import { withStyles, Button } from '@material-ui/core';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 

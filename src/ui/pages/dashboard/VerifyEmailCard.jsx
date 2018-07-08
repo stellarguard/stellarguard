@@ -7,13 +7,13 @@ import {
   CardActions,
   Avatar,
   Typography
-} from 'material-ui';
+} from '@material-ui/core';
 
-import { Check as CheckIcon, Email as EmailIcon } from 'material-ui-icons';
+import { Check as CheckIcon, Email as EmailIcon } from '@material-ui/icons';
 import LoadingButton from '../../components/LoadingButton';
 import { inject, observer } from 'mobx-react';
 
-import green from 'material-ui/colors/green';
+import green from '@material-ui/core/colors/green';
 
 const styles = theme => ({
   actions: {

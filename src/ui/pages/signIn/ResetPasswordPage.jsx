@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardContent,
   Typography
-} from 'material-ui';
+} from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
 
 import { Redirect, withRouter } from 'react-router-dom';

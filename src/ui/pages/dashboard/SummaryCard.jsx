@@ -7,9 +7,9 @@ import {
   Avatar,
   Typography,
   Divider
-} from 'material-ui';
+} from '@material-ui/core';
 
-import { Assignment as AssignmentIcon } from 'material-ui-icons';
+import { Assignment as AssignmentIcon } from '@material-ui/icons';
 import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 

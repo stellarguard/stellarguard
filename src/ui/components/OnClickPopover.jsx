@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { withStyles, Popover } from 'material-ui';
+import { withStyles, Popover } from '@material-ui/core';
 
 const styles = theme => ({
   paper: {

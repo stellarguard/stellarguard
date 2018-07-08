@@ -12,15 +12,15 @@ import {
   ListItemSecondaryAction,
   IconButton,
   Tooltip
-} from 'material-ui';
+} from '@material-ui/core';
 import {
   Security as SecurityIcon,
   Lock as LockIcon,
   Delete as DeleteIcon
-} from 'material-ui-icons';
+} from '@material-ui/icons';
 import { inject, observer } from 'mobx-react';
 
-import green from 'material-ui/colors/green';
+import green from '@material-ui/core/colors/green';
 
 import DeactivateAccountDialog from '../accounts/DeactivateAccountDialog';
 

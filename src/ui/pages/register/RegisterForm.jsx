@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { withStyles, TextField, Button } from 'material-ui';
+import { withStyles, TextField, Button } from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
 
 import { validate } from '../../../shared/validators/users';
