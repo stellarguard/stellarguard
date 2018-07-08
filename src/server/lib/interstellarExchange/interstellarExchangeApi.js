@@ -1,6 +1,4 @@
 const axios = require('axios');
-const Stomp = require('@stomp/stompjs');
-
 const InterstellarExchangeTransaction = require('./interstellarExchangeTransaction');
 
 class InterstellarExchangeApi {
