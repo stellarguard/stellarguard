@@ -92,7 +92,7 @@
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-react": "^7.10.0",
     "mobx-react-devtools": "^4.2.15",
-    "parcel-bundler": "^1.6.2",
+    "parcel-bundler": "^1.9.4",
     "postcss-modules": "^1.1.0",
     "rimraf": "^2.6.2",
     "supervisor": "^0.12.0"
