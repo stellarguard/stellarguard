@@ -44,6 +44,7 @@
     "morgan": "~1.9.0",
     "ms": "^2.1.1",
     "nodemailer": "^4.6.7",
+    "otplib": "^10.0.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.4.3",
@@ -56,7 +57,6 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "serve-favicon": "~2.5.0",
-    "speakeasy": "^2.0.0",
     "stellar-hd-wallet": "^0.0.6",
     "stellar-sdk": "^0.9.1",
     "yup": "^0.25.1"
