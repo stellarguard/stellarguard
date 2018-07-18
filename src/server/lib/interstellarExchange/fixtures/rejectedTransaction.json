@@ -1,0 +1,41 @@
+{
+  "transaction": {
+    "id": "659d8c7e-08f3-462b-b584-3783b1f7f884",
+    "envelope":
+      "AAAAANnOB9/kTB1+btIDlfpwacZLM+5OWEvCPBZ/ARy1f4OrAAAAZAB0x2QAAAAaAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAA2c4H3+RMHX5u0gOV+nBpxksz7k5YS8I8Fn8BHLV/g6sAAAAAAAAAAACYloAAAAAAAAAAAA==",
+    "status": 1,
+    "sourceAccount": "GDM44B674RGB27TO2IBZL6TQNHDEWM7OJZMEXQR4CZ7QCHFVP6B2WOAX",
+    "createdAt": 1532231631000,
+    "updatedAt": 1532231631000
+  },
+  "signatures": [
+    {
+      "account": "GCPWAKSPGAOAHKPE2SSJPLMF35D7LPWJ4KRPV3ZNBUUPTFFFW2KYPYGK",
+      "transactionId": "659d8c7e-08f3-462b-b584-3783b1f7f884",
+      "status": 0,
+      "createdAt": 1532231631000,
+      "updatedAt": 1532231631000
+    },
+    {
+      "account": "GCQCE5R5T5FTLMEVYIKMRJ6QDCN7OMJVO6HCHYZ665YQQDB5OQ2JHVQK",
+      "transactionId": "659d8c7e-08f3-462b-b584-3783b1f7f884",
+      "status": 0,
+      "createdAt": 1532231631000,
+      "updatedAt": 1532231631000
+    },
+    {
+      "account": "GCVHEKSRASJBD6O2Z532LWH4N2ZLCBVDLLTLKSYCSMBLOYTNMEEGUARD",
+      "transactionId": "659d8c7e-08f3-462b-b584-3783b1f7f884",
+      "status": 0,
+      "createdAt": 1532231631000,
+      "updatedAt": 1532231631000
+    },
+    {
+      "account": "GDM44B674RGB27TO2IBZL6TQNHDEWM7OJZMEXQR4CZ7QCHFVP6B2WOAX",
+      "transactionId": "659d8c7e-08f3-462b-b584-3783b1f7f884",
+      "status": -1,
+      "createdAt": 1532231631000,
+      "updatedAt": 1532231631000
+    }
+  ]
+}

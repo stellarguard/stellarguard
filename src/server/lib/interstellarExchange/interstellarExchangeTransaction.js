@@ -1,5 +1,10 @@
 const stellar = require('../stellar');
 
+const SignatureStatus = {
+  Signed: 1,
+  Rejected: -1
+};
+
 class InterstellarExchangeTransaction {
   constructor({ id, xdr, status, sourceAccount, signatures }) {
     this.id = id;
@@ -7,12 +12,25 @@ class InterstellarExchangeTransaction {
     this.status = status;
     this.sourceAccount = sourceAccount;
     this.signatures = signatures || [];
+    this.submittedFrom = 'interstellar.exchange';
   }
 
   isSignedBySourceAccount() {
+    return this.hasStatusForSourceAccount(SignatureStatus.Signed);
+  }
+
+  isRejectedBySourceAccount() {
+    return this.hasStatusForSourceAccount(SignatureStatus.Rejected);
+  }
+
+  isReadyToSubmit() {
+    return this.isSignedBySourceAccount() || this.isRejectedBySourceAccount();
+  }
+
+  hasStatusForSourceAccount(status) {
     return this.signatures.some(
       signature =>
-        signature.account === this.sourceAccount && signature.status === 1
+        signature.account === this.sourceAccount && signature.status === status
     );
   }
 
