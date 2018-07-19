@@ -29,7 +29,7 @@ class AuthorizeTransactionDialog extends Component {
     const {
       open,
       transaction,
-      type = this.props.rootStore.currentUser.transactionVerificationType,
+      type = this.props.rootStore.currentUser.transactionSecurityLevel,
       code
     } = this.props;
 

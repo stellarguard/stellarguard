@@ -57,6 +57,10 @@ class Config {
   get isRecaptchaEnabled() {
     return this.recaptchaSiteKey && this.recaptchaSecret;
   }
+
+  get otpSecret() {
+    return env.sessionSecret;
+  }
 }
 
 const config = new Config();

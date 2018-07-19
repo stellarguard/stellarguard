@@ -57,6 +57,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "serve-favicon": "~2.5.0",
+    "sinon": "^6.1.4",
     "stellar-hd-wallet": "^0.0.6",
     "stellar-sdk": "^0.9.1",
     "yup": "^0.25.1"
@@ -70,10 +71,12 @@
     "run-job": "NODE_PATH=src/shared node ./src/jobs/run",
     "watch": "parcel watch src/ui/index.html",
     "console": "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared node",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "test": "ava"
   },
   "devDependencies": {
     "autoprefixer": "^8.6.5",
+    "ava": "0.25.0",
     "babel-eslint": "^8.2.5",
     "babel-plugin-direct-import": "^0.5.0",
     "babel-plugin-transform-builtin-extend": "^1.1.2",
@@ -92,7 +95,7 @@
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-react": "^7.10.0",
     "mobx-react-devtools": "^4.2.15",
-    "parcel-bundler": "^1.9.4",
+    "parcel-bundler": "^1.9.7",
     "postcss-modules": "^1.1.0",
     "rimraf": "^2.6.2",
     "supervisor": "^0.12.0"

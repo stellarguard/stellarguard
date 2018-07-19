@@ -2,6 +2,7 @@ import { observable, computed } from 'mobx';
 import Authenticator from './Authenticator';
 import Account from './Account';
 import Transaction from './Transaction';
+import UserSettings from './UserSettings';
 
 export default class User {
   @observable email;
@@ -9,9 +10,10 @@ export default class User {
   @observable signerPublicKey;
   @observable authenticator;
   @observable accounts;
-  @observable transactionVerificationType;
+  @observable transactionSecurityLevel;
   @observable transactions;
   @observable externalId;
+  @observable settings;
 
   constructor({
     id,
@@ -20,8 +22,9 @@ export default class User {
     signerPublicKey,
     authenticator,
     accounts,
-    transactionVerificationType,
+    transactionSecurityLevel,
     transactions = [],
+    settings = {},
     externalId
   }) {
     this.id = id;
@@ -30,9 +33,10 @@ export default class User {
     this.isEmailVerified = isEmailVerified;
     this.signerPublicKey = signerPublicKey;
     this.authenticator = authenticator;
-    this.transactionVerificationType = transactionVerificationType;
+    this.transactionSecurityLevel = transactionSecurityLevel;
     this.accounts = accounts;
     this.transactions = transactions;
+    this.settings = settings;
   }
 
   @computed
@@ -58,6 +62,13 @@ export default class User {
     const authenticator = Authenticator.fromJson(json.authenticator);
     const accounts = Account.fromJson(json.accounts);
     const transactions = (json.transactions || []).map(Transaction.fromJson);
-    return new User({ ...json, authenticator, accounts, transactions });
+    const settings = UserSettings.fromJson(json.settings);
+    return new User({
+      ...json,
+      authenticator,
+      accounts,
+      transactions,
+      settings
+    });
   }
 }

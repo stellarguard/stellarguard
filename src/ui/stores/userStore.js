@@ -1,4 +1,4 @@
-import { action } from 'mobx';
+import { action, runInAction } from 'mobx';
 import { usersApi } from '../api';
 import { executeRecaptcha } from './recaptcha';
 import remove from 'lodash.remove';
@@ -42,5 +42,45 @@ export default class UserStore {
   @action
   async resetPassword({ code, password }) {
     await usersApi.resetPassword({ code, password });
+  }
+
+  @action
+  async setTransactionSecurityLevel({ transactionSecurityLevel }) {
+    const submit = async ({ code } = {}) => {
+      try {
+        await usersApi.setTransactionSecurityLevel({
+          transactionSecurityLevel,
+          code
+        });
+
+        runInAction(() => {
+          this.rootStore.uiState.showSnackbar({
+            message: `Transaction Security Level Changed`,
+            duration: 2000
+          });
+          this.rootStore.currentUser.transactionSecurityLevel = transactionSecurityLevel;
+        });
+      } catch (e) {
+        if (e.code === 5000) {
+          // AuthenticatorCodeRequiredError
+          this.rootStore.authorizationDialogs.openAuthenticatorCodeDialog({
+            onSubmit: async ({ code }) => {
+              return await submit({ code });
+            }
+          });
+        } else if (e.code === 4000) {
+          // EmailCodeRequiredError
+          this.rootStore.authorizationDialogs.openEmailCodeDialog({
+            onSubmit: async ({ code }) => {
+              return await submit({ code });
+            }
+          });
+        } else {
+          throw e;
+        }
+      }
+    };
+
+    return await submit();
   }
 }

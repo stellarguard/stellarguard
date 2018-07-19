@@ -1,4 +1,4 @@
-const otp = require('./otp');
+const { authenticatorOtp } = require('../utils');
 const TfaStrategy = require('./TfaStrategy');
 
 class AuthenticatorStrategy extends TfaStrategy {
@@ -20,11 +20,11 @@ class AuthenticatorStrategy extends TfaStrategy {
       return false;
     }
 
-    return otp.verifyToken(token, this.secret);
+    return authenticatorOtp.verifyToken(token, this.secret);
   }
 
   static async getExtras({ email }) {
-    return await otp.generateSecret(email);
+    return await authenticatorOtp.generateSecret(email);
   }
 }
 

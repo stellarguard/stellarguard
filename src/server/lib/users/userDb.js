@@ -31,13 +31,14 @@ class UserDb {
     passwordHash,
     signerPublicKey,
     encryptedSignerSecretKey,
-    encryptedRecoveryPhrase
+    encryptedRecoveryPhrase,
+    transactionSecurityLevel
   }) {
     try {
       const { rows } = await this.db.pg.query(
         `INSERT INTO "user" (email, is_email_verified, password_hash, signer_public_key, 
-          encrypted_signer_secret_key, encrypted_recovery_phrase)
-         VALUES ($1, $2, $3, $4, $5, $6)
+          encrypted_signer_secret_key, encrypted_recovery_phrase, transaction_security_level)
+         VALUES ($1, $2, $3, $4, $5, $6, $7)
          RETURNING *`,
         [
           email,
@@ -45,7 +46,8 @@ class UserDb {
           passwordHash,
           signerPublicKey,
           encryptedSignerSecretKey,
-          encryptedRecoveryPhrase
+          encryptedRecoveryPhrase,
+          transactionSecurityLevel
         ]
       );
 
@@ -107,6 +109,28 @@ class UserDb {
        SET password_hash = $2
        WHERE id = $1`,
       [id, passwordHash]
+    );
+
+    return rows[0];
+  }
+
+  async updateSettings({ id, settings }) {
+    const { rows } = await this.db.pg.query(
+      `UPDATE "user"
+       SET settings = $2
+       WHERE id = $1`,
+      [id, settings]
+    );
+
+    return rows[0];
+  }
+
+  async updateTransactionSecurityLevel({ id, transactionSecurityLevel }) {
+    const { rows } = await this.db.pg.query(
+      `UPDATE "user"
+       SET transaction_security_level = $2
+       WHERE id = $1`,
+      [id, transactionSecurityLevel]
     );
 
     return rows[0];

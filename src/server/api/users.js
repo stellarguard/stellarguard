@@ -49,6 +49,24 @@ class UserController extends Controller {
     await users.userService.resetPassword({ code, password });
     return res.json({});
   }
+
+  async setOnboardingStepComplete(req, res) {
+    const { step } = req.body;
+    const user = req.user;
+    user.settings.onboarding.completeStep(step);
+    await users.userService.updateSettings(req.user);
+    return res.json(req.user.settings.onboarding);
+  }
+
+  async setTransactionSecurityLevel(req, res) {
+    const { transactionSecurityLevel, code } = req.body;
+    await users.userService.setTransactionSecurityLevel(req.user, {
+      transactionSecurityLevel,
+      code
+    });
+
+    return res.json({});
+  }
 }
 
 const controller = new UserController();
@@ -64,5 +82,10 @@ router.use(session.ensureLoggedIn());
 router.get('/me', controller.getCurrentUser);
 router.post('/me/resendverifyemail', controller.resendVerifyEmailAddressEmail);
 router.post('/me/verifyemail', controller.verifyEmailAddress);
+router.post('/me/onboarding', controller.setOnboardingStepComplete);
+router.post(
+  '/me/transaction-security-level',
+  controller.setTransactionSecurityLevel
+);
 
 module.exports = router;

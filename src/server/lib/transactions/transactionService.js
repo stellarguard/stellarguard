@@ -149,12 +149,12 @@ class TransactionService {
 
   async verify({ transaction, user, code }) {
     user.authenticator = await authenticatorService.getForUser(user);
-    const type = user.transactionVerificationType;
+    const type = user.transactionSecurityLevel;
     switch (type) {
       case 'none':
         return true;
       case 'email':
-        return transaction.verifyAuthorizationCode(code);
+        return transaction.verifyEmailAuthorizationCode(code);
       case 'authenticator':
         return authenticatorService.verifyForUser(user, code);
     }

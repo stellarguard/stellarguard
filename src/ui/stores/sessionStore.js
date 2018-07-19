@@ -1,4 +1,4 @@
-import { observable, computed, action, runInAction } from 'mobx';
+import { observable, computed, action, runInAction, autorun } from 'mobx';
 import { sessionApi, usersApi } from '../api';
 import history from '../history';
 import { executeRecaptcha } from './recaptcha';
@@ -40,6 +40,10 @@ export default class SessionStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.currentUser = this.sessionCache.user;
+
+    autorun(() => {
+      this.sessionCache.user = this.currentUser;
+    });
   }
 
   @computed

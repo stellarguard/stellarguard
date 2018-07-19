@@ -22,7 +22,7 @@ class EmailStrategy extends TfaStrategy {
   }
 
   async verify({ transaction, code }) {
-    return transaction.verifyAuthorizationCode(code);
+    return transaction.verifyEmailAuthorizationCode(code);
   }
 
   static async getExtras({}) {

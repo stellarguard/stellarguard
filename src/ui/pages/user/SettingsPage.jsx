@@ -5,7 +5,8 @@ import {
   Grid,
   Typography,
   Card,
-  CardContent
+  CardContent,
+  Divider
 } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 
@@ -13,6 +14,7 @@ import { observer, inject } from 'mobx-react';
 import { withRouter } from 'react-router';
 
 import { Page, DashboardFab, Field, Action } from '../../components';
+import { TransactionSecurityLevelForm } from '../../components/TransactionSecurityLevelForm';
 
 const styles = theme => ({
   subheading: {
@@ -20,6 +22,9 @@ const styles = theme => ({
   },
   label: {
     width: 150
+  },
+  divider: {
+    margin: `${theme.spacing.unit}px 0`
   }
 });
 
@@ -48,6 +53,10 @@ class SettingsPage extends Component {
                   {email}
                 </Field>
                 {this.renderTwoFactorAuthField()}
+                <Divider className={classes.divider} />
+                <Field label="Transaction Security Level" stacked>
+                  <TransactionSecurityLevelForm />
+                </Field>
               </CardContent>
             </Card>
           </Grid>

@@ -1,5 +1,14 @@
 const AppError = require('./AppError');
 
+class AuthenticatorCodeRequiredError extends AppError {
+  constructor() {
+    super({
+      code: 5000,
+      message: `Authenticator code is required to perform this action.`
+    });
+  }
+}
+
 class AuthenticatorVerificationError extends AppError {
   constructor() {
     super({
@@ -29,6 +38,7 @@ class AuthenticatorNotActiveError extends AppError {
 }
 
 module.exports = {
+  AuthenticatorCodeRequiredError,
   AuthenticatorVerificationError,
   AuthenticatorAlreadyActiveError,
   AuthenticatorNotActiveError

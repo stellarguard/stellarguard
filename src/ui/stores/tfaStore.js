@@ -15,6 +15,7 @@ class TfaStore {
     });
     runInAction(() => {
       this.rootStore.currentUser.authenticator = authenticator;
+      this.onAuthenticatorAdded && this.onAuthenticatorAdded(authenticator);
     });
 
     return authenticator;
@@ -67,6 +68,13 @@ class TfaStore {
   @action
   closeRemoveAuthenticatorDialog() {
     this.isRemoveAuthenticatorDialogOpen = false;
+  }
+
+  listenForAuthenticatorAdded(callback) {
+    this.onAuthenticatorAdded = callback;
+    return () => {
+      this.onAuthenticatorAdded = null;
+    };
   }
 }
 

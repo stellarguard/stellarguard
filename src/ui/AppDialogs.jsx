@@ -6,7 +6,7 @@ import RegisterDialog from './pages/register/RegisterDialog';
 import SignInDialog from './pages/signIn/SignInDialog';
 import AddAuthenticatorDialog from './pages/dashboard/tfa/AddAuthenticatorDialog';
 import RemoveAuthenticatorDialog from './pages/dashboard/tfa/RemoveAuthenticatorDialog';
-
+import { AuthenticatorCodeDialog, EmailCodeDialog } from './components';
 const styles = () => ({});
 
 @inject('rootStore')
@@ -40,6 +40,14 @@ class AppDialogs extends Component {
     this.props.rootStore.tfaStore.closeRemoveAuthenticatorDialog();
   };
 
+  handleAuthenticatorCodeDialogClose = () => {
+    this.props.rootStore.authorizationDialogs.closeAuthenticatorCodeDialog();
+  };
+
+  handleEmailCodeDialogClose = () => {
+    this.props.rootStore.authorizationDialogs.closeEmailCodeDialog();
+  };
+
   render() {
     const { rootStore } = this.props;
 
@@ -67,6 +75,23 @@ class AppDialogs extends Component {
           open={rootStore.tfaStore.isRemoveAuthenticatorDialogOpen}
           onClose={this.handleRemoveAuthenticatorClose}
         />
+
+        <AuthenticatorCodeDialog
+          open={rootStore.authorizationDialogs.isAuthenticatorCodeDialogOpen}
+          onClose={this.handleAuthenticatorCodeDialogClose}
+          onSuccess={this.handleAuthenticatorCodeDialogClose}
+          onSubmit={rootStore.authorizationDialogs.onSubmitAuthenticatorCode}
+        />
+
+        {rootStore.sessionStore.isSignedIn && (
+          <EmailCodeDialog
+            open={rootStore.authorizationDialogs.isEmailCodeDialogOpen}
+            onClose={this.handleEmailCodeDialogClose}
+            onSuccess={this.handleEmailCodeDialogClose}
+            onSubmit={rootStore.authorizationDialogs.onSubmitEmailCode}
+            emailAddress={rootStore.currentUser.email}
+          />
+        )}
       </Fragment>
     );
   }
