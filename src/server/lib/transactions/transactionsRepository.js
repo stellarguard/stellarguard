@@ -50,6 +50,17 @@ class TransactionRepository {
     transaction.result = result;
     return transaction;
   }
+
+  async getExternalTransaction({ externalId, submittedFrom }) {
+    const transaction = await this.transactionDb.getByExternalId({
+      externalId,
+      submittedFrom
+    });
+
+    if (transaction) {
+      return new Transaction(transaction);
+    }
+  }
 }
 
 module.exports = new TransactionRepository();

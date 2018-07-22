@@ -16,25 +16,76 @@ class InterstellarExchangeListener {
   }
 
   async _onTransaction(interstellarExchangeTransaction) {
-    // transactions not signed by source account are not ready to be submitted to StellarGuard
-    if (!interstellarExchangeTransaction.isSignedBySourceAccount()) {
+    if (!interstellarExchangeTransaction.isReadyToSubmit()) {
       return;
     }
 
-    console.log('Got transaction from interstellar.exchange');
+    const transaction = new Transaction({
+      xdr: interstellarExchangeTransaction.xdr,
+      externalId: interstellarExchangeTransaction.id,
+      submittedFrom: interstellarExchangeTransaction.submittedFrom
+    });
 
+    // auto reject transactions that are rejected by source account
+    // otherwise transactions may get "stuck" in InterStellar if they fail to submit
+    if (interstellarExchangeTransaction.isRejectedBySourceAccount()) {
+      return await this._rejectTransaction({ transaction });
+    }
+
+    // transactions not signed by source account are not ready to be submitted to StellarGuard
+    if (interstellarExchangeTransaction.isSignedBySourceAccount()) {
+      return await this._submitTransaction({ transaction });
+    }
+  }
+
+  async _rejectTransaction({ transaction }) {
     try {
-      const transaction = new Transaction({
-        xdr: interstellarExchangeTransaction.xdr,
-        externalId: interstellarExchangeTransaction.id,
-        submittedFrom: 'interstellar.exchange'
+      let transactionToDeny = await transactionService.getExternalTransaction({
+        externalId: transaction.externalId,
+        submittedFrom: transaction.submittedFrom
       });
 
       const user = await userService.getUserByAccountPublicKey(
         transaction.source
       );
 
-      await transactionService.createTransaction(transaction, user);
+      if (!transactionToDeny) {
+        transactionToDeny = await transactionService.createTransaction({
+          transaction,
+          user,
+          sendNotifications: false
+        });
+      }
+
+      return await transactionService.denyTransaction({
+        transaction: transactionToDeny,
+        user
+      });
+    } catch (e) {
+      console.error(
+        'Error auto-rejecting InterStellar.Exchange Transaction',
+        e
+      );
+    }
+  }
+
+  async _submitTransaction({ transaction }) {
+    try {
+      const existingTransaction = await transactionService.getExternalTransaction(
+        {
+          externalId: transaction.externalId,
+          submittedFrom: transaction.submittedFrom
+        }
+      );
+
+      if (existingTransaction) {
+        return;
+      }
+
+      const user = await userService.getUserByAccountPublicKey(
+        transaction.source
+      );
+      return await transactionService.createTransaction({ transaction, user });
     } catch (e) {
       if (!(e instanceof DuplicateTransactionError)) {
         console.error('Error submitting InterStellar.Exchange Transaction', e);

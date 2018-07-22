@@ -15,7 +15,6 @@ class ConstellationListener {
   }
 
   async _onTransaction(constellationTransaction) {
-    console.log('Got transaction from Constellation API');
     if (!constellationTransaction.isSignedBySourceAccount()) {
       return;
     }
@@ -23,15 +22,26 @@ class ConstellationListener {
     try {
       const transaction = new Transaction({
         xdr: constellationTransaction.xdr,
-        externalId: constellationTransaction.externalId,
-        submittedFrom: 'constellation'
+        externalId: constellationTransaction.id,
+        submittedFrom: constellationTransaction.submittedFrom
       });
+
+      const existingTransaction = await transactionService.getExternalTransaction(
+        {
+          externalId: transaction.externalId,
+          submittedFrom: transaction.submittedFrom
+        }
+      );
+
+      if (existingTransaction) {
+        return;
+      }
 
       const user = await userService.getUserByAccountPublicKey(
         transaction.source
       );
 
-      await transactionService.createTransaction(transaction, user);
+      await transactionService.createTransaction({ transaction, user });
     } catch (e) {
       console.error('Error submitting Constellation Transaction', e);
     }

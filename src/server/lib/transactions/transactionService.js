@@ -26,7 +26,7 @@ class TransactionService {
     });
   }
 
-  async createTransaction(transaction, user) {
+  async createTransaction({ transaction, user, sendNotifications = true }) {
     transaction.userId = user && user.id;
     await transactionsValidator.validate(transaction);
     const newTransaction = await transactionsRepository.createTransaction(
@@ -34,10 +34,12 @@ class TransactionService {
     );
 
     user.authenticator = await authenticatorService.getForUser(user);
-    await emailService.sendTransactionAuthorizationEmail({
-      user,
-      transaction: newTransaction
-    });
+    if (sendNotifications) {
+      await emailService.sendTransactionAuthorizationEmail({
+        user,
+        transaction: newTransaction
+      });
+    }
 
     return newTransaction;
   }
@@ -125,7 +127,8 @@ class TransactionService {
     }
 
     if (transaction.isFromInterstellarExchange()) {
-      transaction.sign(user.signerSecretKey); // rejections are required to be signed for this API
+      const secretKey = await crypto.decrypt(user.encryptedSignerSecretKey);
+      transaction.sign(secretKey); // rejections are required to be signed for this API
       await interstellarExchangeService.rejectTransaction(
         transaction,
         user.signerPublicKey
@@ -148,6 +151,13 @@ class TransactionService {
       case 'authenticator':
         return authenticatorService.verifyForUser(user, code);
     }
+  }
+
+  async getExternalTransaction({ externalId, submittedFrom }) {
+    return await transactionsRepository.getExternalTransaction({
+      externalId,
+      submittedFrom
+    });
   }
 }
 

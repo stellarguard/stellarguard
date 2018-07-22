@@ -17,8 +17,10 @@ class TransactionsController extends Controller {
       transaction.source
     );
     const newTransaction = await transactions.transactionService.createTransaction(
-      transaction,
-      user
+      {
+        transaction,
+        user
+      }
     );
 
     return res.json(newTransaction);

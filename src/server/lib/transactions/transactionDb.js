@@ -69,6 +69,15 @@ class TransactionDb {
     );
     return rows[0];
   }
+
+  async getByExternalId({ externalId, submittedFrom }) {
+    const { rows } = await this.db.pg.query(
+      'SELECT * FROM "transaction" WHERE external_id = $1 AND submitted_from = $2',
+      [externalId, submittedFrom]
+    );
+
+    return rows[0];
+  }
 }
 
 module.exports = new TransactionDb({ db });

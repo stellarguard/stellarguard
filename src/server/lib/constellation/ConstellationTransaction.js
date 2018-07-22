@@ -9,6 +9,7 @@ class ConstellationTransaction {
     const stellarTransaction = this.toStellarTransaction();
     this.id = stellarTransaction.hash();
     this.sourceAccount = stellarTransaction.source;
+    this.submittedFrom = 'constellation';
   }
 
   isSignedBySourceAccount() {

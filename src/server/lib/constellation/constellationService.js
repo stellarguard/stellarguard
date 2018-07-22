@@ -32,8 +32,7 @@ class ConstellationService {
         const constellationTransaction = ConstellationTransaction.fromJson(
           payload
         );
-        console.log('payload', payload);
-        console.log(constellationTransaction);
+
         if (this.isTransactionToCurrentNetwork(constellationTransaction)) {
           onTransaction(constellationTransaction);
         }
