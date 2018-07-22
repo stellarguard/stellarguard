@@ -119,13 +119,6 @@ class TransactionService {
       throw new TransactionNotOwnedByUserError();
     }
 
-    if (
-      transaction.status !== Transaction.Status.Pending &&
-      transaction.status != Transaction.Status.Error
-    ) {
-      throw new TransactionAlreadySubmittedError();
-    }
-
     if (transaction.isFromInterstellarExchange()) {
       const secretKey = await crypto.decrypt(user.encryptedSignerSecretKey);
       transaction.sign(secretKey); // rejections are required to be signed for this API
