@@ -5,7 +5,8 @@ const querystring = require('querystring');
 class RecaptchaApi {
   constructor({ secret }) {
     this.axiosClient = axios.create({
-      baseURL: `https://www.google.com/recaptcha/api/`
+      baseURL: `https://www.google.com/recaptcha/api/`,
+      timeout: 5000
     });
     this.secret = secret;
   }

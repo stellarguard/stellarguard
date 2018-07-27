@@ -28,13 +28,13 @@ async function validate({
     return;
   }
 
-  const { success, score, action } = await recaptchaApi.verify({
+  const { success, score, action } = await verify({
     token: recaptchaToken,
     ipAddress
   });
 
   if (!success || action !== expectedAction || score < scoreThreshold) {
-    console.error(
+    console.info(
       'Recaptcha failed',
       success,
       expectedAction,
@@ -42,7 +42,23 @@ async function validate({
       score,
       scoreThreshold
     );
-    throw new RecaptchaRegisterError();
+
+    // TODO: enable this when we get a better sense for thresholds and quality of recapthca v3
+    // throw new RecaptchaRegisterError();
+  }
+}
+
+async function verify({ token, ipAddress }) {
+  try {
+    const { success, score, action } = await recaptchaApi.verify({
+      token,
+      ipAddress
+    });
+
+    return { success, score, action };
+  } catch (e) {
+    console.error('Error from recaptcha', e);
+    return { success: false };
   }
 }
 
