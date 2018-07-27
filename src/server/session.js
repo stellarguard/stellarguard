@@ -16,6 +16,7 @@ const cookie = {
 const csrfMiddleware = require('csurf')({ cookie });
 
 const { users, db, tfa } = require('./lib');
+
 const {
   InvalidCredentialsError,
   RequiresAuthenticatorError,
@@ -44,33 +45,38 @@ function configure() {
     new LocalStrategy(
       { usernameField: 'email', passReqToCallback: true },
       async function(req, email, password, done) {
-        const { recaptchaToken } = req.body;
-        await users.recaptchaValidator.validateSignin({
-          recaptchaToken,
-          ipAddress: req.ip
-        });
-        const user = await users.userService.getUserByEmail(email);
-        if (!user) {
-          return done(new InvalidCredentialsError());
-        }
-
-        if (!(await user.verifyPassword(password))) {
-          return done(new InvalidCredentialsError());
-        }
-
-        user.authenticator = await tfa.authenticatorService.getForUser(user);
-        if (user.authenticator) {
-          const code = req.body.code;
-          if (!code) {
-            return done(new RequiresAuthenticatorError());
+        try {
+          const { recaptchaToken } = req.body;
+          await users.recaptchaValidator.validateSignin({
+            recaptchaToken,
+            ipAddress: req.ip
+          });
+          const user = await users.userService.getUserByEmail(email);
+          if (!user) {
+            return done(new InvalidCredentialsError());
           }
 
-          if (!tfa.authenticatorService.verifyForUser(user, code)) {
-            return done(new InvalidAuthenticatorCodeError());
+          if (!(await user.verifyPassword(password))) {
+            return done(new InvalidCredentialsError());
           }
-        }
 
-        done(null, user);
+          user.authenticator = await tfa.authenticatorService.getForUser(user);
+          if (user.authenticator) {
+            const code = req.body.code;
+            if (!code) {
+              return done(new RequiresAuthenticatorError());
+            }
+
+            if (!tfa.authenticatorService.verifyForUser(user, code)) {
+              return done(new InvalidAuthenticatorCodeError());
+            }
+          }
+
+          done(null, user);
+        } catch (e) {
+          console.error('Error during sign in', e);
+          return done(e);
+        }
       }
     )
   );
