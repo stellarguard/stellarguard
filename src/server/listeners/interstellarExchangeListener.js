@@ -49,6 +49,10 @@ class InterstellarExchangeListener {
         transaction.source
       );
 
+      if (!user) {
+        return;
+      }
+
       if (!transactionToDeny) {
         transactionToDeny = await transactionService.createTransaction({
           transaction,
@@ -85,11 +89,13 @@ class InterstellarExchangeListener {
       const user = await userService.getUserByAccountPublicKey(
         transaction.source
       );
+
+      if (!user) {
+        return;
+      }
       return await transactionService.createTransaction({ transaction, user });
     } catch (e) {
-      if (!(e instanceof DuplicateTransactionError)) {
-        console.error('Error submitting InterStellar.Exchange Transaction', e);
-      }
+      console.error('Error submitting InterStellar.Exchange Transaction', e);
     }
   }
 }
