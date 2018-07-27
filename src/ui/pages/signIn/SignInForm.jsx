@@ -1,11 +1,16 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { withStyles, TextField, Button, Typography } from '@material-ui/core';
+import { withStyles, TextField, Typography } from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
 
 import { Link } from 'react-router-dom';
 
-import { FormError, FormActions, FormFieldHelperText } from '../../components';
+import {
+  FormError,
+  FormActions,
+  FormFieldHelperText,
+  LoadingButton
+} from '../../components';
 import AuthenticatorSignInForm from './AuthenticatorSignInForm';
 import signInValidator from '../../../shared/validators/signIn';
 
@@ -27,6 +32,7 @@ class SignInForm extends React.Component {
     { email, password, code },
     { setSubmitting, setErrors }
   ) => {
+    this.props.onSubmit && this.props.onSubmit({ submitting: true });
     try {
       const user = await this.props.rootStore.sessionStore.signIn({
         email,
@@ -34,9 +40,11 @@ class SignInForm extends React.Component {
         code
       });
       setSubmitting(false);
+      this.props.onSubmit && this.props.onSubmit({ submitting: false });
       this.signInSuccess(user);
     } catch (error) {
       setSubmitting(false);
+      this.props.onSubmit && this.props.onSubmit({ submitting: false });
       if (error.code === 1000) {
         this.setState({ showAuthenticatorForm: true });
       } else {
@@ -138,15 +146,15 @@ class SignInForm extends React.Component {
             )}
             {includeActions && (
               <FormActions>
-                <Button
+                <LoadingButton
                   data-test="signin-form-signin-button"
                   type="submit"
-                  disabled={isSubmitting}
+                  loading={isSubmitting}
                   variant="raised"
                   color="primary"
                 >
                   Sign in
-                </Button>
+                </LoadingButton>
               </FormActions>
             )}
           </Form>
