@@ -7,6 +7,7 @@ const { accountsService } = require('../accounts');
 const { emailService } = require('../email');
 const { authenticatorService } = require('../tfa');
 const { crypto } = require('../utils');
+const { transactionCallbackService } = require('./transactionCallbackService');
 
 const {
   TransactionNotFoundError,
@@ -26,11 +27,17 @@ class TransactionService {
     });
   }
 
-  async createTransaction({ transaction, user, sendNotifications = true }) {
+  async createTransaction({
+    transaction,
+    user,
+    callback,
+    sendNotifications = true
+  }) {
     transaction.userId = user && user.id;
     await transactionsValidator.validate(transaction);
     const newTransaction = await transactionsRepository.createTransaction(
-      transaction
+      transaction,
+      callback
     );
 
     user.authenticator = await authenticatorService.getForUser(user);
@@ -94,15 +101,22 @@ class TransactionService {
         });
       }
 
+      if (transaction.callback) {
+        transactionCallbackService.sendTransactionSuccessCallback({
+          transaction,
+          result
+        });
+      }
+
       return await transactionsRepository.updateStatus(transaction, {
         status: Transaction.Status.Success,
         result
       });
     } catch (e) {
-      if (e.data) {
+      if (e.response && e.response.data) {
         return await transactionsRepository.updateStatus(transaction, {
           status: Transaction.Status.Error,
-          result: JSON.stringify(e.data)
+          result: JSON.stringify(e.response.data)
         });
       } else {
         throw e;
