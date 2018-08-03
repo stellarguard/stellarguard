@@ -26,26 +26,34 @@ class TransactionDb {
     return rows;
   }
 
-  async create({ userId, xdr, ipAddress, hash, submittedFrom, externalId }) {
+  async create({
+    userId,
+    xdr,
+    ipAddress,
+    hash,
+    submittedFrom,
+    externalId,
+    callback
+  }) {
     try {
       if (externalId) {
         const { rows } = await this.db.pg.query(
           `
-          INSERT INTO "transaction" (user_id, xdr, ip_address, hash, submitted_from, external_id)
+          INSERT INTO "transaction" (user_id, xdr, ip_address, hash, submitted_from, external_id, callback)
           VALUES ($1, $2, $3, $4, $5, $6)
           RETURNING *
           `,
-          [userId, xdr, ipAddress, hash, submittedFrom, externalId]
+          [userId, xdr, ipAddress, hash, submittedFrom, externalId, callback]
         );
         return rows[0];
       } else {
         const { rows } = await this.db.pg.query(
           `
-          INSERT INTO "transaction" (user_id, xdr, ip_address, hash, submitted_from)
-          VALUES ($1, $2, $3, $4, $5)
+          INSERT INTO "transaction" (user_id, xdr, ip_address, hash, submitted_from, callback)
+          VALUES ($1, $2, $3, $4, $5, $6)
           RETURNING *
           `,
-          [userId, xdr, ipAddress, hash, submittedFrom]
+          [userId, xdr, ipAddress, hash, submittedFrom, callback]
         );
         return rows[0];
       }

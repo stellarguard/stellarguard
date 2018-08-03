@@ -17,7 +17,8 @@ class Transaction {
     ipAddress,
     result,
     submittedFrom,
-    externalId
+    externalId,
+    callback
   }) {
     this.id = id;
     this.userId = userId;
@@ -28,6 +29,7 @@ class Transaction {
     this.ipAddress = ipAddress;
     this.submittedFrom = submittedFrom;
     this.externalId = externalId;
+    this.callback = callback;
   }
 
   get source() {

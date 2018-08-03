@@ -10,9 +10,13 @@ const Controller = require('./Controller');
 
 class TransactionsController extends Controller {
   async createTransaction(req, res) {
-    const { xdr } = req.body;
+    const { xdr, callback } = req.body;
     const ipAddress = req.ip;
-    const transaction = new transactions.Transaction({ xdr, ipAddress });
+    const transaction = new transactions.Transaction({
+      xdr,
+      ipAddress,
+      callback
+    });
     const user = await users.userService.getUserByAccountPublicKey(
       transaction.source
     );

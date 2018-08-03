@@ -20,7 +20,8 @@ class TransactionRepository {
     ipAddress,
     hash,
     submittedFrom,
-    externalId
+    externalId,
+    callback = null
   }) {
     const transaction = await this.transactionDb.create({
       userId,
@@ -28,7 +29,8 @@ class TransactionRepository {
       hash,
       ipAddress,
       submittedFrom,
-      externalId
+      externalId,
+      callback
     });
     return new Transaction(transaction);
   }

@@ -78,6 +78,16 @@ class DuplicateTransactionError extends AppError {
   }
 }
 
+class InvalidCallbackError extends AppError {
+  constructor({ callback }) {
+    super({
+      code: 209,
+      field: 'callback',
+      message: `${callback} is not a valid transaction callback.`
+    });
+  }
+}
+
 module.exports = {
   NoUserForSourceError,
   VariedSourceAccountsError,
@@ -86,5 +96,6 @@ module.exports = {
   TransactionNotOwnedByUserError,
   InvalidAuthorizationCodeError,
   TransactionAlreadySubmittedError,
-  DuplicateTransactionError
+  DuplicateTransactionError,
+  InvalidCallbackError
 };
