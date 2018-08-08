@@ -70,7 +70,10 @@ class AddStellarUiState {
 
       this.transaction = builder.build();
     } catch (e) {
-      if (e.name === 'NotFoundError') {
+      if (
+        e.response &&
+        e.response.type === 'https://stellar.org/horizon-errors/not_found'
+      ) {
         throw new AppError({
           field: 'sourceAccount',
           message: 'There is no active Stellar Account with this public key.'
