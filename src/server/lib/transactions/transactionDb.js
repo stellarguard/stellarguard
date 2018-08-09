@@ -40,7 +40,7 @@ class TransactionDb {
         const { rows } = await this.db.pg.query(
           `
           INSERT INTO "transaction" (user_id, xdr, ip_address, hash, submitted_from, external_id, callback)
-          VALUES ($1, $2, $3, $4, $5, $6)
+          VALUES ($1, $2, $3, $4, $5, $6, $7)
           RETURNING *
           `,
           [userId, xdr, ipAddress, hash, submittedFrom, externalId, callback]
