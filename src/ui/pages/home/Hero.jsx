@@ -96,7 +96,7 @@ class Hero extends Component {
               color="inherit"
               className={classes.headline}
             >
-              {'Secure your XLM with Two Factor Auth and Multi-Sig'}
+              {'Extra security for your Stellar account'}
             </Typography>
             <div className={classes.actions}>
               <div className={classes.buttons}>
