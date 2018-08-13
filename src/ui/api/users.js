@@ -43,3 +43,7 @@ export async function setTransactionSecurityLevel({
     code
   });
 }
+
+export async function getRecoveryPhrase() {
+  return await axios.get('/users/me/recovery-phrase');
+}

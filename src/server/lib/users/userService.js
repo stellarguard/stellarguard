@@ -176,6 +176,22 @@ class UserService {
       transactionSecurityLevel
     });
   }
+
+  async getRecoveryPhrase(user) {
+    // we give them only one chance to see their phrase (during onboarding)
+    if (user.settings.onboarding.recoveryPhrase) {
+      return {};
+    }
+
+    // users that signed up before we started generated this will not have a recovery phrase
+    if (user.encryptedRecoveryPhrase) {
+      const recoveryPhrase = await crypto.decrypt(user.encryptedRecoveryPhrase);
+      return { recoveryPhrase: recoveryPhrase.split(' ') };
+    } else {
+      const secretKey = await crypto.decrypt(user.encryptedSignerSecretKey);
+      return { secretKey };
+    }
+  }
 }
 
 module.exports = new UserService();

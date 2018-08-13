@@ -83,4 +83,9 @@ export default class UserStore {
 
     return await submit();
   }
+
+  @action
+  async getRecoveryPhrase() {
+    return await usersApi.getRecoveryPhrase();
+  }
 }
