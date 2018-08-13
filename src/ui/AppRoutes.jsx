@@ -18,6 +18,7 @@ import SettingsPage from './pages/user/SettingsPage';
 import TutorialsRoutes from './pages/misc/help/TutorialsRoutes';
 import PrivacyPolicyPage from './pages/misc/legal/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/misc/legal/TermsOfServicePage';
+import { OnboardingRoutes } from './pages/onboarding';
 
 import AppLoader from './AppLoader';
 
@@ -64,6 +65,16 @@ class ProtectedRoutes extends React.Component {
     if (!rootStore.sessionStore.isSignedIn) {
       rootStore.sessionStore.setReturnUrl(this.props.location);
       return <Redirect to="/signin" />;
+    }
+
+    if (!rootStore.onboardingStore.isOnboardingComplete) {
+      return (
+        <Switch>
+          <Route path="/welcome" component={OnboardingRoutes} />
+          <Route exact path="/verifyemail" component={VerifyEmailPage} />
+          <Redirect to="/welcome" />
+        </Switch>
+      );
     }
 
     return (

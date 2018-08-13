@@ -6,7 +6,12 @@ if (config.sendGridApiKey) {
   mailer = require('./etherealMailer'); // for development use only
 }
 
-const { Welcome, AuthorizeTransaction, ResetPassword } = require('./emails');
+const {
+  Welcome,
+  AuthorizeTransaction,
+  ResetPassword,
+  TransactionSecurityLevel
+} = require('./emails');
 
 class EmailService {
   async sendWelcomeEmail({ user }) {
@@ -21,6 +26,17 @@ class EmailService {
 
   async sendResetPasswordEmail({ user, code }) {
     const email = new ResetPassword({ user, code });
+    return await mailer.sendEmail(email);
+  }
+
+  async sendChangeTransactionSecurityLevelEmail({
+    user,
+    transactionSecurityLevel
+  }) {
+    const email = new TransactionSecurityLevel({
+      user,
+      transactionSecurityLevel
+    });
     return await mailer.sendEmail(email);
   }
 }

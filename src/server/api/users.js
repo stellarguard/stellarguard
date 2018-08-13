@@ -49,20 +49,52 @@ class UserController extends Controller {
     await users.userService.resetPassword({ code, password });
     return res.json({});
   }
+
+  async setOnboardingStepComplete(req, res) {
+    const { step } = req.body;
+    const user = req.user;
+    user.settings.onboarding.completeStep(step);
+    await users.userService.updateSettings(req.user);
+    return res.json(req.user.settings.onboarding);
+  }
+
+  async setTransactionSecurityLevel(req, res) {
+    const { transactionSecurityLevel, code } = req.body;
+    await users.userService.setTransactionSecurityLevel(req.user, {
+      transactionSecurityLevel,
+      code
+    });
+
+    return res.json({});
+  }
+
+  async getRecoveryPhrase(req, res) {
+    const result = await users.userService.getRecoveryPhrase(req.user);
+    return res.json(result);
+  }
 }
 
 const controller = new UserController();
 
 router.use(session.csrf);
-// logged out routes
-router.post('/', controller.createUser);
-router.post('/forgot-password', controller.forgotPassword);
-router.post('/reset-password', controller.resetPassword);
 
-// logged in routes
-router.use(session.ensureLoggedIn());
-router.get('/me', controller.getCurrentUser);
-router.post('/me/resendverifyemail', controller.resendVerifyEmailAddressEmail);
-router.post('/me/verifyemail', controller.verifyEmailAddress);
+const loggedOutRoutes = express.Router();
+router.use('/', loggedOutRoutes);
+loggedOutRoutes.post('/', controller.createUser);
+loggedOutRoutes.post('/forgot-password', controller.forgotPassword);
+loggedOutRoutes.post('/reset-password', controller.resetPassword);
+
+const meRoutes = express.Router();
+router.use('/me', meRoutes);
+meRoutes.use(session.ensureLoggedIn());
+meRoutes.get('/', controller.getCurrentUser);
+meRoutes.post('/resendverifyemail', controller.resendVerifyEmailAddressEmail);
+meRoutes.post('/verifyemail', controller.verifyEmailAddress);
+meRoutes.post('/onboarding', controller.setOnboardingStepComplete);
+meRoutes.post(
+  '/transaction-security-level',
+  controller.setTransactionSecurityLevel
+);
+meRoutes.get('/recovery-phrase', controller.getRecoveryPhrase);
 
 module.exports = router;

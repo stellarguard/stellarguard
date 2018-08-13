@@ -1,5 +1,5 @@
 const stellar = require('../stellar');
-const { crypto } = require('../utils');
+const { emailOtp } = require('../utils');
 const config = require('../../config');
 const { urls } = require('../utils');
 
@@ -61,8 +61,12 @@ class Transaction {
     return this.stellarTransaction.hash().toString('hex');
   }
 
-  getAuthorizationCode() {
-    return crypto.getHmac(this.id);
+  getEmailAuthorizationCode() {
+    return emailOtp.generateToken(config.otpSecret, { suffix: this.id });
+  }
+
+  verifyEmailAuthorizationCode(code) {
+    return emailOtp.verifyToken(code, config.otpSecret, { suffix: this.id });
   }
 
   /**
@@ -72,10 +76,6 @@ class Transaction {
     return this.stellarTransaction.operations.some(
       operation => !!operation.source && operation.source !== this.source
     );
-  }
-
-  verifyAuthorizationCode(code) {
-    return this.getAuthorizationCode() === code;
   }
 
   sign(secretKey) {

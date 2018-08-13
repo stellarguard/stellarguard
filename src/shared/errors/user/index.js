@@ -1,5 +1,14 @@
 const AppError = require('../AppError');
 
+class EmailCodeRequiredError extends AppError {
+  constructor() {
+    super({
+      code: 4000,
+      message: 'An email verification code is required for this action.'
+    });
+  }
+}
+
 class DuplicateEmailError extends AppError {
   constructor() {
     super({
@@ -105,6 +114,7 @@ class RecaptchaRegisterError extends AppError {
 }
 
 module.exports = {
+  EmailCodeRequiredError,
   DuplicateEmailError,
   InvalidEmailVerificationCodeError,
   NoUserForEmail,

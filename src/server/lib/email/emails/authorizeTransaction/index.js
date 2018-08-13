@@ -7,8 +7,8 @@ class AuthorizeTransactionEmail extends Email {
     const from = 'StellarGuard <no-reply@stellarguard.me>';
     let authorizeUrl;
     let code;
-    if (user.transactionVerificationType === 'email') {
-      code = transaction.getAuthorizationCode();
+    if (user.transactionSecurityLevel === 'email') {
+      code = transaction.getEmailAuthorizationCode();
       authorizeUrl = urls.withHost(
         urls.authorizeTransaction({
           transaction,

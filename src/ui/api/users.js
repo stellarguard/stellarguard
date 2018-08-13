@@ -14,6 +14,10 @@ export async function verifyEmailAddress({ code }) {
   return await axios.post('/users/me/verifyemail', { code });
 }
 
+export async function completeOnboardingStep(step) {
+  return await axios.post('/users/me/onboarding', { step });
+}
+
 export async function register({ password, email, recaptchaToken }) {
   const user = await axios.post('/users', { password, email, recaptchaToken });
   return User.fromJson(user);
@@ -28,4 +32,18 @@ export async function resetPassword({ code, password }) {
     code,
     password
   });
+}
+
+export async function setTransactionSecurityLevel({
+  transactionSecurityLevel,
+  code
+}) {
+  return await axios.post('/users/me/transaction-security-level', {
+    transactionSecurityLevel,
+    code
+  });
+}
+
+export async function getRecoveryPhrase() {
+  return await axios.get('/users/me/recovery-phrase');
 }

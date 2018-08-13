@@ -10,7 +10,8 @@ class UserRepository {
     passwordHash,
     signerPublicKey,
     encryptedSignerSecretKey,
-    encryptedRecoveryPhrase
+    encryptedRecoveryPhrase,
+    transactionSecurityLevel = 'email'
   }) {
     const user = {
       email,
@@ -18,7 +19,8 @@ class UserRepository {
       isEmailVerified: false,
       signerPublicKey,
       encryptedSignerSecretKey,
-      encryptedRecoveryPhrase
+      encryptedRecoveryPhrase,
+      transactionSecurityLevel
     };
 
     const newUser = await this.userDb.create(user);
@@ -74,6 +76,17 @@ class UserRepository {
     return await this.userDb.updatePassword({
       id: id,
       passwordHash
+    });
+  }
+
+  async updateSettings({ id, settings }) {
+    return await this.userDb.updateSettings({ id, settings });
+  }
+
+  async setTransactionSecurityLevel({ id, transactionSecurityLevel }) {
+    return await this.userDb.updateTransactionSecurityLevel({
+      id,
+      transactionSecurityLevel
     });
   }
 }

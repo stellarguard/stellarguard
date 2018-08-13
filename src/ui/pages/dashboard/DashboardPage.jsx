@@ -92,10 +92,10 @@ class DashboardPage extends Component {
             className={classes.contentColumn}
           >
             {this.summaryCard()}
-            {this.verifyEmailCard()}
-            {this.addTwoFactorAuthCard()}
             {this.stellarAccountsCard()}
             {this.addFirstStellarAccountCard()}
+            {this.verifyEmailCard()}
+            {this.addTwoFactorAuthCard()}
           </Grid>
         </Grid>
         <SubmitTransactionFab />

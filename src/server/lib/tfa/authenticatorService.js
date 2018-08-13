@@ -1,17 +1,18 @@
-const otp = require('./otp');
+const { authenticatorOtp } = require('../utils');
 const {
   AuthenticatorVerificationError,
   AuthenticatorNotActiveError
 } = require('errors/authenticator');
 const authenticatorRepository = require('./authenticatorRepository');
+const userRepository = require('../users/userRepository');
 
 class AuthenticatorService {
   async generateSecret(user) {
-    return await otp.generateSecret(user.email);
+    return await authenticatorOtp.generateSecret(user.email);
   }
 
   async enableAuthenticator(user, { secret, verificationCode }) {
-    if (!otp.verifyToken(verificationCode, secret)) {
+    if (!authenticatorOtp.verifyToken(verificationCode, secret)) {
       throw new AuthenticatorVerificationError();
     }
 
@@ -25,19 +26,26 @@ class AuthenticatorService {
       throw new AuthenticatorNotActiveError();
     }
 
-    if (!otp.verifyToken(verificationCode, authenticator.secret)) {
+    if (!authenticatorOtp.verifyToken(verificationCode, authenticator.secret)) {
       throw new AuthenticatorVerificationError();
+    }
+
+    if (user.transactionSecurityLevel === 'authenticator') {
+      await userRepository.setTransactionSecurityLevel({
+        id: user.id,
+        transactionSecurityLevel: user.isEmailVerified ? 'email' : 'none'
+      });
     }
 
     return await authenticatorRepository.removeAuthenticator(user);
   }
 
-  async getForUser(userId) {
-    return await authenticatorRepository.getForUser(userId);
+  async getForUser(user) {
+    return await authenticatorRepository.getForUser(user);
   }
 
   verifyForUser(user, code) {
-    return otp.verifyToken(code, user.authenticator.secret);
+    return authenticatorOtp.verifyToken(code, user.authenticator.secret);
   }
 }
 

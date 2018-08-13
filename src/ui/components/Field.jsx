@@ -13,6 +13,9 @@ const styles = theme => ({
       flexDirection: 'column'
     }
   },
+  stackedField: {
+    flexDirection: 'column'
+  },
   label: {
     fontWeight: 500,
     textAlign: 'right',
@@ -22,6 +25,10 @@ const styles = theme => ({
       textAlign: 'left'
     }
   },
+  stackedLabel: {
+    display: 'block',
+    textAlign: 'left'
+  },
   help: {},
   content: {
     display: 'inline-block',
@@ -30,6 +37,10 @@ const styles = theme => ({
       display: 'block',
       marginLeft: 0
     }
+  },
+  stackedContent: {
+    display: 'block',
+    marginLeft: 0
   }
 });
 
@@ -37,14 +48,26 @@ const styles = theme => ({
 @observer
 class Field extends Component {
   render() {
-    const { classes, label, children, help, labelClass } = this.props;
+    const { classes, label, children, help, labelClass, stacked } = this.props;
     return (
-      <Typography component="div" className={classes.field} gutterBottom>
-        <label className={cx(classes.label, labelClass)}>
+      <Typography
+        component="div"
+        className={cx(classes.field, { [classes.stackedField]: stacked })}
+        gutterBottom
+      >
+        <label
+          className={cx(classes.label, labelClass, {
+            [classes.stackedLabel]: stacked
+          })}
+        >
           {label}
           {help && <FormHelp>{help}</FormHelp>}
         </label>
-        <div className={classes.content}>{children}</div>
+        <div
+          className={cx(classes.content, { [classes.stackedContent]: stacked })}
+        >
+          {children}
+        </div>
       </Typography>
     );
   }
