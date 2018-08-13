@@ -45,6 +45,10 @@ class OnboardingAuthenticatorPage extends Component {
     this.unsubscribe = this.props.rootStore.tfaStore.listenForAuthenticatorAdded(
       this.next
     );
+
+    if (this.props.rootStore.currentUser.hasAuthenticator) {
+      this.next();
+    }
   }
 
   componentWillUnmount() {

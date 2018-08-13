@@ -4,22 +4,17 @@ const passwords = require('./passwords');
 
 const stellar = require('../stellar');
 const { emailService } = require('../email');
-const { authenticatorService } = require('../tfa');
-const userRepository = require('./userRepository');
 
+const userRepository = require('./userRepository');
 const userValidator = require('./userValidator');
 const forgotPasswordValidator = require('./forgotPasswordValidator');
 const resetPasswordValidator = require('./resetPasswordValidator');
+const transactionSecurityLevelValidator = require('./transactionSecurityLevelValidator');
+
 const {
   NoUserForSignerPublicKeyError,
-  EmailCodeRequiredError,
   InvalidEmailVerificationCodeError
 } = require('errors/user');
-const {
-  AuthenticatorCodeRequiredError,
-  AuthenticatorVerificationError,
-  AuthenticatorNotActiveError
-} = require('errors/authenticator');
 
 class UserService {
   async createUser({ email, password, recaptchaToken, ipAddress }) {
@@ -138,38 +133,11 @@ class UserService {
   }
 
   async setTransactionSecurityLevel(user, { transactionSecurityLevel, code }) {
-    const validTypes = ['authenticator', 'email', 'none'];
-    if (!validTypes.includes(transactionSecurityLevel)) {
-      throw new Error(
-        `Invalid transaction security level: ${transactionSecurityLevel}`
-      );
-    }
-
-    const currentTransactionSecurityLevel = user.transactionSecurityLevel;
-    if (currentTransactionSecurityLevel === 'authenticator') {
-      if (!code) {
-        throw new AuthenticatorCodeRequiredError();
-      }
-      user.authenticator = await authenticatorService.getForUser(user);
-      if (!user.authenticator) {
-        throw new AuthenticatorNotActiveError();
-      }
-      if (!authenticatorService.verifyForUser(user, code)) {
-        throw new AuthenticatorVerificationError();
-      }
-    } else if (currentTransactionSecurityLevel === 'email') {
-      if (!code) {
-        emailService.sendChangeTransactionSecurityLevelEmail({
-          user,
-          currentTransactionSecurityLevel,
-          transactionSecurityLevel
-        });
-        throw new EmailCodeRequiredError();
-      }
-      if (!user.verifyEmailCode(code)) {
-        throw new InvalidEmailVerificationCodeError();
-      }
-    }
+    await transactionSecurityLevelValidator.validate({
+      user,
+      transactionSecurityLevel,
+      code
+    });
 
     return await userRepository.setTransactionSecurityLevel({
       id: user.id,

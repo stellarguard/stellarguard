@@ -1,9 +1,25 @@
 const express = require('express');
 const router = express.Router();
 
-const { users } = require('../lib');
+const {
+  users,
+  accounts: { accountsService },
+  tfa: { authenticatorService }
+} = require('../lib');
 const session = require('../session');
 const Controller = require('./Controller');
+
+async function getFullUser(user) {
+  const requests = [
+    user.authenticator || authenticatorService.getForUser(user),
+    user.accounts || accountsService.getForUser(user)
+  ];
+
+  const [authenticator, accounts] = await Promise.all(requests);
+  user.authenticator = authenticator;
+  user.accounts = accounts;
+  return user;
+}
 
 class UserController extends Controller {
   async createUser(req, res, next) {
@@ -60,7 +76,8 @@ class UserController extends Controller {
 
   async setTransactionSecurityLevel(req, res) {
     const { transactionSecurityLevel, code } = req.body;
-    await users.userService.setTransactionSecurityLevel(req.user, {
+    const user = await getFullUser(req.user);
+    await users.userService.setTransactionSecurityLevel(user, {
       transactionSecurityLevel,
       code
     });

@@ -40,6 +40,8 @@ class TransactionSecurityLevelForm extends React.Component {
               id="transactionSecurityLevel"
               name="transactionSecurityLevel"
               value={rootStore.currentUser.transactionSecurityLevel}
+              mediumDisabled={!rootStore.currentUser.isEmailVerified}
+              highDisabled={!rootStore.currentUser.hasAuthenticator}
               onChange={event => {
                 const currentValue = values.transactionSecurityLevel;
                 const newValue = event.target.value;
