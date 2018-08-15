@@ -134,7 +134,6 @@ class WalletCard extends Component {
       className,
       to,
       tutorial,
-      wallet,
       exchange
     } = this.props;
     const { hovered } = this.state;
@@ -142,14 +141,14 @@ class WalletCard extends Component {
       <a
         href={to}
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         className={classes.link}
         onMouseEnter={() => this.setState({ hovered: true })}
         onMouseLeave={() => this.setState({ hovered: false })}
       >
         <Card className={cx({ [classes.hovered]: hovered }, classes.card)}>
           {exchange && <ExchangeRibbon />}
-          {wallet && <WalletRibbon />}
+
           <CardContent className={classes.content}>
             <div className={cx(classes.innerContent, className)}>
               <Typography className={classes.name} gutterBottom>

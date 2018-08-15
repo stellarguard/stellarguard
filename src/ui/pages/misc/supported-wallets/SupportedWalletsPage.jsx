@@ -94,7 +94,7 @@ class SupportedWalletsPage extends Component {
               that support this method than those listed here.
             </Typography>
           </Grid>
-          {this.renderWallets(SupportedWalletsPage.PartiallySupportedWallets)}}
+          {this.renderWallets(SupportedWalletsPage.PartiallySupportedWallets)}
         </Grid>
         <Grid item xs={12} className={classes.walletDevs}>
           <Typography variant="subheading" gutterBottom>
