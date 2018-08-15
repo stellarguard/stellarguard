@@ -134,7 +134,8 @@ class WalletCard extends Component {
       className,
       to,
       tutorial,
-      exchange
+      exchange,
+      wallet
     } = this.props;
     const { hovered } = this.state;
     return (
@@ -148,6 +149,7 @@ class WalletCard extends Component {
       >
         <Card className={cx({ [classes.hovered]: hovered }, classes.card)}>
           {exchange && <ExchangeRibbon />}
+          {wallet && <WalletRibbon />}
 
           <CardContent className={classes.content}>
             <div className={cx(classes.innerContent, className)}>
@@ -202,6 +204,7 @@ class MyStellarToolsCard extends Component {
   render() {
     return (
       <WalletCard
+        wallet
         title="MyStellar.Tools"
         to={this.to}
         name={this.name}
