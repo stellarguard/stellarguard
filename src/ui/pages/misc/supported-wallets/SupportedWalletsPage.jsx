@@ -17,7 +17,8 @@ import {
   StellarAccountViewerCard,
   InterstellarExchangeCard,
   RocketWalletCard,
-  StellarAuthenticatorCard
+  StellarAuthenticatorCard,
+  NucleoWallet
 } from './Wallets';
 
 const styles = theme => ({
@@ -52,7 +53,8 @@ class SupportedWalletsPage extends Component {
     StargazerCard,
     MyStellarToolsCard,
     RocketWalletCard,
-    StellarAuthenticatorCard
+    StellarAuthenticatorCard,
+    NucleoWallet
   ];
 
   static PartiallySupportedWallets = [

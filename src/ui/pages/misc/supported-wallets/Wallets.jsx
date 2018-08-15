@@ -141,7 +141,7 @@ class WalletCard extends Component {
       <a
         href={to}
         target="_blank"
-        rel="noopener noreferrer"
+        rel="noopener"
         className={classes.link}
         onMouseEnter={() => this.setState({ hovered: true })}
         onMouseLeave={() => this.setState({ hovered: false })}
@@ -619,6 +619,45 @@ class StellarAuthenticatorCard extends Component {
   }
 }
 
+@withStyles(styles)
+class NucleoWallet extends Component {
+  get title() {
+    return 'Nucleo.fi';
+  }
+
+  get to() {
+    return 'https://nucleo.fi/';
+  }
+
+  get name() {
+    return <span>Nucelo.fi</span>;
+  }
+
+  get description() {
+    return (
+      <span>
+        Social banking on the Stellar network. Nucleo.fi provides social
+        identity on the Stellar Network. It is a social trading web app coupled
+        with peer-to-peer payments.
+      </span>
+    );
+  }
+
+  render() {
+    return (
+      <WalletCard
+        wallet
+        exchange
+        title={this.title}
+        to={this.to}
+        logo={this.logo}
+        name={this.name}
+        description={this.description}
+      />
+    );
+  }
+}
+
 export {
   MyStellarToolsCard,
   StellarAccountViewerCard,
@@ -629,5 +668,6 @@ export {
   PegasusWalletCard,
   InterstellarExchangeCard,
   RocketWalletCard,
-  StellarAuthenticatorCard
+  StellarAuthenticatorCard,
+  NucleoWallet
 };
