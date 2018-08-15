@@ -34,6 +34,9 @@ const ribbonStyles = theme => ({
     right: -40,
     transform: 'rotate(45deg)',
     backgroundColor: green[500]
+  },
+  myStellar: {
+    color: '#2196f3'
   }
 });
 
@@ -131,8 +134,8 @@ class WalletCard extends Component {
       className,
       to,
       tutorial,
-      wallet,
-      exchange
+      exchange,
+      wallet
     } = this.props;
     const { hovered } = this.state;
     return (
@@ -147,6 +150,7 @@ class WalletCard extends Component {
         <Card className={cx({ [classes.hovered]: hovered }, classes.card)}>
           {exchange && <ExchangeRibbon />}
           {wallet && <WalletRibbon />}
+
           <CardContent className={classes.content}>
             <div className={cx(classes.innerContent, className)}>
               <Typography className={classes.name} gutterBottom>
@@ -200,6 +204,7 @@ class MyStellarToolsCard extends Component {
   render() {
     return (
       <WalletCard
+        wallet
         title="MyStellar.Tools"
         to={this.to}
         name={this.name}
@@ -574,6 +579,88 @@ class RocketWalletCard extends Component {
   }
 }
 
+import stellarAuthenticatorLogo from './stellar_authenticator_logo.png';
+
+@withStyles(styles)
+class StellarAuthenticatorCard extends Component {
+  get title() {
+    return 'Stellar Authenticator';
+  }
+
+  get to() {
+    return 'https://stellar-authenticator.org/';
+  }
+
+  get name() {
+    return <span>Stellar Authenticator</span>;
+  }
+
+  get logo() {
+    return stellarAuthenticatorLogo;
+  }
+
+  get description() {
+    return (
+      <span>
+        Stellar Authenticator is a tool for creating accounts and validating
+        transactions on the Stellar blockchain.
+      </span>
+    );
+  }
+
+  render() {
+    return (
+      <WalletCard
+        wallet
+        title={this.title}
+        to={this.to}
+        logo={this.logo}
+        name={this.name}
+        description={this.description}
+      />
+    );
+  }
+}
+
+@withStyles(styles)
+class NucleoWallet extends Component {
+  get title() {
+    return 'Nucleo.fi';
+  }
+
+  get to() {
+    return 'https://nucleo.fi/';
+  }
+
+  get name() {
+    return <span>Nucelo.fi</span>;
+  }
+
+  get description() {
+    return (
+      <span>
+        Social banking on the Stellar network. Nucleo.fi provides social
+        identity on the Stellar Network. It is a social trading web app coupled
+        with peer-to-peer payments.
+      </span>
+    );
+  }
+
+  render() {
+    return (
+      <WalletCard
+        wallet
+        exchange
+        title={this.title}
+        to={this.to}
+        logo={this.logo}
+        name={this.name}
+        description={this.description}
+      />
+    );
+  }
+}
+
 export {
   MyStellarToolsCard,
   StellarAccountViewerCard,
@@ -583,5 +670,7 @@ export {
   StellarSignerCard,
   PegasusWalletCard,
   InterstellarExchangeCard,
-  RocketWalletCard
+  RocketWalletCard,
+  StellarAuthenticatorCard,
+  NucleoWallet
 };
