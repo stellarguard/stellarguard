@@ -16,7 +16,8 @@ import {
   StellarportCard,
   StellarAccountViewerCard,
   InterstellarExchangeCard,
-  RocketWalletCard
+  RocketWalletCard,
+  StellarAuthenticatorCard
 } from './Wallets';
 
 const styles = theme => ({
@@ -42,7 +43,24 @@ class WalletGridItem extends Component {
 @withStyles(styles)
 @withRouter
 @observer
-class SubmitTransactionPage extends Component {
+class SupportedWalletsPage extends Component {
+  state = {};
+
+  static FullySupportedWallets = [
+    StellarportCard,
+    InterstellarExchangeCard,
+    StargazerCard,
+    MyStellarToolsCard,
+    RocketWalletCard,
+    StellarAuthenticatorCard
+  ];
+
+  static PartiallySupportedWallets = [
+    StellarAccountViewerCard,
+    StellarLaboratoryCard,
+    StellarSignerCard
+  ];
+
   render() {
     const { classes } = this.props;
 
@@ -65,24 +83,7 @@ class SubmitTransactionPage extends Component {
               StellarGuard.
             </Typography>
           </Grid>
-          <WalletGridItem>
-            <StellarportCard />
-          </WalletGridItem>
-          <WalletGridItem>
-            <InterstellarExchangeCard />
-          </WalletGridItem>
-          <WalletGridItem>
-            <StargazerCard />
-          </WalletGridItem>
-          <WalletGridItem>
-            <PegasusWalletCard />
-          </WalletGridItem>
-          <WalletGridItem>
-            <RocketWalletCard />
-          </WalletGridItem>
-          <WalletGridItem>
-            <MyStellarToolsCard />
-          </WalletGridItem>
+          {this.renderWallets(SupportedWalletsPage.FullySupportedWallets)}
           <Grid item xs={12} className={classes.partialSupport}>
             <Typography variant="title" gutterBottom>
               Partially Supported Wallets
@@ -93,15 +94,7 @@ class SubmitTransactionPage extends Component {
               that support this method than those listed here.
             </Typography>
           </Grid>
-          <WalletGridItem>
-            <StellarAccountViewerCard />
-          </WalletGridItem>
-          <WalletGridItem>
-            <StellarLaboratoryCard />
-          </WalletGridItem>
-          <WalletGridItem>
-            <StellarSignerCard />
-          </WalletGridItem>
+          {this.renderWallets(SupportedWalletsPage.PartiallySupportedWallets)}}
         </Grid>
         <Grid item xs={12} className={classes.walletDevs}>
           <Typography variant="subheading" gutterBottom>
@@ -113,6 +106,14 @@ class SubmitTransactionPage extends Component {
       </Page>
     );
   }
+
+  renderWallets(wallets) {
+    return wallets.map((Wallet, i) => (
+      <WalletGridItem key={i}>
+        <Wallet />
+      </WalletGridItem>
+    ));
+  }
 }
 
-export default SubmitTransactionPage;
+export default SupportedWalletsPage;

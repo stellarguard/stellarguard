@@ -577,6 +577,49 @@ class RocketWalletCard extends Component {
   }
 }
 
+import stellarAuthenticatorLogo from './stellar_authenticator_logo.png';
+
+@withStyles(styles)
+class StellarAuthenticatorCard extends Component {
+  get title() {
+    return 'Stellar Authenticator';
+  }
+
+  get to() {
+    return 'https://stellar-authenticator.org/';
+  }
+
+  get name() {
+    return <span>Stellar Authenticator</span>;
+  }
+
+  get logo() {
+    return stellarAuthenticatorLogo;
+  }
+
+  get description() {
+    return (
+      <span>
+        Stellar Authenticator is a tool for creating accounts and validating
+        transactions on the Stellar blockchain.
+      </span>
+    );
+  }
+
+  render() {
+    return (
+      <WalletCard
+        wallet
+        title={this.title}
+        to={this.to}
+        logo={this.logo}
+        name={this.name}
+        description={this.description}
+      />
+    );
+  }
+}
+
 export {
   MyStellarToolsCard,
   StellarAccountViewerCard,
@@ -586,5 +629,6 @@ export {
   StellarSignerCard,
   PegasusWalletCard,
   InterstellarExchangeCard,
-  RocketWalletCard
+  RocketWalletCard,
+  StellarAuthenticatorCard
 };
