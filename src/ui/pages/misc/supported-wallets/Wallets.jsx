@@ -34,6 +34,9 @@ const ribbonStyles = theme => ({
     right: -40,
     transform: 'rotate(45deg)',
     backgroundColor: green[500]
+  },
+  myStellar: {
+    color: '#2196f3'
   }
 });
 

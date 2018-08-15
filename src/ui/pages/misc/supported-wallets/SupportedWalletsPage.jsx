@@ -80,6 +80,9 @@ class SubmitTransactionPage extends Component {
           <WalletGridItem>
             <RocketWalletCard />
           </WalletGridItem>
+          <WalletGridItem>
+            <MyStellarToolsCard />
+          </WalletGridItem>
           <Grid item xs={12} className={classes.partialSupport}>
             <Typography variant="title" gutterBottom>
               Partially Supported Wallets
