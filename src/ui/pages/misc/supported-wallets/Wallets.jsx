@@ -622,6 +622,8 @@ class StellarAuthenticatorCard extends Component {
   }
 }
 
+import nucleoLogo from './nucleo_logo.png';
+
 @withStyles(styles)
 class NucleoWallet extends Component {
   get title() {
@@ -633,7 +635,11 @@ class NucleoWallet extends Component {
   }
 
   get name() {
-    return <span>Nucelo.fi</span>;
+    return <span>Nucleo.fi</span>;
+  }
+
+  get logo() {
+    return nucleoLogo;
   }
 
   get description() {
