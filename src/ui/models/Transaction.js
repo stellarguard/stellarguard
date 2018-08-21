@@ -75,7 +75,7 @@ class Transaction {
   get resultJson() {
     let obj = this.result;
     if (!obj) {
-      return;
+      return this.xdr;
     }
 
     if (typeof obj === 'string') {
