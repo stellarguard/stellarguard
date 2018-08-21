@@ -227,30 +227,25 @@ class TransactionCard extends Component {
               </Button>
             </CardActions>
           )}
-          {transaction.isSuccessful ||
-            (transaction.isError && (
-              <React.Fragment>
-                <CardActions>
-                  <Button color="primary" onClick={this.toggleShowResult}>
-                    Show Result
-                  </Button>
-                </CardActions>
-                <Collapse
-                  in={this.state.showResult}
-                  timeout="auto"
-                  unmountOnExit
-                >
-                  <CardContent>
-                    <Typography variant="title">Stellar Result</Typography>
-                    <pre
-                      style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}
-                    >
-                      <code>{transaction.resultJson}</code>
-                    </pre>
-                  </CardContent>
-                </Collapse>
-              </React.Fragment>
-            ))}
+          {(transaction.isSuccessful || transaction.isError) && (
+            <React.Fragment>
+              <CardActions>
+                <Button color="primary" onClick={this.toggleShowResult}>
+                  Show Result
+                </Button>
+              </CardActions>
+              <Collapse in={this.state.showResult} timeout="auto" unmountOnExit>
+                <CardContent>
+                  <Typography variant="title">Results</Typography>
+                  <pre
+                    style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}
+                  >
+                    <code>{transaction.resultJson}</code>
+                  </pre>
+                </CardContent>
+              </Collapse>
+            </React.Fragment>
+          )}
         </Card>
       </React.Fragment>
     );
