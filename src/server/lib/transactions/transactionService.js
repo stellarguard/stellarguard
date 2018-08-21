@@ -89,22 +89,21 @@ class TransactionService {
           user.signerPublicKey
         );
       } else {
-        result = await stellar.transactions.submitTransaction(
-          transaction.stellarTransaction
-        );
+        if (transaction.callback) {
+          transactionCallbackService.sendTransactionSuccessCallback({
+            transaction
+          });
+        } else {
+          result = await stellar.transactions.submitTransaction(
+            transaction.stellarTransaction
+          );
+        }
       }
 
       if (transaction.isDeactivateAccountTransaction) {
         await accountsService.deactivateAccount({
           userId: transaction.userId,
           publicKey: transaction.source
-        });
-      }
-
-      if (transaction.callback) {
-        transactionCallbackService.sendTransactionSuccessCallback({
-          transaction,
-          result
         });
       }
 

@@ -7,13 +7,22 @@ class Transaction {
   @observable status;
   @observable result;
   @observable isDeactivateAccountTransaction;
+  @observable callback;
 
-  constructor({ id, xdr, status, result, isDeactivateAccountTransaction }) {
+  constructor({
+    id,
+    xdr,
+    status,
+    result,
+    isDeactivateAccountTransaction,
+    callback
+  }) {
     this.id = id;
     this.xdr = xdr;
     this.status = status;
     this.result = result;
     this.isDeactivateAccountTransaction = isDeactivateAccountTransaction;
+    this.callback = callback;
   }
 
   @computed
@@ -66,7 +75,7 @@ class Transaction {
   get resultJson() {
     let obj = this.result;
     if (!obj) {
-      return;
+      return this.xdr;
     }
 
     if (typeof obj === 'string') {
@@ -74,6 +83,15 @@ class Transaction {
     }
 
     return JSON.stringify(obj, null, 2);
+  }
+
+  @computed
+  get callbackDomain() {
+    if (!this.callback) {
+      return;
+    }
+
+    return new URL(this.callback).hostname;
   }
 
   static fromJson(json) {

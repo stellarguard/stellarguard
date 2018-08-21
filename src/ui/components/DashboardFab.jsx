@@ -18,7 +18,7 @@ class DashboardFab extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Tooltip id="tooltip-fab" className={classes.fab} title="Home">
+      <Tooltip id="tooltip-fab" title="Home">
         <Button
           component={Link}
           to="/"
