@@ -108,7 +108,8 @@ class Transaction {
       result: this.result,
       dateCreated: this.dateCreated,
       stellarGuard: true,
-      url: urls.withHost(urls.authorizeTransaction({ transaction: this }))
+      url: urls.withHost(urls.authorizeTransaction({ transaction: this })),
+      callback: this.callback
     };
 
     const isDeactivateAccountTransaction = this.isDeactivateAccountTransaction;

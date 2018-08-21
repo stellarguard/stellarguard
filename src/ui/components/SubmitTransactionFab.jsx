@@ -18,7 +18,7 @@ class SubmitTransactionFab extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Tooltip id="tooltip-fab" className={classes.fab} title="New Transaction">
+      <Tooltip id="tooltip-fab" title="New Transaction">
         <Button
           component={Link}
           to="/transactions/new"

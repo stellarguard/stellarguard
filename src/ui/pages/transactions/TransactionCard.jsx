@@ -12,6 +12,13 @@ import {
 } from '@material-ui/core';
 import grey from '@material-ui/core/colors/grey';
 import green from '@material-ui/core/colors/green';
+import {
+  MoreHoriz as PendingIcon,
+  Done as SuccessIcon,
+  Cancel as DenyIcon,
+  ErrorOutline as ErrorIcon
+} from '@material-ui/icons';
+
 import { observer, inject } from 'mobx-react';
 import cx from 'classnames';
 
@@ -46,6 +53,9 @@ const styles = theme => ({
     width: 255,
     minWidth: '100%',
     display: 'block'
+  },
+  callbackDomain: {
+    fontWeight: 500
   }
 });
 
@@ -59,7 +69,11 @@ class TransactionStatus extends Component {
     }
 
     if (transaction.isSuccessful) {
-      return 'Submitted to Stellar Network';
+      if (transaction.callback) {
+        return `Submitted to ${transaction.callbackDomain}`;
+      } else {
+        return 'Submitted to Stellar Network';
+      }
     }
 
     if (transaction.isDenied) {
@@ -84,13 +98,6 @@ class TransactionStatus extends Component {
     );
   }
 }
-
-import {
-  MoreHoriz as PendingIcon,
-  Done as SuccessIcon,
-  Cancel as DenyIcon,
-  ErrorOutline as ErrorIcon
-} from '@material-ui/icons';
 
 @withStyles(styles)
 @observer
@@ -171,8 +178,17 @@ class TransactionCard extends Component {
               </Fragment>
             }
           />
+          {transaction.callback && (
+            <CardContent>
+              <Typography variant="subheading" gutterBottom>
+                This transaction will be submitted to{' '}
+                <span className={classes.callbackDomain}>
+                  {transaction.callbackDomain}
+                </span>
+              </Typography>
+            </CardContent>
+          )}
           <CardContent>
-            <Typography />
             <Operations operations={transaction.operations} />
           </CardContent>
           {transaction.isPending && (
