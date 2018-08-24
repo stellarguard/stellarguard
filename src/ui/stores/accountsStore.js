@@ -3,6 +3,8 @@ import config from '../config';
 import StellarSdk from 'stellar-sdk';
 import UnknownError from '../../shared/errors/UnknownError';
 
+import { isKnownAccount } from '../knownAccounts';
+
 function server(StellarSdk) {
   if (config.isTestNetwork) {
     StellarSdk.Network.useTestNetwork();
@@ -54,6 +56,21 @@ class AccountsStore {
     } catch (e) {
       console.error(e);
       throw new UnknownError();
+    }
+  }
+
+  isKnownAccount(publicKey) {
+    return isKnownAccount(publicKey) || this.isOwnAccount(publicKey);
+  }
+
+  isOwnAccount(publicKey) {
+    if (
+      this.rootStore.currentUser &&
+      this.rootStore.currentUser.hasAccount(publicKey)
+    ) {
+      return {
+        name: 'You'
+      };
     }
   }
 }

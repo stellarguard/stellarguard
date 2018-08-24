@@ -45,8 +45,8 @@ class InterstellarExchangeListener {
         submittedFrom: transaction.submittedFrom
       });
 
-      const user = await userService.getUserByAccountPublicKey(
-        transaction.source
+      const user = await userService.getFirstUserByAccountPublicKey(
+        transaction.getSources()
       );
 
       if (!user) {
@@ -86,8 +86,8 @@ class InterstellarExchangeListener {
         return;
       }
 
-      const user = await userService.getUserByAccountPublicKey(
-        transaction.source
+      const user = await userService.getFirstUserByAccountPublicKey(
+        transaction.getSources()
       );
 
       if (!user) {

@@ -17,9 +17,11 @@ class TransactionsController extends Controller {
       ipAddress,
       callback
     });
-    const user = await users.userService.getUserByAccountPublicKey(
-      transaction.source
+
+    const user = await users.userService.getFirstUserByAccountPublicKey(
+      transaction.getSources()
     );
+
     const newTransaction = await transactions.transactionService.createTransaction(
       {
         transaction,

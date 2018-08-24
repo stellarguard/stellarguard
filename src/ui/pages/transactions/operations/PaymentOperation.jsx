@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles, Typography } from '@material-ui/core';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
 import OperationWrapper from './OperationWrapper';
 
@@ -41,6 +41,7 @@ class Field extends Component {
   }
 }
 
+@inject('rootStore')
 @observer
 @withStyles(styles)
 class PaymentOperation extends Component {
@@ -48,8 +49,13 @@ class PaymentOperation extends Component {
     const { operation } = this.props;
     return (
       <OperationWrapper type="Payment">
+        {operation.source && (
+          <Field label="From:">
+            <PublicKey publicKey={operation.source} />
+          </Field>
+        )}
         <Field label="To:">
-          <PublicKey>{operation.destination}</PublicKey>
+          <PublicKey publicKey={operation.destination} />
         </Field>
         <Field label="Amount:">
           {operation.amount} {operation.asset.code}

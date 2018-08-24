@@ -49,11 +49,20 @@ class Transaction {
     );
   }
 
-  async hasValidSignatures() {
+  hasValidSignatures(user) {
     return (
       this.isFromConstellation() ||
       this.isFromInterstellarExchange() ||
-      (await stellar.transactions.hasValidSignatures(this.stellarTransaction))
+      this.isSignedByUserAccount(user)
+    );
+  }
+
+  isSignedByUserAccount(user) {
+    return user.accounts.some(account =>
+      stellar.transactions.isSignedByAccount(
+        this.stellarTransaction,
+        account.publicKey
+      )
     );
   }
 
@@ -70,12 +79,19 @@ class Transaction {
   }
 
   /**
-   * Returns true if the transaction has source accounts inside operations that differ from the transaction source
+   * Gets all sources of the transaction as an array.
    */
-  hasVariedSourceAccounts() {
-    return this.stellarTransaction.operations.some(
-      operation => !!operation.source && operation.source !== this.source
-    );
+  getSources() {
+    const sources = new Set();
+    sources.add(this.source);
+
+    this.stellarTransaction.operations.forEach(operation => {
+      if (operation.source) {
+        sources.add(operation.source);
+      }
+    });
+
+    return Array.from(sources);
   }
 
   sign(secretKey) {

@@ -34,14 +34,14 @@ class TransactionService {
     sendNotifications = true
   }) {
     transaction.userId = user && user.id;
-    await transactionsValidator.validate(transaction);
+    await transactionsValidator.validate({ transaction, user });
     const newTransaction = await transactionsRepository.createTransaction(
       transaction,
       callback
     );
 
-    user.authenticator = await authenticatorService.getForUser(user);
     if (sendNotifications) {
+      user.authenticator = await authenticatorService.getForUser(user);
       await emailService.sendTransactionAuthorizationEmail({
         user,
         transaction: newTransaction
@@ -147,7 +147,6 @@ class TransactionService {
   }
 
   async verify({ transaction, user, code }) {
-    user.authenticator = await authenticatorService.getForUser(user);
     const type = user.transactionSecurityLevel;
     switch (type) {
       case 'none':
@@ -155,6 +154,7 @@ class TransactionService {
       case 'email':
         return transaction.verifyEmailAuthorizationCode(code);
       case 'authenticator':
+        user.authenticator = await authenticatorService.getForUser(user);
         return authenticatorService.verifyForUser(user, code);
     }
   }

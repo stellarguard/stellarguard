@@ -8,7 +8,7 @@ const {
   InvalidCallbackError
 } = require('errors/transaction');
 
-async function validate(transaction) {
+async function validate({ transaction, user }) {
   const errors = await sharedValidator.validate({ xdr: transaction.xdr });
   if (Object.keys(errors).length) {
     throw errors;
@@ -22,11 +22,7 @@ async function validate(transaction) {
     validateCallback(transaction.callback);
   }
 
-  if (transaction.hasVariedSourceAccounts()) {
-    throw new VariedSourceAccountsError();
-  }
-
-  if (!(await transaction.hasValidSignatures())) {
+  if (!transaction.hasValidSignatures(user)) {
     throw new InvalidSignaturesError();
   }
 }

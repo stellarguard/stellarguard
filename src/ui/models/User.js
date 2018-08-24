@@ -54,6 +54,13 @@ export default class User {
     return this.transactions.filter(transaction => transaction.isPending);
   }
 
+  hasAccount(publicKey) {
+    return (
+      this.hasAccounts &&
+      this.accounts.some(account => account.publicKey === publicKey)
+    );
+  }
+
   static fromJson(json) {
     if (!json) {
       return;

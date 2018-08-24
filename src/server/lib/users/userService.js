@@ -4,6 +4,7 @@ const passwords = require('./passwords');
 
 const stellar = require('../stellar');
 const { emailService } = require('../email');
+const { accountsService } = require('../accounts');
 
 const userRepository = require('./userRepository');
 const userValidator = require('./userValidator');
@@ -69,6 +70,21 @@ class UserService {
    */
   async getUserByAccountPublicKey(publicKey) {
     return await userRepository.getUserByAccountPublicKey(publicKey);
+  }
+
+  /**
+   * Returns the first user in the list of public keys that has an account.
+   *
+   * @param {string[]} publicKeys
+   */
+  async getFirstUserByAccountPublicKey(publicKeys) {
+    for (const publicKey of publicKeys) {
+      const user = await this.getUserByAccountPublicKey(publicKey);
+      if (user) {
+        user.accounts = await accountsService.getForUser(user);
+        return user;
+      }
+    }
   }
 
   async getUserBySignerPublicKey(publicKey) {

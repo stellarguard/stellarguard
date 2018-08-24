@@ -37,9 +37,13 @@ class ConstellationListener {
         return;
       }
 
-      const user = await userService.getUserByAccountPublicKey(
-        transaction.source
+      const user = await userService.getFirstUserByAccountPublicKey(
+        transaction.getSources()
       );
+
+      if (!user) {
+        return;
+      }
 
       await transactionService.createTransaction({ transaction, user });
     } catch (e) {

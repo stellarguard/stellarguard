@@ -22,3 +22,4 @@ export { AuthenticatorCodeDialog } from './AuthenticatorCodeDialog';
 export { AuthenticatorCodeForm } from './AuthenticatorCodeForm';
 export { EmailCodeDialog } from './EmailCodeDialog';
 export { EmailCodeForm } from './EmailCodeForm';
+export { StellarExpertLink } from './StellarExpertLink';

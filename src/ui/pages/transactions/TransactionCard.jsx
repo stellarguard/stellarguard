@@ -167,10 +167,7 @@ class TransactionCard extends Component {
             subheader={
               <Fragment>
                 <div>
-                  Source:{' '}
-                  <PublicKey className={classes.publicKey}>
-                    {transaction.source}
-                  </PublicKey>
+                  Source: <PublicKey publicKey={transaction.source} />
                 </div>
                 {transaction.memoText && (
                   <div>Memo: {transaction.memoText}</div>

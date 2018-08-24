@@ -13,35 +13,16 @@ async function submitTransaction(stellarTransaction) {
   return await server.submitTransaction(stellarTransaction);
 }
 
-// tests
-// no signatures - fail
-// one signature, one signer, valid signature - pass
-// one signature, one signer, invalid signature - fail
-// two signatures, three signers, all valid - pass
-// two signatures, three signers, one invalid - fail
-async function hasValidSignatures(stellarTransaction) {
-  if (
-    !stellarTransaction.signatures ||
-    stellarTransaction.signatures.length === 0
-  ) {
-    return false;
-  }
-
-  const account = await server.loadAccount(stellarTransaction.source);
-  // every signature on the transaction must match to one of the signers on the account
-  return stellarTransaction.signatures.every(signature => {
-    return account.signers.some(requiredSigner => {
-      const signer = StellarSdk.Keypair.fromPublicKey(
-        requiredSigner.public_key
-      );
-      return signer.verify(stellarTransaction.hash(), signature.signature());
-    });
-  });
+function isSignedByAccount(transaction, publicKey) {
+  const signer = StellarSdk.Keypair.fromPublicKey(publicKey);
+  return transaction.signatures.some(signature =>
+    signer.verify(transaction.hash(), signature.signature())
+  );
 }
 
 module.exports = {
   fromXdr,
   toXdr,
   submitTransaction,
-  hasValidSignatures
+  isSignedByAccount
 };
