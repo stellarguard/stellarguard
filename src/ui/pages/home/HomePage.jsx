@@ -110,7 +110,8 @@ class SecurityInfoCard extends React.Component {
             rel="noopener noreferrer"
           >
             the BlackWallet hack
-          </a>, accounts protected by it would have been completely safe.
+          </a>
+          , accounts protected by it would have been completely safe.
         </InfoCardParagraph>
       </HomeInfoCard>
     );
@@ -224,53 +225,13 @@ class TwoFactorAuthInfoCard extends React.Component {
 @withStyles(styles)
 @observer
 class HomePage extends React.Component {
-  state = { showToast: false };
-  componentDidMount() {
-    if (config.isTestNetwork) {
-      setTimeout(() => {
-        this.setState({ showToast: true });
-        setTimeout(() => {
-          this.setState({ showToast: false });
-        }, 10000);
-      }, 2500);
-    }
-  }
   render() {
     const { classes } = this.props;
-    const { showToast } = this.state;
     return (
       <div className={classes.root}>
         <Helmet>
           <title>StellarGuard</title>
         </Helmet>
-        <Snackbar
-          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-          open={showToast}
-          message={
-            <div>
-              This is the test version of StellarGuard. All transactions will be
-              submitted to the Stellar Testnet. To create a Stellar account on
-              the Testnet,{' '}
-              <a
-                className={classes.secondaryLink}
-                href="https://www.stellar.org/laboratory/#account-creator?network=test"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                go here.
-              </a>
-            </div>
-          }
-          action={
-            <Button
-              color="secondary"
-              size="small"
-              onClick={() => this.setState({ showToast: false })}
-            >
-              OK
-            </Button>
-          }
-        />
         <Hero />
         <div className={classes.gridContainer}>
           <Grid container justify="space-around" spacing={16}>

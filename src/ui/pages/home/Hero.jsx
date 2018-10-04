@@ -128,18 +128,6 @@ class Hero extends Component {
                   Sign in
                 </Button>
               </Typography>
-              {config.isPublicNetwork && (
-                <Typography color="inherit" variant="subheading">
-                  Want to try it out on the Stellar Testnet first?
-                  <Button
-                    component="a"
-                    color="secondary"
-                    href="https://test.stellarguard.me"
-                  >
-                    Go here
-                  </Button>
-                </Typography>
-              )}
             </div>
           </div>
         </div>
