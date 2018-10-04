@@ -39,7 +39,7 @@ app.get('/robots.txt', (req, res) => {
 const getWellKnownEnvFolder = () => {
   if (config.isDevMode) {
     return 'dev';
-  } else if (config.testNetwork) {
+  } else if (config.isTestNetwork) {
     return 'test';
   } else {
     return 'prod';
