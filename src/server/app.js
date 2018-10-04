@@ -50,7 +50,11 @@ app.use(
   '/.well-known',
   cors(),
   express.static(path.join(UI_PUBLIC, '.well-known', getWellKnownEnvFolder()), {
-    maxAge: '1d'
+    maxAge: '1d',
+    fallthrough: false,
+    setHeaders: (res, path, stat) => {
+      res.setHeader('content-type', 'text/plain; charset=utf-8');
+    }
   })
 );
 
