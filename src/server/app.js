@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const csp = require('express-csp-header');
 const ms = require('ms');
+const cors = require('cors');
 
 const version = require('../../package.json').version;
 const session = require('./session');
@@ -34,6 +35,24 @@ if (!config.isDevMode) {
 app.get('/robots.txt', (req, res) => {
   res.sendFile(UI_PUBLIC + '/robots.txt');
 });
+
+const getWellKnownEnvFolder = () => {
+  if (config.isDevMode) {
+    return 'dev';
+  } else if (config.testNetwork) {
+    return 'test';
+  } else {
+    return 'prod';
+  }
+};
+
+app.use(
+  '/.well-known',
+  cors(),
+  express.static(path.join(UI_PUBLIC, '.well-known', getWellKnownEnvFolder()), {
+    maxAge: '1d'
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
