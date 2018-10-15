@@ -6,7 +6,7 @@ const POLLING_INTERVAL_MS = ms('10s');
 
 class InterstellarExchangeService {
   constructor() {
-    this.interstellarExchangeApi = config.useStellarPublicNetwork
+    this.interstellarExchangeApi = config.isPublicNetwork
       ? InterstellarExchangeApi.publicnet()
       : InterstellarExchangeApi.testnet();
   }

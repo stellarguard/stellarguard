@@ -15,10 +15,7 @@ class ConstellationService {
       return true;
     }
 
-    if (
-      constellationTransaction.isPublicNetwork &&
-      config.useStellarPublicNetwork
-    ) {
+    if (constellationTransaction.isPublicNetwork && config.isPublicNetwork) {
       return true;
     }
 

@@ -18,12 +18,12 @@ class Config {
     return pg;
   }
 
-  get useStellarPublicNetwork() {
+  get isPublicNetwork() {
     return env.useStellarPublicNetwork || false;
   }
 
-  get useStellarTestNetwork() {
-    return !this.useStellarPublicNetwork;
+  get isTestNetwork() {
+    return !this.isPublicNetwork;
   }
 
   get isDevMode() {

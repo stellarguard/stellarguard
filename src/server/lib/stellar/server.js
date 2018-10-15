@@ -2,7 +2,7 @@ const StellarSdk = require('stellar-sdk');
 const config = require('../../config');
 
 function server() {
-  if (isTestNetwork()) {
+  if (config.isTestNetwork) {
     StellarSdk.Network.useTestNetwork();
     return new StellarSdk.Server('https://horizon-testnet.stellar.org');
   } else {
@@ -11,11 +11,6 @@ function server() {
   }
 }
 
-function isTestNetwork() {
-  return !config.useStellarPublicNetwork;
-}
-
 module.exports = {
-  server,
-  isTestNetwork
+  server
 };
