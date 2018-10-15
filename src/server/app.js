@@ -54,6 +54,7 @@ app.use(
     fallthrough: false,
     setHeaders: (res, path, stat) => {
       res.setHeader('content-type', 'text/plain; charset=utf-8');
+      res.setHeader('content-disposition', 'inline');
     }
   })
 );
