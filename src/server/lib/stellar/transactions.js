@@ -1,5 +1,6 @@
 const StellarSdk = require('stellar-sdk');
 const server = require('./server').server();
+const { hasAccountSignedTransaction } = require('@stellarguard/multisig-utils');
 
 function fromXdr(xdr) {
   return new StellarSdk.Transaction(xdr);
@@ -14,10 +15,7 @@ async function submitTransaction(stellarTransaction) {
 }
 
 function isSignedByAccount(transaction, publicKey) {
-  const signer = StellarSdk.Keypair.fromPublicKey(publicKey);
-  return transaction.signatures.some(signature =>
-    signer.verify(transaction.hash(), signature.signature())
-  );
+  return hasAccountSignedTransaction(publicKey, transaction);
 }
 
 module.exports = {
