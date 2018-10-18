@@ -11,6 +11,9 @@ const Controller = require('./Controller');
 class TransactionsController extends Controller {
   async createTransaction(req, res) {
     const { xdr, tx, callback } = req.body;
+    console.log('xdr', xdr);
+    console.log('tx', tx);
+    console.log('callback', callback);
     const ipAddress = req.ip;
     const transaction = new transactions.Transaction({
       xdr: tx || xdr,
