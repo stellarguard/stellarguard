@@ -10,10 +10,10 @@ const Controller = require('./Controller');
 
 class TransactionsController extends Controller {
   async createTransaction(req, res) {
-    const { xdr, callback } = req.body;
+    const { xdr, tx, callback } = req.body;
     const ipAddress = req.ip;
     const transaction = new transactions.Transaction({
-      xdr,
+      xdr: tx || xdr,
       ipAddress,
       callback
     });
