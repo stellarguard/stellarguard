@@ -19,7 +19,7 @@ class TransactionDb {
 
   async getByUserId(userId, { status }) {
     const { rows } = await this.db.pg.query(
-      'SELECT * FROM "transaction" WHERE user_id = $1 AND status = $2',
+      'SELECT * FROM "transaction" WHERE user_id = $1 AND status = $2 ORDER BY date_created ASC',
       [userId, status]
     );
 
