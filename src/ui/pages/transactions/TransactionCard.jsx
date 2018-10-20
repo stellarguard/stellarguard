@@ -172,6 +172,7 @@ class TransactionCard extends Component {
                 {transaction.memoText && (
                   <div>Memo: {transaction.memoText}</div>
                 )}
+                <div>Sequence Number: {transaction.sequenceNumber}</div>
               </Fragment>
             }
           />

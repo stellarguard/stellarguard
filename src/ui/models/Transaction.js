@@ -57,6 +57,11 @@ class Transaction {
   }
 
   @computed
+  get sequenceNumber() {
+    return this.stellarTransaction.sequence;
+  }
+
+  @computed
   get isPending() {
     return this.status === Transaction.Status.Pending;
   }
