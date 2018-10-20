@@ -2,12 +2,18 @@ import { observable, computed } from 'mobx';
 import StellarSdk from 'stellar-sdk'; // TODO -- lazy-load?
 
 class Transaction {
-  @observable id;
-  @observable xdr;
-  @observable status;
-  @observable result;
-  @observable isDeactivateAccountTransaction;
-  @observable callback;
+  @observable
+  id;
+  @observable
+  xdr;
+  @observable
+  status;
+  @observable
+  result;
+  @observable
+  isDeactivateAccountTransaction;
+  @observable
+  callback;
 
   constructor({
     id,
@@ -43,7 +49,11 @@ class Transaction {
   @computed
   get memoText() {
     const memo = this.stellarTransaction.memo;
-    return (memo && memo.type !== 'none' && memo.value) || '';
+    if (memo && memo.type !== 'none') {
+      return memo.value.toString();
+    }
+
+    return '';
   }
 
   @computed
