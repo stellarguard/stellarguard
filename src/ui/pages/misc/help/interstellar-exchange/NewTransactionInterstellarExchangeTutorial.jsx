@@ -15,7 +15,7 @@ import trustMobiImg from './trust_mobi.png';
 import multisigNotificationImg from './multisig_notification.png';
 import pendingForAccountImg from './pending_for_account.png';
 import createTrustlineApproveImg from './create_trustline_approve.png';
-import authorizeChangeTrustImg from './authorize_change_trust.png';
+import authorizeChangeTrustImg from './auth_change_trust.png';
 import buyMobiImg from './buy_mobi.png';
 import approveCreateOfferImg from './approve_create_offer.png';
 import authorizeManageOfferImg from './authorize_manage_offer.png';
