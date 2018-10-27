@@ -1,1 +1,3 @@
 MULTISIG_SERVER="https://stellarguard.me/api/transactions"
+MULTISIG_ENDPOINT="https://stellarguard.me/api/transactions"
+URI_REQUEST_SIGNING_KEY="GCVHEKSRASJBD6O2Z532LWH4N2ZLCBVDLLTLKSYCSMBLOYTNMEEGUARD"
