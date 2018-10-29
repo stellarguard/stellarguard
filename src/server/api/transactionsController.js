@@ -1,4 +1,5 @@
 const express = require('express');
+const { parseStellarUri } = require('@stellarguard/stellar-uri');
 const router = express.Router();
 
 const session = require('../session');
@@ -10,10 +11,17 @@ const Controller = require('./Controller');
 
 class TransactionsController extends Controller {
   async createTransaction(req, res) {
-    const { xdr, tx, callback } = req.body;
+    let { xdr, callback, uri } = req.body;
+    if (uri) {
+      // allow SEP7 uri as an alternative format
+      const stellarUri = parseStellarUri(uri);
+      xdr = stellarUri.xdr;
+      callback = stellarUri.callback;
+    }
+
     const ipAddress = req.ip;
     const transaction = new transactions.Transaction({
-      xdr: tx || xdr,
+      xdr: xdr,
       ipAddress,
       callback
     });
