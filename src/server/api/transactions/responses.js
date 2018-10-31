@@ -9,14 +9,15 @@ class BootstrapMultisigTransactionResponse {
   }
 
   toJSON() {
+    const transaction = this.transaction;
     return {
       _links: {
-        status: urls.withHost(urls.transactionStatusApi(this.transaction))
+        status: urls.withHost(urls.transactionStatusApi({ transaction }))
       },
       id: this.transaction.id,
       extras: {
         isStellarGuard: true,
-        url: urls.withHost(urls.authorizeTransaction({ transaction: this }))
+        url: urls.withHost(urls.authorizeTransaction({ transaction }))
       }
     };
   }
