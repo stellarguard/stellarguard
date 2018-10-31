@@ -31,6 +31,10 @@ class Urls {
     });
   }
 
+  transactionStatusApi({ transaction }) {
+    return `/api/transactions/${transaction.id}/status`;
+  }
+
   resetPassword({ code }) {
     const pathname = `/reset-password`;
     const query = {};

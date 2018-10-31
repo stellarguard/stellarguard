@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const transactions = require('./transactionsController');
+const transactions = require('./transactions/transactionsController');
 const users = require('./users');
 const session = require('./session');
 const tfa = require('./tfa');
