@@ -12,7 +12,9 @@ class BootstrapMultisigTransactionResponse {
     const transaction = this.transaction;
     return {
       _links: {
-        status: urls.withHost(urls.transactionStatusApi({ transaction }))
+        status: {
+          href: urls.withHost(urls.transactionStatusApi({ transaction }))
+        }
       },
       id: this.transaction.id,
       extras: {
