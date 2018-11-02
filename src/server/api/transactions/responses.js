@@ -37,19 +37,18 @@ class TransactionStatusResponse {
       case 2:
         return 'success';
       case 3:
-        return 'expired';
       case 4:
-        return 'denied';
       case 5:
       default:
-        return 'error';
+        return 'failed';
     }
   }
 
-  toJSON() {
+  async toJSON() {
     return {
       id: this.transaction.id,
-      status: this.status
+      status: this.status,
+      signers: await this.transaction.getSigners()
     };
   }
 }

@@ -2,6 +2,8 @@ const stellar = require('../stellar');
 const { emailOtp } = require('../utils');
 const config = require('../../config');
 const { urls } = require('../utils');
+const server = require;
+const { getSigners } = require('@stellarguard/multisig-utils');
 
 class Transaction {
   static fromXdr(xdr) {
@@ -92,6 +94,10 @@ class Transaction {
     });
 
     return Array.from(sources);
+  }
+
+  async getSigners() {
+    return await getSigners(this.stellarTransaction, stellar.server.server());
   }
 
   sign(secretKey) {

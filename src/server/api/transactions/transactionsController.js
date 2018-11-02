@@ -82,7 +82,8 @@ class TransactionsController extends Controller {
       });
     }
 
-    return res.json(new TransactionStatusResponse({ transaction }));
+    const response = new TransactionStatusResponse({ transaction });
+    return res.json(await response.toJSON());
   }
 
   async getTransactions(req, res) {
