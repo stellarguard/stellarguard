@@ -31,9 +31,23 @@ class StellarAccountsRepository {
     }
   }
 
+  async getAccountByPublicKey(publicKey) {
+    const account = await this.stellarAccountsDb.getByPublicKey(publicKey);
+    if (account) {
+      return new StellarAccount(account);
+    }
+  }
+
   async getAccountsByUserId(userId) {
     const accounts = await this.stellarAccountsDb.getByUserId(userId);
     return accounts.map(account => new StellarAccount(account));
+  }
+
+  async updateAccount(account) {
+    const updatedAccount = await this.stellarAccountsDb.update(account);
+    if (updatedAccount) {
+      return new StellarAccount(updatedAccount);
+    }
   }
 
   // async getPayments(userId) {

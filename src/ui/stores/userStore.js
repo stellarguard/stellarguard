@@ -1,5 +1,5 @@
 import { action, runInAction } from 'mobx';
-import { usersApi } from '../api';
+import { usersApi, accountsApi } from '../api';
 import { executeRecaptcha } from './recaptcha';
 import remove from 'lodash.remove';
 
@@ -32,6 +32,20 @@ export default class UserStore {
   removeAccount({ publicKey }) {
     const accounts = this.rootStore.currentUser.accounts || [];
     remove(accounts, account => account.publicKey === publicKey);
+  }
+
+  @action
+  async editAccount({ publicKey, name }) {
+    const updatedAccount = await accountsApi.updateAccount({ publicKey, name });
+    runInAction(() => {
+      const accounts = this.rootStore.currentUser.accounts || [];
+      for (let i = 0; i < accounts.length; i++) {
+        if (accounts[i].publicKey === publicKey) {
+          accounts[i] = updatedAccount;
+        }
+      }
+    });
+    return updatedAccount;
   }
 
   @action

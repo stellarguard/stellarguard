@@ -64,13 +64,13 @@ class AccountsStore {
   }
 
   isOwnAccount(publicKey) {
-    if (
-      this.rootStore.currentUser &&
-      this.rootStore.currentUser.hasAccount(publicKey)
-    ) {
-      return {
-        name: 'You'
-      };
+    if (this.rootStore.currentUser) {
+      const account = this.rootStore.currentUser.hasAccount(publicKey);
+      if (account) {
+        return {
+          name: account.name || 'You'
+        };
+      }
     }
   }
 }

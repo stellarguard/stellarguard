@@ -1,6 +1,7 @@
 const StellarAccount = require('./StellarAccount');
 const stellarAccountsRepository = require('./stellarAccountsRepository');
 const stellar = require('../stellar');
+const { NotAuthorizedError } = require('errors/common');
 
 class AccountsService {
   async getAccounts({ cursor, limit = 20 } = {}) {
@@ -15,6 +16,10 @@ class AccountsService {
     return await stellarAccountsRepository.getAccountById(id);
   }
 
+  async getAccountByPublicKey(publicKey) {
+    return await stellarAccountsRepository.getAccountByPublicKey(publicKey);
+  }
+
   async getForUser(user) {
     return await stellarAccountsRepository.getAccountsByUserId(user.id);
   }
@@ -25,6 +30,13 @@ class AccountsService {
 
   async deactivateAccount(account) {
     return await stellarAccountsRepository.deactivateAccount(account);
+  }
+
+  async updateAccount({ account, user }) {
+    if (account.userId !== user.id) {
+      throw new NotAuthorizedError();
+    }
+    return await stellarAccountsRepository.updateAccount(account);
   }
 }
 

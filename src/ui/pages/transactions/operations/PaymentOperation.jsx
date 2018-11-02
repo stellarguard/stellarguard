@@ -51,11 +51,11 @@ class PaymentOperation extends Component {
       <OperationWrapper type="Payment">
         {operation.source && (
           <Field label="From:">
-            <PublicKey publicKey={operation.source} />
+            <PublicKey publicKey={operation.source} linkToStellarExpert />
           </Field>
         )}
         <Field label="To:">
-          <PublicKey publicKey={operation.destination} />
+          <PublicKey publicKey={operation.destination} linkToStellarExpert />
         </Field>
         <Field label="Amount:">
           {operation.amount} {operation.asset.code}

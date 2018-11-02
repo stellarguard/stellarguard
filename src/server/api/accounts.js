@@ -96,6 +96,27 @@ class AccountsController extends Controller {
       stellarGuardSignerPublicKey: user.signerPublicKey
     });
   }
+
+  async editAccount(req, res) {
+    const { publicKey } = req.params;
+    const { name } = req.body;
+    const account = await accounts.accountsService.getAccountByPublicKey(
+      publicKey
+    );
+
+    if (!account) {
+      throw new NoUserForAccountPublicKeyError();
+    }
+
+    account.name = name;
+
+    const updatedAccount = await accounts.accountsService.updateAccount({
+      account,
+      user: req.user
+    });
+
+    return res.json(updatedAccount);
+  }
 }
 
 const accountsController = new AccountsController();
@@ -105,5 +126,8 @@ router.options('/:publicKey', cors());
 router.post('/:publicKey', cors(), accountsController.createAccount);
 router.get('/:publicKey', cors(), accountsController.getAccount);
 router.get('/:publicKey/multisig', cors(), accountsController.getMultisigSetup);
+
+// private api
+router.put('/:publicKey', accountsController.editAccount);
 
 module.exports = router;

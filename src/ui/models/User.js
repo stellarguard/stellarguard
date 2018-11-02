@@ -5,15 +5,24 @@ import Transaction from './Transaction';
 import UserSettings from './UserSettings';
 
 export default class User {
-  @observable email;
-  @observable isEmailVerified;
-  @observable signerPublicKey;
-  @observable authenticator;
-  @observable accounts;
-  @observable transactionSecurityLevel;
-  @observable transactions;
-  @observable externalId;
-  @observable settings;
+  @observable
+  email;
+  @observable
+  isEmailVerified;
+  @observable
+  signerPublicKey;
+  @observable
+  authenticator;
+  @observable
+  accounts;
+  @observable
+  transactionSecurityLevel;
+  @observable
+  transactions;
+  @observable
+  externalId;
+  @observable
+  settings;
 
   constructor({
     id,
@@ -57,7 +66,7 @@ export default class User {
   hasAccount(publicKey) {
     return (
       this.hasAccounts &&
-      this.accounts.some(account => account.publicKey === publicKey)
+      this.accounts.find(account => account.publicKey === publicKey)
     );
   }
 

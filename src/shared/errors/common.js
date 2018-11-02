@@ -11,4 +11,11 @@ class RequiredParamError extends AppError {
   }
 }
 
-module.exports = { RequiredParamError };
+class NotAuthorizedError extends AppError {
+  constructor() {
+    const message = 'You are not authorized to do that.';
+    super({ message, statusCode: 403 });
+  }
+}
+
+module.exports = { NotAuthorizedError, RequiredParamError };

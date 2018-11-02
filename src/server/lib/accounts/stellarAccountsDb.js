@@ -54,6 +54,18 @@ class StellarAccountDb {
     }
   }
 
+  async update({ id, name }) {
+    const { rows } = await this.db.pg.query(
+      `UPDATE stellar_account
+       SET name = $2
+       WHERE id = $1
+       RETURNING *`,
+      [id, name]
+    );
+
+    return rows[0];
+  }
+
   async deactivate({ userId, publicKey }) {
     const { count } = await this.db.pg.query(
       `
