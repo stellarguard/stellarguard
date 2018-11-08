@@ -2,7 +2,8 @@ const stellar = require('../stellar');
 const { emailOtp } = require('../utils');
 const config = require('../../config');
 const { urls } = require('../utils');
-const server = require;
+
+const { TransactionStellarUri } = require('@stellarguard/stellar-uri');
 const { getSigners } = require('@stellarguard/multisig-utils');
 
 class Transaction {
@@ -40,6 +41,14 @@ class Transaction {
 
   get xdr() {
     return stellar.transactions.toXdr(this.stellarTransaction);
+  }
+
+  get uri() {
+    const uri = TransactionStellarUri.forTransaction(this.stellarTransaction);
+    if (config.isTestNetwork) {
+      uri.useTestNetwork();
+    }
+    return uri;
   }
 
   get isDeactivateAccountTransaction() {

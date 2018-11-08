@@ -11,12 +11,8 @@ class BootstrapMultisigTransactionResponse {
   toJSON() {
     const transaction = this.transaction;
     return {
-      _links: {
-        status: {
-          href: urls.withHost(urls.transactionStatusApi({ transaction }))
-        }
-      },
       id: this.transaction.id,
+      statusHref: urls.withHost(urls.transactionStatusApi({ transaction })),
       extras: {
         isStellarGuard: true,
         url: urls.withHost(urls.authorizeTransaction({ transaction }))
@@ -44,11 +40,11 @@ class TransactionStatusResponse {
     }
   }
 
-  async toJSON() {
+  toJSON() {
     return {
       id: this.transaction.id,
       status: this.status,
-      signers: await this.transaction.getSigners()
+      uri: this.transaction.uri.toString()
     };
   }
 }

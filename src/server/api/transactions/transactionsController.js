@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const { parseStellarUri } = require('@stellarguard/stellar-uri');
 
+const { TransactionNotFoundError } = require('errors/transaction');
+
 const session = require('../../session');
 const { transactions, users } = require('../../lib');
 
@@ -58,19 +60,21 @@ class TransactionsController extends Controller {
       id
     );
 
-    if (!transaction || transaction.userId !== req.user.id) {
-      return res.status(404).json({
-        error: 'Transaction not found or you are not authorized to view it.'
-      });
+    if (!transaction) {
+      throw new TransactionNotFoundError();
     }
 
-    return res.json(transaction);
+    if (req.isAuthenticated()) {
+      return res.json(transaction); // show full details when authenticated
+    } else {
+      return res.json(new TransactionStatusResponse({ transaction }));
+    }
   }
 
   /**
    * Public API that returns the status of a transaction.
    */
-  async getTransactionStatus(req, res) {
+  async getTransactionStatus(req, res, next) {
     const { id } = req.params;
     const transaction = await transactions.transactionService.getTransaction(
       id
@@ -127,12 +131,11 @@ const controller = new TransactionsController();
 // open route, no csrf or login required
 router.options('/', cors());
 router.post('/', cors(), controller.createTransaction);
-router.get('/:id/status', cors(), controller.getTransactionStatus);
+router.get('/:id', cors(), controller.getTransaction);
 
 // logged in routes
 router.use(session.csrf);
 router.use(session.ensureLoggedIn());
-router.get('/:id', controller.getTransaction);
 router.get('/', controller.getTransactions);
 
 // scenarios to test

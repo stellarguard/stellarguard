@@ -253,15 +253,15 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/samsam/-/samsam-2.0.0.tgz#9163742ac35c12d3602dece74317643b35db6a80"
 
 "@stellarguard/multisig-utils@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@stellarguard/multisig-utils/-/multisig-utils-0.4.0.tgz#d4cd883c78d3da1fb310fcb78e8fb9acec95526c"
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@stellarguard/multisig-utils/-/multisig-utils-0.4.1.tgz#d02b6c18faa20fdd4e40bfb86b8cad702fe06bf5"
   dependencies:
     "@types/stellar-sdk" "^0.10.3"
     axios "^0.18.0"
 
-"@stellarguard/stellar-uri@^0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@stellarguard/stellar-uri/-/stellar-uri-0.1.7.tgz#ac036149a297155beeb469618a35b44918f37af8"
+"@stellarguard/stellar-uri@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@stellarguard/stellar-uri/-/stellar-uri-0.2.0.tgz#3705f16c22e34c018494d006576c1d3627aa51d6"
   dependencies:
     "@types/stellar-sdk" "^0.10.3"
 
@@ -326,8 +326,8 @@
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.44.tgz#1d4a798e53f35212fd5ad4d04050620171cd5b5e"
 
 "@types/node@*":
-  version "9.4.6"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.6.tgz#d8176d864ee48753d053783e4e463aec86b8d82e"
+  version "10.12.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.3.tgz#3918b73ceed484e58367be5acb79d1775239e393"
 
 "@types/prop-types@*":
   version "15.5.5"
@@ -373,8 +373,8 @@
   resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-4.0.0.tgz#9a93ffa4ee1329e85166278a5ed99f81dc4c8362"
 
 "@types/stellar-sdk@^0.10.3":
-  version "0.10.3"
-  resolved "https://registry.yarnpkg.com/@types/stellar-sdk/-/stellar-sdk-0.10.3.tgz#798beb13a67210f6d5f71a8e912fe1e7a8a935c4"
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/@types/stellar-sdk/-/stellar-sdk-0.10.4.tgz#26c80f9f82c33d187e1b4a4643312782f7744e9e"
   dependencies:
     "@types/node" "*"
 
