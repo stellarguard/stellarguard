@@ -32,7 +32,7 @@ class Urls {
   }
 
   transactionStatusApi({ transaction }) {
-    return `/api/transactions/${transaction.id}/status`;
+    return `/api/transactions/${transaction.id}`;
   }
 
   resetPassword({ code }) {
