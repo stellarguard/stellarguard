@@ -106,7 +106,11 @@ class Transaction {
   }
 
   async getSigners() {
-    return await getSigners(this.stellarTransaction, stellar.server.server());
+    try {
+      return await getSigners(this.stellarTransaction, stellar.server.server());
+    } catch (e) {
+      return [];
+    }
   }
 
   sign(secretKey) {

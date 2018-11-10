@@ -22,8 +22,9 @@ class BootstrapMultisigTransactionResponse {
 }
 
 class TransactionStatusResponse {
-  constructor({ transaction }) {
+  constructor({ transaction, signers }) {
     this.transaction = transaction;
+    this.signers = signers;
   }
 
   get status() {
@@ -44,7 +45,8 @@ class TransactionStatusResponse {
     return {
       id: this.transaction.id,
       status: this.status,
-      uri: this.transaction.uri.toString()
+      uri: this.transaction.uri.toString(),
+      signers: this.signers
     };
   }
 }

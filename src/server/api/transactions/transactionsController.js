@@ -67,7 +67,8 @@ class TransactionsController extends Controller {
     if (req.isAuthenticated()) {
       return res.json(transaction); // show full details when authenticated
     } else {
-      return res.json(new TransactionStatusResponse({ transaction }));
+      const signers = await transaction.getSigners();
+      return res.json(new TransactionStatusResponse({ transaction, signers }));
     }
   }
 
