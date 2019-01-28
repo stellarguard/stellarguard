@@ -3,6 +3,8 @@ const qrcode = require('qrcode');
 
 const ISSUER = 'StellarGuard';
 
+otplib.authenticator.options = { window: 1 };
+
 async function generateSecret(email) {
   const secret = otplib.authenticator.generateSecret();
   const qrCode = await generateQrCode(email, secret);
@@ -22,10 +24,20 @@ function getOtpAuthUrl(email, secret) {
 }
 
 function verifyToken(token, secret) {
-  return otplib.authenticator.check(token, secret);
+  return otplib.authenticator.check(token, secret, { window: 1 });
+}
+
+/**
+ * Generates a TOTP token.
+ *
+ * Only used for testing.
+ */
+function generateToken(secret) {
+  return otplib.authenticator.generate(secret);
 }
 
 module.exports = {
   generateSecret,
-  verifyToken
+  verifyToken,
+  generateToken
 };
