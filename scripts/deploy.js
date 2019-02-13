@@ -23,7 +23,7 @@ const envConfig = {
     dotenv: '.env.prod',
     project: 'stellarguard-prod',
     appYaml: {
-      scalingMinInstances: 2,
+      scalingMinInstances: 1,
       cpuTargetUtilization: 0.7
     },
     cloudStorageBucket: 'cdn.stellarguard.me',
