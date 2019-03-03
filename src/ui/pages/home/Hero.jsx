@@ -96,7 +96,7 @@ class Hero extends Component {
               color="inherit"
               className={classes.headline}
             >
-              {'Extra security for your Stellar account'}
+              {'Security for your Stellar account'}
             </Typography>
             <div className={classes.actions}>
               <div className={classes.buttons}>
