@@ -81,8 +81,7 @@ function getPossibleStellarGuardSigners(account) {
 
   return account.signers.filter(
     signer =>
-      signer.public_key !== account.id &&
-      signer.public_key != config.stellarGuardPublicKey
+      signer.key !== account.id && signer.key != config.stellarGuardPublicKey
   );
 }
 
@@ -94,7 +93,7 @@ function hasStellarGuardMultisigSetup(account, targetSignerPublicKey) {
 }
 
 function doesAccountHaveSigner(account, requiredSigner) {
-  return account.signers.some(signer => signer.public_key === requiredSigner);
+  return account.signers.some(signer => signer.key === requiredSigner);
 }
 
 function getSignerCreatedRecord(records, publicKey) {

@@ -18,7 +18,7 @@ class GetEffectsJob extends Job {
 
 function getSignerCreatedRecords(effects, publicKey) {
   return effects.records.filter(
-    r => r.type === 'signer_created' && r.public_key === publicKey
+    r => r.type === 'signer_created' && r.key === publicKey
   );
 }
 

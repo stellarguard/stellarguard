@@ -44,5 +44,5 @@ class MonitorActiveAccounts extends Job {
 module.exports = MonitorActiveAccounts;
 
 function doesAccountHaveSigner(account, requiredSigner) {
-  return account.signers.some(signer => signer.public_key === requiredSigner);
+  return account.signers.some(signer => signer.key === requiredSigner);
 }

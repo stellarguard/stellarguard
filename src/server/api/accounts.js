@@ -47,9 +47,7 @@ class AccountsController extends Controller {
 
     // we need to try to find the StellarGuard user from the signer
     for (let signer of signers) {
-      const user = await users.userService.getUserBySignerPublicKey(
-        signer.public_key
-      );
+      const user = await users.userService.getUserBySignerPublicKey(signer.key);
 
       if (user) {
         return user;
