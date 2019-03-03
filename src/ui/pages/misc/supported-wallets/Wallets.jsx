@@ -303,30 +303,31 @@ class StargazerCard extends Component {
   }
 }
 
-import pegasusLogo from './pegasus_logo.png';
+import abellxLogo from './abellx_logo.jpg';
 
 @withStyles(styles)
-class PegasusWalletCard extends Component {
+class AbellxWalletCard extends Component {
   get title() {
-    return 'Pegasus';
+    return 'Abellx';
   }
   get to() {
-    return 'https://pegasuswallet.com/';
+    return 'https://abellx.com/';
   }
 
   get name() {
-    return <span>Pegasus</span>;
+    return <span>AbellX</span>;
   }
 
   get logo() {
-    return pegasusLogo;
+    return abellxLogo;
   }
 
   get description() {
     return (
       <span>
-        Pegasus is a light and easy to use multi-wallet / multi-currency mobile
-        app to manage your Lumens!
+        Abellx is a client to the Stellar network for trading and payments.
+        Deposit and Withdraw from Stellar to other chains via Stellar Anchors
+        right from the Abellx app.
       </span>
     );
   }
@@ -335,6 +336,7 @@ class PegasusWalletCard extends Component {
     return (
       <WalletCard
         wallet
+        exchange
         title={this.title}
         to={this.to}
         name={this.name}
@@ -674,7 +676,7 @@ export {
   StellarportCard,
   StargazerCard,
   StellarSignerCard,
-  PegasusWalletCard,
+  AbellxWalletCard,
   InterstellarExchangeCard,
   RocketWalletCard,
   StellarAuthenticatorCard,

@@ -12,13 +12,13 @@ import {
   StellarLaboratoryCard,
   StargazerCard,
   StellarSignerCard,
-  PegasusWalletCard,
   StellarportCard,
   StellarAccountViewerCard,
   InterstellarExchangeCard,
   RocketWalletCard,
   StellarAuthenticatorCard,
-  NucleoWallet
+  NucleoWallet,
+  AbellxWalletCard
 } from './Wallets';
 
 const styles = theme => ({
@@ -51,6 +51,7 @@ class SupportedWalletsPage extends Component {
     StellarportCard,
     InterstellarExchangeCard,
     StargazerCard,
+    AbellxWalletCard,
     MyStellarToolsCard,
     RocketWalletCard,
     StellarAuthenticatorCard,
