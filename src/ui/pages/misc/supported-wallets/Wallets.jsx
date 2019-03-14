@@ -700,6 +700,10 @@ class StellarTermCard extends Component {
     );
   }
 
+  get tutorial() {
+    return `/help/stellarterm/transaction`;
+  }
+
   render() {
     return (
       <WalletCard
@@ -738,6 +742,10 @@ class LobstrCard extends Component {
 
   get description() {
     return <span>Simple &amp; Secure Stellar Wallet</span>;
+  }
+
+  get tutorial() {
+    return `/help/lobstr/transaction`;
   }
 
   render() {
