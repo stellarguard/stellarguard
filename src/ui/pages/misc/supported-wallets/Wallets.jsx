@@ -669,6 +669,92 @@ class NucleoWallet extends Component {
   }
 }
 
+import stellarTermLogo from './stellarterm_logo.png';
+
+@withStyles(styles)
+class StellarTermCard extends Component {
+  get title() {
+    return 'StellarTerm';
+  }
+
+  get to() {
+    return `https://stellarterm.com`;
+  }
+
+  get logo() {
+    return stellarTermLogo;
+  }
+
+  get name() {
+    return <span>StellarTerm</span>;
+  }
+
+  get description() {
+    return (
+      <span>
+        Trade on the Stellar Decentralized Exchange
+        <br />
+        Send, receive, and trade assets on the Stellar network easily with
+        StellarTerm.
+      </span>
+    );
+  }
+
+  render() {
+    return (
+      <WalletCard
+        wallet
+        exchange
+        title={this.title}
+        to={this.to}
+        logo={this.logo}
+        name={this.name}
+        description={this.description}
+        tutorial={this.tutorial}
+      />
+    );
+  }
+}
+
+import lobstrLogo from './lobstr_logo.png';
+
+@withStyles(styles)
+class LobstrCard extends Component {
+  get title() {
+    return 'Lobstr';
+  }
+
+  get to() {
+    return `https://lobstr.co`;
+  }
+
+  get logo() {
+    return lobstrLogo;
+  }
+
+  get name() {
+    return <span>Lobstr</span>;
+  }
+
+  get description() {
+    return <span>Simple &amp; Secure Stellar Wallet</span>;
+  }
+
+  render() {
+    return (
+      <WalletCard
+        wallet
+        title={this.title}
+        to={this.to}
+        logo={this.logo}
+        name={this.name}
+        description={this.description}
+        tutorial={this.tutorial}
+      />
+    );
+  }
+}
+
 export {
   MyStellarToolsCard,
   StellarAccountViewerCard,
@@ -680,5 +766,7 @@ export {
   InterstellarExchangeCard,
   RocketWalletCard,
   StellarAuthenticatorCard,
-  NucleoWallet
+  NucleoWallet,
+  LobstrCard,
+  StellarTermCard
 };
