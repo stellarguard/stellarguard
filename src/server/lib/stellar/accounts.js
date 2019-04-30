@@ -73,7 +73,7 @@ function watchForPayments(publicKey, { onPayment, cursor }) {
   });
 }
 
-// returns a list of signers that could potentially be StellarGuard signers.\
+// returns a list of signers that could potentially be StellarGuard signers.
 function getPossibleStellarGuardSigners(account) {
   if (!doesAccountHaveSigner(account, config.stellarGuardPublicKey)) {
     return [];
@@ -86,10 +86,7 @@ function getPossibleStellarGuardSigners(account) {
 }
 
 function hasStellarGuardMultisigSetup(account, targetSignerPublicKey) {
-  return (
-    doesAccountHaveSigner(account, targetSignerPublicKey) &&
-    doesAccountHaveSigner(account, config.stellarGuardPublicKey)
-  );
+  return doesAccountHaveSigner(account, targetSignerPublicKey);
 }
 
 function doesAccountHaveSigner(account, requiredSigner) {

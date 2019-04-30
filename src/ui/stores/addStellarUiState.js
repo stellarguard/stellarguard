@@ -115,7 +115,12 @@ class AddStellarUiState {
     try {
       const account = await accountsApi.createAccount({ publicKey });
       this.rootStore.userStore.addAccount(account);
-      this.setActivateAccountStatus('success');
+      const stellarAccount = await server(StellarSdk).loadAccount(publicKey);
+      if (doesAccountHaveStellarGuardSharedSigner(stellarAccount)) {
+        this.setActivateAccountStatus('success');
+      } else {
+        this.setActivateAccountStatus('warning');
+      }
       return account;
     } catch (error) {
       this.setActivateAccountStatus('error', error);
@@ -128,6 +133,14 @@ class AddStellarUiState {
   setActivateAccountStatus(status, data) {
     this.activateAccountStatus = { status, data };
   }
+}
+
+function doesAccountHaveStellarGuardSharedSigner(stellarAccount) {
+  return doesAccountHaveSigner(stellarAccount, config.stellarGuardPublicKey);
+}
+
+function doesAccountHaveSigner(stellarAccount, requiredSigner) {
+  return stellarAccount.signers.some(signer => signer.key === requiredSigner);
 }
 
 export default AddStellarUiState;

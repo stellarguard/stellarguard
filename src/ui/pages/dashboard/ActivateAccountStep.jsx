@@ -8,11 +8,12 @@ import {
 } from '@material-ui/core';
 import grey from '@material-ui/core/colors/grey';
 import green from '@material-ui/core/colors/green';
-import { CheckCircle, Check, Error } from '@material-ui/icons';
+import amber from '@material-ui/core/colors/amber';
+import { CheckCircle, Check, Error, Warning } from '@material-ui/icons';
 import { inject, observer } from 'mobx-react';
 import cx from 'classnames';
 
-import { ButtonLink } from '../../components';
+import { ButtonLink, Link } from '../../components';
 
 const styles = theme => ({
   root: {
@@ -36,6 +37,9 @@ const styles = theme => ({
   },
   statusError: {
     backgroundColor: theme.palette.error.main
+  },
+  statusWarning: {
+    backgroundColor: amber[500]
   },
   statusIcon: {
     height: '50%',
@@ -77,12 +81,14 @@ class ActivateAccountStep extends Component {
 
     const loading = status === 'loading';
     const success = status === 'success';
+    const warning = status === 'warning';
     const error = status === 'error';
 
     const statusClasses = cx(classes.status, {
       [classes.statusLoading]: loading,
       [classes.statusSuccess]: success,
-      [classes.statusError]: error
+      [classes.statusError]: error,
+      [classes.statusWarning]: warning
     });
 
     return (
@@ -94,6 +100,7 @@ class ActivateAccountStep extends Component {
               {success && <CheckCircle className={classes.statusIcon} />}
               {loading && <Check className={classes.statusIcon} />}
               {error && <Error className={classes.statusIcon} />}
+              {warning && <Warning className={classes.statusIcon} />}
             </Avatar>
             {loading && (
               <CircularProgress
@@ -105,8 +112,30 @@ class ActivateAccountStep extends Component {
           </div>
           {loading && (
             <Typography className={classes.message}>
-              Verifying that your Stellar Account has Multi-Sig active.
+              Adding StellarGuard to your Stellar account.
             </Typography>
+          )}
+          {warning && (
+            <React.Fragment>
+              <Typography className={classes.message}>
+                <p>Your account is now protected by StellarGuard!</p>
+                <p>
+                  However, your Stellar account does not have the StellarGuard
+                  shared public key as a signer.
+                  <br />
+                  Many wallets check for this key to determine whether to submit
+                  a transaction to StellarGuard.
+                </p>
+                <p>
+                  You should consider adding this key as a signer to your
+                  account. See <Link to="/faq#multisg-explained">the FAQ</Link>{' '}
+                  for more details.
+                </p>
+              </Typography>
+              <ButtonLink color="primary" to="/transactions/new">
+                Submit a New Transaction
+              </ButtonLink>
+            </React.Fragment>
           )}
           {success && (
             <React.Fragment>
