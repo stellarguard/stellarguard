@@ -128,7 +128,7 @@ class ActivateAccountStep extends Component {
                 </p>
                 <p>
                   You should consider adding this key as a signer to your
-                  account. See <Link to="/faq#multisg-explained">the FAQ</Link>{' '}
+                  account. See <Link to="/faq#multisig-explained">the FAQ</Link>{' '}
                   for more details.
                 </p>
               </Typography>

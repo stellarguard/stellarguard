@@ -120,7 +120,8 @@ class FaqPage extends Component {
                 href="https://cointelegraph.com/news/blackwallet-hack-400k-in-stellar-stolen-hosting-provider-possibly-at-fault"
               >
                 the BlackWallet hack
-              </a>, your XLM would have been completely safe.
+              </a>
+              , your XLM would have been completely safe.
             </Typography>
           </FaqGridItem>
           <FaqGridItem
@@ -172,11 +173,14 @@ class FaqPage extends Component {
                   set to 10.
                 </li>
                 <li>
-                  A static StellarGuard key (ends with MEEGUARD) is added as a
-                  signer with weight set to 1 - this key is not able to sign
-                  transactions and is instead used as an indicator for third
-                  party wallets that transactions for this account should be
-                  submitted to StellarGuard.
+                  A static StellarGuard key (
+                  <span className={classes.publicKey}>
+                    GCVHEKSRASJBD6O2Z532LWH4N2ZLCBVDLLTLKSYCSMBLOYTNMEEGUARD{' '}
+                  </span>
+                  ) is added as a signer with weight set to 1 - this key is not
+                  able to sign transactions and is instead used as an indicator
+                  for third party wallets that transactions for this account
+                  should be submitted to StellarGuard.
                 </li>
                 <li>
                   If a backup signer was set, it is added as a signer with
@@ -273,9 +277,9 @@ class FaqPage extends Component {
                   <span className={classes.publicKey}>
                     {' '}
                     GCVHEKSRASJBD6O2Z532LWH4N2ZLCBVDLLTLKSYCSMBLOYTNMEEGUARD{' '}
-                  </span>. If there is, this account is protected by
-                  StellarGuard and transactions must be submitted directly to
-                  it.
+                  </span>
+                  . If there is, this account is protected by StellarGuard and
+                  transactions must be submitted directly to it.
                 </li>
                 <li>
                   Make a POST call to https://stellarguard.me/api/transactions
