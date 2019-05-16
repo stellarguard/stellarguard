@@ -11,7 +11,10 @@ async function buildMultisigTransaction({
 }) {
   try {
     const account = await server.loadAccount(source);
-    const builder = new StellarSdk.TransactionBuilder(account);
+    const builder = new StellarSdk.TransactionBuilder(account, {
+      fee: StellarSdk.BASE_FEE
+    }).setTimeout(StellarSdk.TimeoutInfinite);
+
     const signers = [];
 
     // by adding a static public key that doesn't enough weight to actually do any signing

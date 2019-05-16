@@ -31,7 +31,9 @@ class AddStellarUiState {
   }) {
     try {
       const account = await server(StellarSdk).loadAccount(sourceAccount);
-      const builder = new StellarSdk.TransactionBuilder(account);
+      const builder = new StellarSdk.TransactionBuilder(account, {
+        fee: StellarSdk.BASE_FEE
+      }).setTimeout(StellarSdk.TimeoutInfinite);
 
       // by adding a static public key that doesn't have enough weight to actually do any signing
       // we make it easier for third parties to check whether StellarGuard is enabled on the account

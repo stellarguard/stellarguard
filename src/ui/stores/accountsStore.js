@@ -25,7 +25,9 @@ class AccountsStore {
     const primarySigner = this.rootStore.currentUser.signerPublicKey;
     try {
       const account = await server(StellarSdk).loadAccount(publicKey);
-      const builder = new StellarSdk.TransactionBuilder(account);
+      const builder = new StellarSdk.TransactionBuilder(account, {
+        fee: StellarSdk.BASE_FEE
+      }).setTimeout(StellarSdk.TimeoutInfinite);
 
       builder.addOperation(
         StellarSdk.Operation.setOptions({

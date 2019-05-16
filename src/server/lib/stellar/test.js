@@ -41,7 +41,7 @@ async function makePayment(
   amount = '100'
 ) {
   const account = await server.loadAccount(fromAccountPublicKey);
-  const transaction = new StellarSdk.TransactionBuilder(account)
+  const transaction = new StellarSdk.TransactionBuilder(account, { fee: 100 })
     .addOperation(
       StellarSdk.Operation.payment({
         destination: toAccountPublicKey,
@@ -49,6 +49,7 @@ async function makePayment(
         asset: StellarSdk.Asset.native()
       })
     )
+    .setTimeout(0)
     .build();
 
   const halfSignedTransaction = signer.signTransactionWithSecretKey(
