@@ -6,11 +6,18 @@ const SignatureStatus = {
 };
 
 class InterstellarExchangeTransaction {
-  constructor({ id, xdr, status, sourceAccount, signatures }) {
+  constructor({
+    id,
+    xdr,
+    status,
+    sourceAccount,
+    originalSourceAccount,
+    signatures
+  }) {
     this.id = id;
     this.xdr = xdr;
     this.status = status;
-    this.sourceAccount = sourceAccount;
+    this.sourceAccount = originalSourceAccount || sourceAccount; // interstellar uses channel accounts and rewrites transactions, originalSourceAccount is preserved
     this.signatures = signatures || [];
     this.submittedFrom = 'interstellar.exchange';
   }
@@ -39,13 +46,20 @@ class InterstellarExchangeTransaction {
   }
 
   static fromJson(json) {
-    const { id, envelope, status, sourceAccount } = json.transaction;
+    const {
+      id,
+      envelope,
+      status,
+      sourceAccount,
+      originalSourceAccount
+    } = json.transaction;
     const signatures = json.signatures;
     return new InterstellarExchangeTransaction({
       id,
       xdr: envelope,
       status,
       sourceAccount,
+      originalSourceAccount,
       signatures
     });
   }
