@@ -84,7 +84,7 @@ class AppFooter extends Component {
                 className={classes.copyright}
                 gutterBottom
               >
-                2018 © StellarGuard LLC
+                2019 © StellarGuard LLC
               </Typography>
               <Typography color="inherit" gutterBottom>
                 help@stellarguard.me
