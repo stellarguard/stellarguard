@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
-    "@material-ui/core": "^1.3.1",
-    "@material-ui/icons": "^1.1.0",
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
     "@sendgrid/mail": "^6.3.1",
     "@stellarguard/multisig-utils": "^1.0.0",
     "@stellarguard/stellar-uri": "^1.0.0",
@@ -73,6 +73,7 @@
     "dev": "source .env.dev && NODE_PATH=src/shared supervisor -w src/ -i src/ui ./src/server/bin/www",
     "run-job": "NODE_PATH=src/shared node ./src/jobs/run",
     "watch": "parcel watch src/ui/index.html",
+    "build": "parcel build src/ui/index.html",
     "console": "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared node",
     "cypress": "cypress open",
     "test": "ava"

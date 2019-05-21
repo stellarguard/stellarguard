@@ -6,6 +6,13 @@
         "name": "@material-ui/core"
       }
     ],
+    [
+      "direct-import",
+      {
+        "name": "@material-ui/icons"
+      },
+      "direct-import-icons"
+    ],
     "@babel/plugin-proposal-export-default-from",
     "@babel/plugin-proposal-export-namespace-from",
     [
