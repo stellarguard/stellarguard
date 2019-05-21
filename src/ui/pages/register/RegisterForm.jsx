@@ -4,7 +4,12 @@ import { withStyles, TextField, Button } from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
 
 import { validate } from '../../../shared/validators/users';
-import { FormActions, FormFieldHelperText, FormError } from '../../components';
+import {
+  FormActions,
+  FormFieldHelperText,
+  FormError,
+  RecaptchaDisclaimer
+} from '../../components';
 
 const styles = () => ({});
 
@@ -104,6 +109,7 @@ class RegisterForm extends React.Component {
                 </FormFieldHelperText>
               }
             />
+            <RecaptchaDisclaimer />
             {includeActions && (
               <FormActions>
                 <Button

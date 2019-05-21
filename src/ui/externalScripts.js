@@ -8,6 +8,10 @@ function loadRecaptcha() {
 }
 
 function loadScript(src) {
+  var css = document.createElement('style');
+  css.type = 'text/css';
+  css.innerText = `.grecaptcha-badge {visibility:hidden}`;
+  document.getElementsByTagName('head')[0].appendChild(css);
   var script = document.createElement('script');
   script.type = 'text/javascript';
   script.async = true;

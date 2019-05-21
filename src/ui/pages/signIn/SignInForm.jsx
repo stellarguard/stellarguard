@@ -9,14 +9,15 @@ import {
   FormError,
   FormActions,
   FormFieldHelperText,
-  LoadingButton
+  LoadingButton,
+  RecaptchaDisclaimer
 } from '../../components';
 import AuthenticatorSignInForm from './AuthenticatorSignInForm';
 import signInValidator from '../../../shared/validators/signIn';
 
 const styles = () => ({
   forgotPassword: {
-    cursor: 'poinner'
+    cursor: 'pointer'
   }
 });
 
@@ -142,6 +143,7 @@ class SignInForm extends React.Component {
                 >
                   Forgot your password?
                 </Typography>
+                <RecaptchaDisclaimer />
               </React.Fragment>
             )}
             {includeActions && (
