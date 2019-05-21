@@ -2,17 +2,20 @@
   "plugins": [
     [
       "direct-import",
-      [
-        "@material-ui/core",
-        "@material-ui/icons",
-        "react-router",
-        "react-router-dom"
-      ]
+      {
+        "name": "@material-ui/core"
+      }
     ],
-    "transform-decorators-legacy",
-    "transform-export-extensions",
-    "transform-class-properties",
-    "transform-object-rest-spread",
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-proposal-export-namespace-from",
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
+    "@babel/plugin-proposal-object-rest-spread",
     [
       "babel-plugin-transform-builtin-extend",
       {
@@ -22,7 +25,7 @@
   ],
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
         "targets": {
           "browsers": ["last 2 versions", "> 1%"]
@@ -30,6 +33,6 @@
         "useBuiltIns": "entry"
       }
     ],
-    "react"
+    "@babel/preset-react"
   ]
 }
