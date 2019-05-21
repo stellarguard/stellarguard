@@ -22,7 +22,7 @@ class PrivacyPolicyPage extends Component {
           <title>StellarGuard | Privacy Policy</title>
         </Helmet>
         <div>
-          <Typography variant="headline" gutterBottom>
+          <Typography variant="h5" gutterBottom>
             PRIVACY POLICY
           </Typography>
           <Typography paragraph>
@@ -60,7 +60,7 @@ class PrivacyPolicyPage extends Component {
               us.
             </strong>
           </Typography>
-          <Typography variant="title" gutterBottom>
+          <Typography variant="h6" gutterBottom>
             TABLE OF CONTENTS
           </Typography>
           <Typography paragraph>
@@ -108,10 +108,10 @@ class PrivacyPolicyPage extends Component {
               </li>
             </ol>
           </Typography>
-          <Typography id="section-1" variant="title" gutterBottom>
+          <Typography id="section-1" variant="h6" gutterBottom>
             1. WHAT INFORMATION DO WE COLLECT?
           </Typography>
-          <Typography variant="subheading" gutterBottom>
+          <Typography variant="subtitle1" gutterBottom>
             Personal information you disclose to us
           </Typography>
           <Typography paragraph>
@@ -151,7 +151,7 @@ class PrivacyPolicyPage extends Component {
             complete and accurate, and you must notify us of any changes to such
             personal information.
           </Typography>
-          <Typography variant="subheading" gutterBottom>
+          <Typography variant="subtitle1" gutterBottom>
             Information automatically collected
           </Typography>
           <Typography paragraph>
@@ -175,7 +175,7 @@ class PrivacyPolicyPage extends Component {
             Like many businesses, we also collect information through cookies
             and similar technologies.
           </Typography>
-          <Typography id="section-2" variant="title" gutterBottom>
+          <Typography id="section-2" variant="h6" gutterBottom>
             2. HOW DO WE USE YOUR INFORMATION?
           </Typography>
           <Typography paragraph>
@@ -209,7 +209,7 @@ class PrivacyPolicyPage extends Component {
             account creation and logon process. See the section below headed
             "HOW DO WE HANDLE YOUR SOCIAL LOGINS" for further information.
           </Typography>
-          <Typography id="section-3" variant="title" gutterBottom>
+          <Typography id="section-3" variant="h6" gutterBottom>
             3. WILL YOUR INFORMATION BE SHARED WITH ANYONE?
           </Typography>
           <Typography paragraph>
@@ -221,7 +221,7 @@ class PrivacyPolicyPage extends Component {
             We only share and disclose your information in the following
             situations:
           </Typography>
-          <Typography variant="subheading" gutterBottom>
+          <Typography variant="subtitle1" gutterBottom>
             Compliance with Laws.
           </Typography>
           <Typography paragraph>
@@ -232,7 +232,7 @@ class PrivacyPolicyPage extends Component {
             public authorities to meet national security or law enforcement
             requirements).
           </Typography>
-          <Typography variant="subheading" gutterBottom>
+          <Typography variant="subtitle1" gutterBottom>
             Vital Interests and Legal Rights.
           </Typography>
           <Typography paragraph>
@@ -242,7 +242,7 @@ class PrivacyPolicyPage extends Component {
             threats to the safety of any person and illegal activities, or as
             evidence in litigation in which we are involved.
           </Typography>
-          <Typography variant="subheading" gutterBottom>
+          <Typography variant="subtitle1" gutterBottom>
             For use in reCAPTCHA v3
           </Typography>
           <Typography paragraph>
@@ -256,9 +256,10 @@ class PrivacyPolicyPage extends Component {
             and{' '}
             <ExternalLink href="https://www.google.com/intl/en/policies/terms/">
               Terms of Use
-            </ExternalLink>.
+            </ExternalLink>
+            .
           </Typography>
-          <Typography variant="subheading" gutterBottom>
+          <Typography variant="subtitle1" gutterBottom>
             Business Transfers.
           </Typography>
           <Typography paragraph>
@@ -267,7 +268,7 @@ class PrivacyPolicyPage extends Component {
             financing, or acquisition of all or a portion of our business to
             another company.
           </Typography>
-          <Typography variant="subheading" gutterBottom>
+          <Typography variant="subtitle1" gutterBottom>
             With your Consent.
           </Typography>
           <Typography paragraph>
@@ -275,7 +276,7 @@ class PrivacyPolicyPage extends Component {
             your consent.
           </Typography>
 
-          <Typography id="section-4" variant="title" gutterBottom>
+          <Typography id="section-4" variant="h6" gutterBottom>
             4. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?
           </Typography>
           <Typography paragraph>
@@ -286,7 +287,7 @@ class PrivacyPolicyPage extends Component {
             We may use cookies and similar tracking technologies (like web
             beacons and pixels) to access or store information.
           </Typography>
-          <Typography id="section-5" variant="title" gutterBottom>
+          <Typography id="section-5" variant="h6" gutterBottom>
             5. HOW LONG DO WE KEEP YOUR INFORMATION?
           </Typography>
           <Typography paragraph>
@@ -310,7 +311,7 @@ class PrivacyPolicyPage extends Component {
             your personal information and isolate it from any further processing
             until deletion is possible.
           </Typography>
-          <Typography id="section-6" variant="title" gutterBottom>
+          <Typography id="section-6" variant="h6" gutterBottom>
             6. HOW DO WE KEEP YOUR INFORMATION SAFE?
           </Typography>
           <Typography paragraph>
@@ -327,7 +328,7 @@ class PrivacyPolicyPage extends Component {
             personal information to and from our Sites is at your own risk. You
             should only access the services within a secure environment.
           </Typography>
-          <Typography id="section-7" variant="title" gutterBottom>
+          <Typography id="section-7" variant="h6" gutterBottom>
             7. DO WE COLLECT INFORMATION FROM MINORS?
           </Typography>
           <Typography paragraph>
@@ -345,7 +346,7 @@ class PrivacyPolicyPage extends Component {
             become aware of any data we have collected from children under age
             18, please contact us at support@stellarguard.me.
           </Typography>
-          <Typography id="section-8" variant="title" gutterBottom>
+          <Typography id="section-8" variant="h6" gutterBottom>
             8. WHAT ARE YOUR PRIVACY RIGHTS?
           </Typography>
           <Typography paragraph>
@@ -381,7 +382,7 @@ class PrivacyPolicyPage extends Component {
             authority. You can find their contact details here:
             http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm
           </Typography>
-          <Typography variant="subheading" gutterBottom>
+          <Typography variant="subtitle1" gutterBottom>
             Account Information
           </Typography>
           <Typography paragraph>
@@ -398,7 +399,7 @@ class PrivacyPolicyPage extends Component {
             may ask for additional information from you to verify that you are
             the lawful owner of the account.
           </Typography>
-          <Typography id="section-9" variant="title" gutterBottom>
+          <Typography id="section-9" variant="h6" gutterBottom>
             9. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?
           </Typography>
           <Typography paragraph>
@@ -429,7 +430,7 @@ class PrivacyPolicyPage extends Component {
             please be aware that the data may not be completely or
             comprehensively removed from our systems.
           </Typography>
-          <Typography id="section-10" variant="title" gutterBottom>
+          <Typography id="section-10" variant="h6" gutterBottom>
             10. DO WE MAKE UPDATES TO THIS POLICY?
           </Typography>
           <Typography paragraph>
@@ -446,7 +447,7 @@ class PrivacyPolicyPage extends Component {
             privacy policy frequently to be informed of how we are protecting
             your information.
           </Typography>
-          <Typography id="section-10" variant="title" gutterBottom>
+          <Typography id="section-10" variant="h6" gutterBottom>
             11. HOW CAN YOU CONTACT US ABOUT THIS POLICY?
           </Typography>
           <Typography paragraph>

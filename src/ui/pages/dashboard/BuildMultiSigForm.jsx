@@ -80,7 +80,7 @@ class BuildMultiSigForm extends Component {
 
     return (
       <Form id="build-multisig-form" noValidate>
-        <Typography variant="title">Build Multisig Transaction</Typography>
+        <Typography variant="h6">Build Multisig Transaction</Typography>
         <FormError touched={touched} errors={errors} />
         <TextField
           fullWidth
@@ -105,7 +105,7 @@ class BuildMultiSigForm extends Component {
           }
         />
         <div className={classes.signersHeader}>
-          <Typography variant="title">Signers </Typography>
+          <Typography variant="h6">Signers </Typography>
           <FormControlLabel
             className={classes.addBackupSigner}
             control={

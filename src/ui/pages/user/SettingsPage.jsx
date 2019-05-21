@@ -46,7 +46,7 @@ class SettingsPage extends Component {
           <Grid item xs={12}>
             <Card>
               <CardContent>
-                <Typography className={classes.subheading} variant="subheading">
+                <Typography className={classes.subheading} variant="subtitle1">
                   Settings
                 </Typography>
                 <Field label="Email:" labelClass={classes.label}>

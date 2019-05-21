@@ -82,7 +82,7 @@ class Hero extends Component {
           />
           <div className={classes.text}>
             <Typography
-              variant="display2"
+              variant="h3"
               component="h1"
               color="inherit"
               gutterBottom
@@ -91,7 +91,7 @@ class Hero extends Component {
               <span className={classes.guard}>Guard</span>
             </Typography>
             <Typography
-              variant="headline"
+              variant="h5"
               component="h2"
               color="inherit"
               className={classes.headline}
@@ -118,7 +118,7 @@ class Hero extends Component {
                   Learn More
                 </Button>
               </div>
-              <Typography color="inherit" gutterBottom variant="subheading">
+              <Typography color="inherit" gutterBottom variant="subtitle1">
                 Already have an account?{' '}
                 <Button
                   data-test="hero-sign-in-button"

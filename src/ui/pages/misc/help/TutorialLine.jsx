@@ -24,7 +24,7 @@ class TutorialLine extends Component {
     const { classes, className, children, imgSrc } = this.props;
     return (
       <div className={cx(classes.line, className)}>
-        <Typography className={classes.text} variant="subheading">
+        <Typography className={classes.text} variant="subtitle1">
           {children}
         </Typography>
         {imgSrc && (

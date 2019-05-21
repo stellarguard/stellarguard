@@ -44,7 +44,7 @@ class SubmitMultiSigToStellar extends Component {
     const xdr = this.props.rootStore.uiState.addStellarUiState.xdr;
     return (
       <div>
-        <Typography variant="title">
+        <Typography variant="h6">
           Sign &amp; Submit to Stellar Network
         </Typography>
         <List>

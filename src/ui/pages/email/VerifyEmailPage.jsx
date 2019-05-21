@@ -30,7 +30,7 @@ class VerifyEmailPage extends Component {
       <Page>
         <Grid container spacing={24} justify="center" alignItems="center">
           <Grid item>
-            <Typography variant="title">Verifying Email...</Typography>
+            <Typography variant="h6">Verifying Email...</Typography>
           </Grid>
         </Grid>
       </Page>

@@ -57,7 +57,7 @@ class AppHeader extends Component {
               <MenuIcon />
             </IconButton> */}
             <Typography
-              variant="title"
+              variant="h6"
               color="inherit"
               className={classes.name}
               component={Link}

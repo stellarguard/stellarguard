@@ -34,7 +34,7 @@ class DeactivateAccountDialog extends Component {
     return (
       <Dialog open={open} fullScreen={fullScreen} onClose={onClose}>
         <DialogTitle disableTypography>
-          <Typography variant="title">Edit Account</Typography>
+          <Typography variant="h6">Edit Account</Typography>
           <Typography className={classes.publicKey} variant="caption">
             {account.publicKey}
           </Typography>

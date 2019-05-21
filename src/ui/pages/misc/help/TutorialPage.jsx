@@ -31,7 +31,7 @@ class TutorialPage extends Component {
           <Typography
             className={classes.description}
             align="center"
-            variant="subheading"
+            variant="subtitle1"
           >
             {description}
           </Typography>

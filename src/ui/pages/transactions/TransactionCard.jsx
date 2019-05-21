@@ -182,7 +182,7 @@ class TransactionCard extends Component {
           />
           {transaction.callback && (
             <CardContent>
-              <Typography variant="subheading" gutterBottom>
+              <Typography variant="subtitle1" gutterBottom>
                 This transaction will be submitted to{' '}
                 <span className={classes.callbackDomain}>
                   {transaction.callbackDomain}
@@ -238,7 +238,7 @@ class TransactionCard extends Component {
               </CardActions>
               <Collapse in={this.state.showResult} timeout="auto" unmountOnExit>
                 <CardContent>
-                  <Typography variant="title">Results</Typography>
+                  <Typography variant="h6">Results</Typography>
                   <pre
                     style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}
                   >

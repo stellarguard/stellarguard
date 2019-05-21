@@ -56,15 +56,15 @@ class TransactionsPage extends Component {
               ))
             ) : (
               <Grid item xs={12}>
-                <Typography variant="display1" gutterBottom>
+                <Typography variant="h4" gutterBottom>
                   You&apos;re all set!
                 </Typography>
-                <Typography variant="display1" gutterBottom>
+                <Typography variant="h4" gutterBottom>
                   You have no more pending transactions.
                 </Typography>
                 <Typography
                   color="primary"
-                  variant="display1"
+                  variant="h4"
                   component={Link}
                   className={classes.goBack}
                   to="/"

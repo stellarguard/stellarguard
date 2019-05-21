@@ -22,7 +22,7 @@ class TermsOfServicePage extends Component {
           <title>StellarGuard | Terms of Service</title>
         </Helmet>
         <div>
-          <Typography variant="headline" gutterBottom>
+          <Typography variant="h5" gutterBottom>
             Terms of Service
           </Typography>
           <Typography paragraph>Last updated May 02, 2018</Typography>
@@ -47,7 +47,7 @@ class TermsOfServicePage extends Component {
             the Stellar network. It is not affiliated or partnered with
             Stellar.org or the Stellar Development Foundation.
           </Typography>
-          <Typography variant="title" gutterBottom>
+          <Typography variant="h6" gutterBottom>
             Risk of Loss
           </Typography>
           <Typography paragraph>
@@ -100,7 +100,7 @@ class TermsOfServicePage extends Component {
             ● Financial loss due to "phishing" or other websites masquerading as
             StellarGuard.
           </Typography>
-          <Typography variant="title" gutterBottom>
+          <Typography variant="h6" gutterBottom>
             Ceasing Operations
           </Typography>
           <Typography paragraph>
@@ -120,7 +120,7 @@ class TermsOfServicePage extends Component {
             accounts to be able to continue to sign transactions even without
             StellarGuard.
           </Typography>
-          <Typography variant="title" gutterBottom>
+          <Typography variant="h6" gutterBottom>
             Paid Features
           </Typography>
           <Typography paragraph>

@@ -35,12 +35,12 @@ class SubmitTransactionPage extends Component {
           <title>StellarGuard | New Transaction</title>
         </Helmet>
         <DashboardFab />
-        <Typography variant="subheading" gutterBottom>
+        <Typography variant="subtitle1" gutterBottom>
           For instructions about how to get the transaction XDR from the Stellar
           Account Viewer payments{' '}
           <Link to="/help/new-transaction-account-viewer">click here.</Link>
         </Typography>
-        <Typography variant="subheading" gutterBottom>
+        <Typography variant="subtitle1" gutterBottom>
           For intructions about more advanced operations{' '}
           <Link to="/help/new-transaction-stellar-labs">click here.</Link>
         </Typography>

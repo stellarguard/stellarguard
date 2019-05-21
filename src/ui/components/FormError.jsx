@@ -22,7 +22,7 @@ class FormError extends Component {
 
     return (
       <div className={classes.root}>
-        <Typography color="error" variant="subheading">
+        <Typography color="error" variant="subtitle1">
           {errors.error}
         </Typography>
       </div>

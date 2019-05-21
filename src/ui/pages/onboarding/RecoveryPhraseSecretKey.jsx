@@ -17,16 +17,16 @@ class RecoveryPhraseSecretKey extends Component {
 
     return (
       <div>
-        <Typography variant="subheading" align="center" gutterBottom>
+        <Typography variant="subtitle1" align="center" gutterBottom>
           Write down and save your StellarGuard secret key.
         </Typography>
-        <Typography variant="subheading" align="center" gutterBottom>
+        <Typography variant="subtitle1" align="center" gutterBottom>
           Keep it secret, keep it safe. You will not be shown this again.
         </Typography>
         <Typography
           className={classes.secretKey}
           align="center"
-          variant="headline"
+          variant="h5"
           color="primary"
         >
           {children}

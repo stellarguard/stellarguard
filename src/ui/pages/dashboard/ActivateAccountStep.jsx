@@ -93,7 +93,7 @@ class ActivateAccountStep extends Component {
 
     return (
       <div>
-        <Typography variant="title">Activate StellarGuard</Typography>
+        <Typography variant="h6">Activate StellarGuard</Typography>
         <div className={classes.root}>
           <div className={classes.status}>
             <Avatar className={statusClasses}>

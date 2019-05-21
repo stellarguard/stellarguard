@@ -46,7 +46,7 @@ class RegisterDialog extends Component {
           id="register-dialog"
         >
           <LogoAvatar className={classes.logo} />
-          <Typography variant="title">Register for StellarGuard</Typography>
+          <Typography variant="h6">Register for StellarGuard</Typography>
         </DialogTitle>
         <DialogContent>
           <DialogContentText>

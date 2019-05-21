@@ -72,7 +72,7 @@ class AppFooter extends Component {
           <Grid container spacing={0} className={classes.footer}>
             <Grid item xs={12} md={6} className={classes.gridItem}>
               <Typography
-                variant="headline"
+                variant="h5"
                 color="inherit"
                 gutterBottom
                 className={classes.stellarguard}
@@ -94,7 +94,7 @@ class AppFooter extends Component {
               </Typography>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Typography color="inherit" variant="title" gutterBottom>
+              <Typography color="inherit" variant="h6" gutterBottom>
                 Links
               </Typography>
               <ExternalFooterLink onClick={this.openDonateDialog}>

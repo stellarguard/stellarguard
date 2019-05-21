@@ -56,7 +56,7 @@ class SummaryCard extends React.Component {
           <div className={classes.countWrapper}>
             <Link to="/transactions?status=pending" className={classes.link}>
               <Typography
-                variant="display1"
+                variant="h4"
                 color="primary"
                 className={classes.count}
               >

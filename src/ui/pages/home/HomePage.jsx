@@ -61,11 +61,7 @@ class HomeInfoCard extends React.Component {
     const { classes, children, title } = this.props;
     return (
       <div className={classes.infoCard}>
-        <Typography
-          className={classes.cardHeadline}
-          gutterBottom
-          variant="headline"
-        >
+        <Typography className={classes.cardHeadline} gutterBottom variant="h5">
           {title}
         </Typography>
         <Typography variant="body1">{children}</Typography>

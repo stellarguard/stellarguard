@@ -15,7 +15,7 @@ class PageTitle extends Component {
       <Helmet key="helmet">
         <title>StellarGuard | {children}</title>
       </Helmet>,
-      <Typography key="title" className={classes.title} variant="headline">
+      <Typography key="title" className={classes.title} variant="h5">
         {children}
       </Typography>
     ];

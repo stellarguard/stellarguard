@@ -48,7 +48,7 @@ class FaqItem extends Component {
     return (
       <div className={classes.root}>
         <div className={classes.questionRoot} onClick={this.toggle} id={id}>
-          <Typography variant="title" gutterBottom className={classes.question}>
+          <Typography variant="h6" gutterBottom className={classes.question}>
             {question}
           </Typography>
           <IconButton>

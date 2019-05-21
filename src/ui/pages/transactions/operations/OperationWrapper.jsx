@@ -16,7 +16,7 @@ class OperationWrapper extends Component {
     const { classes, children, type } = this.props;
     return (
       <div>
-        <Typography className={classes.title} variant="subheading">
+        <Typography className={classes.title} variant="subtitle1">
           {type}
         </Typography>
         <div className={classes.content}>{children}</div>

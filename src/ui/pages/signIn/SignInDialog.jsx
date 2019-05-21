@@ -51,7 +51,7 @@ class SignInDialog extends Component {
           id="sign-in-dialog"
         >
           <LogoAvatar className={classes.logo} />
-          <Typography variant="title">Sign in to StellarGuard</Typography>
+          <Typography variant="h6">Sign in to StellarGuard</Typography>
         </DialogTitle>
         <DialogContent className={classes.content}>
           <SignInForm

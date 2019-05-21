@@ -34,7 +34,7 @@ class SubmitTransactionSuccess extends Component {
         <Avatar className={classes.success}>
           <CheckCircle className={classes.successIcon} />
         </Avatar>
-        <Typography variant="headline" className={classes.root}>
+        <Typography variant="h5" className={classes.root}>
           <div>Your transaction has been submitted to StellarGuard.</div>
           <div>
             <Link to={`/transactions/${transaction.id}`}>

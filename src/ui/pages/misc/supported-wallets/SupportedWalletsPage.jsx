@@ -78,13 +78,13 @@ class SupportedWalletsPage extends Component {
         </Helmet>
         <Grid container spacing={8}>
           <Grid item xs={12}>
-            <Typography variant="title" gutterBottom>
+            <Typography variant="h6" gutterBottom>
               Fully Supported Wallets
             </Typography>
-            <Typography variant="subheading" gutterBottom>
+            <Typography variant="subtitle1" gutterBottom>
               These wallets have direct integration with StellarGuard.
             </Typography>
-            <Typography variant="subheading">
+            <Typography variant="subtitle1">
               Instead of copying your transaction to StellarGuard you can use
               the wallet like normal and transactions will be submited to
               StellarGuard.
@@ -92,10 +92,10 @@ class SupportedWalletsPage extends Component {
           </Grid>
           {this.renderWallets(SupportedWalletsPage.FullySupportedWallets)}
           <Grid item xs={12} className={classes.partialSupport}>
-            <Typography variant="title" gutterBottom>
+            <Typography variant="h6" gutterBottom>
               Partially Supported Wallets
             </Typography>
-            <Typography variant="subheading" gutterBottom>
+            <Typography variant="subtitle1" gutterBottom>
               These wallets allow you to copy the signed transaction XDR so you
               can submit it yourself to StellarGuard. There may be more wallets
               that support this method than those listed here.
@@ -104,7 +104,7 @@ class SupportedWalletsPage extends Component {
           {this.renderWallets(SupportedWalletsPage.PartiallySupportedWallets)}
         </Grid>
         <Grid item xs={12} className={classes.walletDevs}>
-          <Typography variant="subheading" gutterBottom>
+          <Typography variant="subtitle1" gutterBottom>
             Are you a wallet developer and want to integrate StellarGuard and be
             featured here? Email developers@stellarguard.me
           </Typography>

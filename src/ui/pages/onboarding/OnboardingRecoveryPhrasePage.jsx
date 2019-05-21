@@ -61,25 +61,25 @@ class OnboardingRecoveryPhrasePage extends Component {
           <CardContent>
             {!isShowingRecovery && (
               <div>
-                <Typography variant="subheading" paragraph>
+                <Typography variant="subtitle1" paragraph>
                   StellarGuard protects your Stellar account by generating a new
                   secret key for each user and adding it as a required signer
                   for transactions.
                 </Typography>
-                <Typography variant="subheading" paragraph>
+                <Typography variant="subtitle1" paragraph>
                   While you normally will not need to know the secret key to use
                   StellarGuard or remove StellarGuard from your account, you now
                   have the option to view your StellarGuard recovery phrase.
                   This would allow you to remove the StellarGuard signer without
                   going through StellarGuard to do it.
                 </Typography>
-                <Typography variant="subheading" paragraph>
+                <Typography variant="subtitle1" paragraph>
                   If you choose do this, you are responsible for keeping it
                   safe. If an attacker learns both your own account secret key
                   and your StellarGuard secret key, then your Stellar account
                   will be compromised.
                 </Typography>
-                <Typography variant="subheading" paragraph>
+                <Typography variant="subtitle1" paragraph>
                   This is the only time you will be given this option.
                 </Typography>
                 <div className={classes.gotIt}>
