@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, Button, Tooltip } from '@material-ui/core';
+import { withStyles, Fab, Tooltip } from '@material-ui/core';
 import { Add as AddIcon } from '@material-ui/icons';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
@@ -19,16 +19,15 @@ class SubmitTransactionFab extends Component {
     const { classes } = this.props;
     return (
       <Tooltip id="tooltip-fab" title="New Transaction">
-        <Button
+        <Fab
           component={Link}
           to="/transactions/new"
-          variant="fab"
           color="primary"
           aria-label="New Transaction"
           className={classes.button}
         >
           <AddIcon />
-        </Button>
+        </Fab>
       </Tooltip>
     );
   }

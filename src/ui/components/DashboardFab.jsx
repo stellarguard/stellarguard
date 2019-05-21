@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, Button, Tooltip } from '@material-ui/core';
+import { withStyles, Fab, Tooltip } from '@material-ui/core';
 import { Home as HomeIcon } from '@material-ui/icons';
 import { observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
@@ -19,16 +19,15 @@ class DashboardFab extends Component {
     const { classes } = this.props;
     return (
       <Tooltip id="tooltip-fab" title="Home">
-        <Button
+        <Fab
           component={Link}
           to="/"
-          variant="fab"
           color="primary"
           aria-label="Home"
           className={classes.button}
         >
           <HomeIcon />
-        </Button>
+        </Fab>
       </Tooltip>
     );
   }
