@@ -17,7 +17,6 @@
     "@stellarguard/multisig-utils": "^1.0.0",
     "@stellarguard/stellar-uri": "^1.0.0",
     "axios": "^0.18.0",
-    "babel-polyfill": "^6.26.0",
     "bcrypt": "^3.0.1",
     "classnames": "^2.2.6",
     "connect-pg-simple": "^5.0.0",
