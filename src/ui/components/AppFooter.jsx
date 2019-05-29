@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { withStyles, Divider, Typography, Grid } from '@material-ui/core';
+import { withStyles, Typography, Grid } from '@material-ui/core';
 
 import DonateDialog from './DonateDialog';
 
@@ -9,15 +9,15 @@ import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
-    backgroundColor: theme.palette.primary.light
+    color: theme.palette.text.secondary
   },
   footer: {
-    color: '#FFF',
     padding: theme.spacing.unit * 2
   },
   link: {
     textDecoration: 'none',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    color: theme.palette.text.secondary
   },
   gridItem: {
     marginBottom: theme.spacing.unit * 2
@@ -68,12 +68,10 @@ class AppFooter extends Component {
     return (
       <Fragment>
         <div className={classes.root}>
-          <Divider />
           <Grid container spacing={0} className={classes.footer}>
             <Grid item xs={12} md={6} className={classes.gridItem}>
               <Typography
                 variant="h5"
-                color="inherit"
                 gutterBottom
                 className={classes.stellarguard}
               >
@@ -94,7 +92,7 @@ class AppFooter extends Component {
               </Typography>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Typography color="inherit" variant="h6" gutterBottom>
+              <Typography variant="h6" gutterBottom>
                 Links
               </Typography>
               <ExternalFooterLink onClick={this.openDonateDialog}>

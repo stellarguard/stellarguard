@@ -13,12 +13,10 @@ const styles = theme => ({
     flex: '0 0 auto',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText
+    alignItems: 'center'
   },
-  guard: {
-    color: theme.palette.secondary.main
+  name: {
+    color: theme.palette.primary.main
   },
   content: {
     display: 'flex',
@@ -87,8 +85,7 @@ class Hero extends Component {
               color="inherit"
               gutterBottom
             >
-              <span>Stellar</span>
-              <span className={classes.guard}>Guard</span>
+              <span className={classes.name}>StellarGuard</span>
             </Typography>
             <Typography
               variant="h5"
@@ -113,12 +110,11 @@ class Hero extends Component {
                   to="/faq"
                   component={Link}
                   className={classes.learnMore}
-                  color="inherit"
                 >
                   Learn More
                 </Button>
               </div>
-              <Typography color="inherit" gutterBottom variant="subtitle1">
+              <Typography gutterBottom variant="subtitle1">
                 Already have an account?{' '}
                 <Button
                   data-test="hero-sign-in-button"

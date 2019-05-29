@@ -3,8 +3,6 @@ import { withStyles } from '@material-ui/core';
 import cx from 'classnames';
 import { inject, observer } from 'mobx-react';
 import AppRoutes from './AppRoutes';
-import AppDrawer from './AppDrawer';
-import AppLoader from './AppLoader';
 import { withRouter } from 'react-router';
 
 const styles = theme => ({
@@ -15,19 +13,14 @@ const styles = theme => ({
   },
   content: {
     width: '100%',
-    marginLeft: -theme.drawer.width,
     flexGrow: 1,
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
-  },
-  contentShift: {
-    margin: 0,
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
+    padding: '0 10%',
+    [theme.breakpoints.only('xs')]: {
+      padding: '0 2%'
+    },
+    [theme.breakpoints.only('sm')]: {
+      padding: '0 5%'
+    }
   }
 });
 
@@ -41,18 +34,10 @@ class AppContent extends Component {
 
   render() {
     const { classes, rootStore } = this.props;
-    const open = rootStore.uiState.isAppDrawerOpen;
 
     return (
       <div className={classes.root}>
-        <AppDrawer />
-        <main
-          className={cx(classes.content, {
-            [classes.contentShift]: open
-          })}
-        >
-          {this.renderContent()}
-        </main>
+        <main className={cx(classes.content)}>{this.renderContent()}</main>
       </div>
     );
   }

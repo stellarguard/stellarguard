@@ -3,7 +3,8 @@ import {
   withStyles,
   Typography,
   Collapse,
-  IconButton
+  IconButton,
+  Card
 } from '@material-ui/core';
 
 import { ExpandMore } from '@material-ui/icons';
@@ -11,7 +12,9 @@ import { ExpandMore } from '@material-ui/icons';
 import cx from 'classnames';
 
 const styles = theme => ({
-  root: {},
+  root: {
+    padding: theme.spacing.unit * 2
+  },
   questionRoot: {
     cursor: 'pointer',
     display: 'flex',
@@ -46,7 +49,7 @@ class FaqItem extends Component {
     const { classes, children, question, id } = this.props;
     const { expanded } = this.state;
     return (
-      <div className={classes.root}>
+      <Card className={classes.root}>
         <div className={classes.questionRoot} onClick={this.toggle} id={id}>
           <Typography variant="h6" gutterBottom className={classes.question}>
             {question}
@@ -64,7 +67,7 @@ class FaqItem extends Component {
         >
           <div>{children}</div>
         </Collapse>
-      </div>
+      </Card>
     );
   }
 

@@ -8,7 +8,8 @@ import {
   ListItem,
   ListItemText,
   Snackbar,
-  Button
+  Button,
+  Card
 } from '@material-ui/core';
 import {
   Security as SecurityIcon,
@@ -33,6 +34,9 @@ const styles = theme => {
       padding: theme.spacing.unit,
       overflow: 'hidden'
     },
+    gridItem: {
+      marginBottom: 2
+    },
     link: {
       color: theme.palette.primary.main,
       cursor: 'pointer',
@@ -43,7 +47,7 @@ const styles = theme => {
       textDecoration: 'none'
     },
     infoCard: {
-      padding: theme.spacing.unit
+      padding: theme.spacing.unit * 6
     },
     cardHeadline: {
       marginBottom: theme.spacing.unit * 2
@@ -60,12 +64,12 @@ class HomeInfoCard extends React.Component {
   render() {
     const { classes, children, title } = this.props;
     return (
-      <div className={classes.infoCard}>
+      <Card className={classes.infoCard}>
         <Typography className={classes.cardHeadline} gutterBottom variant="h5">
           {title}
         </Typography>
         <Typography variant="body1">{children}</Typography>
-      </div>
+      </Card>
     );
   }
 }
@@ -230,17 +234,17 @@ class HomePage extends React.Component {
         </Helmet>
         <Hero />
         <div className={classes.gridContainer}>
-          <Grid container justify="space-around" spacing={16}>
-            <Grid item xs={12} sm={12} md={6}>
+          <Grid container justify="space-between" spacing={0}>
+            <Grid item xs={12} className={classes.gridItem}>
               <SecurityInfoCard />
             </Grid>
-            <Grid item xs={12} sm={12} md={6}>
+            <Grid item xs={12} className={classes.gridItem}>
               <UseYourWalletInfoCard />
             </Grid>
-            <Grid item xs={12} sm={12} md={6}>
+            <Grid item xs={12} className={classes.gridItem}>
               <GetStartedInfoCard />
             </Grid>
-            <Grid item xs={12} sm={12} md={6}>
+            <Grid item xs={12} className={classes.gridItem}>
               <TwoFactorAuthInfoCard />
             </Grid>
           </Grid>

@@ -10,7 +10,6 @@ import { Menu as MenuIcon } from '@material-ui/icons';
 import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import ToolbarActions from './ToolbarActions';
-import MouseoverPopover from './MouseoverPopover';
 import config from '../config';
 
 const styles = theme => ({
@@ -21,19 +20,10 @@ const styles = theme => ({
     flex: 1,
     textDecoration: 'none'
   },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20
+  appBar: {
+    backgroundColor: theme.palette.background.default
   }
 });
-
-function AppName() {
-  if (config.isTestNetwork) {
-    return 'StellarGuard - TestNet';
-  } else {
-    return 'StellarGuard';
-  }
-}
 
 @inject('rootStore')
 @observer
@@ -46,24 +36,16 @@ class AppHeader extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" className={classes.appBar}>
           <Toolbar>
-            {/* <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="Menu"
-              onClick={this.handleToggleMenuClick}
-            >
-              <MenuIcon />
-            </IconButton> */}
             <Typography
               variant="h6"
-              color="inherit"
+              color="primary"
               className={classes.name}
               component={Link}
               to="/"
             >
-              <AppName />
+              StellarGuard
             </Typography>
             <ToolbarActions />
           </Toolbar>
