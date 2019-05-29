@@ -12,7 +12,7 @@ const styles = theme => ({
     color: theme.palette.text.secondary
   },
   footer: {
-    padding: theme.spacing.unit * 2
+    padding: theme.spacing.unit * 4
   },
   link: {
     textDecoration: 'none',

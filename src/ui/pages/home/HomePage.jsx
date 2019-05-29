@@ -47,10 +47,15 @@ const styles = theme => {
       textDecoration: 'none'
     },
     infoCard: {
-      padding: theme.spacing.unit * 6
+      padding: theme.spacing.unit * 6,
+      paddingTop: theme.spacing.unit * 4,
+      paddingBottom: theme.spacing.unit * 4
+    },
+    infoCardParagraph: {
+      fontSize: '1rem'
     },
     cardHeadline: {
-      marginBottom: theme.spacing.unit * 2
+      marginBottom: theme.spacing.unit * 3
     },
     cardParagraph: {
       marginTop: theme.spacing.unit
@@ -68,7 +73,7 @@ class HomeInfoCard extends React.Component {
         <Typography className={classes.cardHeadline} gutterBottom variant="h5">
           {title}
         </Typography>
-        <Typography variant="body1">{children}</Typography>
+        {children}
       </Card>
     );
   }
@@ -122,9 +127,13 @@ class SecurityInfoCard extends React.Component {
 @observer
 class InfoCardParagraph extends React.Component {
   render() {
-    const { children } = this.props;
+    const { children, classes } = this.props;
     return (
-      <Typography variant="body1" paragraph>
+      <Typography
+        variant="body1"
+        className={classes.infoCardParagraph}
+        paragraph
+      >
         {children}
       </Typography>
     );
@@ -236,16 +245,16 @@ class HomePage extends React.Component {
         <div className={classes.gridContainer}>
           <Grid container justify="space-between" spacing={0}>
             <Grid item xs={12} className={classes.gridItem}>
-              <SecurityInfoCard />
-            </Grid>
-            <Grid item xs={12} className={classes.gridItem}>
               <UseYourWalletInfoCard />
             </Grid>
             <Grid item xs={12} className={classes.gridItem}>
-              <GetStartedInfoCard />
+              <TwoFactorAuthInfoCard />
             </Grid>
             <Grid item xs={12} className={classes.gridItem}>
-              <TwoFactorAuthInfoCard />
+              <SecurityInfoCard />
+            </Grid>
+            <Grid item xs={12} className={classes.gridItem}>
+              <GetStartedInfoCard />
             </Grid>
           </Grid>
         </div>

@@ -50,8 +50,8 @@ const styles = theme => ({
   },
   logo: {
     margin: '20px 0',
-    height: '35vw',
-    maxHeight: 200
+    height: '120vw',
+    maxHeight: 150
   }
 });
 
