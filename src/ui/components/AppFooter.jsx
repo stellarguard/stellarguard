@@ -9,10 +9,19 @@ import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
+    marginTop: theme.spacing.unit * 2
   },
   footer: {
-    padding: theme.spacing.unit * 4
+    [theme.breakpoints.only('xs')]: {
+      padding: `0 ${theme.spacing.unit * 2}px`
+    },
+    [theme.breakpoints.only('sm')]: {
+      padding: '0 5%'
+    },
+    [theme.breakpoints.up('md')]: {
+      padding: '0 10%'
+    }
   },
   link: {
     textDecoration: 'none',
@@ -69,7 +78,7 @@ class AppFooter extends Component {
       <Fragment>
         <div className={classes.root}>
           <Grid container spacing={0} className={classes.footer}>
-            <Grid item xs={12} md={6} className={classes.gridItem}>
+            <Grid item xs={12} sm={6} className={classes.gridItem}>
               <Typography
                 variant="h5"
                 gutterBottom
@@ -91,7 +100,7 @@ class AppFooter extends Component {
                 v{config.version}
               </Typography>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6}>
               <Typography variant="h6" gutterBottom>
                 Links
               </Typography>

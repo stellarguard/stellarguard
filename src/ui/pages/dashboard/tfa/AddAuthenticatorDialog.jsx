@@ -13,30 +13,20 @@ import {
 import { inject, observer } from 'mobx-react';
 import { Formik, Form } from 'formik';
 
-import { FormError, FormFieldHelperText } from '../../../components';
+import {
+  FormError,
+  FormFieldHelperText,
+  ExternalLink
+} from '../../../components';
 import { validate } from '../../../../shared/validators/enableAuthenticator';
 
-const styles = theme => ({
-  authenticatorAppLink: {
-    color: theme.palette.primary.main,
-    textDecoration: 'none'
-  }
-});
+const styles = theme => ({});
 
 @withStyles(styles)
 class AuthenticatorAppLink extends Component {
   render() {
     const { classes, href, children } = this.props;
-    return (
-      <a
-        href={href}
-        className={classes.authenticatorAppLink}
-        target="_blank"
-        rel="noopener"
-      >
-        {children}
-      </a>
-    );
+    return <ExternalLink to={href}>{children}</ExternalLink>;
   }
 }
 
@@ -72,8 +62,8 @@ class AddAuthenticatorDialog extends Component {
           <img className={classes.qrCode} src={secret.qrCode} />
           <div>
             <DialogContentText>
-              1. Install an authenticator app on your mobile device if you don't
-              already have one. Choices include: <AuthyLink />,{' '}
+              1. Install an authenticator app on your mobile device if you
+              don&apos;t already have one. Choices include: <AuthyLink />,{' '}
               <GoogleAuthenticatorLink />, and many others.
             </DialogContentText>
             <DialogContentText>

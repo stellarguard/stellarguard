@@ -11,7 +11,7 @@ import {
 import { inject, observer } from 'mobx-react';
 import config from '../../config';
 
-import { CopyToClipboard } from '../../components';
+import { CopyToClipboard, ExternalLink } from '../../components';
 
 const styles = theme => ({
   numbers: {
@@ -53,14 +53,9 @@ class SubmitMultiSigToStellar extends Component {
             <ListItemText
               primary={
                 <div>
-                  <a
-                    className={classes.link}
-                    href={this.stellarTransactionSignerHref}
-                    target="_blank"
-                    rel="noopener"
-                  >
+                  <ExternalLink to={this.stellarTransactionSignerHref}>
                     Sign and submit the transaction at Stellar.org
-                  </a>{' '}
+                  </ExternalLink>{' '}
                   or{' '}
                   <CopyToClipboard text={xdr}>
                     <span className={classes.link}>

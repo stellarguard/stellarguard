@@ -22,6 +22,14 @@ const styles = theme => ({
   },
   appBar: {
     backgroundColor: theme.palette.background.default
+  },
+  toolBar: {
+    [theme.breakpoints.only('sm')]: {
+      padding: '0 5%'
+    },
+    [theme.breakpoints.up('md')]: {
+      padding: '0 10%'
+    }
   }
 });
 
@@ -37,7 +45,7 @@ class AppHeader extends Component {
     return (
       <div className={classes.root}>
         <AppBar position="static" className={classes.appBar}>
-          <Toolbar>
+          <Toolbar className={classes.toolBar}>
             <Typography
               variant="h6"
               color="primary"

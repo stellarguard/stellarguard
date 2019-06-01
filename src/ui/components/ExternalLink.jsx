@@ -5,8 +5,11 @@ import { observer } from 'mobx-react';
 
 const styles = theme => ({
   link: {
-    color: theme.palette.primary.main,
-    textDecoration: 'none'
+    color: theme.palette.secondary.main,
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline'
+    }
   }
 });
 
@@ -14,12 +17,21 @@ const styles = theme => ({
 @observer
 class ExternalLink extends Component {
   render() {
-    const { classes, className, children, ...rest } = this.props;
+    const {
+      classes,
+      className,
+      children,
+      to,
+      href,
+      target = '_blank',
+      ...rest
+    } = this.props;
     return (
       <a
         className={cx(classes.link, className)}
-        target="_blank"
-        rel="noopener"
+        target={target}
+        rel="noopener noreferrer"
+        href={to || href}
         {...rest}
       >
         {children}

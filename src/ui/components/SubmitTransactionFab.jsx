@@ -22,7 +22,7 @@ class SubmitTransactionFab extends Component {
         <Fab
           component={Link}
           to="/transactions/new"
-          color="primary"
+          color="secondary"
           aria-label="New Transaction"
           className={classes.button}
         >

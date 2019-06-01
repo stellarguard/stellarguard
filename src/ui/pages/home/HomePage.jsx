@@ -23,28 +23,15 @@ import { observer, inject } from 'mobx-react';
 
 import config from '../../config';
 
-import { Link } from '../../components';
+import { Link, ExternalLink } from '../../components';
 
 const styles = theme => {
   return {
     root: {
       flex: '1 0 100%'
     },
-    gridContainer: {
-      padding: theme.spacing.unit,
-      overflow: 'hidden'
-    },
     gridItem: {
-      marginBottom: 2
-    },
-    link: {
-      color: theme.palette.primary.main,
-      cursor: 'pointer',
-      textDecoration: 'none'
-    },
-    secondaryLink: {
-      color: theme.palette.secondary.main,
-      textDecoration: 'none'
+      marginBottom: 8
     },
     infoCard: {
       padding: theme.spacing.unit * 6,
@@ -55,7 +42,7 @@ const styles = theme => {
       fontSize: '1rem'
     },
     cardHeadline: {
-      marginBottom: theme.spacing.unit * 3
+      marginBottom: theme.spacing.unit * 2
     },
     cardParagraph: {
       marginTop: theme.spacing.unit
@@ -83,7 +70,6 @@ class HomeInfoCard extends React.Component {
 @observer
 class SecurityInfoCard extends React.Component {
   render() {
-    const { classes } = this.props;
     return (
       <HomeInfoCard
         icon={SecurityIcon}
@@ -91,14 +77,9 @@ class SecurityInfoCard extends React.Component {
       >
         <InfoCardParagraph>
           StellarGuard utilizes the Stellar network&apos;s{' '}
-          <a
-            className={classes.link}
-            href="https://www.stellar.org/developers/guides/concepts/multi-sig.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <ExternalLink to="https://www.stellar.org/developers/guides/concepts/multi-sig.html">
             multisignature functionality
-          </a>{' '}
+          </ExternalLink>{' '}
           to protect your account.
         </InfoCardParagraph>
         <InfoCardParagraph>
@@ -108,14 +89,9 @@ class SecurityInfoCard extends React.Component {
         </InfoCardParagraph>
         <InfoCardParagraph>
           If StellarGuard had been around during{' '}
-          <a
-            className={classes.link}
-            href="https://cointelegraph.com/news/blackwallet-hack-400k-in-stellar-stolen-hosting-provider-possibly-at-fault"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <ExternalLink to="https://cointelegraph.com/news/blackwallet-hack-400k-in-stellar-stolen-hosting-provider-possibly-at-fault">
             the BlackWallet hack
-          </a>
+          </ExternalLink>
           , accounts protected by it would have been completely safe.
         </InfoCardParagraph>
       </HomeInfoCard>
@@ -169,14 +145,17 @@ class GetStartedInfoCard extends React.Component {
     const { classes } = this.props;
     return (
       <HomeInfoCard title="Get started in 3 easy steps">
-        <List>
+        <List disablePadding={true}>
           <ListItem>
             <Avatar className={classes.numbers}>1</Avatar>
             <ListItemText
               primary={
-                <a className={classes.link} onClick={this.onRegisterClick}>
+                <ExternalLink
+                  to="javascript:void()"
+                  onClick={this.onRegisterClick}
+                >
                   Register for your FREE StellarGuard account
-                </a>
+                </ExternalLink>
               }
             />
           </ListItem>
@@ -206,7 +185,7 @@ class TwoFactorAuthInfoCard extends React.Component {
         <InfoCardParagraph>
           StellarGuard supports two ways to authorize your transactions:
         </InfoCardParagraph>
-        <List>
+        <List disablePadding={true}>
           <ListItem>
             <Avatar className={classes.numbers}>
               <EmailIcon />

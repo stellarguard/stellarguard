@@ -139,10 +139,8 @@ class WalletCard extends Component {
     } = this.props;
     const { hovered } = this.state;
     return (
-      <a
-        href={to}
-        target="_blank"
-        rel="noopener"
+      <ExternalLink
+        to={to}
         className={classes.link}
         onMouseEnter={() => this.setState({ hovered: true })}
         onMouseLeave={() => this.setState({ hovered: false })}
@@ -172,7 +170,7 @@ class WalletCard extends Component {
             </div>
           </CardContent>
         </Card>
-      </a>
+      </ExternalLink>
     );
   }
 }

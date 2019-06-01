@@ -22,7 +22,7 @@ class DashboardFab extends Component {
         <Fab
           component={Link}
           to="/"
-          color="primary"
+          color="secondary"
           aria-label="Home"
           className={classes.button}
         >

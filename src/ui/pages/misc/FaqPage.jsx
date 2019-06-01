@@ -3,10 +3,11 @@ import { withStyles, Grid, Typography } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 
 import { observer } from 'mobx-react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { Page, DashboardFab, ScrollIntoView } from '../../components';
 import FaqItem from './FaqItem';
+import { Link, ExternalLink } from '../../components/index';
 
 const styles = theme => {
   return {
@@ -16,10 +17,6 @@ const styles = theme => {
     publicKey: {
       color: theme.palette.primary.main,
       overflowWrap: 'break-word'
-    },
-    link: {
-      color: theme.palette.primary.main,
-      textDecoration: 'none'
     }
   };
 };
@@ -115,12 +112,9 @@ class FaqPage extends Component {
 
             <Typography paragraph>
               If StellarGuard was used during{' '}
-              <a
-                className={classes.link}
-                href="https://cointelegraph.com/news/blackwallet-hack-400k-in-stellar-stolen-hosting-provider-possibly-at-fault"
-              >
+              <ExternalLink href="https://cointelegraph.com/news/blackwallet-hack-400k-in-stellar-stolen-hosting-provider-possibly-at-fault">
                 the BlackWallet hack
-              </a>
+              </ExternalLink>
               , your XLM would have been completely safe.
             </Typography>
           </FaqGridItem>
@@ -203,12 +197,9 @@ class FaqPage extends Component {
             <Typography paragraph>
               Even if your wallet is not listed there, you still may be able to
               use it if it lets you copy{' '}
-              <a
-                className={classes.link}
-                href="https://www.stellar.org/developers/horizon/reference/xdr.html"
-              >
+              <ExternalLink href="https://www.stellar.org/developers/horizon/reference/xdr.html">
                 signed transaction XDRs
-              </a>{' '}
+              </ExternalLink>{' '}
               so you can submit them to StellarGuard.
             </Typography>
           </FaqGridItem>
@@ -230,9 +221,9 @@ class FaqPage extends Component {
           >
             <Typography paragraph>
               Yes.{' '}
-              <a className={classes.link} href="https://test.stellarguard.me">
+              <ExternalLink href="https://test.stellarguard.me">
                 https://test.stellarguard.me
-              </a>{' '}
+              </ExternalLink>{' '}
               uses the Testnet.
             </Typography>
           </FaqGridItem>
@@ -256,12 +247,9 @@ class FaqPage extends Component {
           >
             <Typography paragraph>
               Check out the convient{' '}
-              <a
-                className={classes.link}
-                href="https://github.com/stellarguard/stellarguard-js-sdk"
-              >
+              <ExternalLink href="https://github.com/stellarguard/stellarguard-js-sdk">
                 StellarGuard JavaScript SDK
-              </a>{' '}
+              </ExternalLink>{' '}
               for implementation details and examples.
             </Typography>
             <Typography paragraph>

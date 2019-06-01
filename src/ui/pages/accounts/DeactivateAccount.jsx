@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import { withStyles, List, ListItem, ListItemText, Avatar } from '@material-ui/core';
+import {
+  withStyles,
+  List,
+  ListItem,
+  ListItemText,
+  Avatar
+} from '@material-ui/core';
 import { observer, inject } from 'mobx-react';
 
 import config from '../../config';
 import SubmitTransactionSuccess from '../transactions/SubmitTransactionSuccess';
 import SubmitTransactionForm from '../transactions/SubmitTransactionForm';
-import { CopyToClipboard } from '../../components';
+import { CopyToClipboard, ExternalLink } from '../../components';
 
 const styles = theme => ({
   numbers: {
     backgroundColor: theme.palette.primary.main
-  },
-  link: {
-    color: theme.palette.primary.main,
-    textDecoration: 'none',
-    cursor: 'pointer'
   }
 });
 
@@ -58,15 +59,10 @@ class DeactivateAccount extends Component {
             <ListItemText
               primary={
                 <div>
-                  <a
-                    className={classes.link}
-                    href={this.stellarTransactionSignerHref}
-                    target="_blank"
-                    rel="noopener"
-                  >
+                  <ExternalLink to={this.stellarTransactionSignerHref}>
                     Sign the transaction to remove the StellarGuard
                     multisignature and copy the XDR so it can be pasted below
-                  </a>{' '}
+                  </ExternalLink>{' '}
                   or{' '}
                   <CopyToClipboard text={deactivateAccountXdr}>
                     <span className={classes.link}>

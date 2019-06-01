@@ -14,12 +14,14 @@ const styles = theme => ({
   content: {
     width: '100%',
     flexGrow: 1,
-    padding: '0 10%',
     [theme.breakpoints.only('xs')]: {
-      padding: '0 2%'
+      padding: `0 ${theme.spacing.unit * 2}px`
     },
     [theme.breakpoints.only('sm')]: {
       padding: '0 5%'
+    },
+    [theme.breakpoints.up('md')]: {
+      padding: '0 10%'
     }
   }
 });
