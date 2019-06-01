@@ -50,7 +50,7 @@ const styles = theme => ({
   },
   logo: {
     margin: '20px 0',
-    height: '120vw',
+    height: '25vw',
     maxHeight: 150
   }
 });

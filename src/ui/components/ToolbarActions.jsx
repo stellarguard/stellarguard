@@ -14,6 +14,9 @@ import history from '../history';
 import { ButtonLink } from '../components';
 
 const styles = theme => ({
+  root: {
+    color: '#FFF'
+  },
   leftIcon: {
     marginRight: theme.spacing.unit
   }
@@ -50,7 +53,7 @@ class ToolbarActions extends Component {
         <div className={classes.root}>
           {rootStore.currentUser.hasAccounts ? (
             <ButtonLink
-              color="secondary"
+              color="inherit"
               to="/transactions/new"
               size="small"
               data-test="toolbar-actions-new-transaction"
@@ -60,7 +63,7 @@ class ToolbarActions extends Component {
             </ButtonLink>
           ) : null}
           <Button
-            color="secondary"
+            color="inherit"
             onClick={this.handleUserMenuOpen}
             size="small"
             data-test="toolbar-actions-user-menu-button"
@@ -94,14 +97,14 @@ class ToolbarActions extends Component {
       <div>
         <Button
           data-test="toolbar-actions-register"
-          color="secondary"
+          color="inherit"
           onClick={() => rootStore.uiState.openRegisterDialog()}
         >
           Register
         </Button>
         <Button
           data-test="toolbar-actions-signin"
-          color="secondary"
+          color="inherit"
           onClick={() => rootStore.uiState.openSignInDialog()}
         >
           Sign in

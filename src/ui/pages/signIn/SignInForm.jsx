@@ -138,7 +138,7 @@ class SignInForm extends React.Component {
                   to="/forgot-password"
                   onClick={this.forgotPassword}
                   className={classes.forgotPassword}
-                  color="primary"
+                  color="secondary"
                   variant="caption"
                 >
                   Forgot your password?

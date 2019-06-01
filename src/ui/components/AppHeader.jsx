@@ -20,9 +20,6 @@ const styles = theme => ({
     flex: 1,
     textDecoration: 'none'
   },
-  appBar: {
-    backgroundColor: theme.palette.background.default
-  },
   toolBar: {
     [theme.breakpoints.only('sm')]: {
       padding: '0 5%'
@@ -48,7 +45,7 @@ class AppHeader extends Component {
           <Toolbar className={classes.toolBar}>
             <Typography
               variant="h6"
-              color="primary"
+              color="inherit"
               className={classes.name}
               component={Link}
               to="/"
