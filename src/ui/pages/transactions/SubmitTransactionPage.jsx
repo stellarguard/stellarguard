@@ -14,7 +14,11 @@ import SubmitTransactionForm from './SubmitTransactionForm';
 import SubmitTransactionSuccess from './SubmitTransactionSuccess';
 
 const styles = theme => {
-  return {};
+  return {
+    card: {
+      marginTop: theme.spacing.unit * 2
+    }
+  };
 };
 
 @withStyles(styles)
@@ -44,7 +48,7 @@ class SubmitTransactionPage extends Component {
           For intructions about more advanced operations{' '}
           <Link to="/help/new-transaction-stellar-labs">click here.</Link>
         </Typography>
-        <Card>
+        <Card className={classes.card}>
           <CardContent>
             {transaction ? (
               <SubmitTransactionSuccess transaction={transaction} />

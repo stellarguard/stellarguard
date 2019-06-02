@@ -9,6 +9,7 @@ import StellarAccountsCard from './StellarAccountsCard';
 import SummaryCard from './SummaryCard';
 
 import { inject, observer } from 'mobx-react';
+import { Helmet } from 'react-helmet';
 
 const styles = theme => ({
   sideColumn: {
@@ -83,6 +84,9 @@ class DashboardPage extends Component {
     const { classes, rootStore } = this.props;
     return (
       <Page>
+        <Helmet>
+          <title>StellarGuard</title>
+        </Helmet>{' '}
         <Grid container spacing={16}>
           <Grid
             container

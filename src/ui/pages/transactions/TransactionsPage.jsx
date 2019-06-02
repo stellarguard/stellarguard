@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import { withStyles, Grid, Typography } from '@material-ui/core';
+import {
+  withStyles,
+  Grid,
+  Typography,
+  Card,
+  CardContent
+} from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 
 import { inject, observer } from 'mobx-react';
 import { computed } from 'mobx';
 import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
 
-import { Page, DashboardFab } from '../../components';
+import { Page, DashboardFab, Link } from '../../components';
 import TransactionCard from './TransactionCard';
 
 const styles = theme => {
@@ -56,21 +61,19 @@ class TransactionsPage extends Component {
               ))
             ) : (
               <Grid item xs={12}>
-                <Typography variant="h4" gutterBottom>
-                  You&apos;re all set!
-                </Typography>
-                <Typography variant="h4" gutterBottom>
-                  You have no more pending transactions.
-                </Typography>
-                <Typography
-                  color="primary"
-                  variant="h4"
-                  component={Link}
-                  className={classes.goBack}
-                  to="/"
-                >
-                  Go Back Home
-                </Typography>
+                <Card>
+                  <CardContent>
+                    <Typography variant="h5" gutterBottom>
+                      You&apos;re all set!
+                    </Typography>
+                    <Typography variant="h5" gutterBottom>
+                      You have no more pending transactions.
+                    </Typography>
+                    <Typography variant="h5" className={classes.goBack}>
+                      <Link to="/">Go Back Home</Link>
+                    </Typography>
+                  </CardContent>
+                </Card>
               </Grid>
             )}
           </Grid>

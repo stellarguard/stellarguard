@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 
 const styles = theme => ({
   title: {
-    marginBottom: theme.spacing.unit * 2
+    marginBottom: theme.spacing.unit * 3
   }
 });
 
@@ -15,7 +15,7 @@ class PageTitle extends Component {
       <Helmet key="helmet">
         <title>StellarGuard | {children}</title>
       </Helmet>,
-      <Typography key="title" className={classes.title} variant="h5">
+      <Typography key="title" className={classes.title} variant="h4">
         {children}
       </Typography>
     ];
