@@ -18,7 +18,11 @@ const styles = theme => ({
   },
   name: {
     flex: 1,
-    textDecoration: 'none'
+    textDecoration: 'none',
+    color: theme.palette.primary.main
+  },
+  appBar: {
+    backgroundColor: theme.palette.background.default
   },
   toolBar: {
     [theme.breakpoints.only('sm')]: {
@@ -41,11 +45,15 @@ class AppHeader extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <AppBar position="static" className={classes.appBar}>
+        <AppBar
+          position="static"
+          className={classes.appBar}
+          elevation={0}
+          color="none"
+        >
           <Toolbar className={classes.toolBar}>
             <Typography
               variant="h6"
-              color="inherit"
               className={classes.name}
               component={Link}
               to="/"

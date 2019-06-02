@@ -101,7 +101,7 @@ class AppFooter extends Component {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h5" gutterBottom>
                 Links
               </Typography>
               <ExternalFooterLink onClick={this.openDonateDialog}>
@@ -109,14 +109,11 @@ class AppFooter extends Component {
               </ExternalFooterLink>
               <FooterLink to="/faq">FAQ</FooterLink>
               <FooterLink to="/supported-wallets">Supported Wallets</FooterLink>
-              <ExternalFooterLink href="https://github.com/stellarguard/stellarguard/issues">
-                Request a Feature or Report a Bug
-              </ExternalFooterLink>
-              <ExternalFooterLink href="https://www.reddit.com/r/StellarGuard/">
-                Discuss StellarGuard
-              </ExternalFooterLink>
               <ExternalFooterLink href="https://github.com/stellarguard/stellarguard">
                 Source Code
+              </ExternalFooterLink>
+              <ExternalFooterLink href="https://medium.com/@stellarguard">
+                Blog
               </ExternalFooterLink>
               <FooterLink to="/terms-of-service">Terms of Service</FooterLink>
               <FooterLink to="/privacy-policy">Privacy Policy</FooterLink>
