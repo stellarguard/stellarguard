@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withStyles, Typography, Button } from '@material-ui/core';
 import { inject, observer } from 'mobx-react';
-import { Link } from 'react-router-dom';
 
 import config from '../../config';
+import { ButtonLink } from '../../components';
 
 import logo from '../../images/logo.svg';
 
@@ -106,13 +106,9 @@ class Hero extends Component {
                 >
                   Get Started for Free
                 </Button>
-                <Button
-                  to="/faq"
-                  component={Link}
-                  className={classes.learnMore}
-                >
+                <ButtonLink to="/faq" color="secondary">
                   Learn More
-                </Button>
+                </ButtonLink>
               </div>
               <Typography gutterBottom variant="subtitle1">
                 Already have an account?{' '}
