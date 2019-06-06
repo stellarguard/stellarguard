@@ -83,16 +83,8 @@ class SecurityInfoCard extends React.Component {
           to protect your account.
         </InfoCardParagraph>
         <InfoCardParagraph>
-          That means that even if a hacker steals your secret key or the wallet
-          you&apos;re using has a security flaw, StellarGuard will prevent them
-          from taking your XLM.
-        </InfoCardParagraph>
-        <InfoCardParagraph>
-          If StellarGuard had been around during{' '}
-          <ExternalLink to="https://cointelegraph.com/news/blackwallet-hack-400k-in-stellar-stolen-hosting-provider-possibly-at-fault">
-            the BlackWallet hack
-          </ExternalLink>
-          , accounts protected by it would have been completely safe.
+          That means that even if a hacker steals your secret key, your XLM
+          stays safe.
         </InfoCardParagraph>
       </HomeInfoCard>
     );
@@ -224,13 +216,13 @@ class HomePage extends React.Component {
         <div className={classes.gridContainer}>
           <Grid container justify="space-between" spacing={0}>
             <Grid item xs={12} className={classes.gridItem}>
-              <UseYourWalletInfoCard />
+              <SecurityInfoCard />
             </Grid>
             <Grid item xs={12} className={classes.gridItem}>
               <TwoFactorAuthInfoCard />
             </Grid>
             <Grid item xs={12} className={classes.gridItem}>
-              <SecurityInfoCard />
+              <UseYourWalletInfoCard />
             </Grid>
             <Grid item xs={12} className={classes.gridItem}>
               <GetStartedInfoCard />

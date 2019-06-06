@@ -6,17 +6,23 @@ import {
   Toolbar,
   IconButton
 } from '@material-ui/core';
-import { Menu as MenuIcon } from '@material-ui/icons';
 import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import ToolbarActions from './ToolbarActions';
 import config from '../config';
 
+import { LogoAvatar } from '../components';
+
 const styles = theme => ({
   root: {
     width: '100%'
   },
+  logo: {
+    width: 24,
+    height: 24
+  },
   name: {
+    marginLeft: theme.spacing.unit,
     flex: 1,
     textDecoration: 'none',
     color: theme.palette.primary.main
@@ -52,6 +58,7 @@ class AppHeader extends Component {
           color="none"
         >
           <Toolbar className={classes.toolBar}>
+            <LogoAvatar className={classes.logo} />
             <Typography
               variant="h6"
               className={classes.name}
