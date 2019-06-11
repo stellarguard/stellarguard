@@ -31,7 +31,7 @@ const styles = theme => {
       flex: '1 0 100%'
     },
     gridItem: {
-      marginBottom: 8
+      marginBottom: theme.spacing.unit * 2
     },
     infoCard: {
       padding: theme.spacing.unit * 6,

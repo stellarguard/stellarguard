@@ -10,7 +10,8 @@ import { Link } from 'react-router-dom';
 const styles = theme => ({
   root: {
     color: theme.palette.text.secondary,
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 6
   },
   footer: {
     [theme.breakpoints.only('xs')]: {

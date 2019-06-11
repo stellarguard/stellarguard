@@ -18,11 +18,11 @@ const styles = theme => ({
     width: '100%'
   },
   logo: {
-    width: 24,
-    height: 24
+    width: 26,
+    height: 26
   },
   name: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: 4,
     flex: 1,
     textDecoration: 'none',
     color: theme.palette.primary.main

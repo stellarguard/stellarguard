@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withStyles, Avatar } from '@material-ui/core';
 import cx from 'classnames';
 
-import stellarGuardLogo from '../images/logo.svg';
+import stellarGuardLogo from '../images/logo-with-margins.svg';
 
 const styles = theme => ({
   logo: {
