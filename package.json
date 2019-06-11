@@ -5,7 +5,7 @@
   "repository": "https://github.com/stellarguard/stellarguard.git",
   "author": "Paul Selden <paul.selden@stellarguard.me>",
   "license": "none",
-  "private": true,
+  "private": false,
   "engines": {
     "node": "10.x"
   },
@@ -75,7 +75,8 @@
     "build": "parcel build src/ui/index.html",
     "console": "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared node",
     "cypress": "cypress open",
-    "test": "ava"
+    "test": "ava",
+    "knownAccounts": "node scripts/knownAccounts && git add src/ui/knownAccounts.json && git commit -m 'Update known accounts'"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
