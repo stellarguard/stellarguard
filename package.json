@@ -4,7 +4,7 @@
   "main": "index.js",
   "repository": "https://github.com/stellarguard/stellarguard.git",
   "author": "Paul Selden <paul.selden@stellarguard.me>",
-  "license": "none",
+  "license": "MIT",
   "private": false,
   "engines": {
     "node": "10.x"
