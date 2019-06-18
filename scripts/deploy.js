@@ -128,6 +128,7 @@ function deploy() {
     SEND_GRID_API_KEY: process.env.SEND_GRID_API_KEY,
     RECAPTCHA_SITE_KEY: process.env.RECAPTCHA_SITE_KEY,
     RECAPTCHA_SECRET: process.env.RECAPTCHA_SECRET,
+    REDIS_CONNECTION_STRING: process.env.REDIS_CONNECTION_STRING,
     USE_STELLAR_PUBLIC_NETWORK: process.env.USE_STELLAR_PUBLIC_NETWORK
   };
   const locals = Object.assign({}, appConfig, config.appYaml);
