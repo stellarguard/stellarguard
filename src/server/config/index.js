@@ -1,4 +1,5 @@
 const pg = require('./pg');
+const redis = require('./redis');
 const env = require('./env');
 
 class Config {
@@ -16,6 +17,10 @@ class Config {
 
   get pg() {
     return pg;
+  }
+
+  get redis() {
+    return redis;
   }
 
   get isPublicNetwork() {

@@ -15,7 +15,10 @@ const env = {
   // postgres
   pgHost: process.env.PG_HOST,
   pgUser: process.env.PG_USER,
-  pgPassword: process.env.PG_PASSWORD
+  pgPassword: process.env.PG_PASSWORD,
+
+  // redis
+  redisConnectionString: process.env.REDIS_CONNECTION_STRING
 };
 
 function validateEnv(env) {

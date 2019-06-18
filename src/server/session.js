@@ -6,6 +6,7 @@ const session = require('express-session');
 const config = require('./config');
 const PgSession = require('connect-pg-simple')(session);
 const ms = require('ms');
+
 const cookie = {
   path: '/',
   httpOnly: true,
@@ -15,12 +16,13 @@ const cookie = {
 };
 const csrfMiddleware = require('csurf')({ cookie });
 
-const { users, db, tfa } = require('./lib');
+const { users, db, tfa, rateLimit } = require('./lib');
 
 const {
   InvalidCredentialsError,
   RequiresAuthenticatorError,
-  InvalidAuthenticatorCodeError
+  InvalidAuthenticatorCodeError,
+  RateLimitedError
 } = require('errors/session');
 
 function configure() {
@@ -47,6 +49,11 @@ function configure() {
       async function(req, email, password, done) {
         try {
           const { recaptchaToken } = req.body;
+          const { limited, retryIn } = await isSigninRateLimited(req, email);
+          if (limited) {
+            return done(new RateLimitedError({ retryIn }));
+          }
+
           await users.recaptchaValidator.validateSignin({
             recaptchaToken,
             ipAddress: req.ip
@@ -102,6 +109,38 @@ function ensureLoggedIn(options) {
     }
 
     next();
+  };
+}
+
+async function isSigninRateLimited(req, email) {
+  const MAX_EMAIL_SIGN_INS_PER_MINUTE = 6;
+  const emailRateLimit = rateLimit.limiter.limit({
+    key: `signin/email/${email.trim().toLowerCase()}`,
+    burst: MAX_EMAIL_SIGN_INS_PER_MINUTE,
+    rate: MAX_EMAIL_SIGN_INS_PER_MINUTE,
+    period: ms('1m'),
+    cost: 1
+  });
+
+  // also throttle on by ip address to stop attacks against multiple users
+  const MAX_IP_SIGN_INS_PER_MINUTE = 60;
+  const ipRateLimit = rateLimit.limiter.limit({
+    key: `signin/ip/${req.ip}`,
+    burst: MAX_IP_SIGN_INS_PER_MINUTE,
+    rate: MAX_IP_SIGN_INS_PER_MINUTE,
+    period: ms('1m'),
+    cost: 1
+  });
+
+  const [emailRateLimitResult, ipRateLimitResult] = await Promise.all([
+    emailRateLimit,
+    ipRateLimit
+  ]);
+
+  console.log(emailRateLimitResult);
+  return {
+    limited: emailRateLimitResult.limited || ipRateLimitResult.limited,
+    retryIn: Math.max(emailRateLimitResult.retryIn, ipRateLimitResult.retryIn)
   };
 }
 

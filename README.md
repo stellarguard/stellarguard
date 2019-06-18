@@ -14,6 +14,8 @@ In order to develop locally, you will need to install the following on your syst
 
 [Postgres](https://www.postgresql.org/download/) - Requires Postgres 9.3 or above
 
+[Redis](https://redis.io/download) - Requires Redis 4.0 or above
+
 After forking and cloning the repo:
 
 1.  Start the Postgres server
@@ -27,18 +29,19 @@ After forking and cloning the repo:
 
 ## Server
 
-* [NodeJS](https://nodejs.org/en/)
-* [Express](https://expressjs.com/)
+- [NodeJS](https://nodejs.org/en/)
+- [Express](https://expressjs.com/)
 
 ## Front End
 
-* [React](https://reactjs.org/)
-* [Material UI](https://material-ui.com/)
-* [MobX](https://mobx.js.org/)
+- [React](https://reactjs.org/)
+- [Material UI](https://material-ui.com/)
+- [MobX](https://mobx.js.org/)
 
-## Database
+## Data stores
 
-* [Postgres](https://www.postgresql.org/)
+- [Postgres](https://www.postgresql.org/)
+- [Redis](https://redis.io)
 
 # Project Structure
 

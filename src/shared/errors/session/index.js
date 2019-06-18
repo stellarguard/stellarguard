@@ -1,4 +1,5 @@
 const AppError = require('../AppError');
+const ms = require('ms');
 
 class RequiresAuthenticatorError extends AppError {
   constructor() {
@@ -30,8 +31,21 @@ class InvalidAuthenticatorCodeError extends AppError {
   }
 }
 
+class RateLimitedError extends AppError {
+  constructor({ retryIn }) {
+    super({
+      statusCode: 401,
+      code: 1003,
+      message: `Too many failed sign-in attempts. Try again in ${ms(retryIn, {
+        long: true
+      })}.`
+    });
+  }
+}
+
 module.exports = {
   InvalidCredentialsError,
   RequiresAuthenticatorError,
-  InvalidAuthenticatorCodeError
+  InvalidAuthenticatorCodeError,
+  RateLimitedError
 };

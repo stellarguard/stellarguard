@@ -8,5 +8,6 @@ module.exports = {
   utils: require('./utils'),
   constellation: require('./constellation'),
   interstellarExchange: require('./interstellarExchange'),
+  rateLimit: require('./rateLimit'),
   db: require('./db')
 };
