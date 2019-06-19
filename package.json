@@ -22,6 +22,7 @@
     "connect-pg-simple": "^5.0.0",
     "constellation-api": "johansten/constellation-api",
     "cookie-parser": "~1.4.3",
+    "copyfiles": "^2.1.0",
     "cors": "^2.8.4",
     "cryptr": "^2.0.0",
     "csurf": "^1.9.0",
@@ -78,7 +79,8 @@
     "console": "source .env.dev && DEV_MODE=1 NODE_PATH=src/shared node",
     "cypress": "cypress open",
     "test": "ava",
-    "knownAccounts": "node scripts/knownAccounts && git add src/ui/knownAccounts.json && git commit -m 'Update known accounts'"
+    "knownAccounts": "node scripts/knownAccounts && git add src/ui/knownAccounts.json && git commit -m 'Update known accounts'",
+    "postinstall": "copyfiles -f -V src/server/lib/rateLimit/gcra.lua node_modules/redis-gcra/lib"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
