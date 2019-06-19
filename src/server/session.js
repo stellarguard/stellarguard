@@ -74,7 +74,7 @@ function configure() {
               return done(new RequiresAuthenticatorError());
             }
 
-            if (!tfa.authenticatorService.verifyForUser(user, code)) {
+            if (!(await tfa.authenticatorService.verifyForUser(user, code))) {
               return done(new InvalidAuthenticatorCodeError());
             }
           }
@@ -113,35 +113,7 @@ function ensureLoggedIn(options) {
 }
 
 async function isSigninRateLimited(req, email) {
-  const MAX_EMAIL_SIGN_INS_PER_MINUTE = 6;
-  const emailRateLimit = rateLimit.limiter.limit({
-    key: `signin/email/${email.trim().toLowerCase()}`,
-    burst: MAX_EMAIL_SIGN_INS_PER_MINUTE,
-    rate: MAX_EMAIL_SIGN_INS_PER_MINUTE,
-    period: ms('1m'),
-    cost: 1
-  });
-
-  // also throttle on by ip address to stop attacks against multiple users
-  const MAX_IP_SIGN_INS_PER_MINUTE = 60;
-  const ipRateLimit = rateLimit.limiter.limit({
-    key: `signin/ip/${req.ip}`,
-    burst: MAX_IP_SIGN_INS_PER_MINUTE,
-    rate: MAX_IP_SIGN_INS_PER_MINUTE,
-    period: ms('1m'),
-    cost: 1
-  });
-
-  const [emailRateLimitResult, ipRateLimitResult] = await Promise.all([
-    emailRateLimit,
-    ipRateLimit
-  ]);
-
-  console.log(emailRateLimitResult);
-  return {
-    limited: emailRateLimitResult.limited || ipRateLimitResult.limited,
-    retryIn: Math.max(emailRateLimitResult.retryIn, ipRateLimitResult.retryIn)
-  };
+  return await rateLimit.signin.limit(email, req.ip);
 }
 
 function ensureLoggedOut(options) {

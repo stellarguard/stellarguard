@@ -5,6 +5,7 @@ const {
 } = require('errors/authenticator');
 const authenticatorRepository = require('./authenticatorRepository');
 const userRepository = require('../users/userRepository');
+const rateLimit = require('../rateLimit');
 
 class AuthenticatorService {
   async generateSecret(user) {
@@ -44,8 +45,15 @@ class AuthenticatorService {
     return await authenticatorRepository.getForUser(user);
   }
 
-  verifyForUser(user, code) {
-    return authenticatorOtp.verifyToken(code, user.authenticator.secret);
+  async verifyForUser(user, code) {
+    const { limited, retryIn, remaining } = await rateLimit.authenticator.limit(
+      user.id,
+      code
+    );
+    console.log(limited, retryIn, remaining);
+    return (
+      !limited && authenticatorOtp.verifyToken(code, user.authenticator.secret)
+    );
   }
 }
 

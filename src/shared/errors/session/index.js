@@ -33,10 +33,11 @@ class InvalidAuthenticatorCodeError extends AppError {
 
 class RateLimitedError extends AppError {
   constructor({ retryIn }) {
+    const time = Math.max(1000, retryIn); // don't show "ms"
     super({
       statusCode: 401,
       code: 1003,
-      message: `Too many failed sign-in attempts. Try again in ${ms(retryIn, {
+      message: `Too many failed sign-in attempts. Try again in ${ms(time, {
         long: true
       })}.`
     });

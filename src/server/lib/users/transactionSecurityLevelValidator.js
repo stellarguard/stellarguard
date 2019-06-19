@@ -31,7 +31,7 @@ exports.validate = async function({ user, transactionSecurityLevel, code }) {
       if (!user.authenticator) {
         throw new AuthenticatorNotActiveError();
       }
-      if (!authenticatorService.verifyForUser(user, code)) {
+      if (!(await authenticatorService.verifyForUser(user, code))) {
         throw new AuthenticatorVerificationError();
       }
     } else if (currentTransactionSecurityLevel === 'email') {
