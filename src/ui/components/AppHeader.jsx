@@ -55,7 +55,7 @@ class AppHeader extends Component {
           position="static"
           className={classes.appBar}
           elevation={0}
-          color="none"
+          color="inherit"
         >
           <Toolbar className={classes.toolBar}>
             <LogoAvatar className={classes.logo} />

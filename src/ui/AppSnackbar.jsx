@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { withStyles, Snackbar, Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
+import { Snackbar } from './components';
 
 import { inject, observer } from 'mobx-react';
 
@@ -15,10 +16,6 @@ class AppSnackbar extends Component {
 
   render() {
     const snackbar = this.props.rootStore.uiState.snackbar;
-    if (!snackbar) {
-      return null;
-    }
-
     const anchorOrigin = {
       vertical: snackbar.position || 'top',
       horizontal: 'center'
@@ -26,17 +23,14 @@ class AppSnackbar extends Component {
 
     return (
       <Snackbar
-        anchorOrigin={anchorOrigin}
-        autoHideDuration={snackbar.duration || 5000}
-        open={!!snackbar}
+        position={anchorOrigin}
+        duration={snackbar.duration || 5000}
+        open={snackbar.open}
         onClose={this.closeSnackbar}
-        message={snackbar.message}
-        action={
-          <Button color="secondary" size="small" onClick={this.closeSnackbar}>
-            OK
-          </Button>
-        }
-      />
+        variant={snackbar.variant}
+      >
+        {snackbar.message}
+      </Snackbar>
     );
   }
 }

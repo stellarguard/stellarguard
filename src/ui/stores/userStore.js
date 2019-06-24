@@ -70,7 +70,8 @@ export default class UserStore {
         runInAction(() => {
           this.rootStore.uiState.showSnackbar({
             message: `Transaction Security Level Changed`,
-            duration: 2000
+            duration: 2000,
+            variant: 'warning'
           });
           this.rootStore.currentUser.transactionSecurityLevel = transactionSecurityLevel;
         });

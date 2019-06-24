@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 
 const styles = theme => ({
   link: {
-    color: theme.palette.secondary.main,
+    color: theme.palette.secondary.light,
     textDecoration: 'none',
     '&:hover': {
       textDecoration: 'underline'

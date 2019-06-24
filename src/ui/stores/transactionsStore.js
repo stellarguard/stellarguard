@@ -60,7 +60,8 @@ export default class TransactionsStore {
     }
     this.rootStore.uiState.showSnackbar({
       message: `Transaction Authorized`,
-      duration: 2500
+      duration: 2500,
+      variant: 'success'
     });
     this.addTransaction(transaction);
     return transaction;
@@ -71,7 +72,8 @@ export default class TransactionsStore {
     const transaction = await transactionsApi.denyTransaction(id);
     this.rootStore.uiState.showSnackbar({
       message: `Transaction Denied`,
-      duration: 2500
+      duration: 2500,
+      variant: 'error'
     });
     this.addTransaction(transaction);
     return transaction;
