@@ -74,7 +74,10 @@ class ExchangeRibbon extends Component {
 
 const styles = theme => ({
   link: {
-    textDecoration: 'none'
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'none'
+    }
   },
   card: { position: 'relative', overflow: 'hidden' },
   content: {

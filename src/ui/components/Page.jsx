@@ -4,7 +4,6 @@ import PageTitle from './PageTitle';
 import AppLoader from '../AppLoader';
 const styles = theme => ({
   root: {
-    padding: theme.spacing.unit * 2,
     height: '100%',
     minHeight: 'calc(100vh - 130px)',
     maxWidth: '1280px',
