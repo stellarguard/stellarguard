@@ -1,6 +1,9 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
+import config from '../config';
 
 import AddStellarUiState from './addStellarUiState';
+
+const SCF_BEG_COOKIE = 'show_scf_beg';
 
 export default class UiStateStore {
   @observable isSignInDialogOpen = false;
@@ -76,5 +79,33 @@ export default class UiStateStore {
     }
   }
 
+  @observable showScfBeg = config.showScfBeg && !getCookie(SCF_BEG_COOKIE);
+
+  @action
+  closeScfBeg() {
+    setCookie(SCF_BEG_COOKIE, 1);
+    this.showScfBeg = false;
   }
+
+  @computed
+  get shouldShowScfBeg() {
+    return this.showScfBeg;
+  }
+}
+
+function setCookie(name, value, days) {
+  let expires;
+  if (days) {
+    let date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = '; expires=' + date.toGMTString();
+  } else {
+    expires = '';
+  }
+  document.cookie = name + '=' + value + expires + '; path=/';
+}
+
+function getCookie(a) {
+  var b = document.cookie.match('(^|[^;]+)\\s*' + a + '\\s*=\\s*([^;]+)');
+  return b ? b.pop() : '';
 }

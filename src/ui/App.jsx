@@ -7,6 +7,7 @@ import AppTheme from './AppTheme';
 import AppContent from './AppContent';
 import AppDialogs from './AppDialogs';
 import AppSnackbar from './AppSnackbar';
+import SCFBeg from './components/SCFBeg';
 
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router';
@@ -28,6 +29,7 @@ class App extends React.Component {
         <AppHeader />
         <AppContent />
         <AppFooter />
+        <SCFBeg />
       </AppTheme>
     );
   }
