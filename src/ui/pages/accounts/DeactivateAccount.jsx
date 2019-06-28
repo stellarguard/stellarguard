@@ -11,7 +11,7 @@ import { observer, inject } from 'mobx-react';
 import config from '../../config';
 import SubmitTransactionSuccess from '../transactions/SubmitTransactionSuccess';
 import SubmitTransactionForm from '../transactions/SubmitTransactionForm';
-import { CopyToClipboard, ExternalLink } from '../../components';
+import { CopyToClipboard, Link, ExternalLink } from '../../components';
 
 const styles = theme => ({
   numbers: {
@@ -65,9 +65,9 @@ class DeactivateAccount extends Component {
                   </ExternalLink>{' '}
                   or{' '}
                   <CopyToClipboard text={deactivateAccountXdr}>
-                    <span className={classes.link}>
+                    <Link>
                       Copy the transaction XDR and sign it in your own wallet
-                    </span>
+                    </Link>
                   </CopyToClipboard>
                 </div>
               }
