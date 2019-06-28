@@ -11,16 +11,11 @@ import {
 import { inject, observer } from 'mobx-react';
 import config from '../../config';
 
-import { CopyToClipboard, ExternalLink } from '../../components';
+import { CopyToClipboard, Link, ExternalLink } from '../../components';
 
 const styles = theme => ({
   numbers: {
     backgroundColor: theme.palette.primary.main
-  },
-  link: {
-    color: theme.palette.primary.main,
-    textDecoration: 'none',
-    cursor: 'pointer'
   }
 });
 
@@ -58,9 +53,9 @@ class SubmitMultiSigToStellar extends Component {
                   </ExternalLink>{' '}
                   or{' '}
                   <CopyToClipboard text={xdr}>
-                    <span className={classes.link}>
+                    <Link>
                       Copy the transaction XDR to submit to your own wallet
-                    </span>
+                    </Link>
                   </CopyToClipboard>
                 </div>
               }
@@ -72,12 +67,9 @@ class SubmitMultiSigToStellar extends Component {
               primary={
                 <span>
                   After submitting,{' '}
-                  <span
-                    className={classes.link}
-                    onClick={this.activateStellarGuard}
-                  >
+                  <Link onClick={this.activateStellarGuard}>
                     Activate StellarGuard
-                  </span>
+                  </Link>
                 </span>
               }
             />

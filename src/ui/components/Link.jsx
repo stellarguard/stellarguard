@@ -17,10 +17,25 @@ const styles = theme => ({
 @observer
 @withStyles(styles)
 class Link extends Component {
+  onClick = event => {
+    const { onClick, to } = this.props;
+    if (!to) {
+      event.preventDefault();
+    }
+
+    if (onClick) {
+      return onClick(event);
+    }
+  };
+
   render() {
     const { classes, className, children, ...rest } = this.props;
     return (
-      <RouterLink className={cx(classes.link, className)} {...rest}>
+      <RouterLink
+        className={cx(classes.link, className)}
+        {...rest}
+        onClick={this.onClick}
+      >
         {children}
       </RouterLink>
     );
