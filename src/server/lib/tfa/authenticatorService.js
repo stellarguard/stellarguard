@@ -27,7 +27,13 @@ class AuthenticatorService {
       throw new AuthenticatorNotActiveError();
     }
 
-    if (!authenticatorOtp.verifyToken(verificationCode, authenticator.secret)) {
+    const isValid = await this._verifyForUser(
+      user,
+      verificationCode,
+      authenticator.secret
+    );
+
+    if (!isValid) {
       throw new AuthenticatorVerificationError();
     }
 
@@ -46,14 +52,35 @@ class AuthenticatorService {
   }
 
   async verifyForUser(user, code) {
-    const { limited, retryIn, remaining } = await rateLimit.authenticator.limit(
-      user.id,
+    return await this._verifyForUser(user, code, user.authenticator.secret);
+  }
+
+  async _verifyForUser(user, code, secret) {
+    const userId = user.id;
+    const singleCodeRateLimit = await rateLimit.authenticator.limitSingleCode(
+      userId,
       code
     );
-    console.log(limited, retryIn, remaining);
-    return (
-      !limited && authenticatorOtp.verifyToken(code, user.authenticator.secret)
+
+    if (singleCodeRateLimit.limited) {
+      return false;
+    }
+
+    // we only actually only want to count the attempt against the rate limit if it's a failure
+    // but we still want to reject the request if it currently is limited
+    const attemptsRateLimit = await rateLimit.authenticator.peekFailedAttempts(
+      userId
     );
+
+    if (attemptsRateLimit.limited) {
+      return false;
+    }
+
+    if (authenticatorOtp.verifyToken(code, secret)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 

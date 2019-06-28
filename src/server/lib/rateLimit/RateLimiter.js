@@ -37,6 +37,13 @@ class RateLimiterBuilder {
     return this;
   }
 
+  perTimePeriod(n, period) {
+    this.rate = n;
+    this.burst = n;
+    this.period = ms(period);
+    return this;
+  }
+
   cost(c) {
     this.c = c;
     return this;
@@ -81,13 +88,16 @@ class RateLimiter {
     });
   }
 
-  peek(key) {
-    return limiter.peek({
+  async peek(key, cost = this.cost) {
+    const { limited, remaining, resetIn } = await limiter.peek({
       key: this.keyPrefix + key,
       rate: this.rate,
       period: this.period,
       burst: this.burst
     });
+
+    const wouldBeLimited = cost > remaining;
+    return { limited: limited || wouldBeLimited, remaining, resetIn };
   }
 
   reset(key) {
