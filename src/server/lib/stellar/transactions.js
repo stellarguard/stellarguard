@@ -1,9 +1,19 @@
 const StellarSdk = require('stellar-sdk');
-const server = require('./server').server();
+const config = require('../../config');
 const { hasAccountSignedTransaction } = require('@stellarguard/multisig-utils');
 
+
+function getNetworkpassphrase() {
+  if (config.isTestNetwork) {
+    return StellarSdk.Networks.TESTNET;
+  } else {
+    return StellarSdk.Networks.PUBLIC;
+  }
+}
+
 function fromXdr(xdr) {
-  return new StellarSdk.Transaction(xdr);
+  const passphrase = getNetworkpassphrase();
+  return new StellarSdk.Transaction(xdr, passphrase);
 }
 
 function toXdr(stellarTransaction) {
@@ -11,6 +21,7 @@ function toXdr(stellarTransaction) {
 }
 
 async function submitTransaction(stellarTransaction) {
+  const server = require('./server').server();
   return await server.submitTransaction(stellarTransaction);
 }
 

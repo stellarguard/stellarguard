@@ -21,12 +21,4 @@ const env = {
   redisConnectionString: process.env.REDIS_CONNECTION_STRING
 };
 
-function validateEnv(env) {
-  if (!env.sessionSecret) {
-    throw 'Missing SESSION_SECRET';
-  }
-}
-
-validateEnv(env);
-
 module.exports = env;

@@ -1037,15 +1037,26 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@sinonjs/samsam/-/samsam-2.0.0.tgz#9163742ac35c12d3602dece74317643b35db6a80"
 
-"@stellarguard/multisig-utils@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@stellarguard/multisig-utils/-/multisig-utils-1.0.0.tgz#66994d0a6ba6132b74e58c069b84be74d589f376"
+"@stellarguard/multisig-utils@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@stellarguard/multisig-utils/-/multisig-utils-1.1.0.tgz#3cb9caf424dddf567659ee51f4d5fa138131db80"
+  integrity sha512-fmjuLH+CBjRyfKedppe0Isw81QuZscfDLv3Wzqlq95EecIX0qPOHTuTyuBvxQcmQBXplR31H/MKzy036x5LT7w==
   dependencies:
     axios "^0.18.0"
 
-"@stellarguard/stellar-uri@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@stellarguard/stellar-uri/-/stellar-uri-1.0.0.tgz#0405b9ef737bbf94c54c7e0a8d53ccba0067289c"
+"@stellarguard/stellar-uri@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@stellarguard/stellar-uri/-/stellar-uri-1.1.2.tgz#802f591a31661fa31bffb3057f4a9457a4399ad6"
+  integrity sha512-ZAcOBvTxdfvie2/27zScAUX76oFjqT7UhSrnVLI6hlJbtRU9kIU3Zf5Hlx4ARWZE+rjI19Tb/R3nuNE58lG4BQ==
+  dependencies:
+    "@stellarguard/txrep" "^1.0.7"
+
+"@stellarguard/txrep@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@stellarguard/txrep/-/txrep-1.0.7.tgz#6ae5aecc1918b664323a8fdd1ac9eee03aed1826"
+  integrity sha512-bnky7eInV+bk2s5gb8xpPKuXX0ULJVBSEKnlzFRjL/Jc0VSNBD/3ogkA+abFdxQcVsLN3Ca0umqzuDt2xsfV7Q==
+  dependencies:
+    bignumber.js "^4.0.0"
 
 "@types/blob-util@1.3.3":
   version "1.3.3"
@@ -1073,6 +1084,11 @@
 "@types/chai@4.0.8":
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.0.8.tgz#d27600e9ba2f371e08695d90a0fe0408d89c7be7"
+
+"@types/eventsource@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@types/eventsource/-/eventsource-1.1.2.tgz#079ab4213e844e56f7384aec620e1163dab692b3"
+  integrity sha512-4AKWJ6tvEU4fk0770oAK4Z0lQUuSnc5ljHTcYZhQtdP7XMDKKvegGUC6xGD8+4+F+svZKAzlxbKnuGWfgMtgVA==
 
 "@types/form-data@*":
   version "2.2.1"
@@ -1123,6 +1139,13 @@
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
 
+"@types/randombytes@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/randombytes/-/randombytes-2.0.0.tgz#0087ff5e60ae68023b9bc4398b406fea7ad18304"
+  integrity sha512-bz8PhAVlwN72vqefzxa14DKNT8jK/mV66CSjwdVQM/k3Th3EPKfUtdMniwZgMedQTFuywAsfjnZsg+pEnltaMA==
+  dependencies:
+    "@types/node" "*"
+
 "@types/react-transition-group@^2.0.8":
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-2.9.1.tgz#66c9ca5d0b20bae72fe6b797e0d362b996d55e9f"
@@ -1163,6 +1186,11 @@
 "@types/tough-cookie@*":
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@types/tough-cookie/-/tough-cookie-2.3.2.tgz#e0d481d8bb282ad8a8c9e100ceb72c995fb5e709"
+
+"@types/urijs@^1.19.2":
+  version "1.19.5"
+  resolved "https://registry.yarnpkg.com/@types/urijs/-/urijs-1.19.5.tgz#f2083392f5859be59cbba0b1d463b922c8aef842"
+  integrity sha512-LAyzQkr9rZDoHrv8xRcHStLo8Z4PbP3ZHMqw8WRr1T7Jn4O1z13Qkv+ed9e12pBXWaaqsBj1l4ADU/FlA/jn3w==
 
 abab@^2.0.0:
   version "2.0.0"
@@ -1568,6 +1596,13 @@ axios@^0.18.0, axios@^0.18.1:
     follow-redirects "1.5.10"
     is-buffer "^2.0.2"
 
+axios@^0.19.0:
+  version "0.19.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
+  integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
+  dependencies:
+    follow-redirects "1.5.10"
+
 babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.26.0.tgz#63fd43f7dc1e3bb7ce35947db8fe369a3f58c74b"
@@ -1899,7 +1934,7 @@ balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
 
-base32.js@^0.1.0, base32.js@~0.1.0:
+base32.js@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/base32.js/-/base32.js-0.1.0.tgz#b582dec693c2f11e893cf064ee6ac5b6131a2202"
 
@@ -1950,17 +1985,11 @@ binary-extensions@^1.0.0:
   version "1.13.1"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-1.13.1.tgz#598afe54755b2868a5330d2aff9d4ebb53209b65"
 
-bindings@^1.2.1:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.5.0.tgz#10353c9e945334bc0511a6d90b38fbc7c9c504df"
-  dependencies:
-    file-uri-to-path "1.0.0"
-
 bindings@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
 
-bip39@^2.4.0, bip39@^2.5.0:
+bip39@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/bip39/-/bip39-2.5.0.tgz#51cbd5179460504a63ea3c000db3f787ca051235"
   dependencies:
@@ -2821,7 +2850,7 @@ crc@3.4.4:
   version "3.4.4"
   resolved "https://registry.yarnpkg.com/crc/-/crc-3.4.4.tgz#9da1e980e3bd44fc5c93bf5ab3da3378d85e466b"
 
-crc@^3.3.0, crc@^3.5.0:
+crc@^3.5.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/crc/-/crc-3.8.0.tgz#ad60269c2c856f8c299e2c4cc0de4556914056c6"
   dependencies:
@@ -2850,7 +2879,7 @@ create-hash@^1.1.0, create-hash@^1.1.2:
     ripemd160 "^2.0.1"
     sha.js "^2.4.0"
 
-create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4, create-hmac@^1.1.6:
+create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4, create-hmac@^1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/create-hmac/-/create-hmac-1.1.7.tgz#69170c78b3ab957147b2b8b04572e47ead2243ff"
   dependencies:
@@ -3485,21 +3514,6 @@ ecdsa-sig-formatter@1.0.10:
   dependencies:
     safe-buffer "^5.0.1"
 
-ed25519-hd-key@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/ed25519-hd-key/-/ed25519-hd-key-0.5.0.tgz#24893bb29c96351538eccce7f36347891025193d"
-  dependencies:
-    bip39 "^2.4.0"
-    create-hmac "^1.1.6"
-    js-nacl "^1.2.2"
-
-ed25519@0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/ed25519/-/ed25519-0.0.4.tgz#e56218ace2fc903d259593aef0b2a9639f475beb"
-  dependencies:
-    bindings "^1.2.1"
-    nan "^2.0.9"
-
 editorconfig@^0.15.3:
   version "0.15.3"
   resolved "https://registry.yarnpkg.com/editorconfig/-/editorconfig-0.15.3.tgz#bef84c4e75fb8dcb0ce5cee8efd51c15999befc5"
@@ -4082,10 +4096,6 @@ file-entry-cache@^2.0.0:
   dependencies:
     flat-cache "^1.2.1"
     object-assign "^4.0.1"
-
-file-uri-to-path@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz#553a7b8446ff6f684359c445f1e37a05dacc33dd"
 
 filename-regex@^2.0.0:
   version "2.0.1"
@@ -5337,10 +5347,6 @@ js-levenshtein@^1.1.3:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/js-levenshtein/-/js-levenshtein-1.1.6.tgz#c6cee58eb3550372df8deb85fad5ce66ce01d59d"
 
-js-nacl@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/js-nacl/-/js-nacl-1.2.2.tgz#c4633dbfa67dc62f6b73033e5118e564e5abb987"
-
 js-string-escape@1.0.1, js-string-escape@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/js-string-escape/-/js-string-escape-1.0.1.tgz#e2625badbc0d67c7533e9edc1068c587ae4137ef"
@@ -5353,9 +5359,19 @@ js-tokens@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
-js-xdr@^1.0.0, js-xdr@^1.1.1:
+js-xdr@^1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/js-xdr/-/js-xdr-1.1.2.tgz#aba1f0952508c83f33dd7e774fa9231b3073992b"
+  dependencies:
+    core-js "^2.6.3"
+    cursor "^0.1.5"
+    lodash "^4.17.5"
+    long "^2.2.3"
+
+js-xdr@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/js-xdr/-/js-xdr-1.1.3.tgz#68cf021c0d8a6f8b75e8e3f2d528575a22d7cd1a"
+  integrity sha512-zFg7dIc6lI7LiZ/eru5U/cOur/SJGkbKflgkwoFIiHewgpmBGsRJNKbeOh/8Ffzz5mYvfmsO6gHAe5wv/ZYM2g==
   dependencies:
     core-js "^2.6.3"
     cursor "^0.1.5"
@@ -6142,7 +6158,7 @@ nan@2.11.0:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.11.0.tgz#574e360e4d954ab16966ec102c0c049fd961a099"
 
-nan@^2.0.9, nan@^2.12.1, nan@^2.9.2:
+nan@^2.12.1, nan@^2.9.2:
   version "2.14.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.0.tgz#7818f722027b2459a86f0295d434d1fc2336c52c"
 
@@ -7516,7 +7532,7 @@ randomatic@^3.0.0:
     kind-of "^6.0.0"
     math-random "^1.0.1"
 
-randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
+randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5, randombytes@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/randombytes/-/randombytes-2.1.0.tgz#df6f84372f0270dc65cdf6291349ab7a473d4f2a"
   dependencies:
@@ -8567,23 +8583,10 @@ stealthy-require@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
 
-stellar-base@^0.7.6:
-  version "0.7.8"
-  resolved "https://registry.yarnpkg.com/stellar-base/-/stellar-base-0.7.8.tgz#8bda188cf59eed4149bedf65b655711b88ce69fc"
-  dependencies:
-    base32.js "~0.1.0"
-    bignumber.js "^4.0.0"
-    crc "^3.3.0"
-    js-xdr "^1.0.0"
-    lodash "^4.17.10"
-    sha.js "^2.3.6"
-    tweetnacl "^1.0.0"
-  optionalDependencies:
-    ed25519 "0.0.4"
-
-stellar-base@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/stellar-base/-/stellar-base-1.0.2.tgz#081121e19f90a66becf741ce1f370d700c3ea2a6"
+stellar-base@^0.13.1:
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/stellar-base/-/stellar-base-0.13.2.tgz#40591959a15a4a45a39e8097f23f2f57e80710be"
+  integrity sha512-y0GO3L+HWPx4auyR8QiAC2uRqoa23MzJ9BnVzm1Li/0VsC5oWH82K7Nj040o++Q61KLIVhiZyKZNwCLHj1+0zw==
   dependencies:
     base32.js "^0.1.0"
     bignumber.js "^4.0.0"
@@ -8595,29 +8598,52 @@ stellar-base@^1.0.2:
   optionalDependencies:
     sodium-native "^2.3.0"
 
-stellar-hd-wallet@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/stellar-hd-wallet/-/stellar-hd-wallet-0.0.6.tgz#5f8692ff6ae67829e055dc1fad2132b1e864eb0e"
+stellar-base@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/stellar-base/-/stellar-base-2.1.4.tgz#e3dc7a5acdab3b796f7d8425521e157310406288"
+  integrity sha512-RbHjxqwAaeGHtIlnLdCeCBcGYqzxSUGfcy+KCFVSPc9/c2HoA0KeAh/NlsOq6V+Y7SL2gSoEQLF4ddOD6ToF+A==
+  dependencies:
+    base32.js "^0.1.0"
+    bignumber.js "^4.0.0"
+    crc "^3.5.0"
+    js-xdr "^1.1.3"
+    lodash "^4.17.11"
+    sha.js "^2.3.6"
+    tweetnacl "^1.0.0"
+  optionalDependencies:
+    sodium-native "^2.3.0"
+
+stellar-hd-wallet@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/stellar-hd-wallet/-/stellar-hd-wallet-0.0.10.tgz#bf62521317ecdd63e4df80bfcc14af7e268500ae"
+  integrity sha512-rkg3Q394S6A4h1EYWwACz1v8hkU8zkW574THZ0yY96A8aUqifdBPtVYMInyYbq+le5S+K/Q05x/TZzTAPTIivQ==
   dependencies:
     bip39 "^2.5.0"
-    ed25519-hd-key "^0.5.0"
-    lodash "4.17.10"
-    stellar-base "^0.7.6"
+    create-hmac "^1.1.7"
+    lodash "^4.17.11"
+    stellar-base "^0.13.1"
 
-stellar-sdk@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/stellar-sdk/-/stellar-sdk-1.0.2.tgz#580acb7fdb5b70721773734e53d95a0b3ad294b7"
+stellar-sdk@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/stellar-sdk/-/stellar-sdk-4.0.0.tgz#c443fabae21346badcecff71d8a11fb1ab3fe656"
+  integrity sha512-k2mEalzR7DD/0GJFLvjO/bzEx7J7kfc3++yWI7P9hLV7IYWEPfZMjFuExT8puX3bg2NgXGvgfEL6b4MHk0VciA==
   dependencies:
+    "@types/eventsource" "^1.1.2"
     "@types/node" ">= 8"
-    axios "^0.18.0"
+    "@types/randombytes" "^2.0.0"
+    "@types/urijs" "^1.19.2"
+    axios "^0.19.0"
     bignumber.js "^4.0.0"
     detect-node "^2.0.4"
     es6-promise "^4.2.4"
     eventsource "^1.0.7"
     lodash "^4.17.11"
-    stellar-base "^1.0.2"
+    randombytes "^2.1.0"
+    stellar-base "^2.1.4"
     toml "^2.3.0"
+    tslib "^1.10.0"
     urijs "^1.19.1"
+    utility-types "^3.7.0"
 
 stream-browserify@^2.0.1:
   version "2.0.2"
@@ -9014,6 +9040,11 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
 
+tslib@^1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
+  integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
+
 tsscmp@1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/tsscmp/-/tsscmp-1.0.5.tgz#7dc4a33af71581ab4337da91d85ca5427ebd9a97"
@@ -9258,6 +9289,11 @@ util@^0.11.0:
   resolved "https://registry.yarnpkg.com/util/-/util-0.11.1.tgz#3236733720ec64bb27f6e26f421aaa2e1b588d61"
   dependencies:
     inherits "2.0.3"
+
+utility-types@^3.7.0:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/utility-types/-/utility-types-3.10.0.tgz#ea4148f9a741015f05ed74fd615e1d20e6bed82b"
+  integrity sha512-O11mqxmi7wMKCo6HKFt5AhO4BwY3VV68YU07tgxfz8zJTIxr4BpsezN49Ffwy9j3ZpwwJp4fkRwjRzq3uWE6Rg==
 
 utils-merge@1.0.1:
   version "1.0.1"

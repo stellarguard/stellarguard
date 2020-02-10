@@ -1,4 +1,5 @@
 import { observable, computed } from 'mobx';
+import { config } from '../config';
 import StellarSdk from 'stellar-sdk'; // TODO -- lazy-load?
 
 class Transaction {
@@ -33,7 +34,8 @@ class Transaction {
 
   @computed
   get stellarTransaction() {
-    return new StellarSdk.Transaction(this.xdr);
+    const passphrase = config.isTestNetwork ? StellarSdk.Networks.TESTNET : StellarSdk.Networks.PUBLIC;
+    return new StellarSdk.Transaction(this.xdr, passphrase);
   }
 
   @computed
