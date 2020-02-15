@@ -1,5 +1,5 @@
 import { observable, computed } from 'mobx';
-import { config } from '../config';
+import config from '../config';
 import StellarSdk from 'stellar-sdk'; // TODO -- lazy-load?
 
 class Transaction {
