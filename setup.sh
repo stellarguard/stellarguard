@@ -11,7 +11,8 @@ yarn
 echo "Creating local env file"
 echo "
 export PG_HOST=localhost     # REQUIRED - the host of your postgres instance
-export PG_USER=$(whoami)     # REQUIRED - change this to the user you want for your local postgres instance
+export PG_USER=stellarguard  # REQUIRED - change this to the user you want for your local postgres instance
+export PG_PASSWORD=stellarguard # REQUIRED - change this to the password for your local postgres
 export REDIS_CONNECTION_STRING=redis://localhost:6379   # REQUIRED - the connection string to use to connect to redis
 
 #export SEND_GRID_API_KEY=   # OPTIONAL - use this if you want to send emails via sendgrid in development
@@ -21,8 +22,8 @@ export REDIS_CONNECTION_STRING=redis://localhost:6379   # REQUIRED - the connect
 
 echo "Creating StellarGuard database"
 yarn global add db-migrate
-db-migrate db:create stellarguard
-db-migrate up
+NODE_PATH=src/shared db-migrate db:create stellarguard
+NODE_PATH=src/shared db-migrate up
 
 echo "
 Setup success!

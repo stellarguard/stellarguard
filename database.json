@@ -3,6 +3,8 @@
     "driver": "pg",
     "host": "localhost",
     "database": "stellarguard",
+    "user": "stellarguard",
+    "password": "stellarguard",
     "schema": "public"
   },
   "test": {

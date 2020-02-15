@@ -5,12 +5,13 @@ var type;
 var seed;
 
 var StellarSdk = require('stellar-sdk');
-var stellar = require('../src/server/lib/stellar');
+var config = require('../src/server/config');
 
-if (stellar.server.isTestNetwork()) {
-  StellarSdk.Network.useTestNetwork();
+let networkPassphrase;
+if (config.isPublicNetwork) {
+  networkPassphrase = StellarSdk.Networks.PUBLIC;
 } else {
-  StellarSdk.Network.usePublicNetwork();
+  networkPassphrase = StellarSdk.Networks.TESTNET;
 }
 
 /**
@@ -35,7 +36,7 @@ exports.up = async function(db) {
 
   const hashes = new Map();
   for (const row of rows) {
-    const transaction = new StellarSdk.Transaction(row.xdr);
+    const transaction = new StellarSdk.Transaction(row.xdr, networkPassphrase);
     let hash = transaction.hash().toString('hex');
     if (hashes.has(hash)) {
       const count = hashes.get(hash) + 1;

@@ -18,7 +18,8 @@ In order to develop locally, you will need to install the following on your syst
 
 After forking and cloning the repo:
 
-1.  Start the Postgres server
+1.  Start the Postgres server - if you want to use Docker: `docker run --name stellarguard-postgres -p 5432:5432 -e POSTGRES_USER=stellarguard -e POSTGRES_PASSWORD=stellarguard -d postgres:10`
+1.  Start the Redis server - if you want to use Docker: `docker run --name stellarguard-redis -p 6379:6379 redis:4`
 1.  `./setup.sh` - This will create your .env.dev.local configuration file, install project dependencies, and create the `stellarguard` database
 
 ## Running the develoment server
