@@ -1,4 +1,4 @@
-const Authenticator = require('./Authenticator');
+const Authenticator = require('./authenticator');
 
 class AuthenticatorRepository {
   constructor() {
