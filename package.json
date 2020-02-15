@@ -1,6 +1,6 @@
 {
   "name": "stellarguard",
-  "version": "1.48.0",
+  "version": "1.48.1",
   "main": "index.js",
   "repository": "https://github.com/stellarguard/stellarguard.git",
   "author": "Paul Selden <paul.selden@stellarguard.me>",
