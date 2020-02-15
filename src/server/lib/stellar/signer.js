@@ -11,7 +11,7 @@ function signTransactionWithKeyPair(transaction, signerKeypair) {
 }
 
 function addSignature(transaction, signatureXdr) {
-  var buffer = new Buffer(signatureXdr, 'base64');
+  var buffer = Buffer.from(signatureXdr, 'base64');
   var signature = StellarSdk.xdr.DecoratedSignature.fromXDR(buffer);
   transaction.signatures.push(signature);
   return transaction;
