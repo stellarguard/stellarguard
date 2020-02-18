@@ -22,7 +22,6 @@ export REDIS_CONNECTION_STRING=redis://localhost:6379   # REQUIRED - the connect
 
 echo "Creating StellarGuard database"
 yarn global add db-migrate
-NODE_PATH=src/shared db-migrate db:create stellarguard
 NODE_PATH=src/shared db-migrate up
 
 echo "
