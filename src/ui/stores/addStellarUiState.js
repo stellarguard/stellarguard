@@ -5,16 +5,6 @@ import StellarSdk from 'stellar-sdk';
 import AppError from '../../shared/errors/AppError';
 import UnknownError from '../../shared/errors/UnknownError';
 
-function server(StellarSdk) {
-  if (config.isTestNetwork) {
-    StellarSdk.Network.useTestNetwork();
-    return new StellarSdk.Server('https://horizon-testnet.stellar.org');
-  } else {
-    StellarSdk.Network.usePublicNetwork();
-    return new StellarSdk.Server('https://horizon.stellar.org');
-  }
-}
-
 class AddStellarUiState {
   @observable step = 0;
   @observable transaction;
@@ -30,9 +20,10 @@ class AddStellarUiState {
     backupSigner
   }) {
     try {
-      const account = await server(StellarSdk).loadAccount(sourceAccount);
+      const account = await config.horizonServer.loadAccount(sourceAccount);
       const builder = new StellarSdk.TransactionBuilder(account, {
-        fee: StellarSdk.BASE_FEE
+        fee: StellarSdk.BASE_FEE,
+        networkPassphrase: config.networkPassphrase
       }).setTimeout(StellarSdk.TimeoutInfinite);
 
       // by adding a static public key that doesn't have enough weight to actually do any signing
@@ -117,7 +108,7 @@ class AddStellarUiState {
     try {
       const account = await accountsApi.createAccount({ publicKey });
       this.rootStore.userStore.addAccount(account);
-      const stellarAccount = await server(StellarSdk).loadAccount(publicKey);
+      const stellarAccount = await config.horizonServer.loadAccount(publicKey);
       if (doesAccountHaveStellarGuardSharedSigner(stellarAccount)) {
         this.setActivateAccountStatus('success');
       } else {

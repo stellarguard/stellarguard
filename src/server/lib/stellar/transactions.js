@@ -13,7 +13,7 @@ function getNetworkpassphrase() {
 
 function fromXdr(xdr) {
   const passphrase = getNetworkpassphrase();
-  return new StellarSdk.Transaction(xdr, passphrase);
+  return StellarSdk.TransactionBuilder.fromXDR(xdr, passphrase);
 }
 
 function toXdr(stellarTransaction) {

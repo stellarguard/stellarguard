@@ -12,7 +12,8 @@ async function buildMultisigTransaction({
   try {
     const account = await server.loadAccount(source);
     const builder = new StellarSdk.TransactionBuilder(account, {
-      fee: StellarSdk.BASE_FEE
+      fee: StellarSdk.BASE_FEE,
+      networkPassphrase: config.networkPassphrase
     }).setTimeout(StellarSdk.TimeoutInfinite);
 
     const signers = [];

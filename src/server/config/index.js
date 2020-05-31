@@ -1,6 +1,7 @@
 const pg = require('./pg');
 const redis = require('./redis');
 const env = require('./env');
+const { Networks } = require('stellar-sdk')
 
 class Config {
   get sessionSecret() {
@@ -29,6 +30,10 @@ class Config {
 
   get isTestNetwork() {
     return !this.isPublicNetwork;
+  }
+
+  get networkPassphrase() {
+    return this.isPublicNetwork ? Networks.PUBLIC : Networks.TESTNET;
   }
 
   get isDevMode() {

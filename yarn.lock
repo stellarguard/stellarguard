@@ -1187,10 +1187,10 @@
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@types/tough-cookie/-/tough-cookie-2.3.2.tgz#e0d481d8bb282ad8a8c9e100ceb72c995fb5e709"
 
-"@types/urijs@^1.19.2":
-  version "1.19.5"
-  resolved "https://registry.yarnpkg.com/@types/urijs/-/urijs-1.19.5.tgz#f2083392f5859be59cbba0b1d463b922c8aef842"
-  integrity sha512-LAyzQkr9rZDoHrv8xRcHStLo8Z4PbP3ZHMqw8WRr1T7Jn4O1z13Qkv+ed9e12pBXWaaqsBj1l4ADU/FlA/jn3w==
+"@types/urijs@^1.19.6":
+  version "1.19.9"
+  resolved "https://registry.yarnpkg.com/@types/urijs/-/urijs-1.19.9.tgz#cedccc8e69677080cc8bb2e9ec50c6dd6093429e"
+  integrity sha512-/tiJyrc0GPcsReHzgC0SXwOmoPjLqYe01W7dLYB0yasQXMbcRee+ZIk+g8MIQhoBS8fPoBQO3Y93+aeBrI93Ug==
 
 abab@^2.0.0:
   version "2.0.0"
@@ -7743,9 +7743,10 @@ redis-errors@^1.0.0, redis-errors@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/redis-errors/-/redis-errors-1.2.0.tgz#eb62d2adb15e4eaf4610c04afe1529384250abad"
 
-redis-gcra@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/redis-gcra/-/redis-gcra-0.1.1.tgz#37d752b8d7bfa507ef9cd1ee0c6403346f693ee6"
+redis-gcra@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/redis-gcra/-/redis-gcra-0.3.0.tgz#044cc18549e9c9a0abf298eb0ebb19c957011dbe"
+  integrity sha512-CWEsMWYNT92b3uOsfl2lHx3dxnn6LQv8jTprQXSL+gXnsYiO4v97R20etRAfHt5vzGEf3r2rZHq+jF9qur2CIQ==
   dependencies:
     ioredis ">=2.0.0 <5.0.0"
 
@@ -8589,10 +8590,10 @@ stellar-base@^0.13.1:
   optionalDependencies:
     sodium-native "^2.3.0"
 
-stellar-base@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/stellar-base/-/stellar-base-2.1.4.tgz#e3dc7a5acdab3b796f7d8425521e157310406288"
-  integrity sha512-RbHjxqwAaeGHtIlnLdCeCBcGYqzxSUGfcy+KCFVSPc9/c2HoA0KeAh/NlsOq6V+Y7SL2gSoEQLF4ddOD6ToF+A==
+stellar-base@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/stellar-base/-/stellar-base-3.0.3.tgz#e4b033d113f11e9239ce4fe8ead6e9a791f04f14"
+  integrity sha512-Kb79uQOmlMhGw96rg5qRA+rxK58N2eH+q8OuqVgQr85t5l/+p35BFKVl2yW3xN/OVwY7NrAjFn/KJmoxjcTfeg==
   dependencies:
     base32.js "^0.1.0"
     bignumber.js "^4.0.0"
@@ -8614,15 +8615,15 @@ stellar-hd-wallet@^0.0.10:
     lodash "^4.17.11"
     stellar-base "^0.13.1"
 
-stellar-sdk@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/stellar-sdk/-/stellar-sdk-4.0.0.tgz#c443fabae21346badcecff71d8a11fb1ab3fe656"
-  integrity sha512-k2mEalzR7DD/0GJFLvjO/bzEx7J7kfc3++yWI7P9hLV7IYWEPfZMjFuExT8puX3bg2NgXGvgfEL6b4MHk0VciA==
+stellar-sdk@^5.0.0:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/stellar-sdk/-/stellar-sdk-5.0.3.tgz#9eb329f8645090d3b794998f9afd82f7516ae5b4"
+  integrity sha512-gPcw3xbwPvsRQ1GDQtsfXkKdaW2Qp9BaUtgmqzWyqyk+gEClQg2Q9pQlGYKXttaE/RJmsCcZDIFe5x51AK92bg==
   dependencies:
     "@types/eventsource" "^1.1.2"
     "@types/node" ">= 8"
     "@types/randombytes" "^2.0.0"
-    "@types/urijs" "^1.19.2"
+    "@types/urijs" "^1.19.6"
     axios "^0.19.0"
     bignumber.js "^4.0.0"
     detect-node "^2.0.4"
@@ -8630,7 +8631,7 @@ stellar-sdk@^4.0.0:
     eventsource "^1.0.7"
     lodash "^4.17.11"
     randombytes "^2.1.0"
-    stellar-base "^2.1.4"
+    stellar-base "^3.0.3"
     toml "^2.3.0"
     tslib "^1.10.0"
     urijs "^1.19.1"

@@ -5,16 +5,6 @@ import UnknownError from '../../shared/errors/UnknownError';
 
 import { isKnownAccount } from '../knownAccounts';
 
-function server(StellarSdk) {
-  if (config.isTestNetwork) {
-    StellarSdk.Network.useTestNetwork();
-    return new StellarSdk.Server('https://horizon-testnet.stellar.org');
-  } else {
-    StellarSdk.Network.usePublicNetwork();
-    return new StellarSdk.Server('https://horizon.stellar.org');
-  }
-}
-
 class AccountsStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -24,9 +14,10 @@ class AccountsStore {
   async getDeactivateAccountTransaction({ publicKey }) {
     const primarySigner = this.rootStore.currentUser.signerPublicKey;
     try {
-      const account = await server(StellarSdk).loadAccount(publicKey);
+      const account = await config.horizonServer.loadAccount(publicKey);
       const builder = new StellarSdk.TransactionBuilder(account, {
-        fee: StellarSdk.BASE_FEE
+        fee: StellarSdk.BASE_FEE,
+        networkPassphrase: config.networkPassphrase
       }).setTimeout(StellarSdk.TimeoutInfinite);
 
       builder.addOperation(

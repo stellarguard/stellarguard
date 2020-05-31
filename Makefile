@@ -8,7 +8,7 @@ help:
 
 docker-start: ## Starts the postgres and redis docker containers in daemon mode
 docker-start: 
-	docker start stellarguard-postgres || docker run --name stellarguard-postgres -p 5432:5432 -e POSTGRES_USER=$(POSTGES_USER) -e POSTGRES_PASSWORD=$(POSTGES_USER) -d postgres
+	docker start stellarguard-postgres || docker run --name stellarguard-postgres -p 5432:5432 -e POSTGRES_USER=$(POSTGRES_USER) -e POSTGRES_PASSWORD=$(POSTGRES_USER) -d postgres
 	docker start stellarguard-redis || docker run --name stellarguard-redis -p 6379:6379 -d redis:4
 
 docker-stop: ## Stops the postgres and redis docker containers
