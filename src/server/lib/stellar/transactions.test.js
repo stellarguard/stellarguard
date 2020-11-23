@@ -32,7 +32,7 @@ test('fromXdr()', t => {
 test('toXdr()', t => {
   const source = new Account(publicKey, '0');
   const tx = new TransactionBuilder(source, {
-    fee: 100,
+    fee: '100',
     networkPassphrase: Networks.TESTNET
   })
     .addOperation(

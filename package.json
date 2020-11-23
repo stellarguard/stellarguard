@@ -14,8 +14,8 @@
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
     "@sendgrid/mail": "^6.3.1",
-    "@stellarguard/multisig-utils": "^1.1.0",
-    "@stellarguard/stellar-uri": "^1.1.2",
+    "@stellarguard/multisig-utils": "^2.0.0",
+    "@stellarguard/stellar-uri": "^3.0.0",
     "axios": "^0.19.2",
     "bcrypt": "^3.0.1",
     "classnames": "^2.2.6",
@@ -64,7 +64,7 @@
     "serve-favicon": "~2.5.0",
     "sinon": "^6.1.4",
     "stellar-hd-wallet": "^0.0.10",
-    "stellar-sdk": "^5.0.0",
+    "stellar-sdk": "^7.0.0",
     "yup": "^0.25.1"
   },
   "scripts": {

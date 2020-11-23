@@ -1037,24 +1037,24 @@
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@sinonjs/samsam/-/samsam-2.0.0.tgz#9163742ac35c12d3602dece74317643b35db6a80"
 
-"@stellarguard/multisig-utils@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@stellarguard/multisig-utils/-/multisig-utils-1.1.0.tgz#3cb9caf424dddf567659ee51f4d5fa138131db80"
-  integrity sha512-fmjuLH+CBjRyfKedppe0Isw81QuZscfDLv3Wzqlq95EecIX0qPOHTuTyuBvxQcmQBXplR31H/MKzy036x5LT7w==
+"@stellarguard/multisig-utils@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@stellarguard/multisig-utils/-/multisig-utils-2.0.0.tgz#8f7a101874f0403b0465931f58ef98be1ffeacac"
+  integrity sha512-GYh7NGh/5W73OUn6dojUKoUm2Hjzj5i5sPbv5Ij3n8hGQK8Er8MqWstr7NCjirHagkkSbtNG8mLqTzhW10IPYg==
   dependencies:
     axios "^0.18.0"
 
-"@stellarguard/stellar-uri@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@stellarguard/stellar-uri/-/stellar-uri-1.1.2.tgz#802f591a31661fa31bffb3057f4a9457a4399ad6"
-  integrity sha512-ZAcOBvTxdfvie2/27zScAUX76oFjqT7UhSrnVLI6hlJbtRU9kIU3Zf5Hlx4ARWZE+rjI19Tb/R3nuNE58lG4BQ==
+"@stellarguard/stellar-uri@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@stellarguard/stellar-uri/-/stellar-uri-3.0.0.tgz#bc4b27eb213de27b14be37041d7810742a561e9a"
+  integrity sha512-lSXbxlsOwni92pswMy+5sUZHgYv60FIDxbXWb9cHyFJILDYhBp/bgFW/3Uum8SmK/W6xC9MWXhyBDIJoxv92sg==
   dependencies:
-    "@stellarguard/txrep" "^1.0.7"
+    "@stellarguard/txrep" "^2.0.0"
 
-"@stellarguard/txrep@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@stellarguard/txrep/-/txrep-1.0.7.tgz#6ae5aecc1918b664323a8fdd1ac9eee03aed1826"
-  integrity sha512-bnky7eInV+bk2s5gb8xpPKuXX0ULJVBSEKnlzFRjL/Jc0VSNBD/3ogkA+abFdxQcVsLN3Ca0umqzuDt2xsfV7Q==
+"@stellarguard/txrep@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@stellarguard/txrep/-/txrep-2.0.0.tgz#b9755132d44923262cbb7de726aff515622dfc3d"
+  integrity sha512-gVtlMnxSB4QUCM3r0c0SvlWCptPssnWxXSlepOlEK1y5/EAHNdYdectrUi4CcZHB1wpoJuY7x8atxhCFeCAS/Q==
   dependencies:
     bignumber.js "^4.0.0"
 
@@ -8590,10 +8590,10 @@ stellar-base@^0.13.1:
   optionalDependencies:
     sodium-native "^2.3.0"
 
-stellar-base@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/stellar-base/-/stellar-base-3.0.3.tgz#e4b033d113f11e9239ce4fe8ead6e9a791f04f14"
-  integrity sha512-Kb79uQOmlMhGw96rg5qRA+rxK58N2eH+q8OuqVgQr85t5l/+p35BFKVl2yW3xN/OVwY7NrAjFn/KJmoxjcTfeg==
+stellar-base@^4.0.0:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/stellar-base/-/stellar-base-4.0.3.tgz#03a55fd8ebbd32804d94e87f41bdc56af2a6747b"
+  integrity sha512-Tf1Ko86j4CgUtaiTC6H6qPZ97EziXN6SVokH4FGv5+XvBhFg4V+u9ySMlgPjFbHQumplkHiw8JQx1IZRHnrT3A==
   dependencies:
     base32.js "^0.1.0"
     bignumber.js "^4.0.0"
@@ -8615,10 +8615,10 @@ stellar-hd-wallet@^0.0.10:
     lodash "^4.17.11"
     stellar-base "^0.13.1"
 
-stellar-sdk@^5.0.0:
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/stellar-sdk/-/stellar-sdk-5.0.3.tgz#9eb329f8645090d3b794998f9afd82f7516ae5b4"
-  integrity sha512-gPcw3xbwPvsRQ1GDQtsfXkKdaW2Qp9BaUtgmqzWyqyk+gEClQg2Q9pQlGYKXttaE/RJmsCcZDIFe5x51AK92bg==
+stellar-sdk@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/stellar-sdk/-/stellar-sdk-7.0.0.tgz#9f4a8fbd5bd6c9be180872b13d1e0b6ada3ef5c8"
+  integrity sha512-90hGtqs4W79CFs2SoRtlNC03LysbSZa0UI/msEckQstFnuDzfTxh0GXaN/9EU9OmCE9F13hCIb+E/LBLlPNeHg==
   dependencies:
     "@types/eventsource" "^1.1.2"
     "@types/node" ">= 8"
@@ -8631,7 +8631,7 @@ stellar-sdk@^5.0.0:
     eventsource "^1.0.7"
     lodash "^4.17.11"
     randombytes "^2.1.0"
-    stellar-base "^3.0.3"
+    stellar-base "^4.0.0"
     toml "^2.3.0"
     tslib "^1.10.0"
     urijs "^1.19.1"
