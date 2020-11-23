@@ -86,6 +86,7 @@ async function uploadFiles() {
 }
 
 async function migrate() {
+  const previousProject = execSync('gcloud config get-value project').toString();
   execSync('brew services stop postgres || echo already stopped');
   execSync(`gcloud config set project ${config.project}`); // we need to run migrations in the current project so things like KMS work properly
   const instance = process.env.CLOUD_SQL_INSTANCE;
@@ -113,7 +114,7 @@ async function migrate() {
     }, 1000);
   });
   sqlProxy.kill();
-  execSync('brew services start postgres');
+  execSync(`gcloud config set project ${previousProject}`); // we need to run migrations in the current project so things like KMS work properly
 }
 
 function deploy() {
