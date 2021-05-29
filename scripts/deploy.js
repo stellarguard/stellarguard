@@ -79,7 +79,7 @@ async function build() {
 
 async function uploadFiles() {
   return await execSync(
-    `gsutil -h "Cache-Control:max-age=3600000, immutable" -m cp -Z -n dist/* gs://${
+    `gsutil -h "Cache-Control:max-age=3600000, immutable" cp -Z -n dist/* gs://${
       config.cloudStorageBucket
     }/assets`
   );
