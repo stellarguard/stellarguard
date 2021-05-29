@@ -16,7 +16,7 @@
     "@sendgrid/mail": "^6.3.1",
     "@stellarguard/multisig-utils": "^2.0.0",
     "@stellarguard/stellar-uri": "^3.0.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bcrypt": "^3.0.1",
     "classnames": "^2.2.6",
     "connect-pg-simple": "^6.0.1",
