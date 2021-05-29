@@ -34,7 +34,7 @@
     "express-csp-header": "^2.2.0",
     "express-session": "^1.15.6",
     "formik": "^0.11.3",
-    "googleapis": "^32.0.0",
+    "googleapis": "^39.1.0",
     "helmet": "^3.12.1",
     "history": "^4.9.0",
     "ioredis": "^4.10.0",
