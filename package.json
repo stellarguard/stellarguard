@@ -64,7 +64,7 @@
     "serve-favicon": "~2.5.0",
     "sinon": "^6.1.4",
     "stellar-hd-wallet": "^0.0.10",
-    "stellar-sdk": "^8.0.0",
+    "stellar-sdk": "^8.2.3",
     "yup": "^0.25.1"
   },
   "scripts": {
