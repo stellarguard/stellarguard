@@ -1,13 +1,13 @@
 {
   "name": "stellarguard",
-  "version": "1.52.3",
+  "version": "1.52.4",
   "main": "index.js",
   "repository": "https://github.com/stellarguard/stellarguard.git",
   "author": "Paul Selden <paul.selden@stellarguard.me>",
   "license": "MIT",
   "private": false,
   "engines": {
-    "node": "10.19.0"
+    "node": ">=10"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
