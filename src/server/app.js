@@ -141,7 +141,7 @@ app.use(function(err, req, res, next) {
   }
 });
 
-activateListeners();
+// activateListeners();
 
 function activateListeners() {
   const listeners = require('./listeners');
