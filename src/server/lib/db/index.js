@@ -1,7 +1,7 @@
 const pg = require('./postgres');
-const redis = require('./redis');
+//const redis = require('./redis');
 
 module.exports = {
-  pg,
-  redis
+  pg
+//  redis
 };

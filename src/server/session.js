@@ -16,13 +16,13 @@ const cookie = {
 };
 const csrfMiddleware = require('csurf')({ cookie });
 
-const { users, db, tfa, rateLimit } = require('./lib');
+const { users, db, tfa } = require('./lib');
 
 const {
   InvalidCredentialsError,
   RequiresAuthenticatorError,
   InvalidAuthenticatorCodeError,
-  RateLimitedError
+  // RateLimitedError
 } = require('errors/session');
 
 function configure() {
@@ -49,10 +49,10 @@ function configure() {
       async function(req, email, password, done) {
         try {
           const { recaptchaToken } = req.body;
-          const { limited, retryIn } = await isSigninRateLimited(req, email);
-          if (limited) {
-            return done(new RateLimitedError({ retryIn }));
-          }
+          // const { limited, retryIn } = await isSigninRateLimited(req, email);
+          // if (limited) {
+          //   return done(new RateLimitedError({ retryIn }));
+          // }
 
           await users.recaptchaValidator.validateSignin({
             recaptchaToken,
@@ -112,9 +112,9 @@ function ensureLoggedIn(options) {
   };
 }
 
-async function isSigninRateLimited(req, email) {
-  return await rateLimit.signin.limit(email, req.ip);
-}
+// async function isSigninRateLimited(req, email) {
+//   return await rateLimit.signin.limit(email, req.ip);
+// }
 
 function ensureLoggedOut(options) {
   return (req, res, next) => {

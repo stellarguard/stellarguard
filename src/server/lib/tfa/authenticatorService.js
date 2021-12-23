@@ -5,7 +5,7 @@ const {
 } = require('errors/authenticator');
 const authenticatorRepository = require('./authenticatorRepository');
 const userRepository = require('../users/userRepository');
-const rateLimit = require('../rateLimit');
+//const rateLimit = require('../rateLimit');
 
 class AuthenticatorService {
   async generateSecret(user) {
@@ -57,24 +57,24 @@ class AuthenticatorService {
 
   async _verifyForUser(user, code, secret) {
     const userId = user.id;
-    const singleCodeRateLimit = await rateLimit.authenticator.limitSingleCode(
-      userId,
-      code
-    );
+    // const singleCodeRateLimit = await rateLimit.authenticator.limitSingleCode(
+    //   userId,
+    //   code
+    // );
 
-    if (singleCodeRateLimit.limited) {
-      return false;
-    }
+    // if (singleCodeRateLimit.limited) {
+    //   return false;
+    // }
 
-    // we only actually only want to count the attempt against the rate limit if it's a failure
-    // but we still want to reject the request if it currently is limited
-    const attemptsRateLimit = await rateLimit.authenticator.peekFailedAttempts(
-      userId
-    );
+    // // we only actually only want to count the attempt against the rate limit if it's a failure
+    // // but we still want to reject the request if it currently is limited
+    // const attemptsRateLimit = await rateLimit.authenticator.peekFailedAttempts(
+    //   userId
+    // );
 
-    if (attemptsRateLimit.limited) {
-      return false;
-    }
+    // if (attemptsRateLimit.limited) {
+    //   return false;
+    // }
 
     if (authenticatorOtp.verifyToken(code, secret)) {
       return true;
