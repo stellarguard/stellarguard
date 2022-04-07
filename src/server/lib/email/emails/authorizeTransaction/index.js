@@ -4,7 +4,7 @@ const { urls } = require('../../../utils');
 class AuthorizeTransactionEmail extends Email {
   constructor({ user, transaction }) {
     const to = user.email;
-    const from = 'StellarGuard <no-reply@stellarguard.me>';
+    const from = 'StellarGuard <no-reply@email.stellarguard.me>';
     let authorizeUrl;
     let code;
     if (user.transactionSecurityLevel === 'email') {
