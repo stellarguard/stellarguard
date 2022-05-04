@@ -455,7 +455,7 @@ class StellarLaboratoryCard extends Component {
 
   get to() {
     const network = config.isTestNetwork ? 'test' : 'public';
-    return `https://www.stellar.org/laboratory/#txbuilder?network=${network}`;
+    return `https://laboratory.stellar.org/#txbuilder?network=${network}`;
   }
 
   get logo() {

@@ -35,7 +35,7 @@ class DeactivateAccount extends Component {
   get stellarTransactionSignerHref() {
     const xdr = this.state.deactivateAccountXdr;
     const network = config.isTestNetwork ? 'test' : 'public';
-    return `https://www.stellar.org/laboratory/#txsigner?xdr=${encodeURIComponent(
+    return `https://laboratory.stellar.org/#txsigner?xdr=${encodeURIComponent(
       xdr
     )}&network=${network}`;
   }
