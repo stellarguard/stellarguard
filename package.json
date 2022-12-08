@@ -30,7 +30,7 @@
     "dotenv": "^6.0.0",
     "dumb-passwords": "^0.2.1",
     "ejs": "~2.6.1",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "express-csp-header": "^2.2.0",
     "express-session": "^1.15.6",
     "formik": "^0.11.3",
