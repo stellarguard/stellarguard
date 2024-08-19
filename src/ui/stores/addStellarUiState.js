@@ -17,12 +17,13 @@ class AddStellarUiState {
   async buildMultiSigTransaction({
     sourceAccount,
     primarySigner,
-    backupSigner
+    backupSigner,
+    baseFee
   }) {
     try {
       const account = await config.horizonServer.loadAccount(sourceAccount);
       const builder = new StellarSdk.TransactionBuilder(account, {
-        fee: StellarSdk.BASE_FEE,
+        fee: baseFee,
         networkPassphrase: config.networkPassphrase
       }).setTimeout(StellarSdk.TimeoutInfinite);
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, withFormik } from 'formik';
+import StellarSdk from 'stellar-sdk';
 
 import {
   withStyles,
@@ -38,7 +39,8 @@ const styles = theme => ({
       sourceAccount: '',
       primarySigner: props.rootStore.currentUser.signerPublicKey,
       addBackupSigner: false,
-      backupSigner: ''
+      backupSigner: '',
+      baseFee: StellarSdk.BASE_FEE
     };
   },
   async handleSubmit(values, { props, setSubmitting, setErrors }) {
@@ -104,6 +106,28 @@ class BuildMultiSigForm extends Component {
             </FormFieldHelperText>
           }
         />
+        <TextField
+          fullWidth
+          required
+          margin="normal"
+          type="text"
+          id="baseFee"
+          name="baseFee"
+          label="Your Base Fee"
+          onChange={handleChange}
+          inputProps={{ onBlur: handleBlur }}
+          value={values.baseFee}
+          error={!!(touched.baseFee && errors.baseFee)}
+          helperText={
+            <FormFieldHelperText
+              error={errors.baseFee}
+              touched={touched.baseFee}
+            >
+              This is the account you want protected with StellarGuard
+            </FormFieldHelperText>
+          }
+        />
+
         <div className={classes.signersHeader}>
           <Typography variant="h6">Signers </Typography>
           <FormControlLabel
