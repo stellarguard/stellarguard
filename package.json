@@ -20,6 +20,7 @@
     "bcrypt": "^5.0.1",
     "classnames": "^2.2.6",
     "connect-pg-simple": "^6.0.1",
+    "constellation-api": "johansten/constellation-api",
     "cookie-parser": "~1.4.3",
     "copyfiles": "^2.1.0",
     "cors": "^2.8.4",
