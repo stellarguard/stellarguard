@@ -92,7 +92,7 @@ async function migrate() {
   const instance = process.env.CLOUD_SQL_INSTANCE;
   const sqlProxy = spawn(
     `cloud_sql_proxy`,
-    [`-instances=${instance}=tcp:5432`],
+    [`${instance}`],
     {
       stdio: [0, 1, 2]
     }
