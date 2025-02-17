@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "engines": {
-    "node": ">=10"
+    "node": ">=22"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
@@ -17,10 +17,9 @@
     "@stellarguard/multisig-utils": "^2.0.0",
     "@stellarguard/stellar-uri": "^3.0.0",
     "axios": "^0.19.2",
-    "bcrypt": "^3.0.1",
+    "bcrypt": "^5.0.1",
     "classnames": "^2.2.6",
     "connect-pg-simple": "^6.0.1",
-    "constellation-api": "johansten/constellation-api",
     "cookie-parser": "~1.4.3",
     "copyfiles": "^2.1.0",
     "cors": "^2.8.4",
@@ -65,6 +64,7 @@
     "sinon": "^6.1.4",
     "stellar-hd-wallet": "^0.0.10",
     "stellar-sdk": "^10.1.0",
+    "yarn": "^1.22.22",
     "yup": "^0.25.1"
   },
   "scripts": {
